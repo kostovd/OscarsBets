@@ -1,0 +1,17 @@
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Business.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Business.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\obj\Debug\MovieScrapper.Business.csprojResolveAssemblyReference.cache
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\obj\Debug\MovieScrapper.Business.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\obj\Debug\MovieScrapper.Business.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Data.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Entities.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\EntityFramework.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\Newtonsoft.Json.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Data.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Data.dll.config
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Entities.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\EntityFramework.xml
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\Newtonsoft.Json.xml
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\MovieScrapper.Business.dll.config
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Business\bin\Debug\System.Net.Http.Formatting.xml

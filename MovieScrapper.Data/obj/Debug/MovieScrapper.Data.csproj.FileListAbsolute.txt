@@ -1,0 +1,16 @@
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\MovieScrapper.Data.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\MovieScrapper.Data.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\obj\Debug\MovieScrapper.Data.csprojResolveAssemblyReference.cache
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\obj\Debug\MovieScrapper.Data.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\obj\Debug\MovieScrapper.Data.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\MovieScrapper.Data.dll.config
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\EntityFramework.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\MovieScrapper.Entities.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\Newtonsoft.Json.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\MovieScrapper.Entities.pdb
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\EntityFramework.xml
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\Newtonsoft.Json.xml
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Data\bin\Debug\System.Net.Http.Formatting.xml

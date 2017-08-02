@@ -1,10 +1,12 @@
-﻿using MovieScrapper.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MovieScrapper.Business;
+using MovieScrapper.Data;
+using MovieScrapper.Entities;
 
 namespace MovieScrapper.Admin
 {
@@ -12,12 +14,8 @@ namespace MovieScrapper.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (var ctx = new MovieContext())
-            {
-                var test = ctx.MovieCaterogries.ToList();
-            }
+
         }
-      
 
         protected void AddCategoryButton_Click(object sender, EventArgs e)
         {
@@ -26,7 +24,7 @@ namespace MovieScrapper.Admin
 
         protected void EditCategoryButton_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void EditMoviesInThisCategoryButton_Click(object sender, EventArgs e)
@@ -34,21 +32,20 @@ namespace MovieScrapper.Admin
 
         }
 
-        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "EditCategory")
             {
                 var id = e.CommandArgument;
                 Response.Redirect("EditCategory.aspx?id=" + id.ToString());
             }
-            
-            if (e.CommandName == "EditMoviesInThisCategory")
+
+            if (e.CommandName == "ShowMoviesInThisCategory")
             {
                 var id = e.CommandArgument;
                 Response.Redirect("EditMoviesInThisCategory.aspx?categoryId=" + id.ToString());
             }
         }
-
-        
     }
 }

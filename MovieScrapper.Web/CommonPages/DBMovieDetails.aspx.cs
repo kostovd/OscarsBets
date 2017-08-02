@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business;
+using MovieScrapper.Data;
 using MovieScrapper.Entities;
 using MovieScrapper.Models;
 using System;
@@ -15,23 +16,19 @@ namespace MovieScrapper.CommonPages
         protected void Page_Load(object sender, EventArgs e)
         {
             var movieId= Request.QueryString["id"];
-
-            using (var ctx = new MovieContext())
-            {
-                var movie = ctx.Movies.FirstOrDefault(m => m.Id == movieId);
-                DetailsView1.DataSource= new Movie[] { movie };
-                DetailsView1.DataBind();
-            }
-
+            //var service = new CategoryService();
+            //var movie= service.GetMovie(movieId);
+            //DetailsView1.DataSource = new Movie[] { movie };
+            //DetailsView1.DataBind();
         }
 
         protected string BuildPosterUrl(string path)
         {
             return "http://image.tmdb.org/t/p/w300" + path;
         }
+
         protected string BuildBackUrl()
         {
-
             string backUrl = Request.QueryString["back"];
             return backUrl;
         }

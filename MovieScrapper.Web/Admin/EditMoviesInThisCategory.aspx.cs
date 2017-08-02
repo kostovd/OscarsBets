@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business;
+using MovieScrapper.Data;
 using MovieScrapper.Models;
 using System;
 using System.Collections.Generic;
@@ -16,47 +17,13 @@ namespace MovieScrapper.Admin
             if (!Page.IsPostBack)
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                LoadCategory(categoryId);
-                LoadMovies(categoryId);
-            }
-        }
-
-        private void LoadMovies(int categoryId)
-        {
-
-            var movieClient = new MoviesLocalDBClient();
-
-            try
-            {
-
-                var movies = movieClient.ShowMoviesInCategory(categoryId);
-                DataList1.DataSource = movies;
-                DataList1.DataBind();
-
-            }
-            catch (Exception e)
-            {
-
-            }
-
-        }
-
-        private void LoadCategory(int categoryId)
-        {
-
-            var movieClient = new MoviesLocalDBClient();
-
-            try
-            {
-
-                var category = movieClient.ShowCategory(categoryId);
+                var service = new CategoryService();
+                var category = service.GetCategory(categoryId);
                 CategoryTitle.Text = category.CategoryTtle;
+                var movies = category.Movies;
+                DataList1.DataSource = movies;
+                DataList1.DataBind();       
             }
-            catch (Exception e)
-            {
-
-            }
-
         }
 
         public string DisplayYear(string dateString)
@@ -114,17 +81,14 @@ namespace MovieScrapper.Admin
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = e.CommandArgument.ToString();
+                var service = new CategoryService();
+                service.RemoveMovieFromCategory(categoryId, movieId);
+                var category = service.GetCategory(categoryId);
+                var movies = category.Movies;
+                         
+                DataList1.DataSource = movies;
+                DataList1.DataBind();
 
-                using (var ctx = new MovieContext())
-                {
-                    var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                    var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
-                    var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
-                    databaseCategory.Movies.Remove(foundedMovie);
-                    //ctx.Entry(fosundedMovie).State = System.Data.Entity.EntityState.Deleted;
-                    ctx.SaveChanges();
-                }
-                LoadMovies(categoryId);
             }                     
 
             if (e.CommandName == "ShowDetails")

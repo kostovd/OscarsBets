@@ -40,7 +40,6 @@ namespace MovieScrapper.Admin
         protected void SaveChangesButton_Click(object sender, EventArgs e)
         {
 
-            //int id = Int32.Parse(Request.QueryString["id"]);
             string categoryTitle = EditCategoryTitleTextBox.Text;
             string categoryDescription = EditCategoryDescriptionTextBox.Text;
             MovieCategory category = new MovieCategory() { CategoryTtle = categoryTitle, CategoryDescription = categoryDescription };

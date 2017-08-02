@@ -1,35 +1,28 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="MovieScrapper.Admin.Categories" MasterPageFile="~/Site.Master" %>
-<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
+    <link href="MovieStyleSheet.css" rel="stylesheet" />
         <div>
-            <br />
-            <hr />
-            <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333"
-                OnItemCommand="DataList1_ItemCommand" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" RepeatDirection="Horizontal" RepeatColumns="5" BorderColor="Gray" CellSpacing="3">
-                <AlternatingItemStyle BackColor="White" />
-                <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <ItemStyle BackColor="#EFF3FB" />              
+            <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
+                ItemType="MovieScrapper.Entities.MovieCategory" OnItemCommand="Repeater1_ItemCommand">
                 <ItemTemplate>
                     
-                    <asp:Label ID="CategoryTtleLabel" runat="server" style="text-transform: uppercase;" Text='<%# Eval("CategoryTtle") %>' />
-                    <br />
-                    <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Eval("CategoryDescription") %>' />
-                    <br />
-                    <br />
-                    <asp:Button runat="server" ID="EditCategory" OnClick="EditCategoryButton_Click" Text="Edit category name or description" 
-                        CommandName="EditCategory" CommandArgument='<%# Eval("Id") %>' Width="240px" />
-                    <br />
-                    <br />
-                    <asp:Button ID="ShowMoviesInThisCategoryButton" runat="server" CommandName="EditMoviesInThisCategory"
-                        CommandArgument='<%# Eval("Id") %>' Text="Edit movies in this category" Width="240px" />
-                    <br />
-                    <br />
+                        <br />
+                        <asp:Label ID="CategoryTtleLabel"  runat="server" style="text-transform: uppercase;font-weight:bold;" Text='<%# Item.CategoryTtle %>' />
+                        <br />
+                        <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription %>' />   
+                        <br />
+                        <asp:Button runat="server" ID="EditCategory" OnClick="EditCategoryButton_Click" Text="Edit category name or description" CommandName="EditCategory" CommandArgument='<%# Item.Id %>' Width="240px" />
+                        <br />
+                        <br />
+                        <asp:Button runat="server" ID="ShowMoviesInThisCategoryButton" CommandName="ShowMoviesInThisCategory" CommandArgument='<%# Item.Id %>' Text="Show movies in this category" Width="240px" />
+                        <hr />
                 </ItemTemplate>
-                <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            </asp:DataList>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT DISTINCT [CategoryTtle], [CategoryDescription], [Id] FROM [MovieCategories]"></asp:SqlDataSource>
+            </asp:Repeater>
             <br />
+            <hr />
+            <asp:Button ID="AddCategoryButton" runat="server" OnClick="AddCategoryButton_Click" Text="Add new category" Width="240px" />
+            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll"
+                TypeName="MovieScrapper.Business.CategoryService"></asp:ObjectDataSource>
+
         </div>
-        <hr />
-        <asp:Button ID="AddCategoryButton" runat="server" OnClick="AddCategoryButton_Click" Text="Add new category" Width="240px" />
 </asp:Content>

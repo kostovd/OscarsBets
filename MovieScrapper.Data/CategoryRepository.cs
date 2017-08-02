@@ -24,8 +24,18 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var databaseCategory = ctx.MovieCaterogries.Where(x=>x.Id==id).SingleOrDefault();
+                var databaseCategory = ctx.MovieCaterogries.Include("Movies").Where(x=>x.Id==id).SingleOrDefault();
                 return databaseCategory;
+            }
+        }
+
+        public Movie GetMovie(string id)
+        {
+
+            using (var ctx = new MovieContext())
+            {
+                var databaseMovie = ctx.Movies.Where(m => m.Id == id).SingleOrDefault();
+                return databaseMovie;
             }
         }
 
@@ -45,6 +55,18 @@ namespace MovieScrapper.Data
             {
                 var databaseCategory = ctx.MovieCaterogries.Where(x => x.Id == id).SingleOrDefault();
                 ctx.Entry(databaseCategory).State = System.Data.Entity.EntityState.Deleted;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void RemoveMovieFromCategory(int categoryId, string movieId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
+                var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
+                databaseCategory.Movies.Remove(foundedMovie);
                 ctx.SaveChanges();
             }
         }

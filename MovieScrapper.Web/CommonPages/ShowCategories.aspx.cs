@@ -34,7 +34,7 @@ namespace MovieScrapper.CommonPages
 
         }
 
-        protected string BuildUrl(string movieId)
+        protected string BuildUrl(int movieId)
         {
             
             return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowCategories";

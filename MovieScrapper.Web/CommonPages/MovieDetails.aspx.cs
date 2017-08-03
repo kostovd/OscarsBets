@@ -72,7 +72,7 @@ namespace MovieScrapper
             if (movie != null)
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var movieId = Request.QueryString["id"];
+                var movieId = Int32.Parse(Request.QueryString["id"]);
                 var service = new CategoryService();
                 var databaseMovie = service.GetMovie(movieId);
                 var databaseMovieInCategory = service.GetMovieInCategory(categoryId, movieId);

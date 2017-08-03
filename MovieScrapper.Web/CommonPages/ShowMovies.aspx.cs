@@ -80,7 +80,7 @@ namespace MovieScrapper.Secured
             }
         }
 
-        protected string BuildUrlWithId(string id)
+        protected string BuildUrlWithId(int id)
         {
             var categoryId = Request.QueryString["categoryId"];
             if (categoryId != null)

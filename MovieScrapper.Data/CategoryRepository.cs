@@ -29,7 +29,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public Movie GetMovie(string id)
+        public Movie GetMovie(int id)
         {
 
             using (var ctx = new MovieContext())
@@ -66,7 +66,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public void AddMovieInCategory(int categoryId, string movieId)
+        public void AddMovieInCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {
@@ -88,7 +88,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public void RemoveMovieFromCategory(int categoryId, string movieId)
+        public void RemoveMovieFromCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {
@@ -100,7 +100,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public Movie GetMovieInCategory(int categoryId, string movieId)
+        public Movie GetMovieInCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {

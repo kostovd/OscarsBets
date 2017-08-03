@@ -25,7 +25,7 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             return repo.GetCategory(id);
         }
-        public Movie GetMovie(string id)
+        public Movie GetMovie(int id)
         {
             var repo = new CategoryRepository();
             return repo.GetMovie(id);
@@ -41,7 +41,7 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             repo.AddMovie(movie);
         }
-        public void AddMovieInCategory(int categoryId, string movieId)
+        public void AddMovieInCategory(int categoryId, int movieId)
         {
             var repo = new CategoryRepository();
             repo.AddMovieInCategory(categoryId, movieId);
@@ -52,13 +52,13 @@ namespace MovieScrapper.Business
             repo.DeleteCategory(id);
         }
 
-        public void RemoveMovieFromCategory(int categoryId, string movieId)
+        public void RemoveMovieFromCategory(int categoryId, int movieId)
         {
             var repo = new CategoryRepository();
             repo.RemoveMovieFromCategory(categoryId, movieId);
         }
 
-        public Movie GetMovieInCategory(int categoryId, string movieId)
+        public Movie GetMovieInCategory(int categoryId, int movieId)
         {
             var repo = new CategoryRepository();
             return repo.GetMovieInCategory(categoryId, movieId);

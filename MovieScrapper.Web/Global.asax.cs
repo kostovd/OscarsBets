@@ -3,9 +3,6 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
-using System.Data.Entity;
-using MovieScrapper.Models;
-using MovieScrapper.Data;
 
 namespace MovieScrapper
 {
@@ -23,7 +20,6 @@ namespace MovieScrapper
                 defaults: new { id = System.Web.Http.RouteParameter.Optional }
             );
 
-            Database.SetInitializer<MovieContext>(new DropCreateDatabaseIfModelChanges<MovieContext>());
         }
     }
 }

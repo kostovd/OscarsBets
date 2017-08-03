@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using MovieScrapper.Business;
-using MovieScrapper.Data;
-using MovieScrapper.Entities;
+
 
 namespace MovieScrapper.Admin
 {
@@ -21,18 +15,7 @@ namespace MovieScrapper.Admin
         {
             Response.Redirect("EditCategory.aspx");
         }
-
-        protected void EditCategoryButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void EditMoviesInThisCategoryButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+     
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "EditCategory")

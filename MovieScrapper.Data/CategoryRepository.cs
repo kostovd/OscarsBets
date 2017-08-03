@@ -39,11 +39,40 @@ namespace MovieScrapper.Data
             }
         }
 
+        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var databaseCategoty = ctx.MovieCaterogries.Include("Movies").Where(x => x.Id==categoryId).SingleOrDefault();
+                return databaseCategoty.Movies;
+            }
+        }
+
         public void AddCategory(MovieCategory category)
         {
             using (var ctx = new MovieContext())
             {                
                 ctx.MovieCaterogries.Add(category);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void AddMovie(Movie movie)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.Movies.Add(movie);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void AddMovieInCategory(int categoryId, string movieId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
+                databaseCategory.Movies.Add(databaseMovie);
                 ctx.SaveChanges();
             }
         }
@@ -68,6 +97,17 @@ namespace MovieScrapper.Data
                 var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
                 databaseCategory.Movies.Remove(foundedMovie);
                 ctx.SaveChanges();
+            }
+        }
+
+        public Movie GetMovieInCategory(int categoryId, string movieId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
+                var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
+                return foundedMovie;
             }
         }
     }

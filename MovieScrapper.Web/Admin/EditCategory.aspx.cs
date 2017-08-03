@@ -1,13 +1,7 @@
 ﻿using MovieScrapper.Business;
-using MovieScrapper.Data;
 using MovieScrapper.Entities;
-using MovieScrapper.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+
 
 namespace MovieScrapper.Admin
 {

@@ -111,11 +111,6 @@ namespace MovieScrapper.Secured
 
         }
 
-        protected void MoviesDataList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void BackToEditMoviesInThisCategoryButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Admin/EditMoviesInThisCategory.aspx?categoryId=" + Request.QueryString["categoryId"]);

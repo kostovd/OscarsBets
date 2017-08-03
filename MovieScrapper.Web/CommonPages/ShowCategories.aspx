@@ -22,7 +22,8 @@
                             <div id="movieItem">
                                 <div id="title">
                                     <div class="items">
-                                        <%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)
+                                        <%--http://localhost:57344/CommonPages/DBMovieDetails?id=11&back=/Admin/EditMoviesInThisCategory?categoryId=1--%>
+                                       <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                     </div>
                                 </div>
                                 <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
@@ -35,8 +36,11 @@
                 </ItemTemplate>
             </asp:Repeater>
             <br />
-            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll"
-                TypeName="MovieScrapper.Business.CategoryService"></asp:ObjectDataSource>
-
+            <asp:ObjectDataSource 
+                ID="ObjectDataSource1" 
+                runat="server" 
+                SelectMethod="GetAll"
+                TypeName="MovieScrapper.Business.CategoryService">
+            </asp:ObjectDataSource>
         </div>
 </asp:Content>

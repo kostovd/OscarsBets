@@ -7,7 +7,7 @@ namespace MovieScrapper.Data
     {
         public MovieContext(): base("DefaultConnection")
         {
-
+            Database.SetInitializer<MovieContext>(new DropCreateDatabaseIfModelChanges<MovieContext>());
         }
 
         public DbSet<Movie> Movies { get; set; }

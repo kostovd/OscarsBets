@@ -1,13 +1,4 @@
-﻿using MovieScrapper.Business;
-using MovieScrapper.Data;
-using MovieScrapper.Entities;
-using MovieScrapper.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
 
 namespace MovieScrapper.CommonPages
 {
@@ -15,11 +6,7 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var movieId= Request.QueryString["id"];
-            //var service = new CategoryService();
-            //var movie= service.GetMovie(movieId);
-            //DetailsView1.DataSource = new Movie[] { movie };
-            //DetailsView1.DataBind();
+           
         }
 
         protected string BuildPosterUrl(string path)
@@ -29,6 +16,7 @@ namespace MovieScrapper.CommonPages
 
         protected string BuildBackUrl()
         {
+
             string backUrl = Request.QueryString["back"];
             return backUrl;
         }

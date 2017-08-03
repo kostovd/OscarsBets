@@ -17,7 +17,7 @@
         </asp:Panel>
     </p>
     <p>
-        <asp:DataList ID="MoviesDataList" runat="server" RepeatColumns="3" RepeatDirection="Horizontal" RepeatLayout="Flow" OnSelectedIndexChanged="MoviesDataList_SelectedIndexChanged">
+        <asp:DataList ID="MoviesDataList" runat="server" RepeatColumns="3" RepeatDirection="Horizontal" RepeatLayout="Flow" >
             <ItemTemplate>
               <div id="movieItem">  
                   <div id="title">
@@ -26,8 +26,7 @@
                       </br>
                       <a id="buildUrlWithId" runat="server" href=<%# BuildUrlWithId((string)Eval("Id")) %>>Details</a>
                   </div>  
-                  <img id="poster" src=<%# BuildUrl((string)Eval("PosterPath")) %> />                                 
-                  
+                  <img id="poster" src=<%# BuildUrl((string)Eval("PosterPath")) %> />                                                  
               </div>
             </ItemTemplate>
         </asp:DataList>

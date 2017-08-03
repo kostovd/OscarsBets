@@ -1,10 +1,5 @@
 ﻿using MovieScrapper.Business;
-using MovieScrapper.Data;
-using MovieScrapper.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,10 +14,7 @@ namespace MovieScrapper.Admin
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var service = new CategoryService();
                 var category = service.GetCategory(categoryId);
-                CategoryTitle.Text = category.CategoryTtle;
-                var movies = category.Movies;
-                DataList1.DataSource = movies;
-                DataList1.DataBind();       
+                CategoryTitle.Text = category.CategoryTtle;      
             }
         }
 
@@ -83,12 +75,7 @@ namespace MovieScrapper.Admin
                 var movieId = e.CommandArgument.ToString();
                 var service = new CategoryService();
                 service.RemoveMovieFromCategory(categoryId, movieId);
-                var category = service.GetCategory(categoryId);
-                var movies = category.Movies;
-                         
-                DataList1.DataSource = movies;
-                DataList1.DataBind();
-
+                Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
             }                     
 
             if (e.CommandName == "ShowDetails")

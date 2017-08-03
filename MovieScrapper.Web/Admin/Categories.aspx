@@ -11,7 +11,7 @@
                         <br />
                         <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription %>' />   
                         <br />
-                        <asp:Button runat="server" ID="EditCategory" OnClick="EditCategoryButton_Click" Text="Edit category name or description" CommandName="EditCategory" CommandArgument='<%# Item.Id %>' Width="240px" />
+                        <asp:Button runat="server" ID="EditCategory"  Text="Edit category name or description" CommandName="EditCategory" CommandArgument='<%# Item.Id %>' Width="240px" />
                         <br />
                         <br />
                         <asp:Button runat="server" ID="ShowMoviesInThisCategoryButton" CommandName="ShowMoviesInThisCategory" CommandArgument='<%# Item.Id %>' Text="Show movies in this category" Width="240px" />

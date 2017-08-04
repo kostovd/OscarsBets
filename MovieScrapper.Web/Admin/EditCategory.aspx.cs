@@ -36,17 +36,34 @@ namespace MovieScrapper.Admin
 
             string categoryTitle = EditCategoryTitleTextBox.Text;
             string categoryDescription = EditCategoryDescriptionTextBox.Text;
+            var id = Request.QueryString["id"];
             MovieCategory category = new MovieCategory() { CategoryTtle = categoryTitle, CategoryDescription = categoryDescription };
             var service = new CategoryService();
-            
-            try
+            if (id != null)
             {
-                service.AddCategory(category);
-                Response.Redirect("Categories.aspx");
+                try
+                {
+                    category.Id = int.Parse(id);
+                    service.EditCategory(category);
+                    Response.Redirect("Categories.aspx");
+                }
+                catch (Exception ex)
+                {
+                    Label1.Text = ex.Message;
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                Label1.Text = ex.Message;
+                try
+                {
+                    service.AddCategory(category);
+                    Response.Redirect("Categories.aspx");
+                }
+                catch (Exception ex)
+                {
+                    Label1.Text = ex.Message;
+                }
             }
             
         }

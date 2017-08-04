@@ -15,6 +15,13 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             return repo.GetAll();
         }
+
+        public IEnumerable<Movie> GetAllMovies()
+        {
+            var repo = new CategoryRepository();
+            return repo.GetAllMovies();
+
+        }
         public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
         {
             var repo = new CategoryRepository();
@@ -34,6 +41,11 @@ namespace MovieScrapper.Business
         {
             var repo = new CategoryRepository();
             repo.AddCategory(category);
+        }
+        public void EditCategory(MovieCategory category)
+        {
+            var repo = new CategoryRepository();
+            repo.EditCategory(category);
         }
 
         public void AddMovie(Movie movie)

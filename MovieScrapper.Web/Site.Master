@@ -13,8 +13,9 @@
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Creative.css" rel="stylesheet" type="text/css" />
     <link href="SiteMaster.css" rel="stylesheet" type="text/css" />
+   <%-- <link href="Creative.css" rel="stylesheet" type="text/css" />--%>
 
 </head>
 <body>
@@ -55,7 +56,8 @@
                         
                         <li><a runat="server" href="~/CommonPages/ShowMovies">Home</a></li>
                         <li><a runat="server" href="~/CommonPages/ShowCategories">Categories</a></li>
-                        
+                        <li><a runat="server" href="~/CommonPages/ShowAllDBMovies">Watched</a></li>
+                        <li>               </li>
                         <li><a runat="server" id="Admin1" href="~/Admin/Categories">Edit movies</a></li>
                         <li><a runat="server" id="Admin2" href="~/Admin/Users">Edit users</a></li>
                         

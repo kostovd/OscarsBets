@@ -18,6 +18,15 @@ namespace MovieScrapper.Data
                 return databaseCategory;
             }
         }
+        public IEnumerable<Movie> GetAllMovies()
+        {
+
+            using (var ctx = new MovieContext())
+            {
+                var movies = ctx.Movies.ToList();
+                return movies;
+            }
+        }
 
         public MovieCategory GetCategory(int id)
         {
@@ -53,6 +62,15 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {                
                 ctx.MovieCaterogries.Add(category);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void EditCategory(MovieCategory category)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 ctx.SaveChanges();
             }
         }

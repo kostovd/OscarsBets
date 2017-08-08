@@ -48,6 +48,7 @@
     <Compile Include="MovieCategory.cs" />
     <Compile Include="MoviesCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Watched.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

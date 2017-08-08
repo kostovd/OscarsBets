@@ -50,6 +50,7 @@
     <Compile Include="MovieClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMDBMovieService.cs" />
+    <Compile Include="UserSevices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieScrapper.Data\MovieScrapper.Data.csproj">

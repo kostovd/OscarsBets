@@ -37,4 +37,10 @@
 a {
     color:darkgray;
 }
-
+.checkButton {
+    font-family: Wingdings;
+    background-color: none
+}
+.hidden{
+    visibility:hidden;
+}

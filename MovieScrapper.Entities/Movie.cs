@@ -28,5 +28,6 @@ namespace MovieScrapper.Entities
 
         public virtual ICollection<MovieCategory> MovieCategories { get; set; }
 
+        public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }
     }
 }

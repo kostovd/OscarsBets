@@ -21,8 +21,7 @@
                         <ItemTemplate>
                             <div id="movieItem">
                                 <div id="title">
-                                    <div class="items">
-                                        <%--http://localhost:57344/CommonPages/DBMovieDetails?id=11&back=/Admin/EditMoviesInThisCategory?categoryId=1--%>
+                                    <div class="items">                                       
                                        <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                     </div>
                                 </div>

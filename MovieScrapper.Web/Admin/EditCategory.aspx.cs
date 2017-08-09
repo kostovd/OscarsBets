@@ -37,7 +37,7 @@ namespace MovieScrapper.Admin
             string categoryTitle = EditCategoryTitleTextBox.Text;
             string categoryDescription = EditCategoryDescriptionTextBox.Text;
             var id = Request.QueryString["id"];
-            MovieCategory category = new MovieCategory() { CategoryTtle = categoryTitle, CategoryDescription = categoryDescription };
+            Category category = new Category() { CategoryTtle = categoryTitle, CategoryDescription = categoryDescription };
             var service = new CategoryService();
             if (id != null)
             {

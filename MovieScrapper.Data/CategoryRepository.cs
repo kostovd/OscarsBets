@@ -9,12 +9,12 @@ namespace MovieScrapper.Data
 {
     public class CategoryRepository
     {
-        public IEnumerable<MovieCategory> GetAll()
+        public IEnumerable<Category> GetAll()
         {
 
             using (var ctx = new MovieContext())
             {
-                var databaseCategory = ctx.MovieCaterogries.Include("Movies").ToList();
+                var databaseCategory = ctx.MovieCaterogries.Include("Movies").ToList();                
                 return databaseCategory;
             }
         }
@@ -44,7 +44,7 @@ namespace MovieScrapper.Data
 
         
 
-        public MovieCategory GetCategory(int id)
+        public Category GetCategory(int id)
         {
 
             using (var ctx = new MovieContext())
@@ -73,7 +73,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public void AddCategory(MovieCategory category)
+        public void AddCategory(Category category)
         {
             using (var ctx = new MovieContext())
             {                
@@ -82,7 +82,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public void EditCategory(MovieCategory category)
+        public void EditCategory(Category category)
         {
             using (var ctx = new MovieContext())
             {

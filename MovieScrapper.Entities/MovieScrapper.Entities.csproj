@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bets.cs" />
     <Compile Include="Movie.cs" />
-    <Compile Include="MovieCategory.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="MoviesCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Watched.cs" />

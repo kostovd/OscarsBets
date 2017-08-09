@@ -12,7 +12,7 @@ namespace MovieScrapper.Entities
     {
         public Movie()
         {
-            this.MovieCategories = new List<MovieCategory>();
+            this.Categories = new List<Category>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -26,8 +26,8 @@ namespace MovieScrapper.Entities
         public string PosterPath { get; set; }
         public string Overview { get; set; }
 
-        public virtual ICollection<MovieCategory> MovieCategories { get; set; }
-
+        public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }
+        public ICollection<Bet> Bets { get; set; }
     }
 }

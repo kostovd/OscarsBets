@@ -10,7 +10,7 @@ namespace MovieScrapper.Business
 {
     public class CategoryService
     {
-        public IEnumerable<MovieCategory> GetAll()
+        public IEnumerable<Category> GetAll()
         {
             var repo = new CategoryRepository();
             return repo.GetAll();
@@ -35,7 +35,7 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             return repo.GetAllMoviesInCategory(categoryId);
         }
-        public MovieCategory GetCategory(int id)
+        public Category GetCategory(int id)
         {
             var repo = new CategoryRepository();
             return repo.GetCategory(id);
@@ -45,7 +45,7 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             return repo.GetMovie(id);
         }
-        public void AddCategory(MovieCategory category)
+        public void AddCategory(Category category)
         {
             var repo = new CategoryRepository();
             repo.AddCategory(category);
@@ -56,7 +56,7 @@ namespace MovieScrapper.Business
             return repo.AddWatchedEntity(watchedEntity);
 
         }
-        public void EditCategory(MovieCategory category)
+        public void EditCategory(Category category)
         {
             var repo = new CategoryRepository();
             repo.EditCategory(category);

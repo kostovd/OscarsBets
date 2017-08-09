@@ -3,7 +3,7 @@
     <link href="MovieStyleSheet.css" rel="stylesheet" />
         <div>
             <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
-                ItemType="MovieScrapper.Entities.MovieCategory" OnItemCommand="Repeater1_ItemCommand">
+                ItemType="MovieScrapper.Entities.Category" OnItemCommand="Repeater1_ItemCommand">
                 <ItemTemplate>
                     
                         <br />

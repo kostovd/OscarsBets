@@ -4,17 +4,17 @@
     <link href="MovieStyleSheet.css" rel="stylesheet" />
         <div>
             <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
-                ItemType="MovieScrapper.Entities.MovieCategory">
+                ItemType="MovieScrapper.Entities.Category">
                 <ItemTemplate>
                     <br />
                     <br />
-                    <asp:Label ID="CategoryTtleLabel"  runat="server" style="text-transform: uppercase;font-weight:bold;" Text='<%# Item.CategoryTtle %>' />
+                    <asp:Label ID="CategoryTtleLabel"  runat="server" style="text-transform: uppercase;font-weight:bold;" Text='<%# Item.CategoryTtle%>' />
                     <br />
                     <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription %>' />
                     <br />
 
                     <asp:Repeater ID="Repeater2" runat="server"
-                        ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies %>">
+                        ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies%>">
                         <HeaderTemplate>
                             <div>
                         </HeaderTemplate>
@@ -25,7 +25,7 @@
                                        <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                     </div>
                                 </div>
-                                <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
+                                <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath)%>" class="auto-style2" />
                             </div>
                         </ItemTemplate>
                         <FooterTemplate>

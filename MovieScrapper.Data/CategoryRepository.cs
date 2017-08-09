@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MovieScrapper.Data
 {
@@ -14,8 +15,13 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var databaseCategory = ctx.MovieCaterogries.Include("Movies").ToList();                
+                var databaseCategory = ctx.MovieCaterogries
+                    .Include(cat => cat.Movies)
+                    .Include(cat => cat.Bets)
+                    .ToList();
+
                 return databaseCategory;
+
             }
         }
         public IEnumerable<Movie> GetAllMovies()

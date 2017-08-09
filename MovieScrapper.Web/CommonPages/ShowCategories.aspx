@@ -2,6 +2,10 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
     <link href="MovieStyleSheet.css" rel="stylesheet" />
+    <asp:Label ID="Label1" runat="server" Text="Label" CssClass="header"></asp:Label>
+    <br />
+    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+    <hr />
         <div>
             <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
                 ItemType="MovieScrapper.Entities.Category">
@@ -10,19 +14,21 @@
                     <br />
                     <asp:Label ID="CategoryTtleLabel"  runat="server" style="text-transform: uppercase;font-weight:bold;" Text='<%# Item.CategoryTtle%>' />
                     <br />
-                    <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription %>' />
+                    <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription%>' />
                     <br />
 
                     <asp:Repeater ID="Repeater2" runat="server"
-                        ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies%>">
+                        ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies%>" OnItemCommand="Repeater2_ItemCommand">
                         <HeaderTemplate>
                             <div>
                         </HeaderTemplate>
                         <ItemTemplate>
                             <div id="movieItem">
                                 <div id="title">
-                                    <div class="items">                                       
+                                    <div class="items">
+                                        <div><%# DataBinder.Eval(Container.Parent.Parent, "DataItem.Id") %></div>
                                        <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
+                                         <asp:Button ID="MarkAsBettedButton" runat="server" CssClass="items checkButton" Text= "<%# ChangeTextIfUserBettedOnThisMovie(Item.Bets)%>" CommandName="MarkAsBetted" CommandArgument='<%# Item.Id %>' Enabled=<%# DoesUserBetOnThisMovie(Item.Bets)%> />
                                     </div>
                                 </div>
                                 <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath)%>" class="auto-style2" />

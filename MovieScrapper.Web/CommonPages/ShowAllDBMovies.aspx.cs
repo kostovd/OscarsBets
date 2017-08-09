@@ -74,7 +74,7 @@ namespace MovieScrapper.CommonPages
                 
             }
         }
-        //<%--Enabled='<%# !Item.UsersWatchedThisMovie.Any(x => x.UserId == User.Identity.GetUserId()) %>'--%>
+        
         protected bool DoesUserWatchedThisMovie(ICollection<Watched> users)
         {
             return !users.Any(x => x.UserId == User.Identity.GetUserId());
@@ -84,11 +84,11 @@ namespace MovieScrapper.CommonPages
         {
             if (!users.Any(x => x.UserId == User.Identity.GetUserId()))
             {
-                return "&#252;";
+                return "o"; //code 111 in ASCI
             }
             else
             {
-                return "&#10004;";
+                return "þ"; //code 254 in ASCI
             }
         }
     }

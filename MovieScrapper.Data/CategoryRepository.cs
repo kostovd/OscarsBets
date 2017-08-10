@@ -113,13 +113,22 @@ namespace MovieScrapper.Data
             {                
                 var foundedMovie = ctx.Movies.Where(m => m.Id == movieId).SingleOrDefault();
                 var foundedCategory = ctx.MovieCaterogries.Where(x => x.Id == categoryId).SingleOrDefault();
-                var betEntity = new Bet() { UserId = userId, Movie=foundedMovie, Category=foundedCategory };
-               // betEntity = ctx.Bets.Attach(betEntity);
-                betEntity = ctx.Bets.Add(betEntity);
-                ctx.SaveChanges();
-                return betEntity;
-            }
-          
+                var foundedUserBets = ctx.Bets.Where(x => x.UserId == userId);
+                Bet foundedUserBetInThisCategory = ctx.Bets.Where(x => x.UserId == userId).Where(y => y.Category.Id == categoryId).FirstOrDefault();
+                if (foundedUserBetInThisCategory == null)
+                {
+                    var betEntity = new Bet() { UserId = userId, Movie = foundedMovie, Category = foundedCategory };
+                    betEntity = ctx.Bets.Add(betEntity);
+                    ctx.SaveChanges();
+                    return betEntity;
+                }
+                else
+                {
+                    foundedUserBetInThisCategory.Movie = foundedMovie;
+                    ctx.SaveChanges();
+                    return foundedUserBetInThisCategory;
+                }
+            }         
         }
 
         //public void AddWatchedMovie(Watched watchedEntity, int movieId)

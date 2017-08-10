@@ -69,23 +69,17 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected bool DoesUserBetOnThisMovie(ICollection<Bet> users)
+     
+        protected string ChangeTextIfUserBettedOnThisMovie(ICollection<Bet> categoryBets, int movieId)
         {
-            //return !users.Any(x => x.UserId == User.Identity.GetUserId());
-            return true;
-        }
-
-
-        protected string ChangeTextIfUserBettedOnThisMovie(ICollection<Bet> users)
-        {
-            //if (!users.Any(x => x.UserId == User.Identity.GetUserId()))
-            if(true)
+            string currentUserId = User.Identity.GetUserId();
+            if (categoryBets.Any(x => x.UserId == currentUserId && x.Movie.Id == movieId))           
             {
-                return "o"; //code 111 in ASCI
+                return "þ"; //code 254 in ASCI
             }
             else
             {
-                return "þ"; //code 254 in ASCI
+                return "o"; //code 111 in ASCI
             }
         }
     }

@@ -1,7 +1,0 @@
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\bin\Debug\MovieScrapper.Entities.dll
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\bin\Debug\MovieScrapper.Entities.pdb
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\bin\Debug\Newtonsoft.Json.dll
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\bin\Debug\Newtonsoft.Json.xml
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\obj\Debug\MovieScrapper.Entities.csprojResolveAssemblyReference.cache
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\obj\Debug\MovieScrapper.Entities.dll
-C:\Users\k.barutska\documents\visual studio 2017\Projects\MovieScrapper\MovieScrapper.Entities\obj\Debug\MovieScrapper.Entities.pdb

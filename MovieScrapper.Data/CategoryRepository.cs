@@ -107,7 +107,20 @@ namespace MovieScrapper.Data
             return watchedEntity;
         }
 
-        
+        public Bet MakeBetEntity(string userId, int movieId, int categoryId)
+        {
+            using (var ctx = new MovieContext())
+            {                
+                var foundedMovie = ctx.Movies.Where(m => m.Id == movieId).SingleOrDefault();
+                var foundedCategory = ctx.MovieCaterogries.Where(x => x.Id == categoryId).SingleOrDefault();
+                var betEntity = new Bet() { UserId = userId, Movie=foundedMovie, Category=foundedCategory };
+               // betEntity = ctx.Bets.Attach(betEntity);
+                betEntity = ctx.Bets.Add(betEntity);
+                ctx.SaveChanges();
+                return betEntity;
+            }
+          
+        }
 
         //public void AddWatchedMovie(Watched watchedEntity, int movieId)
         //{
@@ -199,6 +212,16 @@ namespace MovieScrapper.Data
                 
             }
         }
-        
+
+        public Bet GetUserBetEntity(string userId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedEntity = ctx.Bets.Where(x => x.UserId == userId).SingleOrDefault();
+                return foundedEntity;
+
+            }
+        }
+
     }
 }

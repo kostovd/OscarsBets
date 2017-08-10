@@ -54,7 +54,11 @@ namespace MovieScrapper.Business
         {
             var repo = new CategoryRepository();
             return repo.AddWatchedEntity(watchedEntity);
-
+        }
+        public Bet MakeBetEntity(string userId, int movieId, int categoryId)
+        {
+            var repo = new CategoryRepository();
+            return repo.MakeBetEntity(userId, movieId, categoryId);
         }
         public void EditCategory(Category category)
         {
@@ -106,6 +110,12 @@ namespace MovieScrapper.Business
         {
             var repo = new CategoryRepository();
             return repo.GetUserWatchedEntity(userId);
+        }
+
+        public Bet GetUserBetEntity(string userId)
+        {
+            var repo = new CategoryRepository();
+            return repo.GetUserBetEntity(userId);
         }
 
     }

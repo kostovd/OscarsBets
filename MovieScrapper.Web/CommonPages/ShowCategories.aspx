@@ -27,8 +27,9 @@
                                 <div id="title">
                                     <div class="items">
                                         <div><%# DataBinder.Eval(Container.Parent.Parent, "DataItem.Id") %></div>
+                                         <%--CommandArgument='<%#string.Format("{0}|{1}",Eval("arrange_by_id"),Eval("value"))%>'--%>
                                        <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
-                                         <asp:Button ID="MarkAsBettedButton" runat="server" CssClass="items checkButton" Text= "<%# ChangeTextIfUserBettedOnThisMovie(Item.Bets)%>" CommandName="MarkAsBetted" CommandArgument='<%# Item.Id %>' Enabled=<%# DoesUserBetOnThisMovie(Item.Bets)%> />
+                                         <asp:Button ID="MarkAsBettedButton" runat="server" CssClass="items checkButton" Text= "<%# ChangeTextIfUserBettedOnThisMovie(Item.Bets)%>"  CommandName="MarkAsBetted" CommandArgument='<%#string.Format("{0}|{1}",Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id"))%>' Enabled=<%# DoesUserBetOnThisMovie(Item.Bets)%> />
                                     </div>
                                 </div>
                                 <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath)%>" class="auto-style2" />

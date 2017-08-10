@@ -56,7 +56,8 @@ namespace MovieScrapper.CommonPages
             if (e.CommandName == "MarkAsWatched")
             {
                 var userId = User.Identity.GetUserId();
-                var movieId = int.Parse(e.CommandArgument.ToString());                                
+                var movieId = int.Parse(e.CommandArgument.ToString());
+                
                 var service = new CategoryService();              
                 
                 if (service.GetUserWatchedEntity(userId)==null)

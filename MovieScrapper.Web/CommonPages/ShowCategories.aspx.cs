@@ -54,18 +54,17 @@ namespace MovieScrapper.CommonPages
             if (e.CommandName == "MarkAsBetted")
             {
                 var userId = User.Identity.GetUserId();
-                var movieId = int.Parse(e.CommandArgument.ToString());
-                var service = new CategoryService();
-                Label2.Text = User.Identity.Name + " betted on movie with Id = " + movieId;
-                //if (service.GetUserWatchedEntity(userId) == null)
-                //{
-                //    var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
-                //    watchedEntity = service.AddWatchedEntity(watchedEntity);
-
-                //}
-
-                //service.AddWatchedMovie(userId, movieId);
-               // Response.Redirect("/CommonPages/ShowCategories?userId=" + userId);
+                string sortByAndArrangeBy = (e.CommandArgument).ToString();
+                char[] separator = { '|' };
+                string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
+                var movieId = int.Parse(sortByAndArrangeByArray[0]);
+                var categoryId = int.Parse(sortByAndArrangeByArray[1]);
+                var service = new CategoryService();                               
+                //var betEntity = new Bet() { UserId = userId, Movie= service.GetMovie(movieId), Category= service.GetCategory(categoryId) };
+                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
+                Label2.Text = User.Identity.Name + " added new entity with userId= " + betEntity.UserId + "  movieId= " + betEntity.Movie.Id +  " and categoryId= " + betEntity.Category.Id;
+                               
+                Response.Redirect("/CommonPages/ShowCategories.aspx?userId=" + userId);
 
             }
         }

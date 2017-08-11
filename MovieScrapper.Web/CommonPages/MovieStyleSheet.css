@@ -8,6 +8,13 @@
     color:slategrey;
 }
 
+.warning{
+   margin:5px;
+   padding:5px;
+   float:right;
+   border:2px solid red;
+}
+
 .linkTitle {
     margin-bottom: 5px;
     font-size: 16px;

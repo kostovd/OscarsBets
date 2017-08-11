@@ -96,12 +96,38 @@ namespace MovieScrapper.CommonPages
 
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
+            var currentUsereId = User.Identity.GetUserId();
+
             IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
-            var categoryCount = categories.Count();            
-            var service = new CategoryService();
-            var bettedCategories = service.GetAllUserBets(User.Identity.GetUserId()).Count();
+            var categoryCount = categories.Count();
+            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
+
+            //int sum = 0;
+            //foreach (Category cat in categories)
+            //{
+            //    sum += cat.Bets.Where(x => x.UserId == currentUsereId).Count();
+            //}
+
+           // var service = new CategoryService();
+            //var bettedCategories = service.GetAllUserBets(currentUsereId).Count();
             GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
-            WarningLabel.Text = "You have betted in " + bettedCategories + " categories. " + "You have " + (categoryCount - bettedCategories) +" more categories to bet.";
+            var missedCategories = categoryCount - bettedCategories;
+            if (missedCategories > 0)
+            {
+                if (missedCategories == 1)
+                {
+                    WarningLabel.Text = "Don't miss your chance! " + " You have " + (missedCategories) + " more category to bet!";
+                }
+                else
+                {
+                    WarningLabel.Text = "Don't miss your chance! " + " You have " + (missedCategories) + " more categories to bet!";
+                }
+            }
+            else
+            {
+                WarningLabel.CssClass = "hidden";
+                //WarningLabel.Attributes.Add("class", "hidden");
+            }
         }
     }
 }

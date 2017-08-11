@@ -15,7 +15,7 @@ namespace MovieScrapper.Entities
             this.Categories = new List<Category>();
         }
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        ////[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string Title { get; set; }
 
@@ -29,5 +29,6 @@ namespace MovieScrapper.Entities
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }
         public ICollection<Bet> Bets { get; set; }
+        public virtual ICollection<Category> WinningCategories { get; set; }
     }
 }

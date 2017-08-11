@@ -3,8 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
     <asp:Label ID="GreatingLabel" runat="server" CssClass="header"></asp:Label>
-    <br />
-   
+    <br />  
     <asp:Label ID="WarningLabel" runat="server" CssClass="header warning"></asp:Label>
     <hr />
     <div>

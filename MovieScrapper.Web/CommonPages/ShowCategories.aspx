@@ -2,9 +2,10 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
-    <asp:Label ID="Label1" runat="server" Text="Label" CssClass="header"></asp:Label>
+    <asp:Label ID="GreatingLabel" runat="server" CssClass="header"></asp:Label>
     <br />
-    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+   
+    <asp:Label ID="WarningLabel" runat="server" CssClass="header warning"></asp:Label>
     <hr />
     <div>
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
@@ -32,7 +33,7 @@
                                         CssClass="items checkButton"
                                         Text='<%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>'
                                         CommandName="MarkAsBetted"
-                                        CommandArgument='<%# string.Format("{0}|{1}",Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>' />
+                                        CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>' />
                                 </div>
                             </div>
                             <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
@@ -49,6 +50,6 @@
             ID="ObjectDataSource1"
             runat="server"
             SelectMethod="GetAll"
-            TypeName="MovieScrapper.Business.CategoryService"></asp:ObjectDataSource>
+            TypeName="MovieScrapper.Business.CategoryService" OnSelected="ObjectDataSource1_Selected"></asp:ObjectDataSource>
     </div>
 </asp:Content>

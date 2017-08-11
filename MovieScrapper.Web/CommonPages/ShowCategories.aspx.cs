@@ -15,12 +15,25 @@ namespace MovieScrapper.CommonPages
         {
             if (User.Identity.IsAuthenticated)
             {
-                Label1.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+                //if (!Page.IsPostBack)
+                //{
+                //    Repeater1.DataBind();
+                //    IEnumerable<Category> data = (IEnumerable<Category>)Repeater1.DataSource;
+                //    DisplayPageSummary(data);
+                //}
             }
             else
             {
-                Label1.Text = "You must be logged in to mark a movie as watched!";
+                GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
             }
+        }
+
+        private void DisplayPageSummary(IEnumerable<Category> data)
+        {
+            //var service = new CategoryService();
+            //var categoryCount = service.GetAll().Count();
+            //Label1.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+            //Label3.Text = "You betted in " + service.GetAllUserBets(User.Identity.GetUserId()).Count() + " categories. " + "Categories are " + categoryCount ;
         }
 
         public string BuildPosterUrl(string path)
@@ -59,13 +72,11 @@ namespace MovieScrapper.CommonPages
                 string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
                 var movieId = int.Parse(sortByAndArrangeByArray[0]);
                 var categoryId = int.Parse(sortByAndArrangeByArray[1]);
-                var service = new CategoryService();                               
-                //var betEntity = new Bet() { UserId = userId, Movie= service.GetMovie(movieId), Category= service.GetCategory(categoryId) };
-                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
-                Label2.Text = User.Identity.Name + " added new entity with userId= " + betEntity.UserId + "  movieId= " + betEntity.Movie.Id +  " and categoryId= " + betEntity.Category.Id;
-                               
-                Response.Redirect("/CommonPages/ShowCategories.aspx?userId=" + userId);
-
+                var service = new CategoryService();                                               
+                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);                                                     
+                Repeater1.DataBind();
+                //IEnumerable<Category> data = (IEnumerable<Category>)Repeater1.DataSource;
+                //DisplayPageSummary(data);
             }
         }
 
@@ -81,6 +92,16 @@ namespace MovieScrapper.CommonPages
             {
                 return "o"; //code 111 in ASCI
             }
+        }
+
+        protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
+            var categoryCount = categories.Count();            
+            var service = new CategoryService();
+            var bettedCategories = service.GetAllUserBets(User.Identity.GetUserId()).Count();
+            GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+            WarningLabel.Text = "You have betted in " + bettedCategories + " categories. " + "You have " + (categoryCount - bettedCategories) +" more categories to bet.";
         }
     }
 }

@@ -30,7 +30,7 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var movies = ctx.Movies
-                    .Include("UsersWatchedThisMovie")
+                    .Include(u=>u.UsersWatchedThisMovie)
                     //.Where(x => x.UsersWatchedThisMovie.Any())
                     .ToList();
                 return movies;
@@ -42,20 +42,19 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var watched = ctx.Watched.Include("Movies").Where(x => x.UserId == userId).ToList();
+                var watched = ctx.Watched.Include(w => w.Movies).Where(x => x.UserId == userId).ToList();
 
                 return watched;
             }
         }
 
-        
 
         public Category GetCategory(int id)
         {
 
             using (var ctx = new MovieContext())
             {
-                var foundedCategory = ctx.MovieCaterogries.Include("Movies").Where(x=>x.Id==id).SingleOrDefault();
+                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == id).SingleOrDefault();
                 return foundedCategory;
             }
         }
@@ -74,7 +73,7 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {
-                var foundedCategoty = ctx.MovieCaterogries.Include("Movies").Where(x => x.Id==categoryId).SingleOrDefault();
+                var foundedCategoty = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == categoryId).SingleOrDefault();
                 return foundedCategoty.Movies;
             }
         }
@@ -107,6 +106,15 @@ namespace MovieScrapper.Data
             return watchedEntity;
         }
 
+        public IEnumerable<Bet> GetAllUserBets(string userId)
+        {
+            using (var ctx=new MovieContext())
+            {
+                var bets = ctx.Bets.Where(bet => bet.UserId == userId).ToList();
+                return bets;
+            }
+        }
+      
         public Bet MakeBetEntity(string userId, int movieId, int categoryId)
         {
             using (var ctx = new MovieContext())
@@ -145,16 +153,23 @@ namespace MovieScrapper.Data
         //    }
         //} 
 
-        public void AddWatchedMovie(string userId, int movieId)
+        public void ChangeMovieStatus(string userId, int movieId)
         {
 
             using (var ctx = new MovieContext())
             {
                 var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var watchedEntity = ctx.Watched.Include("Movies").SingleOrDefault(x => x.UserId == userId);               
-                watchedEntity.Movies.Add(movie);
+                var watchedEntity = ctx.Watched.Include(w => w.Movies).SingleOrDefault(x => x.UserId == userId);
+                if(watchedEntity.Movies.Where(m=>m.Id== movieId).SingleOrDefault() == null)
+                {
+                    watchedEntity.Movies.Add(movie);
+                }
+                else
+                {
+                    watchedEntity.Movies.Remove(movie);
+                }
+               
                 ctx.SaveChanges();
-
             }
         }
 
@@ -171,9 +186,9 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {
-                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
-                databaseCategory.Movies.Add(databaseMovie);
+                var foundedMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(cat => cat.Id == categoryId);
+                foundedCategory.Movies.Add(foundedMovie);
                 ctx.SaveChanges();
             }
         }
@@ -194,7 +209,7 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
+                var databaseCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(x => x.Id == categoryId);
                 var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
                 databaseCategory.Movies.Remove(foundedMovie);
                 ctx.SaveChanges();
@@ -206,7 +221,7 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var databaseCategory = ctx.MovieCaterogries.Include("Movies").SingleOrDefault(x => x.Id == categoryId);
+                var databaseCategory = ctx.MovieCaterogries.Include(cat =>cat.Movies).SingleOrDefault(x => x.Id == categoryId);
                 var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
                 return foundedMovie;
             }

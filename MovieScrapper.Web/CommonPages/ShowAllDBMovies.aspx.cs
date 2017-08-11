@@ -53,11 +53,12 @@ namespace MovieScrapper.CommonPages
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "MarkAsWatched")
+            if (e.CommandName == "MarkAsWatchedOrUnwatched")
             {
                 var userId = User.Identity.GetUserId();
-                var movieId = int.Parse(e.CommandArgument.ToString());
+                int movieId = int.Parse((e.CommandArgument).ToString());
                 
+
                 var service = new CategoryService();              
                 
                 if (service.GetUserWatchedEntity(userId)==null)
@@ -70,7 +71,8 @@ namespace MovieScrapper.CommonPages
                 {
                     Label2.Text = "This user has an entity.";
                 }
-                service.AddWatchedMovie(userId, movieId);
+
+                service.ChangeMovieStatus(userId, movieId);
                 Response.Redirect("/CommonPages/ShowAllDBMovies.aspx?userId=" + userId);
                 
             }

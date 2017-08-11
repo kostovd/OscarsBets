@@ -16,13 +16,16 @@
                                 <div id="title">
                                     <div ="items">                                      
                                        <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
-                                        <asp:Button ID="MarkAsWatchedButton" runat="server" CssClass="items checkButton" Text= "<%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie)%>" CommandName="MarkAsWatched" CommandArgument='<%# Item.Id %>' Enabled=<%# DoesUserWatchedThisMovie(Item.UsersWatchedThisMovie)%> />
+                                        <asp:Button ID="MarkAsWatchedButton" 
+                                            runat="server" 
+                                            CssClass="items checkButton" 
+                                            Text= "<%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie) %>" 
+                                            CommandName="MarkAsWatchedOrUnwatched" 
+                                            CommandArgument='<%# Item.Id %>' /> 
                                     </div>
                                 </div>
                                 <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
-                            </div> 
-                            
-                            
+                            </div>                                                      
                         </ItemTemplate>
                         <FooterTemplate>
                             </div>

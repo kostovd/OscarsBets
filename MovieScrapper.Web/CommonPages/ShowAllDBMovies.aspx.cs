@@ -51,10 +51,10 @@ namespace MovieScrapper.CommonPages
             return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowAllDBMovies";
         }
 
-        protected string BuildImdbUrl(int movieId)
+        protected string BuildImdbUrl(string movieId)
         {
 
-            return "https://www.themoviedb.org/movie/" + movieId;
+            return "http://www.imdb.com/title/" + movieId;
         }
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)

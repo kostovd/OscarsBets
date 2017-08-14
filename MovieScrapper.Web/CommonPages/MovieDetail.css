@@ -1,5 +1,5 @@
-﻿#movieItem {
-    width: 500px;
+﻿.movieItem {
+    width:800px;
     align-items: center;
     justify-content: center;
     display: inline-flex;
@@ -15,7 +15,7 @@
 }
 
 
-#poster {
+.poster {
     width: 40%;
     align-self: flex-start;
     margin: 3px;
@@ -27,9 +27,13 @@
 }
 
 #backlLink{
-    text-decoration:none;
+    text-decoration:none;   
 }
 
 #AddMovieToCategoryButton {
     background-color: antiquewhite;
+}
+.imdb {
+    margin:5px;
+    width: 40px;
 }

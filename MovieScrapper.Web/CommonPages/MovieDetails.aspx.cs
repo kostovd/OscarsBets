@@ -100,5 +100,11 @@ namespace MovieScrapper
             var title = service.GetCategory(categoryId).CategoryTtle;
             return title;
         }
+
+        protected string BuildImdbUrl(string movieId)
+        {
+
+            return "http://www.imdb.com/title/" + movieId;
+        }
     }
 }

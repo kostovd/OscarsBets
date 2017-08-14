@@ -56,10 +56,10 @@ namespace MovieScrapper.CommonPages
 
         }
 
-        protected string BuildImdbUrl(int movieId)
+        protected string BuildImdbUrl(string movieId)
         {
 
-            return "https://www.themoviedb.org/movie/" + movieId;
+            return "http://www.imdb.com/title/" + movieId;
         }
 
         protected string BuildUrl(int movieId)

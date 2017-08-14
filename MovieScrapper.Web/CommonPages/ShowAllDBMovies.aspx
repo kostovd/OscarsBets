@@ -17,7 +17,7 @@
                                     <div ="items">                                      
                                        <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                         <br />
-                                        <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" title="See the info in IMDB" ><img class="imdb" src="/imdb.svg" /> </a>
+                                        <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB" ><img class="imdb" src="/imdb.svg" /> </a>
                                         <asp:Button ID="MarkAsWatchedButton" 
                                             runat="server" 
                                             CssClass="items checkButton" 

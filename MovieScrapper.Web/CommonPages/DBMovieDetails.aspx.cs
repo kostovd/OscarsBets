@@ -20,5 +20,10 @@ namespace MovieScrapper.CommonPages
             string backUrl = Request.QueryString["back"];
             return backUrl;
         }
+
+        protected string BuildImdbUrl(string movieId)
+        {
+            return "http://www.imdb.com/title/" + movieId;
+        }
     }
 }

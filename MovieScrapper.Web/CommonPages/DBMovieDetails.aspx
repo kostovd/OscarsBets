@@ -6,7 +6,7 @@
             <Fields>            
             <asp:TemplateField>
                 <ItemTemplate>
-                  <div id="movieItem"> 
+                  <div class="movieItem"> 
                     <div id="info">
                             <div id="title"><%# Item.Title %> (<%# Item.ReleaseDate %>)
 
@@ -14,12 +14,13 @@
                             </br>
                             <div id="overview">
                                 <%# Item.Overview %>
-                            </div>                    
+                            </div>  
+                            <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB"><img class="imdb" src="/imdb.svg" /> </a>
                             <br />
                         <a id="backlLink" runat="server" href="<%# BuildBackUrl() %>"><span style="font-family:Wingdings">&#231;</span> </a>                             
                         </br>
                     </div>
-                    <img id="poster" src="<%# BuildPosterUrl((string)Item.PosterPath) %>"/>
+                    <img class="poster" src="<%# BuildPosterUrl((string)Item.PosterPath) %>"/>
                       <br />
                       <br />                     
                    </div>

@@ -51,9 +51,8 @@
                 <div class="navbar-collapse collapse">
                     
                     <ul class="nav navbar-nav">
-                        
-                        <li><a runat="server" href="~/CommonPages/ShowMovies">Home</a></li>
-                        <li><a runat="server" href="~/CommonPages/ShowCategories">Categories</a></li>
+                                                
+                        <li><a runat="server" href="~/CommonPages/ShowCategories">Home</a></li>
                         <li><a runat="server" href="~/CommonPages/ShowAllDBMovies">Watched</a></li>
                         <li>               </li>
                         <li><a runat="server" id="Admin1" href="~/Admin/Categories">Edit movies</a></li>
@@ -85,7 +84,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Oscars Bets ASP.NET Application. With the help of the <a href="https://www.themoviedb.org" target="_newtab"> TMDB Movie Database</a></p>
             </footer>
         </div>
     </form>

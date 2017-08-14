@@ -99,7 +99,17 @@ namespace MovieScrapper.CommonPages
                 return "o"; //code 111 in ASCI
             }
         }
-
+        protected string CheckIfWinner(string winner, int currentMovieId)
+        {
+            if (winner == currentMovieId.ToString())
+            {
+                return "Winner!";
+            }
+            else
+            {             
+                return "";
+            }
+        }
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
             var currentUsereId = User.Identity.GetUserId();

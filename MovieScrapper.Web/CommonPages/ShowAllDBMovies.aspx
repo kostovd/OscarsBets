@@ -15,15 +15,16 @@
                             <div id="movieItem">
                                 <div id="title">
                                     <div ="items">                                      
-                                       <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
+                                       <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                         <br />
-                                        <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" ><img class="imdb" src="/imdb.svg" /> </a>
+                                        <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" title="See the info in IMDB" ><img class="imdb" src="/imdb.svg" /> </a>
                                         <asp:Button ID="MarkAsWatchedButton" 
                                             runat="server" 
                                             CssClass="items checkButton" 
                                             Text= "<%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie) %>" 
                                             CommandName="MarkAsWatchedOrUnwatched" 
-                                            CommandArgument='<%# Item.Id %>' /> 
+                                            CommandArgument='<%# Item.Id %>'
+                                            title="Mark this movie as watched"/> 
                                     </div>
                                 </div>
                                 <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />

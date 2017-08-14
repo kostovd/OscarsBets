@@ -3,7 +3,6 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
     <asp:Label ID="GreatingLabel" runat="server" CssClass="header"></asp:Label>
-    <br />  
     <asp:Label ID="WarningLabel" runat="server" CssClass="header warning"></asp:Label>
     <hr />
     <div>
@@ -12,32 +11,32 @@
             <ItemTemplate>
                 <br />
                 <br />
-                <asp:Label ID="CategoryTtleLabel" runat="server" Style="text-transform: uppercase; font-weight: bold;" Text='<%# Item.CategoryTtle %>' />
-                <br />
-                <asp:Label ID="CategoryDescriptionLabel" runat="server" Text='<%# Item.CategoryDescription %>' />
-                <br />
-
+                <asp:Label ID="CategoryTtleLabel" class="categoryTtleLabel" runat="server" ToolTip="<%# Item.CategoryDescription %>" Text='<%# Item.CategoryTtle %>' />
+                
                 <asp:Repeater ID="Repeater2" runat="server"
                     ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies %>" OnItemCommand="Repeater2_ItemCommand">
                     <HeaderTemplate>
                         <div>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div id="movieItem">
+                        <div id="movieItem"  >
                             <div id="title">
-                                <div class="items">
-                                    <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
+                                <div class="items " >
+                                    <label id="checkForWinner" class="winner"><%# CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %></label>
                                     <br />
-                                     <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" ><img class="imdb" src="/imdb.svg" /> </a>
+                                    <a href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
+                                    <br />
+                                    <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" title="See the info in IMDB"><img class="imdb" src="/imdb.svg" /> </a>
                                     <asp:Button ID="MarkAsBettedButton"
                                         runat="server"
                                         CssClass="items checkButton"
                                         Text='<%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>'
                                         CommandName="MarkAsBetted"
-                                        CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>' />
+                                        CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
+                                        title="Bet that the movie will be the winer in this category"/>
                                 </div>
                             </div>
-                            <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
+                            <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
                         </div>
                     </ItemTemplate>
                     <FooterTemplate>

@@ -11,7 +11,7 @@
 
 .linkTitle {
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 20px;
     color:slategray;
     
 }
@@ -46,9 +46,10 @@
     
 }
 
-#CategoryTtleLabel {
+.categoryTtleLabel {
     text-transform: uppercase;
     font-weight:bold;
+    font-size:20px;
 }
 
 a {
@@ -61,7 +62,7 @@ a {
     border: none;
     width: 30px;
     height: 30px;
-    color:black;
+    color:gold;
     font-size:25px;
 }
 
@@ -73,13 +74,20 @@ a {
     padding: 5px;
     float: right;
     border: 2px solid red;
+    border-radius: 3px;
 }
 .green {
     margin: 5px;
     padding: 5px;
     float: right;
     border: 2px solid green;
+    border-radius:3px;
 }
 .imdb {
     width:40px;
+}
+.winner {
+  margin:2px;
+  font-weight:bold;
+  color:gold;
 }

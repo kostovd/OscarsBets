@@ -64,7 +64,7 @@ namespace MovieScrapper.CommonPages
 
         protected string BuildUrl(int movieId)
         {
-            
+
             return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowCategories";
         }
 
@@ -78,19 +78,19 @@ namespace MovieScrapper.CommonPages
                 string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
                 var movieId = int.Parse(sortByAndArrangeByArray[0]);
                 var categoryId = int.Parse(sortByAndArrangeByArray[1]);
-                var service = new CategoryService();                                               
-                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);                                                     
+                var service = new CategoryService();
+                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
                 //IEnumerable<Category> data = (IEnumerable<Category>)Repeater1.DataSource;
                 //DisplayPageSummary(data);
             }
         }
 
-     
+
         protected string ChangeTextIfUserBettedOnThisMovie(ICollection<Bet> categoryBets, int movieId)
         {
             string currentUserId = User.Identity.GetUserId();
-            if (categoryBets.Any(x => x.UserId == currentUserId && x.Movie.Id == movieId))           
+            if (categoryBets.Any(x => x.UserId == currentUserId && x.Movie.Id == movieId))
             {
                 return "þ"; //code 254 in ASCI
             }
@@ -114,7 +114,7 @@ namespace MovieScrapper.CommonPages
             //    sum += cat.Bets.Where(x => x.UserId == currentUsereId).Count();
             //}
 
-           // var service = new CategoryService();
+            // var service = new CategoryService();
             //var bettedCategories = service.GetAllUserBets(currentUsereId).Count();
             GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
             var missedCategories = categoryCount - bettedCategories;
@@ -122,17 +122,19 @@ namespace MovieScrapper.CommonPages
             {
                 if (missedCategories == 1)
                 {
-                    WarningLabel.Text = "Don't miss your chance! " + " You have " + (missedCategories) + " more category to bet!";
+                    WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
+                        "You have " + (missedCategories) + " more category to bet!";
                 }
                 else
                 {
-                    WarningLabel.Text = "Don't miss your chance! " + " You have " + (missedCategories) + " more categories to bet!";
+                    WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
+                        "You have " + (missedCategories) + " more categories to bet!";
                 }
             }
             else
             {
-                WarningLabel.CssClass = "hidden";
-                //WarningLabel.Attributes.Add("class", "hidden");
+                WarningLabel.CssClass = "green";
+                WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
             }
         }
     }

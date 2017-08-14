@@ -56,6 +56,12 @@ namespace MovieScrapper.CommonPages
 
         }
 
+        protected string BuildImdbUrl(int movieId)
+        {
+
+            return "https://www.themoviedb.org/movie/" + movieId;
+        }
+
         protected string BuildUrl(int movieId)
         {
             

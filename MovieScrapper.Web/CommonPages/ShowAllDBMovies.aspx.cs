@@ -51,6 +51,12 @@ namespace MovieScrapper.CommonPages
             return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowAllDBMovies";
         }
 
+        protected string BuildImdbUrl(int movieId)
+        {
+
+            return "https://www.themoviedb.org/movie/" + movieId;
+        }
+
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "MarkAsWatchedOrUnwatched")

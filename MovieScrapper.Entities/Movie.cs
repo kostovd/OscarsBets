@@ -25,6 +25,8 @@ namespace MovieScrapper.Entities
         [JsonProperty("poster_path")]
         public string PosterPath { get; set; }
         public string Overview { get; set; }
+        [JsonProperty("imdb_id")]
+        public string ImdbId { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }

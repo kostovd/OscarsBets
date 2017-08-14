@@ -27,6 +27,8 @@
                             <div id="title">
                                 <div class="items">
                                     <a href="<%# BuildUrl(Item.Id) %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
+                                    <br />
+                                     <a href="<%# BuildImdbUrl(Item.Id) %>" target="_newtab" ><img class="imdb" src="/imdb.svg" /> </a>
                                     <asp:Button ID="MarkAsBettedButton"
                                         runat="server"
                                         CssClass="items checkButton"

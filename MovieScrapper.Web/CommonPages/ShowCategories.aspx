@@ -19,10 +19,10 @@
                         <div>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div id="movieItem"  >
+                        <div id="movieItem" class="<%# CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %>"  >
                             <div id="title">
-                                <div class="items " >
-                                    <label id="checkForWinner" class="winner"><%# CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %></label>
+                                <div class="items " >                                   
+                                    <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %>" title="WINNER!"/>
                                     <br />
                                     <a href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                     <br />
@@ -36,6 +36,7 @@
                                         title="Bet that the movie will be the winer in this category"/>
                                 </div>
                             </div>
+                            
                             <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
                         </div>
                     </ItemTemplate>

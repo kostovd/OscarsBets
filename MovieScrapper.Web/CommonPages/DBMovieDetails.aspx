@@ -7,20 +7,18 @@
             <asp:TemplateField>
                 <ItemTemplate>
                   <div class="movieItem"> 
-                    <div id="info">
-                            <div id="title"><%# Item.Title %> (<%# Item.ReleaseDate %>)
-
-                            </div>                       
+                    <div id="info">                        
+                            <div id="title"><%# Item.Title %> (<%# Item.ReleaseDate %>)</div>                       
                             </br>
-                            <div id="overview">
-                                <%# Item.Overview %>
-                            </div>  
+                            <div id="overview"><%# Item.Overview %></div> 
+                            <hr />                           
                             <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB"><img class="imdb" src="/imdb.svg" /> </a>
                             <br />
-                        <a id="backlLink" runat="server" href="<%# BuildBackUrl() %>"><span style="font-family:Wingdings">&#231;</span> </a>                             
-                        </br>
+                            <a class="backlLink" title="Back" runat="server" href="<%# BuildBackUrl() %>"><span style="font-family:Wingdings">&#231;</span></a>  
+                            <br />
+                                                   
                     </div>
-                    <img class="poster" src="<%# BuildPosterUrl((string)Item.PosterPath) %>"/>
+                    <img class="poster"  src="<%# BuildPosterUrl((string)Item.PosterPath) %>"/>
                       <br />
                       <br />                     
                    </div>

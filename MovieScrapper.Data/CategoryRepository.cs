@@ -82,6 +82,15 @@ namespace MovieScrapper.Data
             }
         }
 
+        public void EditCategory(Category category)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
         #region GET
 
 
@@ -171,13 +180,13 @@ namespace MovieScrapper.Data
                 return foundedMovie;
             }
         }
-
-        public void EditCategory(Category category)
+        
+        public StopDate GetStopDate()
         {
             using (var ctx = new MovieContext())
             {
-                ctx.Entry(category).State = System.Data.Entity.EntityState.Modified;
-                ctx.SaveChanges();
+                var foundedDate = ctx.StopDate.First();
+                return foundedDate;
             }
         }
 

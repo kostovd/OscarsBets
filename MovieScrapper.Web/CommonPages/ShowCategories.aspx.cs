@@ -21,8 +21,22 @@ namespace MovieScrapper.CommonPages
             {
                 GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
             }
+
+            stopGameLabel.Text = ShowIfGameIsStopped();
         }
 
+        public string ShowIfGameIsStopped()
+        {
+            var service = new CategoryService();
+            if (service.IsGameStopped() == true)
+            {
+                return "The Game is stopped!";
+            }
+            else
+            {
+                return "The Game is running!";
+            }
+        }
         private void DisplayPageSummary(IEnumerable<Category> data)
         {
             //var service = new CategoryService();
@@ -105,17 +119,24 @@ namespace MovieScrapper.CommonPages
             }
         }
        
-        protected string CheckIfWinner(string winner, int currentMovieId)
-        {
-            if (winner == currentMovieId.ToString())
-            {
-                return "winner";
-            }
-            else
-            {
-                return "notWinner";
-            }
-        }
+        //protected string CheckIfWinner(string winner, int currentMovieId)
+        //{
+        //    if (!winner.HasValue)
+        //    {
+        //        return "";
+        //    }
+        //    else
+        //    {
+        //        if (winner.ToString() == currentMovieId.ToString())
+        //        {
+        //            return "winner";
+        //        }
+        //        else
+        //        {
+        //            return "notWinner";
+        //        }
+        //    }
+        //}
 
         protected string CheckIfWinnerImage(string winner, int currentMovieId)
         {

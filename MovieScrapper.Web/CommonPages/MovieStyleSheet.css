@@ -41,7 +41,6 @@
     color: gray;
     font-size:16px;
     width: 60%;
-
     align-self: flex-start;
   
 }
@@ -51,7 +50,8 @@
    height: 190px;
    align-self: flex-start;
    float:right;
-   margin:3px;        
+   margin:3px;
+   border-radius:7px;
 }
 
 .categoryTtleLabel {
@@ -82,14 +82,14 @@ a {
     padding: 5px;
     float: right;
     border: 3px solid red;
-    border-radius: 3px;
+    border-radius: 7px;
 }
 .green {
     margin: 5px;
     padding: 5px;
     float: right;
     border: 3px solid green;
-    border-radius:3px;
+    border-radius:7px;
 }
 .imdb {
     width:50px;
@@ -97,14 +97,14 @@ a {
 .notWinner {
     padding: 5px;
     border: 3px solid grey;    
-    border-radius: 3px;
+    border-radius: 7px;
 }
 
 .winner {
     padding: 5px;
     border: 3px solid;
     border-color: rgb(237,192,116); 
-    border-radius:3px;
+    border-radius:7px;
 }
 .winnerLogo {
     width: 40px;

@@ -4,17 +4,18 @@ using System.Data.Entity;
 
 namespace MovieScrapper.Data
 {
-    public class MovieContext: DbContext
+    public class MovieContext : DbContext
     {
-        public MovieContext(): base("DefaultConnection")
+        public MovieContext() : base("DefaultConnection")
         {
             Database.SetInitializer<MovieContext>(new DropCreateDatabaseIfModelChanges<MovieContext>());
         }
 
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Category> MovieCaterogries { get; set; }     
+        public DbSet<Category> MovieCaterogries { get; set; }
         public DbSet<Watched> Watched { get; set; }
         public DbSet<Bet> Bets { get; set; }
+        public DbSet<StopDate> StopDate {get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

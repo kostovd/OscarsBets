@@ -216,6 +216,17 @@ namespace MovieScrapper.Data
             }
         }
 
+        public void MarkAsWinner(int categoryId, int movieId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Winner).SingleOrDefault(x => x.Id == categoryId);
+                foundedCategory.Winner = foundedMovie;
+                ctx.SaveChanges();
+            }
+        }
+
         public Movie GetMovieInCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())

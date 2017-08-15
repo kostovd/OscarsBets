@@ -84,6 +84,15 @@ namespace MovieScrapper.Admin
                 
                 Response.Redirect("/CommonPages/DBMovieDetails.aspx?id=" + id.ToString()+ "&back=/Admin/EditMoviesInThisCategory?categoryId="+ Request.QueryString["categoryId"]);
             }
+
+            if (e.CommandName == "MarkAsWinner")
+            {
+                var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
+                var movieId = Int32.Parse(e.CommandArgument.ToString());
+                var service = new CategoryService();
+                service.MarkAsWinner(categoryId, movieId);
+                Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
+            }
         }
 
         protected void BackToEditCategoriesButton_Click(object sender, EventArgs e)

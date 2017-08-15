@@ -124,5 +124,11 @@ namespace MovieScrapper.Business
             return repo.GetAllUserBets(userId);
         }
 
+        public void MarkAsWinner(int categoryId, int movieId)
+        {
+            var repo = new CategoryRepository();
+            repo.MarkAsWinner(categoryId, movieId);
+        }
+
     }
 }

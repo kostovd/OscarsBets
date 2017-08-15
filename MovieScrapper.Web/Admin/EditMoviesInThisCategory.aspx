@@ -24,19 +24,40 @@
             <ItemTemplate>
                 <div id="movieItem">  
                   <div id="title">
-                      <div class="items">
+                      
                       <%# Item.Title %> (<%# DisplayYear((string)Item.ReleaseDate) %>)
-                      </div>
-                      <div class="items">
-                      <asp:Button ID="DeleteButton" runat="server" CssClass="items" Height="30px" Text="Delete" Width="100px" 
-                          CommandName="Delete" CommandArgument='<%# Item.Id %>'  OnClientClick="return confirm('Are you sure you want to delete this item?')"/>
-                     </div>
-                      <div class="items">
-                      <asp:Button ID="ShowDetailsButton" runat="server" Text="Show details" Width="100px" 
-                          CommandName="ShowDetails" CommandArgument='<%# Item.Id %>' CssClass="items" Height="30px" />
-                        </div>                   
+                      
+                      <asp:Button 
+                          ID="DeleteButton" 
+                          runat="server" 
+                          CssClass="items"  
+                          Text="Delete" 
+                          CommandName="Delete" 
+                          CommandArgument='<%# Item.Id %>'  
+                          OnClientClick="return confirm('Are you sure you want to delete this item?')"
+                          />
+                                          
+                      <asp:Button 
+                          ID="ShowDetailsButton" 
+                          runat="server" 
+                          CssClass="items"
+                          Text="Show details"  
+                          CommandName="ShowDetails" 
+                          CommandArgument='<%# Item.Id %>'   
+                          />                      
+                      
+                      <asp:Button 
+                          ID="MarkAsWinnerButton" 
+                          runat="server" 
+                          CssClass="items"
+                          Text="Mark as winner" 
+                          CommandName="MarkAsWinner" 
+                          CommandArgument='<%# Item.Id %>'   
+                          />
                   </div>  
-                    &nbsp;<img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" /></div>
+                  &nbsp;
+                  <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
+                </div>
             </ItemTemplate>
             <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
         </asp:DataList>

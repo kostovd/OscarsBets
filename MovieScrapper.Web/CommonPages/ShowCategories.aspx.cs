@@ -116,7 +116,7 @@ namespace MovieScrapper.CommonPages
         {
             if (winner == currentMovieId.ToString())
             {
-                return "/favicon.ico";
+                return "/Oscar_logo.png";
             }
             else
             {

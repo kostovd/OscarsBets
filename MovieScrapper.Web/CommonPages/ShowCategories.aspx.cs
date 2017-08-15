@@ -118,35 +118,43 @@ namespace MovieScrapper.CommonPages
                 return "o"; //code 111 in ASCI
             }
         }
-       
-        //protected string CheckIfWinner(string winner, int currentMovieId)
-        //{
-        //    if (!winner.HasValue)
-        //    {
-        //        return "";
-        //    }
-        //    else
-        //    {
-        //        if (winner.ToString() == currentMovieId.ToString())
-        //        {
-        //            return "winner";
-        //        }
-        //        else
-        //        {
-        //            return "notWinner";
-        //        }
-        //    }
-        //}
 
-        protected string CheckIfWinnerImage(string winner, int currentMovieId)
+        protected string CheckIfWinner(object winner, int currentMovieId)
         {
-            if (winner == currentMovieId.ToString())
+            if (winner == null)
             {
-                return "/Oscar_logo.png";
+                return "";
             }
             else
             {
+                if (winner.ToString() == currentMovieId.ToString())
+                {
+                    return "winner";
+                }
+                else
+                {
+                    return "notWinner";
+                }
+            }
+            
+        }
+
+        protected string CheckIfWinnerImage(object winner, int currentMovieId)
+        {
+            if (winner == null)
+            {
                 return "";
+            }
+            else
+            {
+                if (winner.ToString() == currentMovieId.ToString())
+                {
+                    return "/Oscar_logo.png";
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
 

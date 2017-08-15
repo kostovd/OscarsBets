@@ -25,6 +25,19 @@ namespace MovieScrapper.CommonPages
             }
             
         }
+
+        protected bool CheckIfTheUserIsLogged()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string BuildPosterUrl(string path)
         {
             return "http://image.tmdb.org/t/p/w92" + path;

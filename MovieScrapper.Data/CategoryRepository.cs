@@ -10,6 +10,81 @@ namespace MovieScrapper.Data
 {
     public class CategoryRepository
     {
+# region ADD
+        public void AddCategory(Category category)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.MovieCaterogries.Add(category);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void AddMovie(Movie movie)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.Movies.Add(movie);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void AddMovieInCategory(int categoryId, int movieId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(cat => cat.Id == categoryId);
+                foundedCategory.Movies.Add(foundedMovie);
+                ctx.SaveChanges();
+            }
+        }
+
+        public Watched AddWatchedEntity(Watched watchedEntity)
+        {
+            using (var ctx = new MovieContext())
+            {
+                watchedEntity = ctx.Watched.Add(watchedEntity);
+                ctx.SaveChanges();
+            }
+
+            return watchedEntity;
+        }
+        #endregion
+        public void ChangeMovieStatus(string userId, int movieId)
+        {
+
+            using (var ctx = new MovieContext())
+            {
+                var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var watchedEntity = ctx.Watched.Include(w => w.Movies).SingleOrDefault(x => x.UserId == userId);
+                if (watchedEntity.Movies.Where(m => m.Id == movieId).SingleOrDefault() == null)
+                {
+                    watchedEntity.Movies.Add(movie);
+                }
+                else
+                {
+                    watchedEntity.Movies.Remove(movie);
+                }
+
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeleteCategory(int id)
+        {
+
+            using (var ctx = new MovieContext())
+            {
+                var databaseCategory = ctx.MovieCaterogries.Where(x => x.Id == id).SingleOrDefault();
+                ctx.Entry(databaseCategory).State = System.Data.Entity.EntityState.Deleted;
+                ctx.SaveChanges();
+            }
+        }
+
+        #region GET
+
+
         public IEnumerable<Category> GetAll()
         {
 
@@ -37,6 +112,24 @@ namespace MovieScrapper.Data
             }
         }
 
+        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedCategoty = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == categoryId).SingleOrDefault();
+                return foundedCategoty.Movies;
+            }
+        }
+
+        public IEnumerable<Bet> GetAllUserBets(string userId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var bets = ctx.Bets.Where(bet => bet.UserId == userId).ToList();
+                return bets;
+            }
+        }
+
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
         {
 
@@ -47,7 +140,6 @@ namespace MovieScrapper.Data
                 return watched;
             }
         }
-
 
         public Category GetCategory(int id)
         {
@@ -69,21 +161,14 @@ namespace MovieScrapper.Data
             }
         }
 
-        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
+        public Movie GetMovieInCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {
-                var foundedCategoty = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == categoryId).SingleOrDefault();
-                return foundedCategoty.Movies;
-            }
-        }
-
-        public void AddCategory(Category category)
-        {
-            using (var ctx = new MovieContext())
-            {                
-                ctx.MovieCaterogries.Add(category);
-                ctx.SaveChanges();
+                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+                var databaseCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(x => x.Id == categoryId);
+                var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
+                return foundedMovie;
             }
         }
 
@@ -95,26 +180,28 @@ namespace MovieScrapper.Data
                 ctx.SaveChanges();
             }
         }
-        public Watched AddWatchedEntity(Watched watchedEntity)
+
+        public Watched GetUserWatchedEntity(string userId)
         {
             using (var ctx = new MovieContext())
             {
-                watchedEntity = ctx.Watched.Add(watchedEntity);
-                ctx.SaveChanges();
+                var foundedEntity = ctx.Watched.Where(x => x.UserId == userId).SingleOrDefault();
+                return foundedEntity;
+
             }
-
-            return watchedEntity;
         }
-
-        public IEnumerable<Bet> GetAllUserBets(string userId)
+        public Bet GetUserBetEntity(string userId)
         {
-            using (var ctx=new MovieContext())
+            using (var ctx = new MovieContext())
             {
-                var bets = ctx.Bets.Where(bet => bet.UserId == userId).ToList();
-                return bets;
+                var foundedEntity = ctx.Bets.Where(x => x.UserId == userId).SingleOrDefault();
+                return foundedEntity;
+
             }
         }
-      
+
+#endregion
+
         public Bet MakeBetEntity(string userId, int movieId, int categoryId)
         {
             using (var ctx = new MovieContext())
@@ -139,67 +226,13 @@ namespace MovieScrapper.Data
             }         
         }
 
-        //public void AddWatchedMovie(Watched watchedEntity, int movieId)
-        //{
-
-        //    using (var ctx = new MovieContext())
-        //    {
-        //        var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-
-        //        watchedEntity = ctx.Watched.Attach(watchedEntity);
-        //        watchedEntity.Movies.Add(movie);
-        //        ctx.SaveChanges();
-
-        //    }
-        //} 
-
-        public void ChangeMovieStatus(string userId, int movieId)
-        {
-
-            using (var ctx = new MovieContext())
-            {
-                var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var watchedEntity = ctx.Watched.Include(w => w.Movies).SingleOrDefault(x => x.UserId == userId);
-                if(watchedEntity.Movies.Where(m=>m.Id== movieId).SingleOrDefault() == null)
-                {
-                    watchedEntity.Movies.Add(movie);
-                }
-                else
-                {
-                    watchedEntity.Movies.Remove(movie);
-                }
-               
-                ctx.SaveChanges();
-            }
-        }
-
-        public void AddMovie(Movie movie)
-        {
-            using (var ctx = new MovieContext())
-            {
-                ctx.Movies.Add(movie);
-                ctx.SaveChanges();
-            }
-        }
-
-        public void AddMovieInCategory(int categoryId, int movieId)
+        public void MarkAsWinner(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {
                 var foundedMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(cat => cat.Id == categoryId);
-                foundedCategory.Movies.Add(foundedMovie);
-                ctx.SaveChanges();
-            }
-        }
-
-        public void DeleteCategory(int id)
-        {
-
-            using (var ctx = new MovieContext())
-            {
-                var databaseCategory = ctx.MovieCaterogries.Where(x => x.Id == id).SingleOrDefault();
-                ctx.Entry(databaseCategory).State = System.Data.Entity.EntityState.Deleted;
+                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Winner).SingleOrDefault(x => x.Id == categoryId);
+                foundedCategory.Winner = foundedMovie;
                 ctx.SaveChanges();
             }
         }
@@ -214,49 +247,7 @@ namespace MovieScrapper.Data
                 databaseCategory.Movies.Remove(foundedMovie);
                 ctx.SaveChanges();
             }
-        }
-
-        public void MarkAsWinner(int categoryId, int movieId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var foundedMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Winner).SingleOrDefault(x => x.Id == categoryId);
-                foundedCategory.Winner = foundedMovie;
-                ctx.SaveChanges();
-            }
-        }
-
-        public Movie GetMovieInCategory(int categoryId, int movieId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
-                var databaseCategory = ctx.MovieCaterogries.Include(cat =>cat.Movies).SingleOrDefault(x => x.Id == categoryId);
-                var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
-                return foundedMovie;
-            }
-        }
-
-        public Watched GetUserWatchedEntity(string userId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var foundedEntity = ctx.Watched.Where(x=> x.UserId==userId).SingleOrDefault();
-                return foundedEntity;
-                
-            }
-        }
-
-        public Bet GetUserBetEntity(string userId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var foundedEntity = ctx.Bets.Where(x => x.UserId == userId).SingleOrDefault();
-                return foundedEntity;
-
-            }
-        }
+        }                               
 
     }
 }

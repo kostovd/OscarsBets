@@ -15,12 +15,7 @@ namespace MovieScrapper.CommonPages
         {
             if (User.Identity.IsAuthenticated)
             {
-                //if (!Page.IsPostBack)
-                //{
-                //    Repeater1.DataBind();
-                //    IEnumerable<Category> data = (IEnumerable<Category>)Repeater1.DataSource;
-                //    DisplayPageSummary(data);
-                //}
+                GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
             }
             else
             {
@@ -81,11 +76,21 @@ namespace MovieScrapper.CommonPages
                 var service = new CategoryService();
                 var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
-                //IEnumerable<Category> data = (IEnumerable<Category>)Repeater1.DataSource;
-                //DisplayPageSummary(data);
+                
             }
         }
 
+        protected bool CheckIfTheUserIsLogged()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         protected string ChangeTextIfUserBettedOnThisMovie(ICollection<Bet> categoryBets, int movieId)
         {
@@ -108,7 +113,7 @@ namespace MovieScrapper.CommonPages
             }
             else
             {
-                return "";
+                return "notWinner";
             }
         }
 
@@ -130,35 +135,34 @@ namespace MovieScrapper.CommonPages
 
             IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
             var categoryCount = categories.Count();
-            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
-
-            //int sum = 0;
-            //foreach (Category cat in categories)
-            //{
-            //    sum += cat.Bets.Where(x => x.UserId == currentUsereId).Count();
-            //}
-
-            // var service = new CategoryService();
-            //var bettedCategories = service.GetAllUserBets(currentUsereId).Count();
-            GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));  
+            
+            //GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
             var missedCategories = categoryCount - bettedCategories;
-            if (missedCategories > 0)
+            if (CheckIfTheUserIsLogged() == true)
             {
-                if (missedCategories == 1)
+                if (missedCategories > 0)
                 {
-                    WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
-                        "You have " + (missedCategories) + " more category to bet!";
+                    if (missedCategories == 1)
+                    {
+                        WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
+                            "You have " + (missedCategories) + " more category to bet!";
+                    }
+                    else
+                    {
+                        WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
+                            "You have " + (missedCategories) + " more categories to bet!";
+                    }
                 }
                 else
                 {
-                    WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
-                        "You have " + (missedCategories) + " more categories to bet!";
+                    WarningLabel.CssClass = "green";
+                    WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
                 }
             }
             else
             {
-                WarningLabel.CssClass = "green";
-                WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
+                WarningLabel.CssClass = "hidden";
             }
         }
     }

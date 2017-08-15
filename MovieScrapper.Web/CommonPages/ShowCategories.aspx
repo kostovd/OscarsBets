@@ -12,15 +12,15 @@
                 <br />
                 <br />
                 <asp:Label ID="CategoryTtleLabel" class="categoryTtleLabel" runat="server" ToolTip="<%# Item.CategoryDescription %>" Text='<%# Item.CategoryTtle %>' />
-                
+                <hr />
                 <asp:Repeater ID="Repeater2" runat="server"
                     ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies %>" OnItemCommand="Repeater2_ItemCommand">
                     <HeaderTemplate>
                         <div>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div id="movieItem" class="<%# CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %>"  >
-                            <div id="title">
+                        <div  class ="movieItem <%# CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %>"  >
+                            <div class="title">
                                 <div class="items " >                                   
                                     <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id").ToString(), Item.Id) %>" title="WINNER!"/>
                                     <br />
@@ -33,11 +33,13 @@
                                         Text='<%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>'
                                         CommandName="MarkAsBetted"
                                         CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
-                                        title="Bet that the movie will be the winer in this category"/>
+                                        title="Bet that the movie will be the winer in this category"
+                                        enabled="<%# CheckIfTheUserIsLogged() %>"
+                                        />
                                 </div>
                             </div>
                             
-                            <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
+                            <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
                         </div>
                     </ItemTemplate>
                     <FooterTemplate>

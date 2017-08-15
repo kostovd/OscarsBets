@@ -72,7 +72,7 @@ namespace MovieScrapper.Admin
             if (e.CommandName == "Delete")
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var movieId = (int)e.CommandArgument;
+                var movieId = Int32.Parse(e.CommandArgument.ToString());
                 var service = new CategoryService();
                 service.RemoveMovieFromCategory(categoryId, movieId);
                 Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);

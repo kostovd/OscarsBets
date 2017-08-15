@@ -22,8 +22,8 @@
             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
             <ItemStyle BackColor="#EFF3FB" />
             <ItemTemplate>
-                <div id="movieItem">  
-                  <div id="title">
+                <div class="movieItem">  
+                  <div class="title">
                       
                       <%# Item.Title %> (<%# DisplayYear((string)Item.ReleaseDate) %>)
                       
@@ -56,7 +56,7 @@
                           />
                   </div>  
                   &nbsp;
-                  <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
+                  <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
                 </div>
             </ItemTemplate>
             <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

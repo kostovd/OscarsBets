@@ -12,8 +12,8 @@
                             <div>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <div id="movieItem">
-                                <div id="title">
+                            <div class="movieItem">
+                                <div class="title">
                                     <div ="items">                                      
                                        <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>
                                         <br />
@@ -24,11 +24,14 @@
                                             Text= "<%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie) %>" 
                                             CommandName="MarkAsWatchedOrUnwatched" 
                                             CommandArgument='<%# Item.Id %>'
-                                            title="Mark this movie as watched"/> 
+                                            title="Mark this movie as watched"
+                                            enabled="<%# CheckIfTheUserIsLogged() %>"
+                                            /> 
                                     </div>
                                 </div>
-                                <img id="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" class="auto-style2" />
-                            </div>                                                      
+                                <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
+                            </div>
+                            
                         </ItemTemplate>
                         <FooterTemplate>
                             </div>

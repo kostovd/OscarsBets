@@ -2,9 +2,9 @@
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <link href="MovieStyleSheet.css" rel="stylesheet" />    
-    <asp:Label ID="Label1" runat="server" Text="Label" CssClass="header"></asp:Label>
+    <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="greatingLabel"></asp:Label>
+    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
     <br />
-    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
     <hr />
     <asp:Repeater ID="Repeater1" runat="server"
                         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
@@ -25,7 +25,7 @@
                                             CommandName="MarkAsWatchedOrUnwatched" 
                                             CommandArgument='<%# Item.Id %>'
                                             title="Mark this movie as watched"
-                                            enabled="<%# CheckIfTheUserIsLogged() %>"
+                                            enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
                                             /> 
                                     </div>
                                 </div>
@@ -41,6 +41,7 @@
                 ID="ObjectDataSource1" 
                 runat="server" 
                 SelectMethod="GetAllMovies"
+                OnSelected="ObjectDataSource1_Selected"
                 TypeName="MovieScrapper.Business.CategoryService">
             </asp:ObjectDataSource>
     </asp:Content>

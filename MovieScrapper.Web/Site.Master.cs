@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using MovieScrapper.Business;
 
 namespace MovieScrapper
 {
@@ -78,6 +79,20 @@ namespace MovieScrapper
             {
                 Admin1.Visible = false;
                 Admin2.Visible = false;
+            }
+            stopGameLabel.Text = ShowIfGameIsStopped();
+        }
+
+        public string ShowIfGameIsStopped()
+        {
+            var service = new CategoryService();
+            if (service.IsGameStopped() == true)
+            {
+                return "The Game is stopped!";
+            }
+            else
+            {
+                return "The Game is running!";
             }
         }
 

@@ -2,10 +2,11 @@
     background-color:ghostwhite;
 }
 
-.header{
-    margin:3px;
-    font-size:16px;
-    color:slategrey;
+.greatingLabel {
+    margin: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(237,192,116);
 }
 
 
@@ -84,12 +85,12 @@ a {
     border: 3px solid red;
     border-radius: 7px;
 }
-.green {
-    margin: 5px;
+.goldBorder {
+    margin: 0px;
     padding: 5px;
     float: right;
-    border: 3px solid green;
-    border-radius:7px;
+    border: 3px solid rgb(237,192,116);
+    border-radius: 7px;
 }
 .imdb {
     width:50px;

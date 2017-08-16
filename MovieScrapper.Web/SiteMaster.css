@@ -1,8 +1,8 @@
-﻿.navbar{
-    background-color:black;
-    color:ghostwhite;
-    font-size:18px;
-    position:static;
+﻿.navbar {
+    background-color: black;
+    color: rgb(237,192,116);
+    font-size: 18px;
+    position: static;
 }
 #top-content{
     background-color:black;
@@ -12,4 +12,13 @@
 
 #logo{
     height:150px;
+}
+.showIfGameStopped {
+    color: rgb(237,192,116);
+    float: right;
+    font-size: 18px;
+    margin: 40px;
+    padding: 5px;
+    border: 3px solid rgb(237,192,116);
+    border-radius: 7px;
 }

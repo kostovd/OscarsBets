@@ -14,16 +14,36 @@ namespace MovieScrapper.CommonPages
     public partial class ShowAllDBMovies : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {                    
-           if (User.Identity.IsAuthenticated)
+        {
+            if (IsGameRunning())
             {
-                Label1.Text = "Hello " + User.Identity.Name + "! Here you can mark the movies you have watched!";
+                if (User.Identity.IsAuthenticated)
+                {
+                    GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can mark the movies you have watched!";
+                }
+                else
+                {
+                    GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
+                }
             }
             else
             {
-                Label1.Text = "You must be logged in to mark a movie as watched!";
+                GreatingLabel.Text = "The game is stopped. You can not mark a movie as watched anymore.";
             }
             
+        }
+
+        public bool IsGameRunning()
+        {
+            var service = new CategoryService();
+            if (service.IsGameStopped() == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         protected bool CheckIfTheUserIsLogged()
@@ -83,14 +103,9 @@ namespace MovieScrapper.CommonPages
                 if (service.GetUserWatchedEntity(userId)==null)
                 {
                     var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
-                    watchedEntity = service.AddWatchedEntity(watchedEntity);
-                    Label2.Text = User.Identity.Name + " added new entity with userId= " + watchedEntity.UserId;
+                    watchedEntity = service.AddWatchedEntity(watchedEntity);                   
                 }
-                else
-                {
-                    Label2.Text = "This user has an entity.";
-                }
-
+                
                 service.ChangeMovieStatus(userId, movieId);
                 Response.Redirect("/CommonPages/ShowAllDBMovies.aspx?userId=" + userId);
                 
@@ -111,6 +126,43 @@ namespace MovieScrapper.CommonPages
             else
             {
                 return "þ"; //code 254 in ASCI
+            }
+        }
+
+        protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            var currentUsereId = User.Identity.GetUserId();
+
+            IEnumerable<Movie> movies = (IEnumerable<Movie>)e.ReturnValue;
+            var moviesCount = movies.Count();
+            //var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
+            var watchedMovies = movies.Sum(x => x.UsersWatchedThisMovie.Count(u => u.UserId == currentUsereId));
+           
+            var missedMovies = moviesCount - watchedMovies;
+            if (CheckIfTheUserIsLogged() == true)
+            {
+                if (missedMovies > 0)
+                {
+                    if (missedMovies == 1)
+                    {
+                        WarningLabel.Text = "There are " + moviesCount + " nominated movies. " +
+                            "You have " + (missedMovies) + " more movie to watch!";
+                    }
+                    else
+                    {
+                        WarningLabel.Text = "There are " + moviesCount + " nominated movies. " +
+                            "You have " + (missedMovies) + " more movies to watch!";
+                    }
+                }
+                else
+                {
+                    WarningLabel.CssClass = "goldBorder";
+                    WarningLabel.Text = "Congretilations! You have watched all the " + moviesCount + " movies!";
+                }
+            }
+            else
+            {
+                WarningLabel.CssClass = "hidden";
             }
         }
     }

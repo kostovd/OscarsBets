@@ -2,9 +2,9 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
-    <asp:Label ID="GreatingLabel" runat="server" CssClass="header"></asp:Label>
-    <asp:Label ID="WarningLabel" runat="server" CssClass="header warning"></asp:Label><br />
-    <asp:Label ID="stopGameLabel" runat="server" ></asp:Label>
+    <asp:Label ID="GreatingLabel" runat="server" CssClass="greatingLabel"></asp:Label>
+    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label><br />
+    
     <hr />
     <div>
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
@@ -35,7 +35,7 @@
                                         CommandName="MarkAsBetted"
                                         CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
                                         title="Bet that the movie will be the winer in this category"
-                                        enabled="<%# CheckIfTheUserIsLogged() %>"
+                                        enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
                                         />
                                 </div>
                             </div>
@@ -54,6 +54,7 @@
             ID="ObjectDataSource1"
             runat="server"
             SelectMethod="GetAll"
-            TypeName="MovieScrapper.Business.CategoryService" OnSelected="ObjectDataSource1_Selected"></asp:ObjectDataSource>
+            TypeName="MovieScrapper.Business.CategoryService" 
+            OnSelected="ObjectDataSource1_Selected"></asp:ObjectDataSource>
     </div>
 </asp:Content>

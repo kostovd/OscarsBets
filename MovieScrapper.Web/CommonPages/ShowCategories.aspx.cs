@@ -13,36 +13,35 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated)
+            if (IsGameRunning())
             {
-                GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+                if (User.Identity.IsAuthenticated)
+                {
+                    GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
+                }
+                else
+                {
+                    GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
+                }
             }
+
             else
             {
-                GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
+                GreatingLabel.Text = "The game is stopped. You can not bet anymore.";
             }
-
-            stopGameLabel.Text = ShowIfGameIsStopped();
         }
 
-        public string ShowIfGameIsStopped()
+        public bool IsGameRunning()
         {
             var service = new CategoryService();
-            if (service.IsGameStopped() == true)
+            if (service.IsGameStopped() == false)
             {
-                return "The Game is stopped!";
+                return true;
             }
             else
             {
-                return "The Game is running!";
+                return false;
             }
-        }
-        private void DisplayPageSummary(IEnumerable<Category> data)
-        {
-            //var service = new CategoryService();
-            //var categoryCount = service.GetAll().Count();
-            //Label1.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
-            //Label3.Text = "You betted in " + service.GetAllUserBets(User.Identity.GetUserId()).Count() + " categories. " + "Categories are " + categoryCount ;
         }
 
         public string BuildPosterUrl(string path)
@@ -121,19 +120,26 @@ namespace MovieScrapper.CommonPages
 
         protected string CheckIfWinner(object winner, int currentMovieId)
         {
-            if (winner == null)
+            if (IsGameRunning() == true)
             {
                 return "";
             }
             else
             {
-                if (winner.ToString() == currentMovieId.ToString())
+                if (winner == null)
                 {
-                    return "winner";
+                    return "";
                 }
                 else
                 {
-                    return "notWinner";
+                    if (winner.ToString() == currentMovieId.ToString())
+                    {
+                        return "winner";
+                    }
+                    else
+                    {
+                        return "notWinner";
+                    }
                 }
             }
             
@@ -141,19 +147,26 @@ namespace MovieScrapper.CommonPages
 
         protected string CheckIfWinnerImage(object winner, int currentMovieId)
         {
-            if (winner == null)
+            if (IsGameRunning() == true)
             {
                 return "";
             }
             else
             {
-                if (winner.ToString() == currentMovieId.ToString())
+                if (winner == null)
                 {
-                    return "/Oscar_logo.png";
+                    return "";
                 }
                 else
                 {
-                    return "";
+                    if (winner.ToString() == currentMovieId.ToString())
+                    {
+                        return "/Oscar_logo.png";
+                    }
+                    else
+                    {
+                        return "";
+                    }
                 }
             }
         }
@@ -185,7 +198,7 @@ namespace MovieScrapper.CommonPages
                 }
                 else
                 {
-                    WarningLabel.CssClass = "green";
+                    WarningLabel.CssClass = "goldBorder";
                     WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
                 }
             }

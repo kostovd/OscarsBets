@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieScrapper.Business;
+using System;
 using System.Web.UI.WebControls;
 
 
@@ -15,7 +16,28 @@ namespace MovieScrapper.Admin
         {
             Response.Redirect("EditCategory.aspx");
         }
-     
+
+        protected void ChangeDateButton_Click(object sender, EventArgs e)
+        {
+            var service = new CategoryService();
+            var changeDate = Calendar1.SelectedDate;
+            service.ChangeGameStopDate(changeDate);
+            Response.Redirect("Categories.aspx");
+        }
+
+        protected void ShowChangeDateButton_Click(object sender, EventArgs e)
+        {
+            ChangeStopGameDateButton.CssClass = "saveButton";
+            Calendar1.CssClass = "";
+                        
+        }
+
+        protected void EditUsersButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Users.aspx");
+
+        }
+
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "EditCategory")
@@ -29,6 +51,11 @@ namespace MovieScrapper.Admin
                 var id = e.CommandArgument;
                 Response.Redirect("EditMoviesInThisCategory.aspx?categoryId=" + id.ToString());
             }
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

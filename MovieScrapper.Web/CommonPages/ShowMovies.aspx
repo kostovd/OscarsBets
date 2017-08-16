@@ -19,14 +19,14 @@
     <p>
         <asp:DataList ID="MoviesDataList" runat="server" RepeatColumns="3" RepeatDirection="Horizontal" RepeatLayout="Flow" >
             <ItemTemplate>
-              <div id="movieItem">  
+              <div class="movieItem">  
                   <div id="title">
                       <%# Eval("Title") %> (<%# DisplayYear((string)Eval("ReleaseDate")) %>)
                       <br>
                       </br>
                       <a id="buildUrlWithId" runat="server" href=<%# BuildUrlWithId((int)Eval("Id")) %>>Details</a>
                   </div>  
-                  <img id="poster" src=<%# BuildUrl((string)Eval("PosterPath")) %> />                                                  
+                  <img class="poster" src=<%# BuildUrl((string)Eval("PosterPath")) %> />                                                  
               </div>
             </ItemTemplate>
         </asp:DataList>

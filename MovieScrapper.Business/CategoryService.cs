@@ -36,6 +36,11 @@ namespace MovieScrapper.Business
         }
 
         #endregion
+        public void ChangeGameStopDate(DateTime stopDate)
+        {
+            var repo = new CategoryRepository();
+            repo.ChangeGameStopDate(stopDate);
+        }
 
         public void ChangeMovieStatus(string userId, int movieId)
         {

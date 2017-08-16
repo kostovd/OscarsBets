@@ -71,6 +71,25 @@ namespace MovieScrapper.Data
             }
         }
 
+        public void ChangeGameStopDate(DateTime stopDate)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedDate = ctx.StopDate.FirstOrDefault();
+                if (foundedDate == null)
+                {
+                    var stopDateEntity = new StopDate {StopGameDate=stopDate };
+                    ctx.StopDate.Add(stopDateEntity);
+                }
+                else
+                {
+                    foundedDate.StopGameDate = stopDate;
+                }
+
+                ctx.SaveChanges();
+            }
+        }
+
         public void DeleteCategory(int id)
         {
 

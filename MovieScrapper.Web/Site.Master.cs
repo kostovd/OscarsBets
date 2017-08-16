@@ -72,13 +72,11 @@ namespace MovieScrapper
         {
             if (HttpContext.Current.User.IsInRole("admin"))
             {
-                Admin1.Visible = true;
-                Admin2.Visible = true;
+                Admin.Visible = true;                
             }
             else
             {
-                Admin1.Visible = false;
-                Admin2.Visible = false;
+                Admin.Visible = false;
             }
             stopGameLabel.Text = ShowIfGameIsStopped();
         }

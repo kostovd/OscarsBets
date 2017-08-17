@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.ViewModels
 {
-    public class WatchedMoviesViewModel
+    public class WatchedMovies
     {
-        public Movie Movie { get; set; }
-        public Watched UserId { get; set; }
+        public List<Watched> User { get; set; }
+        public List<Movie> Movie { get; set; }
+        
     }
 
     

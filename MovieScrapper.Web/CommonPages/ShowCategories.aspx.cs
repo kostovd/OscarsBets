@@ -177,9 +177,19 @@ namespace MovieScrapper.CommonPages
 
             IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
             var categoryCount = categories.Count();
-            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));  
+            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
+            var counter = 0;
+
+            foreach (var category in categories)
+            {
+                var winner = category.Winner.Id;
+                Bet bet = category.Bets.Where(x => x.UserId == currentUsereId).SingleOrDefault();
+                if (bet.Movie.Id == winner)
+                {
+                    counter++;
+                }
+            }
             
-            //GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
             var missedCategories = categoryCount - bettedCategories;
             if (CheckIfTheUserIsLogged() == true)
             {
@@ -201,10 +211,37 @@ namespace MovieScrapper.CommonPages
                     WarningLabel.CssClass = "goldBorder";
                     WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
                 }
+               
             }
             else
             {
                 WarningLabel.CssClass = "hidden";
+            }
+            ///////////////////////////////////////////
+
+            if (CheckIfTheUserIsLogged() == true)
+            {
+                if (counter > 0)
+                {
+                    if (counter == 1)
+                    {
+                        WinnerLabel.Text = "You guessed right in " + counter + " category!";
+                    }
+                    else
+                    {
+                        WinnerLabel.Text = "You guessed right in " + counter + " categories!";
+                    }
+                }
+                else
+                {
+                    WinnerLabel.Text = "Soyyy";
+                }
+                
+            }
+
+            else
+            {
+                WinnerLabel.CssClass = "hidden";
             }
         }
     }

@@ -4,6 +4,7 @@
     <link href="MovieStyleSheet.css" rel="stylesheet" />
     <asp:Label ID="GreatingLabel" runat="server" CssClass="greatingLabel"></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label><br />
+    <asp:Label ID="WinnerLabel" runat="server" CssClass=""></asp:Label><br />
     
     <hr />
     <div>

@@ -88,6 +88,12 @@ namespace MovieScrapper.Business
             return repo.GetAllUserBets(userId);
         }
 
+        public IEnumerable<Watched> GetAllUsersWatchedAMovie()
+        {
+            var repo = new CategoryRepository();
+            return repo.GetAllUsersWatchedAMovie();
+        }
+
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
 
         {

@@ -9,6 +9,7 @@
             <div class="changeDate">                
                 <asp:Calendar ID="Calendar1" cssClass="hidden" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
                 <asp:Button ID="ChangeStopGameDateButton" cssClass=" hidden" runat="server" OnClick="ChangeDateButton_Click" Text="Save"  />
+                <asp:CustomValidator id="CustomValidator1" runat="server" Display="Dynamic" ErrorMessage="Please select a date"  OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
             </div>
 
             <hr />

@@ -158,6 +158,25 @@ namespace MovieScrapper.Data
             }
         }
 
+        //public IEnumerable<string> GetAllUsersWatchedThisMovie (int movieId)
+        //{
+        //    using (var ctx = new MovieContext())
+        //    {
+        //        var users = ctx.Watched.Include(m=>m.Movies).Where(w=>w.Movies.)
+        //        return users;
+        //    }
+        //}
+        public IEnumerable<Watched> GetAllUsersWatchedAMovie()
+        {
+
+            using (var ctx = new MovieContext())
+            {
+                var watched = ctx.Watched.Include(w => w.Movies);
+
+                return watched;
+            }
+        }
+
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
         {
 

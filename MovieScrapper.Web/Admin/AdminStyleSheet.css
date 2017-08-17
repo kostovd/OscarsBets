@@ -46,6 +46,7 @@
 .changeDate {
     float: right;
     padding: 5px;
+    margin:5px;
     background-color: rgb(237,192,116);
     border-radius: 7px;
 }
@@ -56,10 +57,12 @@
 
 .saveButton {
     background-color: ghostwhite;
+    border-radius: 3px;
     border: none;
-    align-content:center;
-    float:right;
-    padding:2px;
+    align-content: center;
+    float: right;
+    margin: 3px;
+    padding: 3px;
 }
 
 .hidden{

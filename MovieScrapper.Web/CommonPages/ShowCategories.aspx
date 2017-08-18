@@ -3,9 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
     <asp:Label ID="GreatingLabel" runat="server" CssClass="greatingLabel"></asp:Label>
-    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label><br />
-    <asp:Label ID="WinnerLabel" runat="server" CssClass=""></asp:Label><br />
-    
+    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
+    <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>  
     <hr />
     <div>
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"

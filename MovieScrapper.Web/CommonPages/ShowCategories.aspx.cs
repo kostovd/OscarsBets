@@ -178,20 +178,23 @@ namespace MovieScrapper.CommonPages
             IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
             var categoryCount = categories.Count();
             var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
+            var missedCategories = categoryCount - bettedCategories;
             var counter = 0;
 
             foreach (var category in categories)
             {
                 var winner = category.Winner.Id;
                 Bet bet = category.Bets.Where(x => x.UserId == currentUsereId).SingleOrDefault();
-                if (bet.Movie.Id == winner)
+                if (bet != null)
                 {
-                    counter++;
+                    if (bet.Movie.Id == winner)
+                    {
+                        counter++;
+                    }
                 }
-            }
+            }         
             
-            var missedCategories = categoryCount - bettedCategories;
-            if (CheckIfTheUserIsLogged() == true)
+            if (CheckIfTheUserIsLogged() == true && IsGameRunning() == true)
             {
                 if (missedCategories > 0)
                 {
@@ -217,24 +220,30 @@ namespace MovieScrapper.CommonPages
             {
                 WarningLabel.CssClass = "hidden";
             }
-            ///////////////////////////////////////////
 
-            if (CheckIfTheUserIsLogged() == true)
+            //////////////// Show right gestures statistic label /////////////////////
+
+            if (CheckIfTheUserIsLogged() == true && IsGameRunning() == false)
             {
                 if (counter > 0)
                 {
-                    if (counter == 1)
+                    if (counter== categoryCount)
                     {
-                        WinnerLabel.Text = "You guessed right in " + counter + " category!";
+                        WinnerLabel.Text = "Yayyyyyyyyy! You guessed right in all the categories!";
+                        WinnerLabel.CssClass = "goldBorder";
+                    }
+                    else if(counter == 1)
+                    {
+                        WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " category!";
                     }
                     else
                     {
-                        WinnerLabel.Text = "You guessed right in " + counter + " categories!";
+                        WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " categories!";
                     }
                 }
                 else
                 {
-                    WinnerLabel.Text = "Soyyy";
+                    WinnerLabel.Text = "Sorry, you don't have right gestures";
                 }
                 
             }

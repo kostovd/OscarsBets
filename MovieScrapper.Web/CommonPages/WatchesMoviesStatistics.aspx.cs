@@ -15,11 +15,16 @@ namespace MovieScrapper.CommonPages
         {
 
         }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         //public Watched ShowUsers(int mpvieId)
         //{
         //    var service = new CategoryService();
         //    //var watcheds= service.GetAllWatchedMovies()
         //}
-            
+
     }
 }

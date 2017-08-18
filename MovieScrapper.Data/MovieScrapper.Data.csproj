@@ -57,6 +57,7 @@
     <Compile Include="MovieContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMDBRepository.cs" />
+    <Compile Include="ViewModelsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

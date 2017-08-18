@@ -2,13 +2,9 @@
     background-color:ghostwhite;
 }
 
-.greatingLabel {
-    margin: 3px;
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(237,192,116);
+.hidden {
+    visibility: hidden;
 }
-
 
 .linkTitle {
     margin-bottom: 5px;
@@ -75,22 +71,39 @@ a {
     font-size:25px;
 }
 
-.hidden{
-    visibility:hidden;
+.greatingLabel {
+    margin: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(237,192,116);
 }
+
 .warning {
     margin: 5px;
     padding: 5px;
-    float: right;
     border: 3px solid red;
     border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
+}
+.greenBorder {
+    margin: 5px;
+    padding: 5px;    
+    border: 3px solid green;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
 }
 .goldBorder {
     margin: 0px;
-    padding: 5px;
-    float: right;
+    padding: 5px;    
     border: 3px solid rgb(237,192,116);
     border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    float:right;
 }
 .imdb {
     width:50px;

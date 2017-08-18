@@ -10,10 +10,13 @@ namespace MovieScrapper.Business.ViewModels
 {
     public class WatchedMovies
     {
-        //public string User { get; set; }
-        //public List<Movie> Movie { get; set; }
+                  
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Email { get; set; }
+        
 
-        Dictionary<string, IList<int>> UsersMovies { get; set; }        
+        Dictionary<string, IList<int>> UsersMovies { get; set; }
 
     }
     

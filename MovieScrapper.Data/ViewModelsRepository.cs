@@ -20,7 +20,6 @@ namespace MovieScrapper.Data
             using (SqlCommand command = new SqlCommand(query, conn))
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             dataAdapter.Fill(results);
-            return results;
-        } 
+            return results;        } 
     }
 }

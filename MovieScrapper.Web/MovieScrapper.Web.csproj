@@ -205,6 +205,7 @@
     <Content Include="Admin\Categories.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="CommonPages\DBMovieDetails.aspx" />
+    <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
     <Content Include="CommonPages\ShowCategories.aspx" />
     <Content Include="CommonPages\WatchesMoviesStatistics.aspx" />
@@ -411,6 +412,13 @@
     </Compile>
     <Compile Include="CommonPages\DBMovieDetails.aspx.designer.cs">
       <DependentUpon>DBMovieDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPages\MoviesStatistic.aspx.cs">
+      <DependentUpon>MoviesStatistic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPages\MoviesStatistic.aspx.designer.cs">
+      <DependentUpon>MoviesStatistic.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPages\ShowAllDBMovies.aspx.cs">
       <DependentUpon>ShowAllDBMovies.aspx</DependentUpon>

@@ -49,8 +49,8 @@
     <Compile Include="CategoryService.cs" />
     <Compile Include="MovieClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticService.cs" />
     <Compile Include="TMDBMovieService.cs" />
-    <Compile Include="UserSevices.cs" />
     <Compile Include="ViewModels\WatchedMoviesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

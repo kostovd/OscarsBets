@@ -15,10 +15,10 @@ namespace MovieScrapper.CommonPages
         {
             if (!this.IsPostBack)
             {
-                
+
 
                 TemplateField tfield = new TemplateField();
-                
+
                 tfield.HeaderText = "Email";
                 GridView1.Columns.Add(tfield);
 
@@ -31,7 +31,7 @@ namespace MovieScrapper.CommonPages
                     tfield.HeaderText = title;
                     GridView1.Columns.Add(tfield);
                 }
-                
+
             }
             this.BindGrid();
 
@@ -42,36 +42,42 @@ namespace MovieScrapper.CommonPages
             var service = new StatisticService();
             var users = service.GetData();
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string))});
+            dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
 
             foreach (var user in users)
             {
                 dt.Rows.Add(user);
-                
+
             }
-            
+
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
+            
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //TextBox txtUser = new TextBox();
-                //txtUser.ID = "txtUser";
-                //txtUser.Text = (e.Row.DataItem as DataRowView).Row["Email"].ToString();
-                //e.Row.Cells[0].Controls.Add(txtUser);
+                
                 var service = new StatisticService();
                 var dict = service.GetData();
+                var titles = service.GetTitles();
                 var arrayOfAllKeys = dict.Keys.ToArray();
+                var listOfAllValues = dict.Values.ToList();
+                var index = e.Row.RowIndex;
+                e.Row.Cells[0].Text = arrayOfAllKeys[index];
+                
+                for (int i = 1; i <= titles.Count(); i++)
+                {
 
-                e.Row.Cells[0].Text = arrayOfAllKeys.ToString();
+                    //string headerText = ((DataTable)((GridView)sender).DataSource).Columns[i].ColumnName;
+                    e.Row.Cells[i].Text = titles[i-1]+" "+ arrayOfAllKeys[index];
 
-
+                }
             }
+
+
         }
-
-
     }
 }

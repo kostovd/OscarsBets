@@ -10,7 +10,7 @@ namespace MovieScrapper.Business
 {
     public class StatisticService
     {
-        public Dictionary<string, IList<string>> GetData()
+        public Dictionary<string, List<string>> GetData()
         {
             var data = new ViewModelsRepository();
             var recievedTable = data.GetData();
@@ -22,17 +22,15 @@ namespace MovieScrapper.Business
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
             int emailsCount = collectionWithDistinctEmails.Count();
             
-            Dictionary<string, IList<string>> myDict = new Dictionary<string, IList<string>>();
+            Dictionary<string, List<string>> myDict = new Dictionary<string, List<string>>();
           
             //for (int i = 0; i < emailsCount; i++)
             foreach(var email in collectionWithDistinctEmails)
             {               
-                IList<string> userTitles= new List<string>();
+                List<string> userTitles= new List<string>();
                 for (int j =0; j<recievedTable.Rows.Count; j++)
                 {
-                    //var currentTitle = (from DataRow dr in recievedTable.Rows
-                    //                    where (string)dr["Email"] == email
-                    //                    select (string)dr["Title"]).FirstOrDefault();
+                   
                     string currentTitle;
                     foreach (DataRow row in recievedTable.Rows)
                     {
@@ -44,9 +42,10 @@ namespace MovieScrapper.Business
                     }
                    
                 }
-                myDict.Add(email, userTitles);
+                List<string> distinctTitles = userTitles.Distinct().ToList();
+                myDict.Add(email, distinctTitles);
             }
-
+            myDict = myDict.OrderByDescending(x => x.Value.Count).ToDictionary(x => x.Key, x => x.Value);
             return myDict;
         }
 

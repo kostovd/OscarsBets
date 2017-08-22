@@ -19,7 +19,10 @@ namespace MovieScrapper.CommonPages
 
                 TemplateField tfield = new TemplateField();
 
-                tfield.HeaderText = "Email";
+                //tfield.HeaderText = "Email";
+                GridView1.Columns.Add(tfield);
+
+                //tfield.HeaderText = "Sum";
                 GridView1.Columns.Add(tfield);
 
                 var service = new StatisticService();
@@ -32,6 +35,8 @@ namespace MovieScrapper.CommonPages
                     GridView1.Columns.Add(tfield);
                 }
 
+                
+
             }
             this.BindGrid();
 
@@ -42,22 +47,24 @@ namespace MovieScrapper.CommonPages
             var service = new StatisticService();
             var users = service.GetData();
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
+            //dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
 
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("User", typeof(string)), new DataColumn("Sum", typeof(string)),});
             foreach (var user in users)
             {
                 dt.Rows.Add(user);
 
-            }
+            }           
 
             GridView1.DataSource = dt;
             GridView1.DataBind();
+            
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
             
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
             {
                 
                 var service = new StatisticService();
@@ -66,24 +73,31 @@ namespace MovieScrapper.CommonPages
                 var arrayOfAllKeys = dict.Keys.ToArray();               
                 var index = e.Row.RowIndex;
                 var userName = arrayOfAllKeys[index];
-                e.Row.Cells[0].Text = userName;              
                 var userTitles = dict[userName];
-                
 
-                for (int i = 0; i < allTitles.Count(); i++)
+                e.Row.Cells[0].Text = userName;
+                e.Row.Cells[0].Attributes["width"] = "150px";
+
+                e.Row.Cells[1].Text = userTitles.Count.ToString();
+                e.Row.Cells[1].Attributes["width"] = "30px";
+
+                for (int i = 0; i <allTitles.Count(); i++)
                 {
                     for(int j = 0; j < userTitles.Count; j++)
                     {
                         if (allTitles[i] == userTitles[j])
                         {
-                            e.Row.Cells[i+1].Text = "X";
+                            e.Row.Cells[i+2].Text = "X";
+                            e.Row.Cells[i+2].Attributes["width"] = "100px";
                         }
                     }
                     
                 }
+                
             }
 
-
         }
+       
+
     }
 }

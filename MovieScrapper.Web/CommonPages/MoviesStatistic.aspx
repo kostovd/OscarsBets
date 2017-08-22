@@ -6,5 +6,6 @@
     <span>All users with the movies they have watched</span>
     <hr />
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns = "false" OnRowDataBound = "OnRowDataBound"></asp:GridView>
-    
+    <%--<asp:LoginStatus ID="LoginStatus1" runat="server" 
+                     LogoutAction="Redirect" LogoutPageUrl="Default.aspx" />--%>
 </asp:Content>

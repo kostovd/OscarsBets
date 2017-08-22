@@ -16,18 +16,35 @@ namespace MovieScrapper.Business
             var recievedTable = data.GetData();
 
             var stringArrTitles= recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
-            var collectionWithDistinctTitles = stringArrTitles.Distinct().ToArray();            
-            int titlesCount = collectionWithDistinctTitles.Count();
+            var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
+            int allTitlesCount = collectionWithAllDistinctTitles.Count();
             var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
             int emailsCount = collectionWithDistinctEmails.Count();
             
             Dictionary<string, IList<string>> myDict = new Dictionary<string, IList<string>>();
           
-            for (int i = 0; i < emailsCount; i++)
-            {
-                
-                myDict.Add(collectionWithDistinctEmails[i], collectionWithDistinctTitles);
+            //for (int i = 0; i < emailsCount; i++)
+            foreach(var email in collectionWithDistinctEmails)
+            {               
+                IList<string> userTitles= new List<string>();
+                for (int j =0; j<recievedTable.Rows.Count; j++)
+                {
+                    //var currentTitle = (from DataRow dr in recievedTable.Rows
+                    //                    where (string)dr["Email"] == email
+                    //                    select (string)dr["Title"]).FirstOrDefault();
+                    string currentTitle;
+                    foreach (DataRow row in recievedTable.Rows)
+                    {
+                        if (row["Email"].ToString() == email )
+                        {
+                            currentTitle= row["Title"].ToString();
+                            userTitles.Add(currentTitle);
+                        }
+                    }
+                   
+                }
+                myDict.Add(email, userTitles);
             }
 
             return myDict;

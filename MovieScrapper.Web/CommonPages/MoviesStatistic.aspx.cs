@@ -76,7 +76,7 @@ namespace MovieScrapper.CommonPages
                     {
                         if (allTitles[i] == userTitles[j])
                         {
-                            e.Row.Cells[i+1].Text = userTitles[j];
+                            e.Row.Cells[i+1].Text = "X";
                         }
                     }
                     

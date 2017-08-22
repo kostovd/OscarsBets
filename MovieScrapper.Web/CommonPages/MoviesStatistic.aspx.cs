@@ -62,18 +62,24 @@ namespace MovieScrapper.CommonPages
                 
                 var service = new StatisticService();
                 var dict = service.GetData();
-                var titles = service.GetTitles();
-                var arrayOfAllKeys = dict.Keys.ToArray();
-                var listOfAllValues = dict.Values.ToList();
+                var allTitles = service.GetTitles();
+                var arrayOfAllKeys = dict.Keys.ToArray();               
                 var index = e.Row.RowIndex;
-                e.Row.Cells[0].Text = arrayOfAllKeys[index];
+                var userName = arrayOfAllKeys[index];
+                e.Row.Cells[0].Text = userName;              
+                var userTitles = dict[userName];
                 
-                for (int i = 1; i <= titles.Count(); i++)
+
+                for (int i = 0; i < allTitles.Count(); i++)
                 {
-
-                    //string headerText = ((DataTable)((GridView)sender).DataSource).Columns[i].ColumnName;
-                    e.Row.Cells[i].Text = titles[i-1]+" "+ arrayOfAllKeys[index];
-
+                    for(int j = 0; j < userTitles.Count; j++)
+                    {
+                        if (allTitles[i] == userTitles[j])
+                        {
+                            e.Row.Cells[i+1].Text = userTitles[j];
+                        }
+                    }
+                    
                 }
             }
 

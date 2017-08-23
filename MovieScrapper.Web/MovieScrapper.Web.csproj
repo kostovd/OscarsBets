@@ -204,6 +204,7 @@
     <Content Include="Admin\EditMoviesInThisCategory.aspx" />
     <Content Include="Admin\Categories.aspx" />
     <Content Include="Admin\Users.aspx" />
+    <Content Include="CommonPages\BetsStatistics.aspx" />
     <Content Include="CommonPages\DBMovieDetails.aspx" />
     <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
@@ -406,6 +407,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="CommonPages\BetsStatistics.aspx.cs">
+      <DependentUpon>BetsStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPages\BetsStatistics.aspx.designer.cs">
+      <DependentUpon>BetsStatistics.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CommonPages\DBMovieDetails.aspx.cs">
       <DependentUpon>DBMovieDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

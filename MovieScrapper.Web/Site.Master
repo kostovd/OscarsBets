@@ -58,6 +58,7 @@
                         <li><a runat="server" href="~/CommonPages/ShowAllDBMovies">Movies</a></li>  
                         <li><a runat="server" href="~/CommonPages/WatchesMoviesStatistics">Statistic - Test</a></li>
                         <li><a runat="server" href="~/CommonPages/MoviesStatistic">Statistics</a></li>
+                        <li><a runat="server" href="~/CommonPages/BetsStatistics">Statistics- Bets</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>

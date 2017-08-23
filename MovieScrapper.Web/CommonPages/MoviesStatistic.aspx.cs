@@ -16,7 +16,6 @@ namespace MovieScrapper.CommonPages
             if (!this.IsPostBack)
             {
 
-
                 TemplateField tfield = new TemplateField();
 
                 //tfield.HeaderText = "Email";
@@ -34,9 +33,7 @@ namespace MovieScrapper.CommonPages
                     tfield.HeaderText = title;
                     GridView1.Columns.Add(tfield);
                 }
-
-                
-
+               
             }
             this.BindGrid();
 

@@ -25,7 +25,7 @@ namespace MovieScrapper.Data
 
         public DataTable GetBetsData()
         {
-            string query = "SELECT	AspNetUsers.Email, Categories.CategoryTtle, Movies.Title FROM BetsINNER JOIN Movies ON Bets.Movie_Id = Movies.Id INNER JOIN AspNetUsers ON Bets.UserId = AspNetUsers.Id RIGHT JOIN Categories ON Bets.Category_Id = Categories.Id";
+            string query = "SELECT Bets.Id, AspNetUsers.Email, Categories.CategoryTtle as Category, Movies.Title FROM Bets INNER JOIN Movies ON Bets.Movie_Id = Movies.Id INNER JOIN AspNetUsers ON Bets.UserId = AspNetUsers.Id JOIN Categories ON Bets.Category_Id = Categories.Id";
             string connString = "Data Source=PC-1099\\SQLEXPRESS;Initial Catalog=MovieScrapper.Models.MovieContext;Integrated Security=True";
             DataTable results = new DataTable();
 

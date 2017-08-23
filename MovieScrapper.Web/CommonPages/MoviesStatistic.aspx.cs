@@ -25,7 +25,7 @@ namespace MovieScrapper.CommonPages
                 //tfield.HeaderText = "Sum";
                 GridView1.Columns.Add(tfield);
 
-                var service = new StatisticService();
+                var service = new WatcheMoviesStatisticService();
                 var titles = service.GetTitles();
 
                 foreach (var title in titles)
@@ -44,7 +44,7 @@ namespace MovieScrapper.CommonPages
 
         private void BindGrid()
         {
-            var service = new StatisticService();
+            var service = new WatcheMoviesStatisticService();
             var users = service.GetData();
             DataTable dt = new DataTable();
             //dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
@@ -67,7 +67,7 @@ namespace MovieScrapper.CommonPages
             if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
             {
                 
-                var service = new StatisticService();
+                var service = new WatcheMoviesStatisticService();
                 var dict = service.GetData();
                 var allTitles = service.GetTitles();
                 var arrayOfAllKeys = dict.Keys.ToArray();               

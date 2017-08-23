@@ -183,13 +183,19 @@ namespace MovieScrapper.CommonPages
 
             foreach (var category in categories)
             {
-                var winner = category.Winner.Id;
-                Bet bet = category.Bets.Where(x => x.UserId == currentUsereId).SingleOrDefault();
-                if (bet != null)
+                if (category.Winner != null)
                 {
-                    if (bet.Movie.Id == winner)
+                    var winner = category.Winner.Id;
+                    Bet bet = category.Bets.Where(x => x.UserId == currentUsereId).SingleOrDefault();
+                    if (bet != null)
                     {
-                        counter++;
+                        if (winner != 0)
+                        {
+                            if (bet.Movie.Id == winner)
+                            {
+                                counter++;
+                            }
+                        }
                     }
                 }
             }         

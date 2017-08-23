@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business
 {
-    public class StatisticService
+    public class WatcheMoviesStatisticService
     {
         public Dictionary<string, List<string>> GetData()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetData();
+            var recievedTable = data.GetWatchedMoviesData();
 
             var stringArrTitles= recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
             var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
@@ -54,7 +54,7 @@ namespace MovieScrapper.Business
         public string [] GetTitles()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetData();
+            var recievedTable = data.GetWatchedMoviesData();
 
             var stringArrTitles = recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
             var collectionWithDistinctTitles = stringArrTitles.Distinct().ToArray();
@@ -65,7 +65,7 @@ namespace MovieScrapper.Business
         public string[] GetUsers()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetData();
+            var recievedTable = data.GetWatchedMoviesData();
             var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 

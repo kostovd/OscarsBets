@@ -84,8 +84,9 @@ namespace MovieScrapper.CommonPages
                     {
                         if (allTitles[i] == userTitles[j])
                         {
-                            e.Row.Cells[i+2].Text = "X";
-                            e.Row.Cells[i+2].Attributes["width"] = "100px";
+                           
+                                e.Row.Cells[i + 2].Text = "<span style='font-family:Wingdings;color:grey; text-align: center;font-size:30px;'>&#252;</span>";
+                                e.Row.Cells[i + 2].Attributes["width"] = "100px";                           
                         }
                     }
                     

@@ -13,43 +13,21 @@ namespace MovieScrapper.Business
         public Dictionary<string, List<string[]>> GetData()
         {
             var data = new ViewModelsRepository();
-            var dt = data.GetBetsData();                      
+            var dt = data.GetBetsData();
             var stringArrEmails = dt.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 
             Dictionary<string, List<string[]>> myDict = new Dictionary<string, List<string[]>>();
 
-            //foreach (var email in collectionWithDistinctEmails)
-            //{
-            //    List<string[]> userCategories = new List<string[]>();             
-            //    string currentCategory;
-            //    string currentTitle;
-            //    string[] categoryMovie= new string[2];
-            //    foreach (DataRow row in dt.Rows)
-            //    {
-            //        if (row["Email"].ToString() == email)
-            //        {
-            //            currentCategory = row["Category"].ToString();
-            //            currentTitle = row["Title"].ToString();
-            //            categoryMovie[0] = currentCategory;
-            //            categoryMovie[1] = currentTitle;
-            //            userCategories.Add(categoryMovie);
-            //        }
-            //    }
-
-            //    myDict.Add(email, userCategories);
-            //}
-
-            
             foreach (var email in collectionWithDistinctEmails)
             {
-                
+
                 string currentCategory;
                 string currentTitle;
-                
+
                 List<string[]> userCategories = new List<string[]>();
 
-                for (int j = 0; j < dt.Rows.Count; j++)                  
+                for (int j = 0; j < dt.Rows.Count; j++)
                 {
                     string[] categoryMovie = new string[2];
                     DataRow row = dt.Rows[j];
@@ -60,13 +38,12 @@ namespace MovieScrapper.Business
 
                         categoryMovie[0] = currentCategory;
                         categoryMovie[1] = currentTitle;
-                        
+
                         userCategories.Add(categoryMovie);
-                        
-                    }                   
+
+                    }
                 }
 
-                //List<string> distinctCategories = userCategories.Distinct().ToList();
                 myDict.Add(email, userCategories);
             }
             myDict = myDict.OrderByDescending(x => x.Value.Count).ToDictionary(x => x.Key, x => x.Value);
@@ -80,8 +57,32 @@ namespace MovieScrapper.Business
             var dt = data.GetBetsData();
 
             var stringArrCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).ToArray();
-            var collectionWithDistinctCategories = stringArrCategories.Distinct().ToArray();            
+            var collectionWithDistinctCategories = stringArrCategories.Distinct().ToArray();
             return collectionWithDistinctCategories;
+        }
+
+        public List<string[]> GetWinners()
+        {
+            var data = new ViewModelsRepository();
+            var dt = data.GetWinner();
+          
+            string currentCategory;
+            string currentWinner;
+            List<string[]> winners = new List<string[]>();
+            for (int j = 0; j < dt.Rows.Count; j++)
+            {
+                string[] categoryWinner = new string[2];
+                DataRow row = dt.Rows[j];
+
+                currentCategory = row["Category"].ToString();
+                currentWinner = row["Winner"].ToString();
+
+                categoryWinner[0] = currentCategory;
+                categoryWinner[1] = currentWinner;
+
+                winners.Add(categoryWinner);
+            }
+            return winners;
         }
     }
 }

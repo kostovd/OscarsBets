@@ -35,5 +35,18 @@ namespace MovieScrapper.Data
                 dataAdapter.Fill(results);
             return results;
         }
+
+        public DataTable GetWinner()
+        {
+            string query = "SELECT Categories.CategoryTtle as Category, Movies.Title as Winner FROM Categories INNER JOIN Movies ON Categories.Winner_Id = Movies.Id";
+            string connString = "Data Source=PC-1099\\SQLEXPRESS;Initial Catalog=MovieScrapper.Models.MovieContext;Integrated Security=True";
+            DataTable results = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand(query, conn))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                dataAdapter.Fill(results);
+            return results;
+        }
     }
 }

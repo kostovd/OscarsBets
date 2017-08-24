@@ -18,28 +18,39 @@ namespace MovieScrapper.CommonPages
 
                 TemplateField tfield = new TemplateField();
 
-                tfield.HeaderText = "Email";
-                GridView1.Columns.Add(tfield);
                 
+                GridView1.Columns.Add(tfield);
+
+                if (!IsGameRunning())
+                {
+                    
+                    GridView1.Columns.Add(tfield);
+                }
+
                 var service = new BetsStatisticService();
                 var categories = service.GetCategories();
                 var winners = service.GetWinners();
 
                 foreach (var category in categories)
                 {
-                    foreach (var winner in winners)
-                    {
-                        var currentWinnerCategory = winner[0];
-                        var currentWinnerTitle = winner[1];
-                        if (currentWinnerCategory == category)
-                        {
-                            tfield = new TemplateField();
-                            tfield.HeaderText = category + "<br /><span style='color: rgb(237,192,116);'>" + currentWinnerTitle + "</span>";
-                            GridView1.Columns.Add(tfield);
-                        }
-                    }
-                   
+                    tfield = new TemplateField();
+                    tfield.HeaderText = category;// + "<br /><span style='color: rgb(237,192,116);'>" + currentWinnerTitle + "</span>";
+                    GridView1.Columns.Add(tfield);
+
+                    //foreach (var winner in winners)
+                    //{
+                    //    var currentWinnerCategory = winner[0];
+                    //    var currentWinnerTitle = winner[1];
+                    //    if (currentWinnerCategory == category)
+                    //    {
+                    //        tfield = new TemplateField();
+                    //        tfield.HeaderText = category + "<br /><span style='color: rgb(237,192,116);'>" + currentWinnerTitle + "</span>";
+                    //        GridView1.Columns.Add(tfield);
+                    //    }
+                    //}
+
                 }
+                
 
             }
 
@@ -70,15 +81,14 @@ namespace MovieScrapper.CommonPages
             if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
             {
 
-                var service = new BetsStatisticService();
-                var dict = service.GetData();
-                var allCategories = service.GetCategories();
+                var statisticsService = new BetsStatisticService();
+                var dict = statisticsService.GetData();
+                var allCategories = statisticsService.GetCategories();
                 var arrayOfAllKeys = dict.Keys.ToArray();
                 var index = e.Row.RowIndex;
                 var userName = arrayOfAllKeys[index];
                 var userCategoriesMovies = dict[userName];
-                var winners = service.GetWinners();
-
+                var winners = statisticsService.GetWinners();                
                 e.Row.Cells[0].Text = userName;
                 e.Row.Cells[0].Attributes["width"] = "150px";
 
@@ -92,24 +102,30 @@ namespace MovieScrapper.CommonPages
                         var currentMovie = currentMovieCategory[1];
                         if (allCategories[i] == currentCategory)
                         {
-                            
-                            foreach (var winner in winners)
+                            if (IsGameRunning() == true)
                             {
-                                var currentWinnerCategory = winner[0];
-                                var currentWinnerTitle = winner[1];
-                                if (currentWinnerCategory == currentCategory)
+                                e.Row.Cells[i + 1].Text = currentMovie;
+                                e.Row.Cells[i + 1].Attributes["width"] = "150px";
+                            }
+                            else
+                            {
+                                foreach (var winner in winners)
                                 {
-                                    e.Row.Cells[i + 1].Text = currentMovie;
-                                    e.Row.Cells[i + 1].Attributes["width"] = "150px";
-                                    if (currentWinnerTitle == currentMovie)
+                                    var currentWinnerCategory = winner[0];
+                                    var currentWinnerTitle = winner[1];
+                                    if (currentWinnerCategory == currentCategory)
                                     {
-                                        e.Row.Cells[i + 1].Text = currentMovie + "<span style='font-family:Wingdings;color:rgb(237,192,116); font-size:30px;'>&#67;</span>";
+                                        e.Row.Cells[i + 2].Text = currentMovie;
+                                        e.Row.Cells[i + 2].Attributes["width"] = "150px";
+                                        if (currentWinnerTitle == currentMovie)
+                                        {
+                                            e.Row.Cells[i + 2].Text = currentMovie + "<span style='font-family:Wingdings;color:rgb(237,192,116); font-size:30px;'>&#67;</span>";
+                                        }
                                     }
+
                                 }
 
                             }
-
-
                         }
                         
                     }
@@ -118,6 +134,19 @@ namespace MovieScrapper.CommonPages
 
             }
 
+        }
+
+        private bool IsGameRunning()
+        {
+            var service = new CategoryService();
+            if (service.IsGameStopped() == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

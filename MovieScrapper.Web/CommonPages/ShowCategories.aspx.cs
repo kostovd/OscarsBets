@@ -179,6 +179,8 @@ namespace MovieScrapper.CommonPages
             var categoryCount = categories.Count();
             var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
             var missedCategories = categoryCount - bettedCategories;
+            var winners = categories.Select(c => c.Winner).ToList();
+            bool winnersAreSet = !winners.Any(x=>x==null);
             var counter = 0;
 
             foreach (var category in categories)
@@ -207,18 +209,18 @@ namespace MovieScrapper.CommonPages
                     if (missedCategories == 1)
                     {
                         WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
-                            "You have " + (missedCategories) + " more category to bet!";
+                            "You have " + (missedCategories) + " more category to bet.";
                     }
                     else
                     {
                         WarningLabel.Text = "Here you can bet in " + categoryCount + " different categories. " +
-                            "You have " + (missedCategories) + " more categories to bet!";
+                            "You have " + (missedCategories) + " more categories to bet.";
                     }
                 }
                 else
                 {
                     WarningLabel.CssClass = "goldBorder";
-                    WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories!";
+                    WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories.";
                 }
                
             }
@@ -231,25 +233,32 @@ namespace MovieScrapper.CommonPages
 
             if (CheckIfTheUserIsLogged() == true && IsGameRunning() == false)
             {
-                if (counter > 0)
+                if (winnersAreSet)
                 {
-                    if (counter== categoryCount)
+                    if (counter > 0)
                     {
-                        WinnerLabel.Text = "Yayyyyyyyyy! You guessed right in all the categories!";
-                        WinnerLabel.CssClass = "goldBorder";
-                    }
-                    else if(counter == 1)
-                    {
-                        WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " category!";
+                        if (counter == categoryCount)
+                        {
+                            WinnerLabel.Text = "Yayyyyyyyyy! You guessed right in all the categories!";
+                            WinnerLabel.CssClass = "goldBorder";
+                        }
+                        else if (counter == 1)
+                        {
+                            WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " category.";
+                        }
+                        else
+                        {
+                            WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " categories.";
+                        }
                     }
                     else
                     {
-                        WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " categories!";
+                        WinnerLabel.Text = "Sorry, you don't have right gestures";
                     }
                 }
                 else
                 {
-                    WinnerLabel.Text = "Sorry, you don't have right gestures";
+                    WinnerLabel.Text = "The game is stopped, but we are waiting to know the winners.";
                 }
                 
             }

@@ -36,6 +36,11 @@ namespace MovieScrapper.Business
         }
 
         #endregion
+        public bool AreWinnersSet()
+        {
+            var repo = new CategoryRepository();
+            return repo.AreWinnersSet();
+        }
         public void ChangeGameStopDate(DateTime stopDate)
         {
             var repo = new CategoryRepository();

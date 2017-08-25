@@ -50,6 +50,22 @@ namespace MovieScrapper.Data
 
             return watchedEntity;
         }
+
+        public bool AreWinnersSet()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var winners = ctx.MovieCaterogries.Select(x => x.Winner);
+                if (winners != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         #endregion
         public void ChangeMovieStatus(string userId, int movieId)
         {
@@ -248,6 +264,8 @@ namespace MovieScrapper.Data
         }
 
 #endregion
+
+       
 
         public Bet MakeBetEntity(string userId, int movieId, int categoryId)
         {

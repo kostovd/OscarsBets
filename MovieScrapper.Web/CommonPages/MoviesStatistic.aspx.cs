@@ -18,10 +18,10 @@ namespace MovieScrapper.CommonPages
 
                 TemplateField tfield = new TemplateField();
 
-                //tfield.HeaderText = "Email";
+               //Email
                 GridView1.Columns.Add(tfield);
 
-                //tfield.HeaderText = "Sum";
+                //Sum
                 GridView1.Columns.Add(tfield);
 
                 var service = new WatcheMoviesStatisticService();

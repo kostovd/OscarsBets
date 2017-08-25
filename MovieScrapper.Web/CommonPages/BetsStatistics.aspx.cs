@@ -29,18 +29,17 @@ namespace MovieScrapper.CommonPages
                     allWinnersAreSet = false;
                 }
 
+                // Email column
                 TemplateField tfield = new TemplateField();              
                 GridView1.Columns.Add(tfield);
 
+                // Sum column 
                 if (!GameIsRunning() && allWinnersAreSet )
-                {
-                    
+                {                   
                     GridView1.Columns.Add(tfield);
                 }
-
-               
-                               
-
+                                           
+                //Categories columns
                 foreach (var category in categories)
                 {
                     if (GameIsRunning())
@@ -73,8 +72,7 @@ namespace MovieScrapper.CommonPages
                         }
                     }
 
-                }
-                
+                }              
 
             }
 
@@ -123,10 +121,41 @@ namespace MovieScrapper.CommonPages
                 {
                     allWinnersAreSet = false;
                 }
+
+                // Email column
                 e.Row.Cells[0].Text = userName;
                 e.Row.Cells[0].Attributes["width"] = "150px";
 
-               
+                // Email column
+                if (allWinnersAreSet)
+                {
+                    var counter = 0;
+                    for (int i = 0; i < allCategories.Count(); i++)
+                    {
+                        for (int j = 0; j < userCategoriesMovies.Count; j++)
+                        {
+                            var currentMovieCategory = userCategoriesMovies[j];
+                            var currentCategory = currentMovieCategory[0];
+                            var currentMovie = currentMovieCategory[1];
+
+                            foreach (var winner in winners)
+                            {
+                                var currentWinnerCategory = winner[0];
+                                var currentWinnerTitle = winner[1];
+                                if (currentWinnerCategory == currentCategory)
+                                {                                    
+                                    if (currentWinnerTitle == currentMovie)
+                                    {
+                                        counter++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    e.Row.Cells[1].Text = (counter/ allCategories.Count()).ToString();
+                    e.Row.Cells[1].Attributes["width"] = "50px";
+                }
+
                 for (int i = 0; i < allCategories.Count(); i++)
                 {
                     for (int j = 0; j < userCategoriesMovies.Count; j++)
@@ -150,6 +179,7 @@ namespace MovieScrapper.CommonPages
                                 }
                                 else if (allWinnersAreSet)
                                 {
+                                    
                                     foreach (var winner in winners)
                                     {
                                         var currentWinnerCategory = winner[0];
@@ -161,10 +191,12 @@ namespace MovieScrapper.CommonPages
                                             if (currentWinnerTitle == currentMovie)
                                             {
                                                 e.Row.Cells[i + 2].Text = currentMovie + "<span style='font-family:Wingdings;color:rgb(237,192,116); font-size:30px;'>&#67;</span>";
+                                               
                                             }
                                         }
 
                                     }
+                                    
                                 }
 
                             }

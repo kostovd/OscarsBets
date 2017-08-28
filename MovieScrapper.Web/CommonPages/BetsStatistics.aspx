@@ -4,7 +4,9 @@
     <link href="MovieStyleSheet.css" rel="stylesheet" /> 
     <br />
     <span>All users with the bets they made</span>
-    <hr />
+    
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+   
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns = "false" OnRowDataBound = "OnRowDataBound"></asp:GridView>
     
 </asp:Content>

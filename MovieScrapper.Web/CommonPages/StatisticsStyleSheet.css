@@ -1,0 +1,16 @@
+﻿body {
+    background-color: ghostwhite;
+}
+.goldBorder {    
+    padding: 5px;
+    border: 3px solid rgb(179,0,0);        
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+.grid {
+    margin-top: 20px;
+    border: 3px solid rgb(237,192,116);
+    border-radius: 7px;
+}

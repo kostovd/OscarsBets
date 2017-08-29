@@ -200,6 +200,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Admin\AdminStyleSheet.css" />
+    <Content Include="Admin\Calendar.aspx" />
     <Content Include="Admin\EditCategory.aspx" />
     <Content Include="Admin\EditMoviesInThisCategory.aspx" />
     <Content Include="Admin\Categories.aspx" />
@@ -209,6 +210,7 @@
     <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
     <Content Include="CommonPages\ShowCategories.aspx" />
+    <Content Include="CommonPages\StatisticsStyleSheet.css" />
     <Content Include="CommonPages\WatchesMoviesStatistics.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -374,6 +376,13 @@
     </Compile>
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EditCategory.aspx.cs">
       <DependentUpon>EditCategory.aspx</DependentUpon>

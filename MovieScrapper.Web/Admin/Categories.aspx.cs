@@ -11,37 +11,18 @@ namespace MovieScrapper.Admin
         {
 
         }
-
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (Calendar1.SelectedDate == null || Calendar1.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
-                args.IsValid = false;
-            else
-                args.IsValid = true;
-        }
-
+        
 
         protected void AddCategoryButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("EditCategory.aspx");
         }
-
-        protected void ChangeDateButton_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                var service = new CategoryService();
-                var changeDate = Calendar1.SelectedDate;
-                service.ChangeGameStopDate(changeDate);
-                Response.Redirect("Categories.aspx");
-            }
-        }
+       
 
         protected void ShowChangeDateButton_Click(object sender, EventArgs e)
         {
-            ChangeStopGameDateButton.CssClass = "saveButton";
-            Calendar1.CssClass = "";
-                        
+            Response.Redirect("Calendar.aspx");
+
         }
 
         protected void EditUsersButton_Click(object sender, EventArgs e)
@@ -65,9 +46,6 @@ namespace MovieScrapper.Admin
             }
         }
 
-        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -1,7 +1,7 @@
 ﻿body {
     background-color: ghostwhite;
 }
-.goldBorder {    
+.redBorder {    
     padding: 5px;
     border: 3px solid rgb(179,0,0);        
     font-size: 18px;
@@ -12,5 +12,23 @@
 .grid {
     margin-top: 20px;
     border: 3px solid rgb(237,192,116);
-    border-radius: 7px;
+   
+}
+
+.link {
+    color: rgb(179,0,0);
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
+}
+.goldFont {
+    color: rgb(237,192,116);
+}
+
+.goldFont {
+    color: rgb(179,0,0);
+}
+.columnscss {    
+    padding-left: 20px;
+    padding-right: 20px;
 }

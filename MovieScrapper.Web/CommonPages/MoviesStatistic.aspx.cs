@@ -30,8 +30,9 @@ namespace MovieScrapper.CommonPages
                 foreach (var title in titles)
                 {
                     tfield = new TemplateField();
-                    tfield.HeaderText = title;
+                    tfield.HeaderText = "<span class='redFont'>"+ title + "</span>";
                     GridView1.Columns.Add(tfield);
+                    
                 }
                
             }
@@ -44,8 +45,7 @@ namespace MovieScrapper.CommonPages
             var service = new WatcheMoviesStatisticService();
             var users = service.GetData();
             DataTable dt = new DataTable();
-            //dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
-
+            
             dt.Columns.AddRange(new DataColumn[2] { new DataColumn("User", typeof(string)), new DataColumn("Sum", typeof(string)),});
             foreach (var user in users)
             {
@@ -72,11 +72,10 @@ namespace MovieScrapper.CommonPages
                 var userName = arrayOfAllKeys[index];
                 var userTitles = dict[userName];
 
-                e.Row.Cells[0].Text = userName;
-                e.Row.Cells[0].Attributes["width"] = "150px";
+                e.Row.Cells[0].Text = userName;               
 
                 e.Row.Cells[1].Text = userTitles.Count.ToString();
-                e.Row.Cells[1].Attributes["width"] = "30px";
+                e.Row.Cells[1].CssClass = "columnscss";
 
                 for (int i = 0; i <allTitles.Count(); i++)
                 {
@@ -85,8 +84,8 @@ namespace MovieScrapper.CommonPages
                         if (allTitles[i] == userTitles[j])
                         {
                            
-                                e.Row.Cells[i + 2].Text = "<span style='font-family:Wingdings;color:grey; text-align: center;font-size:30px;'>&#252;</span>";
-                                e.Row.Cells[i + 2].Attributes["width"] = "100px";                           
+                                e.Row.Cells[i + 2].Text = "<span style='font-family:Wingdings;color:rgb(179,0,0); text-align: center;font-size:30px;'>&#252;</span>";                              
+                                e.Row.Cells[i+2].CssClass = "columnscss";
                         }
                     }
                     

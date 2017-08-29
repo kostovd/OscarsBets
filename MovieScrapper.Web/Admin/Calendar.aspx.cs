@@ -12,8 +12,8 @@ namespace MovieScrapper.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            
+            //Calendar1.SelectedDate = DateTime.Today;
+
         }
 
         protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)

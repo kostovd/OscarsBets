@@ -45,7 +45,7 @@ namespace MovieScrapper.CommonPages
                     if (GameIsRunning())
                     {
                         tfield = new TemplateField();
-                        tfield.HeaderText = "<span style='color: rgb(237,192,116);'>" + category + "</span>";
+                        tfield.HeaderText = "<span class='goldFont'>" + category + "</span>";
                         GridView1.Columns.Add(tfield);
                     }
                     else //Game is stopped
@@ -59,22 +59,22 @@ namespace MovieScrapper.CommonPages
                                 if (currentWinnerCategory == category)
                                 {
                                     tfield = new TemplateField();
-                                    tfield.HeaderText = "<span style='color: rgb(237,192,116);'>" + category + "</span>" + "<br /><span style='color: rgb(179,0,0);'>" + currentWinnerTitle + "</span>";
+                                    tfield.HeaderText = "<span class='goldFont'>" + category + "</span>" + "<br /><span class='redFont'>" + currentWinnerTitle + "</span>";
                                     GridView1.Columns.Add(tfield);
                                 }
                             }
                             var theWinner = service.GetWinner();
                             Label1.Text = theWinner;
-                            Label1.CssClass = "goldBorder";
+                            Label1.CssClass = "redBorder";
                         }
                         else
                         {
                             tfield = new TemplateField();
-                            tfield.HeaderText = "<span style='color: rgb(237,192,116);'>" + category + "</span>" + "<br /><span style='font-size:10px;'> Waiting to know the winner </span>";
+                            tfield.HeaderText = "<span class='goldFont'>" + category + "</span>" + "<br /><span style='font-size:10px;'> Waiting to know the winner </span>";
                             GridView1.Columns.Add(tfield);
 
                             Label1.Text = "Winners not set yet";
-                            Label1.CssClass = "goldBorder";
+                            Label1.CssClass = "redBorder";
                         }
                     }
 
@@ -137,28 +137,7 @@ namespace MovieScrapper.CommonPages
                 if (allWinnersAreSet)
                 {
                     var counter = 0;
-                    //for (int i = 0; i < allCategories.Count(); i++)
-                    //{
-                    //    for (int j = 0; j < userCategoriesMovies.Count; j++)
-                    //    {
-                    //        var currentMovieCategory = userCategoriesMovies[j];
-                    //        var currentCategory = currentMovieCategory[0];
-                    //        var currentMovie = currentMovieCategory[1];
-
-                    //        foreach (var winner in winners)
-                    //        {
-                    //            var currentWinnerCategory = winner[0];
-                    //            var currentWinnerTitle = winner[1];
-                    //            if (currentWinnerCategory == currentCategory)
-                    //            {                                    
-                    //                if (currentWinnerTitle == currentMovie)
-                    //                {
-                    //                    counter++;
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                 
                     foreach(var userCategoryMovie in userCategoriesMovies)
                     {
                         if (userCategoryMovie[2] == 1.ToString())

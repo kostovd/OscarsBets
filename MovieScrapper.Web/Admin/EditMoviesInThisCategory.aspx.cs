@@ -95,6 +95,56 @@ namespace MovieScrapper.Admin
             }
         }
 
+        protected string CheckIfWinner( int currentMovieId)
+        {
+            var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
+            var service = new CategoryService();
+            var category= service.GetCategory(categoryId);
+            var winner = category.Winner;
+
+            if (winner == null)
+            {
+                return "";
+            }
+            else
+            {
+                if (winner.Id.ToString() == currentMovieId.ToString())
+                {
+                    return "winner";
+                }
+                else
+                {
+                    return "notWinner";
+                }
+            }
+
+        }
+
+        protected string CheckIfWinnerImage(int currentMovieId)
+        {
+            var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
+            var service = new CategoryService();
+            var category = service.GetCategory(categoryId);
+            var winner = category.Winner;
+
+            if (winner == null)
+            {
+                return "";
+            }
+            else
+            {
+                if (winner.Id.ToString() == currentMovieId.ToString())
+                {
+                    return "/Oscar_logo.png";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+        }
+
         protected void BackToEditCategoriesButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("Categories.aspx" );

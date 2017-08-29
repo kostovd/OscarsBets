@@ -22,9 +22,9 @@
             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
             <ItemStyle BackColor="#EFF3FB" />
             <ItemTemplate>
-                <div class="movieItem">  
+                <div class="movieItem <%#  CheckIfWinner(Item.Id)  %> ">  
                   <div class="title">
-                      
+                      <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item.Id) %>" title="WINNER!"/>
                       <%# Item.Title %> (<%# DisplayYear((string)Item.ReleaseDate) %>)
                       
                       <asp:Button 

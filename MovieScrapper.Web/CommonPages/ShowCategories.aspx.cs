@@ -89,7 +89,7 @@ namespace MovieScrapper.CommonPages
                 var service = new CategoryService();
                 var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
-                
+
             }
         }
 
@@ -142,7 +142,7 @@ namespace MovieScrapper.CommonPages
                     }
                 }
             }
-            
+
         }
 
         protected string CheckIfWinnerImage(object winner, int currentMovieId)
@@ -180,7 +180,7 @@ namespace MovieScrapper.CommonPages
             var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
             var missedCategories = categoryCount - bettedCategories;
             var winners = categories.Select(c => c.Winner).ToList();
-            bool winnersAreSet = !winners.Any(x=>x==null);
+            bool winnersAreSet = !winners.Any(x => x == null);
             var counter = 0;
 
             foreach (var category in categories)
@@ -200,8 +200,8 @@ namespace MovieScrapper.CommonPages
                         }
                     }
                 }
-            }         
-            
+            }
+
             if (CheckIfTheUserIsLogged() == true && IsGameRunning() == true)
             {
                 if (missedCategories > 0)
@@ -222,7 +222,7 @@ namespace MovieScrapper.CommonPages
                     WarningLabel.CssClass = "goldBorder";
                     WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories.";
                 }
-               
+
             }
             else
             {
@@ -260,7 +260,7 @@ namespace MovieScrapper.CommonPages
                 {
                     WinnerLabel.Text = "The game is stopped, but we are waiting to know the winners.";
                 }
-                
+
             }
 
             else

@@ -136,7 +136,8 @@ namespace MovieScrapper.Data
             {
                 var databaseCategory = ctx.MovieCaterogries
                     .Include(cat => cat.Movies)
-                    .Include(cat => cat.Bets)
+                    .Include(cat => cat.Bets.Select(bet=>bet.Movie))
+                    .Include(cat => cat.Winner)
                     .ToList();
 
                 return databaseCategory;

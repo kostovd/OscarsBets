@@ -161,7 +161,10 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {
-                var foundedCategoty = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == categoryId).SingleOrDefault();
+                var foundedCategoty = ctx.MovieCaterogries
+                    .Include(cat=>cat.Winner)
+                    .Include(cat => cat.Movies)
+                    .Where(cat => cat.Id == categoryId).SingleOrDefault();
                 return foundedCategoty.Movies;
             }
         }
@@ -175,14 +178,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        //public IEnumerable<string> GetAllUsersWatchedThisMovie (int movieId)
-        //{
-        //    using (var ctx = new MovieContext())
-        //    {
-        //        var users = ctx.Watched.Include(m=>m.Movies).Where(w=>w.Movies.)
-        //        return users;
-        //    }
-        //}
+        
         public IEnumerable<Watched> GetAllUsersWatchedAMovie()
         {
 
@@ -210,7 +206,9 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var foundedCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).Where(cat => cat.Id == id).SingleOrDefault();
+                var foundedCategory = ctx.MovieCaterogries
+                    .Include(cat =>cat.Winner)
+                    .Include(cat => cat.Movies).Where(cat => cat.Id == id).SingleOrDefault();
                 return foundedCategory;
             }
         }
@@ -240,7 +238,7 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {
-                var foundedDate = ctx.StopDate.First();
+                var foundedDate = ctx.StopDate.FirstOrDefault();
                 return foundedDate;
             }
         }

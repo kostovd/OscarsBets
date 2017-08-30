@@ -2,10 +2,9 @@
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <link href="MovieStyleSheet.css" rel="stylesheet" />    
-    <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="greatingLabel"></asp:Label>
-    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
-    <br />
-    <hr />
+    <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="warning-left"></asp:Label>
+    <asp:Label ID="WarningLabel" runat="server" CssClass="warning-left"></asp:Label>
+    <br /> <br />
     <asp:Repeater ID="Repeater1" runat="server"
                         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
                         <HeaderTemplate>
@@ -15,8 +14,7 @@
                             <div class="movieItem">
                                 <div class="title">
                                     <div ="items">                                      
-                                       <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>                                       
-                                        <hr />
+                                       <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>                                                                             
                                         <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB" ><img class="imdb" src="/imdb.svg" /> </a>
                                         <asp:Button ID="MarkAsWatchedButton" 
                                             runat="server" 

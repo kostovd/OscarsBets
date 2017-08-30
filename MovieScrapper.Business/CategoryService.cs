@@ -127,17 +127,10 @@ namespace MovieScrapper.Business
         {
             var repo = new CategoryRepository();
 
-            int result = DateTime.Compare( repo.GetStopDate().StopGameDate, DateTime.Now);
-            if (result<0)
-            {
-                return true;
-            }
-
-            else
-            {
-                return false;
-            }
-            
+            StopDate stopDateObject = repo.GetStopDate();
+            DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.MinValue);
+            return (stopDate < DateTime.Now);        
+           
         }
 
         public Bet GetUserBetEntity(string userId)

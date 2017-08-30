@@ -15,22 +15,14 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsGameRunning())
+            if (!User.Identity.IsAuthenticated)
             {
-                if (User.Identity.IsAuthenticated)
-                {
-                    GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can mark the movies you have watched!";
-                }
-                else
-                {
-                    GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
-                }
+               GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
             }
             else
             {
-                GreatingLabel.Text = "The game is stopped. You can not mark a movie as watched anymore.";
+                GreatingLabel.CssClass = "hidden";
             }
-            
         }
 
         public bool IsGameRunning()
@@ -156,7 +148,7 @@ namespace MovieScrapper.CommonPages
                 }
                 else
                 {
-                    WarningLabel.CssClass = "goldBorder";
+                    WarningLabel.CssClass = "goldBorder-left";
                     WarningLabel.Text = "Congretilations! You have watched all the " + moviesCount + " movies!";
                 }
             }

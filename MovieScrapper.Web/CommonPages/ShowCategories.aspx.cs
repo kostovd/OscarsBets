@@ -13,21 +13,13 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsGameRunning())
+            if (!User.Identity.IsAuthenticated)
             {
-                if (User.Identity.IsAuthenticated)
-                {
-                    GreatingLabel.Text = "Hello " + User.Identity.Name + "! Here you can bet on the movie which you think will win!";
-                }
-                else
-                {
-                    GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
-                }
+                GreatingLabel.Text = "You must be logged in to bet!";
             }
-
             else
             {
-                GreatingLabel.Text = "The game is stopped. You can not bet anymore.";
+                GreatingLabel.CssClass = "hidden";
             }
         }
 

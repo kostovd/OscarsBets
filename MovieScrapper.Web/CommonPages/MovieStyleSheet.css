@@ -87,6 +87,15 @@ a {
     font-weight: bold;
     float: right;
 }
+.warning-left {
+    margin: 5px;
+    padding: 5px;
+    border: 3px solid rgb(179, 0, 0);
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
 .greenBorder {
     margin: 5px;
     padding: 5px;    
@@ -104,6 +113,15 @@ a {
     font-size: 18px;
     font-weight: bold;
     float:right;
+}
+
+.goldBorder-left {
+    margin: 5px;
+    padding: 5px;
+    border: 3px solid rgb(237,192,116);
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;   
 }
 .imdb {
     width:50px;

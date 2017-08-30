@@ -134,7 +134,7 @@ namespace MovieScrapper.CommonPages
                 e.Row.Cells[0].Attributes["width"] = "150px";
 
                 // Gesses sum column
-                if (allWinnersAreSet)
+                if (allWinnersAreSet && !GameIsRunning())
                 {
                     var counter = 0;
                  

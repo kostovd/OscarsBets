@@ -15,7 +15,7 @@ namespace MovieScrapper.Data
         public DbSet<Category> MovieCaterogries { get; set; }
         public DbSet<Watched> Watched { get; set; }
         public DbSet<Bet> Bets { get; set; }
-        public DbSet<GameProperties> StopDate {get; set; }
+        public DbSet<GameProperties> Game {get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -87,19 +87,38 @@ namespace MovieScrapper.Data
             }
         }
 
+        public void ChangeGameStartDate(DateTime startDate)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedEntity = ctx.Game.FirstOrDefault();
+                if (foundedEntity == null)
+                {
+                    var newDateEntity = new GameProperties { StopGameDate = startDate, StartGameDate = startDate }; //To Do!
+                    ctx.Game.Add(newDateEntity);
+                }
+                else
+                {
+                    foundedEntity.StartGameDate = startDate;
+                }
+
+                ctx.SaveChanges();
+            }
+        }
+
         public void ChangeGameStopDate(DateTime stopDate)
         {
             using (var ctx = new MovieContext())
             {
-                var foundedDate = ctx.StopDate.FirstOrDefault();
-                if (foundedDate == null)
+                var foundedEntity = ctx.Game.FirstOrDefault();
+                if (foundedEntity == null)
                 {
                     var stopDateEntity = new GameProperties {StopGameDate=stopDate, StartGameDate=stopDate}; //To Do!
-                    ctx.StopDate.Add(stopDateEntity);
+                    ctx.Game.Add(stopDateEntity);
                 }
                 else
                 {
-                    foundedDate.StopGameDate = stopDate;
+                    foundedEntity.StopGameDate = stopDate;
                 }
 
                 ctx.SaveChanges();
@@ -238,7 +257,7 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {
-                var foundedDate = ctx.StopDate.FirstOrDefault();
+                var foundedDate = ctx.Game.FirstOrDefault();
                 return foundedDate;
             }
         }

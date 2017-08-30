@@ -94,7 +94,7 @@ namespace MovieScrapper.Data
                 var foundedDate = ctx.StopDate.FirstOrDefault();
                 if (foundedDate == null)
                 {
-                    var stopDateEntity = new StopDate {StopGameDate=stopDate };
+                    var stopDateEntity = new GameProperties {StopGameDate=stopDate, StartGameDate=stopDate}; //To Do!
                     ctx.StopDate.Add(stopDateEntity);
                 }
                 else
@@ -234,7 +234,7 @@ namespace MovieScrapper.Data
             }
         }
         
-        public StopDate GetStopDate()
+        public GameProperties GetStopDate()
         {
             using (var ctx = new MovieContext())
             {

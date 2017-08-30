@@ -127,8 +127,8 @@ namespace MovieScrapper.Business
         {
             var repo = new CategoryRepository();
 
-            StopDate stopDateObject = repo.GetStopDate();
-            DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.MinValue);
+            GameProperties stopDateObject = repo.GetStopDate();
+            DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.Now);
             return (stopDate < DateTime.Now);        
            
         }

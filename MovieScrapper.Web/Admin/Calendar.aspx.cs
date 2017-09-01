@@ -12,46 +12,33 @@ namespace MovieScrapper.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Calendar1.SelectedDate = DateTime.Today;
-
+            if (!Page.IsPostBack)
+            {
+                var service = new CategoryService();
+                StartGameCalendar.SelectedDate = service.GetGameStartDate();
+                StopGameCalendar.SelectedDate = service.GetGameStopDate();
+            }
         }
 
-        protected void StartGameValidator_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (StartGameCalendar.SelectedDate == null || StartGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
-                args.IsValid = false;
-            else
-                args.IsValid = true;
-        }
         protected void StopGameValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (StopGameCalendar.SelectedDate == null || StopGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
+            if (StartGameCalendar.SelectedDate == null || StartGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0)||StopGameCalendar.SelectedDate == null || StopGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
                 args.IsValid = false;
             else
                 args.IsValid = true;
         }
-
-        protected void ChangeStartDateButton_Click(object sender, EventArgs e)
+        protected void ChangeDateButton_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
                 var service = new CategoryService();
-                var changeDate = StartGameCalendar.SelectedDate;
-                service.ChangeGameStartDate(changeDate);
+                var startDate = StartGameCalendar.SelectedDate;
+                service.ChangeGameStartDate(startDate);
+                var stopDate = StopGameCalendar.SelectedDate;
+                 service.ChangeGameStopDate(stopDate);
                 Response.Redirect("Categories.aspx");
             }
         }
 
-        protected void ChangeStopDateButton_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                var service = new CategoryService();
-                var changeDate = StopGameCalendar.SelectedDate;
-                service.ChangeGameStopDate(changeDate);
-                Response.Redirect("Categories.aspx");
-            }
-        }
-       
     }
 }

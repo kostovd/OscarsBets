@@ -42,29 +42,31 @@
     font-size:18px;
     font-weight:bold;
 }
-
-.changeDate {
-    width:300px;
-    padding: 5px;
-    margin:5px;
-    
-    border-radius: 7px;
+.calendarTitle {
+    color: rgb(196, 0, 0);
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
+
 .calendar {
-    width: 300px;
+   
+    display:inline-block;
+    margin:20px;
 }
  .changeDate:empty {
       background-color: ghostwhite;
   }
 
 .saveButton {
-    background-color: ghostwhite;
-    border-radius: 3px;
-    border: none;
-    align-content: center;
-    float: right;
-    margin: 3px;
+    width: 150px;
+    margin-left: 200px;
+    margin-right: 100px;
     padding: 3px;
+    color: rgb(196, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgb(237,192,116)
 }
 
 .hidden{

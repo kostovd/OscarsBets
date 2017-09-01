@@ -116,6 +116,19 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             return repo.GetCategory(id);
         }
+
+        public DateTime GetGameStartDate()
+        {
+            var repo = new CategoryRepository();
+            return repo.GetGameStartDate();
+        }
+
+        public DateTime GetGameStopDate()
+        {
+            var repo = new CategoryRepository();
+            return repo.GetGameStopDate();
+        }
+
         public Movie GetMovie(int id)
         {
             var repo = new CategoryRepository();

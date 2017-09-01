@@ -232,6 +232,24 @@ namespace MovieScrapper.Data
             }
         }
 
+        public DateTime GetGameStartDate()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedDate = ctx.Game.Select(x => x.StartGameDate).SingleOrDefault();
+                return foundedDate;
+            }
+        }
+
+        public DateTime GetGameStopDate()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundedDate = ctx.Game.Select(x => x.StopGameDate).SingleOrDefault();
+                return foundedDate;
+            }
+        }
+
         public Movie GetMovie(int id)
         {
 

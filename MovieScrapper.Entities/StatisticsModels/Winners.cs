@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Entities.StatisticsModels
 {
-    public class Bet
+    public class Winners
     {
-        int Id { get; set; }
-        string Email { get; set; }
-        string Category { get; set; }
-        string Title { get; set; }
-
+        public string Category { get; set; }
+        public string Winner { get; set; }
     }
 }

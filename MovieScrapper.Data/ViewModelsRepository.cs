@@ -36,30 +36,37 @@ namespace MovieScrapper.Data
         //    return results;
         //}
 
-        public DataTable GetBetsData()
+        public List<BetsStatistic> GetBetsData()
         {
             string query = "SELECT Bets.Id, AspNetUsers.Email, Categories.CategoryTtle as Category, Movies.Title FROM Bets INNER JOIN Movies ON Bets.Movie_Id = Movies.Id INNER JOIN AspNetUsers ON Bets.UserId = AspNetUsers.Id JOIN Categories ON Bets.Category_Id = Categories.Id";
-            string connString = "Data Source=PC-1099\\SQLEXPRESS;Initial Catalog=MovieScrapper.Models.MovieContext;Integrated Security=True";
-            DataTable results = new DataTable();
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand(query, conn))
-            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
-                dataAdapter.Fill(results);
-            return results;
+            using (var ctx = new MovieContext())
+            {
+                List<BetsStatistic> resaults = ctx.Database.SqlQuery<BetsStatistic>(query).ToList();
+                return resaults;
+            }
         }
 
-        public DataTable GetWinner()
+        //public DataTable GetWinner()
+        //{
+        //    string query = "SELECT Categories.CategoryTtle as Category, Movies.Title as Winner FROM Categories INNER JOIN Movies ON Categories.Winner_Id = Movies.Id";
+        //    string connString = "Data Source=PC-1099\\SQLEXPRESS;Initial Catalog=MovieScrapper.Models.MovieContext;Integrated Security=True";
+        //    DataTable results = new DataTable();
+
+        //    using (SqlConnection conn = new SqlConnection(connString))
+        //    using (SqlCommand command = new SqlCommand(query, conn))
+        //    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+        //        dataAdapter.Fill(results);
+        //    return results;
+        //}
+
+        public List<Winners> GetWinner()
         {
             string query = "SELECT Categories.CategoryTtle as Category, Movies.Title as Winner FROM Categories INNER JOIN Movies ON Categories.Winner_Id = Movies.Id";
-            string connString = "Data Source=PC-1099\\SQLEXPRESS;Initial Catalog=MovieScrapper.Models.MovieContext;Integrated Security=True";
-            DataTable results = new DataTable();
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand(query, conn))
-            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
-                dataAdapter.Fill(results);
-            return results;
+            using (var ctx = new MovieContext())
+            {
+                List<Winners> resaults = ctx.Database.SqlQuery<Winners>(query).ToList();
+                return resaults;
+            }
         }
     }
 }

@@ -52,7 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WatcheMoviesStatisticService.cs" />
     <Compile Include="TMDBMovieService.cs" />
-    <Compile Include="ViewModels\WatchedMoviesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieScrapper.Data\MovieScrapper.Data.csproj">

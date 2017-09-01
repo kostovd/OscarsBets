@@ -1,4 +1,5 @@
 ﻿using MovieScrapper.Data;
+using MovieScrapper.Entities.StatisticsModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,9 @@ namespace MovieScrapper.Business
         public Dictionary<string, List<string[]>> GetData()
         {
             var data = new ViewModelsRepository();
-            var dt = data.GetBetsData();            
-            var stringArrEmails = dt.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            List<BetsStatistic> bets = data.GetBetsData();
+            // var stringArrEmails = dt.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            var stringArrEmails = bets.Select(b=>b.Email).Where(e => e != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 
             var winningMovieCategories = GetWinningCategoryMovies();
@@ -29,14 +31,14 @@ namespace MovieScrapper.Business
 
                 List<string[]> userCategories = new List<string[]>();
 
-                for (int j = 0; j < dt.Rows.Count; j++)
+                for (int j = 0; j < bets.Count; j++)
                 {
                     string[] categoryMovie = new string[3];
-                    DataRow row = dt.Rows[j];
-                    if (row["Email"].ToString() == email)
+                    var bet = bets[j];
+                    if (bet.Email.ToString() == email)
                     {
-                        currentCategory = row["Category"].ToString();
-                        currentTitle = row["Title"].ToString();
+                        currentCategory = bet.Category.ToString();
+                        currentTitle = bet.Title.ToString();
 
                         categoryMovie[0] = currentCategory;
                         categoryMovie[1] = currentTitle;
@@ -184,20 +186,21 @@ namespace MovieScrapper.Business
         private List<string[]> GetWinningCategoryMovies()
         {
             var data = new ViewModelsRepository();
-            var dt = data.GetWinner();
-            var winningCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).Where(x => x != null).ToArray();
+            List<Winners> winners = data.GetWinner();
+            //var winningCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).Where(x => x != null).ToArray();
+            var winningCategories = winners.Select(w => w.Category).Where(x => x != null).ToArray();
 
-            List<string[]> winningMovies = new List<string[]>();
+            List <string[]> winningMovies = new List<string[]>();
            
                 string currentCategory;
                 string currentWinner;
                
-                for (int i = 0; i < dt.Rows.Count; i++)
+                for (int i = 0; i < winners.Count; i++)
                 {
                     string[] categoryMovie = new string[2];
-                    DataRow row = dt.Rows[i];
-                    currentCategory = row["Category"].ToString();
-                    currentWinner = row["Winner"].ToString();
+                    var winner = winners[i];
+                    currentCategory = winner.Category.ToString();
+                    currentWinner = winner.Winner.ToString();
                     categoryMovie[0] = currentCategory;
                     categoryMovie[1] = currentWinner;
 
@@ -213,7 +216,8 @@ namespace MovieScrapper.Business
             var data = new ViewModelsRepository();
             var dt = data.GetBetsData();
 
-            var stringArrCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).ToArray();
+            //var stringArrCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).ToArray();
+            var stringArrCategories = dt.Select(x => x.Category).ToArray();
             var collectionWithDistinctCategories = stringArrCategories.Distinct().ToArray();
             return collectionWithDistinctCategories;
         }
@@ -226,13 +230,13 @@ namespace MovieScrapper.Business
             string currentCategory;
             string currentWinner;
             List<string[]> winners = new List<string[]>();
-            for (int j = 0; j < dt.Rows.Count; j++)
+            for (int j = 0; j < dt.Count; j++)
             {
                 string[] categoryWinner = new string[2];
-                DataRow row = dt.Rows[j];
+                var row = dt[j];
 
-                currentCategory = row["Category"].ToString();
-                currentWinner = row["Winner"].ToString();
+                currentCategory = row.Category.ToString();
+                currentWinner = row.Winner.ToString();
 
                 categoryWinner[0] = currentCategory;
                 categoryWinner[1] = currentWinner;

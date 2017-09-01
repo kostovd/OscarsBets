@@ -21,7 +21,7 @@
                         <div  class ="movieItem <%#  CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id)  %>"  >
                             <div class="title">
                                 <div class="items " >                                   
-                                    <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" title="WINNER!"/>
+                                    <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
                                     <br />
                                     <a href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>                                   
                                     <hr />

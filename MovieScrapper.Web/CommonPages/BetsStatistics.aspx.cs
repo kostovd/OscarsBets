@@ -65,7 +65,7 @@ namespace MovieScrapper.CommonPages
                             }
                             var theWinner = service.GetWinner();
                             Label1.Text = theWinner;
-                            Label1.CssClass = "redBorder";
+                            //Label1.CssClass = "redBorder";
                         }
                         else
                         {

@@ -16,25 +16,42 @@ namespace MovieScrapper.Admin
 
         }
 
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void StartGameValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (Calendar1.SelectedDate == null || Calendar1.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
+            if (StartGameCalendar.SelectedDate == null || StartGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
                 args.IsValid = false;
             else
                 args.IsValid = true;
         }
-       
+        protected void StopGameValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (StopGameCalendar.SelectedDate == null || StopGameCalendar.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
+                args.IsValid = false;
+            else
+                args.IsValid = true;
+        }
 
-        protected void ChangeDateButton_Click(object sender, EventArgs e)
+        protected void ChangeStartDateButton_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
                 var service = new CategoryService();
-                var changeDate = Calendar1.SelectedDate;
+                var changeDate = StartGameCalendar.SelectedDate;
+                service.ChangeGameStartDate(changeDate);
+                Response.Redirect("Categories.aspx");
+            }
+        }
+
+        protected void ChangeStopDateButton_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                var service = new CategoryService();
+                var changeDate = StopGameCalendar.SelectedDate;
                 service.ChangeGameStopDate(changeDate);
                 Response.Redirect("Categories.aspx");
             }
-
         }
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business.ViewModels;
+using MovieScrapper.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,33 +11,40 @@ namespace MovieScrapper.Business
 {
     public class WatcheMoviesStatisticService
     {
+
+       
+
         public Dictionary<string, List<string>> GetData()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetWatchedMoviesData();
+            var watchedMovies = data.GetWatchedMoviesData();
 
-            var stringArrTitles= recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
+            //var stringArrTitles= recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
+            var stringArrTitles = watchedMovies.Select(m => m.Title).ToArray();
             var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
             int allTitlesCount = collectionWithAllDistinctTitles.Count();
-            var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            //var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            var stringArrEmails = watchedMovies.Select(m => m.Email).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
             int emailsCount = collectionWithDistinctEmails.Count();
+
             
+
             Dictionary<string, List<string>> myDict = new Dictionary<string, List<string>>();
           
             //for (int i = 0; i < emailsCount; i++)
             foreach(var email in collectionWithDistinctEmails)
             {               
                 List<string> userTitles= new List<string>();
-                for (int j =0; j<recievedTable.Rows.Count; j++)
+                for (int j =0; j< allTitlesCount; j++)
                 {
                    
                     string currentTitle;
-                    foreach (DataRow row in recievedTable.Rows)
+                    foreach (var item in watchedMovies)
                     {
-                        if (row["Email"].ToString() == email )
+                        if (item.Email.ToString() == email )
                         {
-                            currentTitle= row["Title"].ToString();
+                            currentTitle= item.Title.ToString();
                             userTitles.Add(currentTitle);
                         }
                     }
@@ -54,9 +62,9 @@ namespace MovieScrapper.Business
         public string [] GetTitles()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetWatchedMoviesData();
+            var watchedMovies = data.GetWatchedMoviesData();
 
-            var stringArrTitles = recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
+            var stringArrTitles =  watchedMovies.Select(m => m.Title).ToArray();
             var collectionWithDistinctTitles = stringArrTitles.Distinct().ToArray();
             int titlesCount = collectionWithDistinctTitles.Count();                                             
             return collectionWithDistinctTitles;
@@ -65,8 +73,9 @@ namespace MovieScrapper.Business
         public string[] GetUsers()
         {
             var data = new ViewModelsRepository();
-            var recievedTable = data.GetWatchedMoviesData();
-            var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            var watchedMovies = data.GetWatchedMoviesData();
+            // var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            var stringArrEmails = watchedMovies.Select(m=>m.Email).Where(e=>e!=null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 
             return collectionWithDistinctEmails;

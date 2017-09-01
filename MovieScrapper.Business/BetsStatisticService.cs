@@ -111,12 +111,12 @@ namespace MovieScrapper.Business
             }
             if (winners.Count == 0)
             {
-                return "There are no winners";
+                return "<div class='redBorder'>There are no winners</div>";
             }
             else if (winners.Count == 1)
             {
                 var winner = winners[0];
-                return "The winner is " + winner[0] + "! He guessed right in " + winner[1] + " categories!";
+                return "<div class='redBorder'>The winner is " + winner[0] + "! He/she guessed right in " + winner[1] + " categories!</div>";
             }
             else
             {
@@ -154,27 +154,27 @@ namespace MovieScrapper.Business
                 }
                 if (finalWinners.Count == 0)
                 {
-                    string resault = "The winners are: <br/>";
+                    string resault = "<div class='redBorder'>The winners are: <br/>";
                     foreach (var winner in winners)
                     {
                         resault += winner[0] + "<br/>";
                     }
-                    resault += "They guessed rigth in " + winners[0][1] + " categories!";
+                    resault += "They guessed rigth in " + winners[0][1] + " categories!</div>";
                     return resault;
                 }
                 else if(finalWinners.Count == 1)
                 {
-                    var resault = finalWinners[0][0] +" wins! He/she guessed right in "+ winners[0][1]+ " categories and watched "+ finalWinners[0][1]+ " movies!";
+                    var resault = "<div class='redBorder'>"+finalWinners[0][0] +" wins! He/she guessed right in "+ winners[0][1]+ " categories and watched "+ finalWinners[0][1]+ " movies!</div>";
                     return resault;
                 }
                 else
                 {
-                    string resault = "The winners are: <br/>";
+                    string resault = "<div class='redBorder'>The winners are: <br/>";
                     foreach (var winner in finalWinners)
                     {
                         resault += winner[0] + "<br/>";
                     }
-                    resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in "+ winners[0][1]+ " categories!";
+                    resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in "+ winners[0][1]+ " categories!</div>";
                     return resault;
                 }
 

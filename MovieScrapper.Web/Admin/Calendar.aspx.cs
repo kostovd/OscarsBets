@@ -16,7 +16,9 @@ namespace MovieScrapper.Admin
             {
                 var service = new CategoryService();
                 StartGameCalendar.SelectedDate = service.GetGameStartDate();
+                StartGameCalendar.VisibleDate = service.GetGameStartDate();
                 StopGameCalendar.SelectedDate = service.GetGameStopDate();
+                StopGameCalendar.VisibleDate = service.GetGameStopDate();
             }
         }
 

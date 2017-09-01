@@ -21,7 +21,7 @@ namespace MovieScrapper.Business
             var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
             int allTitlesCount = collectionWithAllDistinctTitles.Count();
             //var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
-            var stringArrEmails = watchedMovies.Select(m => m.Email).ToArray();
+            var stringArrEmails = watchedMovies.Select(m => m.Email).Where(e => e != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
             int emailsCount = collectionWithDistinctEmails.Count();
 
@@ -39,10 +39,13 @@ namespace MovieScrapper.Business
                     string currentTitle;
                     foreach (var item in watchedMovies)
                     {
-                        if (item.Email.ToString() == email )
+                        if (item.Email != null)
                         {
-                            currentTitle= item.Title.ToString();
-                            userTitles.Add(currentTitle);
+                            if (item.Email.ToString() == email)
+                            {
+                                currentTitle = item.Title.ToString();
+                                userTitles.Add(currentTitle);
+                            }
                         }
                     }
                    

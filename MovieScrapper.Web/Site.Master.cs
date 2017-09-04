@@ -70,6 +70,8 @@ namespace MovieScrapper
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var service = new CategoryService();
+
             if (HttpContext.Current.User.IsInRole("admin"))
             {
                 Admin.Visible = true;                
@@ -78,21 +80,38 @@ namespace MovieScrapper
             {
                 Admin.Visible = false;
             }
-            stopGameLabel.Text = ShowIfGameIsStopped();
+
+            if (service.IsGameNotStartedYet())
+            {
+                Statistics.Visible = false;
+                
+            }
+            else
+            {
+                Statistics.Visible = true;
+            }
+
+            stopGameLabel.Text = ShowGameStatus();
         }
 
-        public string ShowIfGameIsStopped()
+        public string ShowGameStatus()
         {
             var service = new CategoryService();
             if (service.IsGameStopped() == true)
             {
                 return "The Game is stopped!";
             }
+            else if(service.IsGameNotStartedYet()==true)
+            {
+                return "The Game is not started yet";
+            }
+
             else
             {
                 return "The Game is running!";
             }
         }
+    
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {

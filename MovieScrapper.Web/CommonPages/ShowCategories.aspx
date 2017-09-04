@@ -2,8 +2,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
-    <asp:Label ID="GreatingLabel" runat="server" CssClass="warning"></asp:Label>
-    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
+    <asp:Label ID="GreatingLabel" runat="server" CssClass="warning" ></asp:Label>
+    <asp:Label ID="WarningLabel" runat="server" CssClass="warning" ></asp:Label>
     <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>  
     <div>
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="ObjectDataSource1"
@@ -34,6 +34,7 @@
                                         CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
                                         title="Bet that the movie will be the winer in this category"
                                         enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
+                                        visible="<%#!IsGameNotStartedYet()%>"
                                         />
                                 </div>
                             </div>

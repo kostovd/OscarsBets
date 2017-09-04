@@ -53,6 +53,7 @@
    
     display:inline-block;
     margin:20px;
+
 }
  .changeDate:empty {
       background-color: ghostwhite;
@@ -66,9 +67,17 @@
     color: rgb(196, 0, 0);
     font-weight: bold;
     font-size: 18px;
-    background-color: rgb(237,192,116)
+    background-color: rgb(237,192,116);
 }
 
 .hidden{
     visibility:hidden;
 }
+.errorMessage {
+    color: rgb(196, 0, 0);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+

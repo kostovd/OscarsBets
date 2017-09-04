@@ -14,6 +14,6 @@
      </div>
     <hr />
    <asp:Button ID="Button1" cssClass="saveButton" runat="server" OnClick="ChangeDateButton_Click" Text="Save"  />
-   <asp:CustomValidator id="CustomValidator1" runat="server" Display="Dynamic" ErrorMessage="Please select a date"  OnServerValidate="StopGameValidator_ServerValidate"></asp:CustomValidator>
+   <asp:CustomValidator id="CustomValidator1" runat="server" Display="Dynamic" ErrorMessage="<span class='errorMessage'>Please select a date. The start date must be before the end date.</span>"  OnServerValidate="StopGameValidator_ServerValidate"></asp:CustomValidator>
         
 </asp:Content>

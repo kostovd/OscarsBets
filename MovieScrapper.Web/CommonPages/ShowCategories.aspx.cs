@@ -13,6 +13,8 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var service = new CategoryService();
+
             if (!User.Identity.IsAuthenticated)
             {
                 GreatingLabel.Text = "You must be logged in to bet!";
@@ -21,12 +23,32 @@ namespace MovieScrapper.CommonPages
             {
                 GreatingLabel.CssClass = "hidden";
             }
+
+            if (service.IsGameNotStartedYet())
+            {
+                WarningLabel.CssClass = WarningLabel.CssClass.Replace("warning", "");
+                GreatingLabel.CssClass = "hidden";
+                WarningLabel.CssClass = "hidden";
+            }
         }
 
         public bool IsGameRunning()
         {
             var service = new CategoryService();
             if (service.IsGameStopped() == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsGameNotStartedYet()
+        {
+            var service = new CategoryService();
+            if (service.IsGameNotStartedYet()==true)
             {
                 return true;
             }

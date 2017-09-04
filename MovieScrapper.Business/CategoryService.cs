@@ -151,6 +151,16 @@ namespace MovieScrapper.Business
            
         }
 
+        public bool IsGameNotStartedYet()
+        {
+            var repo = new CategoryRepository();
+
+            GameProperties dateObject = repo.GetStopDate();
+            DateTime startDate = (dateObject != null ? dateObject.StartGameDate : DateTime.Now);
+            return (startDate > DateTime.Now);
+
+        }
+
         public Bet GetUserBetEntity(string userId)
         {
             var repo = new CategoryRepository();

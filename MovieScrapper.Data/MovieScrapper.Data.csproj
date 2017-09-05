@@ -56,7 +56,12 @@
     <Compile Include="BetRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="GamePropertyRepository.cs" />
+    <Compile Include="Interfaces\IBetRepository.cs" />
+    <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\IGamePropertyRepository.cs" />
     <Compile Include="Interfaces\IMovieRepository.cs" />
+    <Compile Include="Interfaces\IViewModelsRepository.cs" />
+    <Compile Include="Interfaces\IWatchedMovieRepository.cs" />
     <Compile Include="MovieContext.cs" />
     <Compile Include="MovieRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

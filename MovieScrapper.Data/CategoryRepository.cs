@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Data
 {
-    public class CategoryRepository
+    public class CategoryRepository: ICategoryRepository
     {
         public void AddCategory(Category category)
         {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data.Entity;
 using MovieScrapper.Entities;
 using MovieScrapper.Data.Interfaces;
+using MovieScrapper.Entities.Interfaces;
 
 namespace MovieScrapper.Data
 {

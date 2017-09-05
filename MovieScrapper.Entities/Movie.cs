@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MovieScrapper.Entities.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ namespace MovieScrapper.Entities
 {
     [JsonObject]
     [Serializable]
-    public class Movie
+    public class Movie:IMovie
     {
         public Movie()
         {

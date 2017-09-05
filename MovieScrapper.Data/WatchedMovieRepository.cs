@@ -1,13 +1,12 @@
 ﻿using MovieScrapper.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Data.Entity;
+using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Data
 {
-    public class WatchedMovieRepository
+    public class WatchedMovieRepository: IWatchedMovieRepository
     {
         public Watched AddWatchedEntity(Watched watchedEntity)
         {
@@ -26,7 +25,6 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var watched = ctx.Watched.Include(w => w.Movies);
-
                 return watched;
             }
         }
@@ -48,10 +46,8 @@ namespace MovieScrapper.Data
             {
                 var foundedEntity = ctx.Watched.Where(x => x.UserId == userId).SingleOrDefault();
                 return foundedEntity;
-
             }
         }
-
        
     }
 }

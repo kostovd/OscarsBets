@@ -1,10 +1,11 @@
-﻿using MovieScrapper.Entities.StatisticsModels;
+﻿using MovieScrapper.Data.Interfaces;
+using MovieScrapper.Entities.StatisticsModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MovieScrapper.Data
 {
-    public class ViewModelsRepository
+    public class ViewModelsRepository: IViewModelsRepository
     {
 
         public List<WatchedMovies> GetWatchedMoviesData()

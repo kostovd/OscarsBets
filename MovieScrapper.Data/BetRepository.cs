@@ -1,13 +1,11 @@
-﻿using MovieScrapper.Entities;
-using System;
+﻿using MovieScrapper.Data.Interfaces;
+using MovieScrapper.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieScrapper.Data
 {
-    public class BetRepository
+    public class BetRepository: IBetRepository
     {
         public IEnumerable<Bet> GetAllUserBets(string userId)
         {

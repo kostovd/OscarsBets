@@ -1,13 +1,12 @@
-﻿using MovieScrapper.Entities;
+﻿using MovieScrapper.Data.Interfaces;
+using MovieScrapper.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MovieScrapper.Data
 {
-    public class GamePropertyRepository
+    public class GamePropertyRepository: IGamePropertyRepository
     {
         public void ChangeGameStartDate(DateTime startDate)
         {

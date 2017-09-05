@@ -1,12 +1,11 @@
-﻿using System;
+﻿using MovieScrapper.Entities.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MovieScrapper.Entities
 {
     [Serializable]
-    public class Category
+    public class Category:ICategory
     {
         public Category()
         {

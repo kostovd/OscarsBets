@@ -45,6 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bets.cs" />
+    <Compile Include="Interfaces\IBet.cs" />
+    <Compile Include="Interfaces\ICollection.cs" />
+    <Compile Include="Interfaces\IGameProperties.cs" />
+    <Compile Include="Interfaces\IMovie.cs" />
+    <Compile Include="Interfaces\IWatched.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="MoviesCollection.cs" />

@@ -70,7 +70,7 @@ namespace MovieScrapper
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
 
             if (HttpContext.Current.User.IsInRole("admin"))
             {
@@ -96,7 +96,7 @@ namespace MovieScrapper
 
         public string ShowGameStatus()
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
             if (service.IsGameStopped() == true)
             {
                 return "The Game is stopped!";

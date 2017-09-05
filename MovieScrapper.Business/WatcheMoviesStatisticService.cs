@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,30 +7,22 @@ using System.Linq;
 
 namespace MovieScrapper.Business
 {
-    public class WatcheMoviesStatisticService
-    {
-
-       
+    public class WatcheMoviesStatisticService: IWatcheMoviesStatisticService
+    {     
 
         public Dictionary<string, List<string>> GetData()
         {
             var data = new ViewModelsRepository();
             var watchedMovies = data.GetWatchedMoviesData();
-
-            //var stringArrTitles= recievedTable.AsEnumerable().Select(r => r.Field<string>("Title")).ToArray();
             var stringArrTitles = watchedMovies.Select(m => m.Title).ToArray();
             var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
             int allTitlesCount = collectionWithAllDistinctTitles.Count();
-            //var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
             var stringArrEmails = watchedMovies.Select(m => m.Email).Where(e => e != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
-            int emailsCount = collectionWithDistinctEmails.Count();
-
-            
+            int emailsCount = collectionWithDistinctEmails.Count();         
 
             Dictionary<string, List<string>> myDict = new Dictionary<string, List<string>>();
           
-            //for (int i = 0; i < emailsCount; i++)
             foreach(var email in collectionWithDistinctEmails)
             {               
                 List<string> userTitles= new List<string>();
@@ -57,8 +50,6 @@ namespace MovieScrapper.Business
             return myDict;
         }
 
-
-
         public string [] GetTitles()
         {
             var data = new ViewModelsRepository();
@@ -74,7 +65,6 @@ namespace MovieScrapper.Business
         {
             var data = new ViewModelsRepository();
             var watchedMovies = data.GetWatchedMoviesData();
-            // var stringArrEmails = recievedTable.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
             var stringArrEmails = watchedMovies.Select(m=>m.Email).Where(e=>e!=null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 

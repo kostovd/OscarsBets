@@ -64,7 +64,7 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" 
             runat="server" 
             SelectMethod="GetAllMoviesInCategory" 
-            TypeName="MovieScrapper.Business.CategoryService">
+            TypeName="MovieScrapper.Business.MovieService">
             <SelectParameters>
                 <asp:QueryStringParameter QueryStringField="categoryId" Name="categoryId"/>
             </SelectParameters>

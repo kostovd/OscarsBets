@@ -13,7 +13,7 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
 
             if (!User.Identity.IsAuthenticated)
             {
@@ -34,7 +34,7 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameRunning()
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
             if (service.IsGameStopped() == false)
             {
                 return true;
@@ -47,7 +47,7 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameNotStartedYet()
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
             if (service.IsGameNotStartedYet()==true)
             {
                 return true;
@@ -100,7 +100,7 @@ namespace MovieScrapper.CommonPages
                 string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
                 var movieId = int.Parse(sortByAndArrangeByArray[0]);
                 var categoryId = int.Parse(sortByAndArrangeByArray[1]);
-                var service = new CategoryService();
+                var service = new BetService();
                 var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
 

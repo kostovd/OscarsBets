@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
@@ -65,7 +63,7 @@ namespace MovieScrapper.CommonPages
                             }
                             var theWinner = service.GetWinner();
                             Label1.Text = theWinner;
-                            //Label1.CssClass = "redBorder";
+                          
                         }
                         else
                         {
@@ -205,11 +203,13 @@ namespace MovieScrapper.CommonPages
 
         private bool GameIsRunning()
         {
-            var service = new CategoryService();
+            var service = new GamePropertyService();
+
             if (service.IsGameStopped() == false)
             {
                 return true;
             }
+
             else
             {
                 return false;

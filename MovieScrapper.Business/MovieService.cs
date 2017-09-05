@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Data;
 using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business
 {
-    public class MovieService
+    public class MovieService: IMovieService
     {
         public void AddMovie(Movie movie)
         {

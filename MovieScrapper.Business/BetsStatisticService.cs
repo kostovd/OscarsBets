@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Data;
+﻿using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Data;
 using MovieScrapper.Entities.StatisticsModels;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,12 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business
 {
-    public class BetsStatisticService
+    public class BetsStatisticService: IBetStatisticService
     {
         public Dictionary<string, List<string[]>> GetData()
         {
             var data = new ViewModelsRepository();
-            List<BetsStatistic> bets = data.GetBetsData();
-            // var stringArrEmails = dt.AsEnumerable().Select(r => r.Field<string>("Email")).Where(x => x != null).ToArray();
+            List<BetsStatistic> bets = data.GetBetsData();           
             var stringArrEmails = bets.Select(b=>b.Email).Where(e => e != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 
@@ -186,14 +186,11 @@ namespace MovieScrapper.Business
         private List<string[]> GetWinningCategoryMovies()
         {
             var data = new ViewModelsRepository();
-            List<Winners> winners = data.GetWinner();
-            //var winningCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).Where(x => x != null).ToArray();
+            List<Winners> winners = data.GetWinner();            
             var winningCategories = winners.Select(w => w.Category).Where(x => x != null).ToArray();
-
-            List <string[]> winningMovies = new List<string[]>();
-           
-                string currentCategory;
-                string currentWinner;
+            List <string[]> winningMovies = new List<string[]>();     
+            string currentCategory;
+            string currentWinner;
                
                 for (int i = 0; i < winners.Count; i++)
                 {
@@ -205,8 +202,7 @@ namespace MovieScrapper.Business
                     categoryMovie[1] = currentWinner;
 
                     winningMovies.Add(categoryMovie);
-                }
-            
+                }         
 
             return winningMovies;
         }
@@ -215,8 +211,6 @@ namespace MovieScrapper.Business
         {
             var data = new ViewModelsRepository();
             var dt = data.GetBetsData();
-
-            //var stringArrCategories = dt.AsEnumerable().Select(r => r.Field<string>("Category")).ToArray();
             var stringArrCategories = dt.Select(x => x.Category).ToArray();
             var collectionWithDistinctCategories = stringArrCategories.Distinct().ToArray();
             return collectionWithDistinctCategories;

@@ -1,15 +1,15 @@
-﻿using MovieScrapper.Entities;
+﻿using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace MovieScrapper
 {
-    public class MovieClient
+    public class MovieClient: IMovieClient
     {
         private const string baseUrl = "https://api.themoviedb.org";
         private const string DefaltApiVersion = "3";

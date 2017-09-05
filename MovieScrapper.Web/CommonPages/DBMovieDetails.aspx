@@ -29,7 +29,7 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" 
             runat="server" 
             SelectMethod="GetMovie" 
-            TypeName="MovieScrapper.Business.CategoryService">
+            TypeName="MovieScrapper.Business.MovieService">
             <SelectParameters>
                 <asp:QueryStringParameter QueryStringField="id" Name="id"/>
             </SelectParameters>

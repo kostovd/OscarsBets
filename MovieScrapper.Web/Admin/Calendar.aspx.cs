@@ -14,7 +14,7 @@ namespace MovieScrapper.Admin
         {
             if (!Page.IsPostBack)
             {
-                var service = new CategoryService();
+                var service = new GamePropertyService();
                 StartGameCalendar.SelectedDate = service.GetGameStartDate();
                 StartGameCalendar.VisibleDate = service.GetGameStartDate();
                 StopGameCalendar.SelectedDate = service.GetGameStopDate();
@@ -37,7 +37,7 @@ namespace MovieScrapper.Admin
         {
             if (Page.IsValid)
             {
-                var service = new CategoryService();
+                var service = new GamePropertyService();
                 var startDate = StartGameCalendar.SelectedDate;
                 service.ChangeGameStartDate(startDate);
                 var stopDate = StopGameCalendar.SelectedDate;

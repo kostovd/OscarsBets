@@ -52,7 +52,7 @@
     <Compile Include="StatisticsModels\BetsStatistic.cs" />
     <Compile Include="StatisticsModels\WatchedMovies.cs" />
     <Compile Include="StatisticsModels\Winners.cs" />
-    <Compile Include="StopDate.cs" />
+    <Compile Include="GameProperties.cs" />
     <Compile Include="Watched.cs" />
   </ItemGroup>
   <ItemGroup>

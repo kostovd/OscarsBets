@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
@@ -16,12 +17,7 @@ namespace MovieScrapper.Business
             var repo = new CategoryRepository();
             repo.AddCategory(category);
         }
-
-        public void AddMovie(Movie movie)
-        {
-            var repo = new CategoryRepository();
-            repo.AddMovie(movie);
-        }
+      
 
         public void AddMovieInCategory(int categoryId, int movieId)
         {
@@ -31,7 +27,7 @@ namespace MovieScrapper.Business
 
         public Watched AddWatchedEntity(Watched watchedEntity)
         {
-            var repo = new CategoryRepository();
+            var repo = new WatchedMovieRepository();
             return repo.AddWatchedEntity(watchedEntity);
         }
 
@@ -43,20 +39,15 @@ namespace MovieScrapper.Business
         }
         public void ChangeGameStartDate(DateTime stopDate)
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
             repo.ChangeGameStartDate(stopDate);
         }
         public void ChangeGameStopDate(DateTime stopDate)
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
             repo.ChangeGameStopDate(stopDate);
         }
-
-        public void ChangeMovieStatus(string userId, int movieId)
-        {
-            var repo = new CategoryRepository();
-            repo.ChangeMovieStatus(userId, movieId);
-        }
+      
 
         public void DeleteCategory(int id)
         {
@@ -80,34 +71,24 @@ namespace MovieScrapper.Business
             return repo.GetAll();
         }
 
-        public IEnumerable<Movie> GetAllMovies()
-        {
-            var repo = new CategoryRepository();
-            return repo.GetAllMovies();
-        }
-
-        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
-        {
-            var repo = new CategoryRepository();
-            return repo.GetAllMoviesInCategory(categoryId);
-        }
+                
 
         public IEnumerable<Bet> GetAllUserBets(string userId)
         {
-            var repo = new CategoryRepository();
+            var repo = new BetRepository();
             return repo.GetAllUserBets(userId);
         }
 
         public IEnumerable<Watched> GetAllUsersWatchedAMovie()
         {
-            var repo = new CategoryRepository();
+            var repo = new WatchedMovieRepository();
             return repo.GetAllUsersWatchedAMovie();
         }
 
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
 
         {
-            var repo = new CategoryRepository();
+            var repo = new WatchedMovieRepository();
             return repo.GetAllWatchedMovies(userId);
         }
         
@@ -119,21 +100,16 @@ namespace MovieScrapper.Business
 
         public DateTime GetGameStartDate()
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
             return repo.GetGameStartDate();
         }
 
         public DateTime GetGameStopDate()
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
             return repo.GetGameStopDate();
         }
-
-        public Movie GetMovie(int id)
-        {
-            var repo = new CategoryRepository();
-            return repo.GetMovie(id);
-        }
+       
 
         public Movie GetMovieInCategory(int categoryId, int movieId)
         {
@@ -143,9 +119,9 @@ namespace MovieScrapper.Business
 
         public bool IsGameStopped()
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
 
-            GameProperties stopDateObject = repo.GetStopDate();
+            GameProperties stopDateObject = repo.GetDate();
             DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.Now);
             return (stopDate < DateTime.Now);        
            
@@ -153,9 +129,9 @@ namespace MovieScrapper.Business
 
         public bool IsGameNotStartedYet()
         {
-            var repo = new CategoryRepository();
+            var repo = new GamePropertyRepository();
 
-            GameProperties dateObject = repo.GetStopDate();
+            GameProperties dateObject = repo.GetDate();
             DateTime startDate = (dateObject != null ? dateObject.StartGameDate : DateTime.Now);
             return (startDate > DateTime.Now);
 
@@ -163,13 +139,13 @@ namespace MovieScrapper.Business
 
         public Bet GetUserBetEntity(string userId)
         {
-            var repo = new CategoryRepository();
+            var repo = new BetRepository();
             return repo.GetUserBetEntity(userId);
         }
 
         public Watched GetUserWatchedEntity(string userId)
         {
-            var repo = new CategoryRepository();
+            var repo = new WatchedMovieRepository();
             return repo.GetUserWatchedEntity(userId);
         }
 
@@ -177,7 +153,7 @@ namespace MovieScrapper.Business
 
         public Bet MakeBetEntity(string userId, int movieId, int categoryId)
         {
-            var repo = new CategoryRepository();
+            var repo = new BetRepository();
             return repo.MakeBetEntity(userId, movieId, categoryId);
         }
 

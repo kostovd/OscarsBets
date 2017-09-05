@@ -73,19 +73,20 @@ namespace MovieScrapper
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(Request.QueryString["id"]);
-                var service = new CategoryService();
-                var databaseMovie = service.GetMovie(movieId);
-                var databaseMovieInCategory = service.GetMovieInCategory(categoryId, movieId);
+                var movieService = new MovieService();
+                var categoryService = new CategoryService();
+                var databaseMovie = movieService.GetMovie(movieId);
+                var databaseMovieInCategory = categoryService.GetMovieInCategory(categoryId, movieId);
 
                 if (databaseMovie == null)
                 {
-                    service.AddMovie(movie);
+                    movieService.AddMovie(movie);
                     //Label1.Text = "The movie " + movie.Title + " was added in the DB";
                 }
 
                 if (databaseMovieInCategory == null)
                 {
-                    service.AddMovieInCategory(categoryId, movieId);
+                    categoryService.AddMovieInCategory(categoryId, movieId);
                     //Label2.Text = "The movie " + movie.Title + " was added in category " + categoryTitle;
                 }
 

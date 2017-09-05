@@ -110,15 +110,15 @@ namespace MovieScrapper.CommonPages
                 int movieId = int.Parse((e.CommandArgument).ToString());
                 
 
-                var service = new CategoryService();              
-                
+                var service = new CategoryService();
+                var movieService = new MovieService();
                 if (service.GetUserWatchedEntity(userId)==null)
                 {
                     var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
                     watchedEntity = service.AddWatchedEntity(watchedEntity);                   
                 }
                 
-                service.ChangeMovieStatus(userId, movieId);
+                movieService.ChangeMovieStatus(userId, movieId);
                 Response.Redirect("/CommonPages/ShowAllDBMovies.aspx?userId=" + userId);
                 
             }

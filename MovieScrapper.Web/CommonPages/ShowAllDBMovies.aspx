@@ -41,6 +41,6 @@
                 runat="server" 
                 SelectMethod="GetAllMovies"
                 OnSelected="ObjectDataSource1_Selected"
-                TypeName="MovieScrapper.Business.CategoryService">
+                TypeName="MovieScrapper.Business.MovieService">
             </asp:ObjectDataSource>
     </asp:Content>

@@ -11,16 +11,11 @@ using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class ShowCategories : System.Web.UI.Page
+    public partial class ShowCategories : BasePage
     {
         // [Dependency]
         // public ICategoryRepository CategoryRepository { get; }
-
-        private ICategoryService GetCategoryService()
-        {
-            var container = (IUnityContainer)Application["EntLibContainer"];
-            return container.Resolve<ICategoryService>();
-        }
+     
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -296,7 +291,7 @@ namespace MovieScrapper.CommonPages
 
         protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
         {
-            e.ObjectInstance = GetCategoryService();
+            e.ObjectInstance = GetBuisnessService<ICategoryService>();
         }
     }
 }

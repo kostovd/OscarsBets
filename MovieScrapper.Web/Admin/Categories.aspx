@@ -23,7 +23,9 @@
             <br />
             <hr />            
             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll"
-                TypeName="MovieScrapper.Business.CategoryService"></asp:ObjectDataSource>
+                TypeName="MovieScrapper.Business.Interfaces.ICategoryService" 
+                OnObjectCreating="ObjectDataSource1_ObjectCreating">
+            </asp:ObjectDataSource>
 
         </div>
 </asp:Content>

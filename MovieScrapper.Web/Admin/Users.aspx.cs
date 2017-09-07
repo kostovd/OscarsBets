@@ -2,7 +2,7 @@
 
 namespace MovieScrapper.Admin
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class Users : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

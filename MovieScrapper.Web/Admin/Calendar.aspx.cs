@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace MovieScrapper.Admin
 {
-    public partial class Calendar : System.Web.UI.Page
+    public partial class Calendar : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ using System;
 
 namespace MovieScrapper.Admin
 {
-    public partial class EditCategory : System.Web.UI.Page
+    public partial class EditCategory : BasePage
     {
 
         private ICategoryService GetCategoryService()

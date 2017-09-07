@@ -11,7 +11,7 @@ using MovieScrapper.Entities;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class ShowAllDBMovies : System.Web.UI.Page
+    public partial class ShowAllDBMovies : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

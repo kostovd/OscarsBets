@@ -9,7 +9,7 @@ using System.Web.UI;
 
 namespace MovieScrapper
 {
-    public partial class MovieDetails : System.Web.UI.Page
+    public partial class MovieDetails : BasePage
     {
 
         private ICategoryService GetCategoryService()

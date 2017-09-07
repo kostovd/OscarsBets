@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace MovieScrapper.Admin
 {
-    public partial class EditMoviesInThisCategory : System.Web.UI.Page
+    public partial class EditMoviesInThisCategory : BasePage
     {
        // [Dependency]
        // public ICategoryRepository CategoryRepository { get; }

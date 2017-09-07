@@ -2,7 +2,7 @@
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class DBMovieDetails : System.Web.UI.Page
+    public partial class DBMovieDetails : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

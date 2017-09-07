@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class MoviesStatistic : System.Web.UI.Page
+    public partial class MoviesStatistic : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

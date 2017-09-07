@@ -10,10 +10,11 @@ namespace MovieScrapper.Business
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService()
-        {
-            _categoryRepository = new CategoryRepository();
-        }
+        //public CategoryService()
+        //{
+        //    _categoryRepository = new CategoryRepository();
+        //}
+
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;

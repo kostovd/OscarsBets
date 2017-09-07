@@ -53,7 +53,8 @@
             ID="ObjectDataSource1"
             runat="server"
             SelectMethod="GetAll"
-            TypeName="MovieScrapper.Business.CategoryService" 
+            TypeName="MovieScrapper.Business.Interfaces.ICategoryService" 
+            OnObjectCreating="ObjectDataSource1_ObjectCreating"
             OnSelected="ObjectDataSource1_Selected"></asp:ObjectDataSource>
     </div>
 </asp:Content>

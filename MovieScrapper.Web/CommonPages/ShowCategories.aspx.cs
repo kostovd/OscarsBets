@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Practices.Unity;
 using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,15 @@ namespace MovieScrapper.CommonPages
 {
     public partial class ShowCategories : System.Web.UI.Page
     {
+        // [Dependency]
+        // public ICategoryRepository CategoryRepository { get; }
+
+        private ICategoryService GetCategoryService()
+        {
+            var container = (IUnityContainer)Application["EntLibContainer"];
+            return container.Resolve<ICategoryService>();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var service = new GamePropertyService();
@@ -281,6 +292,11 @@ namespace MovieScrapper.CommonPages
             {
                 WinnerLabel.CssClass = "hidden";
             }
+        }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetCategoryService();
         }
     }
 }

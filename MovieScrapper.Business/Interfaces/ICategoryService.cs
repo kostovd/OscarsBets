@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface ICategoryService
+    public interface ICategoryService
     {
         void AddCategory(Category category);
 

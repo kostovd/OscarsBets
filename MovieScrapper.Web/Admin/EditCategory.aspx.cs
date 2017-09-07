@@ -1,4 +1,6 @@
-﻿using MovieScrapper.Business;
+﻿using Microsoft.Practices.Unity;
+using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 
@@ -7,6 +9,13 @@ namespace MovieScrapper.Admin
 {
     public partial class EditCategory : System.Web.UI.Page
     {
+
+        private ICategoryService GetCategoryService()
+        {
+            var container = (IUnityContainer)Application["EntLibContainer"];
+            return container.Resolve<ICategoryService>();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Request.QueryString["id"];
@@ -14,7 +23,7 @@ namespace MovieScrapper.Admin
             {               
                 if (id != null)
                 {
-                    var service = new CategoryService();
+                    var service = GetCategoryService();
                     var category = service.GetCategory(int.Parse(id));
                     EditCategoryTitleTextBox.Text = category.CategoryTtle;
                     EditCategoryDescriptionTextBox.Text = category.CategoryDescription;
@@ -32,13 +41,12 @@ namespace MovieScrapper.Admin
         }
 
         protected void SaveChangesButton_Click(object sender, EventArgs e)
-        {
-
+        {            
             string categoryTitle = EditCategoryTitleTextBox.Text;
             string categoryDescription = EditCategoryDescriptionTextBox.Text;
             var id = Request.QueryString["id"];
             Category category = new Category() { CategoryTtle = categoryTitle, CategoryDescription = categoryDescription };
-            var service = new CategoryService();
+            var service = GetCategoryService();
             if (id != null)
             {
                 try
@@ -69,9 +77,9 @@ namespace MovieScrapper.Admin
         }
 
         protected void DeleteCategoryButton_Click(object sender, EventArgs e)
-        {
+        {            
             int id = Int32.Parse(Request.QueryString["id"]);
-            var service = new CategoryService();
+            var service = GetCategoryService();
 
             try
             {

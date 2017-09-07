@@ -2,70 +2,70 @@
 using MovieScrapper.Data;
 using MovieScrapper.Entities;
 using System.Collections.Generic;
+using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
     public class CategoryService: ICategoryService
     {
-        
+        private readonly ICategoryRepository _categoryRepository;
+
+        public CategoryService()
+        {
+            _categoryRepository = new CategoryRepository();
+        }
+        public CategoryService(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
         public void AddCategory(Category category)
         {
-            var repo = new CategoryRepository();
-            repo.AddCategory(category);
+            _categoryRepository.AddCategory(category);
         }  
 
         public void AddMovieInCategory(int categoryId, int movieId)
         {
-            var repo = new CategoryRepository();
-            repo.AddMovieInCategory(categoryId, movieId);
+            _categoryRepository.AddMovieInCategory(categoryId, movieId);
         }
               
         public bool AreWinnersSet()
         {
-            var repo = new CategoryRepository();
-            return repo.AreWinnersSet();
+            return _categoryRepository.AreWinnersSet();
         }       
       
         public void DeleteCategory(int id)
         {
-            var repo = new CategoryRepository();
-            repo.DeleteCategory(id);
+            _categoryRepository.DeleteCategory(id);
         }    
 
         public void EditCategory(Category category)
         {
-            var repo = new CategoryRepository();
-            repo.EditCategory(category);
+            _categoryRepository.EditCategory(category);
         }    
 
         public IEnumerable<Category> GetAll()
         {
-            var repo = new CategoryRepository();
-            return repo.GetAll();
+            return _categoryRepository.GetAll();
         }                                    
         
         public Category GetCategory(int id)
         {
-            var repo = new CategoryRepository();
-            return repo.GetCategory(id);
+            return _categoryRepository.GetCategory(id);
         }
            
         public Movie GetMovieInCategory(int categoryId, int movieId)
         {
-            var repo = new CategoryRepository();
-            return repo.GetMovieInCategory(categoryId, movieId);
+            return _categoryRepository.GetMovieInCategory(categoryId, movieId);
         }              
                          
         public void MarkAsWinner(int categoryId, int movieId)
         {
-            var repo = new CategoryRepository();
-            repo.MarkAsWinner(categoryId, movieId);
+            _categoryRepository.MarkAsWinner(categoryId, movieId);
         }
 
         public void RemoveMovieFromCategory(int categoryId, int movieId)
         {
-            var repo = new CategoryRepository();
-            repo.RemoveMovieFromCategory(categoryId, movieId);
+            _categoryRepository.RemoveMovieFromCategory(categoryId, movieId);
         }                                
 
     }

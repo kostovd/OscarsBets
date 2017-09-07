@@ -1,4 +1,6 @@
-﻿using MovieScrapper.Business;
+﻿using Microsoft.Practices.Unity;
+using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +11,13 @@ namespace MovieScrapper
 {
     public partial class MovieDetails : System.Web.UI.Page
     {
+
+        private ICategoryService GetCategoryService()
+        {
+            var container = (IUnityContainer)Application["EntLibContainer"];
+            return container.Resolve<ICategoryService>();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {      
             
@@ -66,7 +75,7 @@ namespace MovieScrapper
         }
 
         protected void AddMovieToCategoryButton_Click(object sender, EventArgs e)
-        {
+        {           
             var movie = ViewState["Movie"] as Movie;
 
             if (movie != null)
@@ -74,20 +83,19 @@ namespace MovieScrapper
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(Request.QueryString["id"]);
                 var movieService = new MovieService();
-                var categoryService = new CategoryService();
+                var categoryService = GetCategoryService();
                 var databaseMovie = movieService.GetMovie(movieId);
                 var databaseMovieInCategory = categoryService.GetMovieInCategory(categoryId, movieId);
 
                 if (databaseMovie == null)
                 {
                     movieService.AddMovie(movie);
-                    //Label1.Text = "The movie " + movie.Title + " was added in the DB";
+                   
                 }
 
                 if (databaseMovieInCategory == null)
                 {
-                    categoryService.AddMovieInCategory(categoryId, movieId);
-                    //Label2.Text = "The movie " + movie.Title + " was added in category " + categoryTitle;
+                    categoryService.AddMovieInCategory(categoryId, movieId);                   
                 }
 
                     Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
@@ -95,9 +103,9 @@ namespace MovieScrapper
         }
 
         protected string ShowCategoryTitle()
-        {
+        {           
             var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = new CategoryService();
+            var service = GetCategoryService();
             var title = service.GetCategory(categoryId).CategoryTtle;
             return title;
         }

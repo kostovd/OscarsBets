@@ -1,5 +1,8 @@
-﻿using MovieScrapper.Business;
+﻿using Microsoft.Practices.Unity;
+using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using System;
+using System.Runtime.CompilerServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -7,12 +10,23 @@ namespace MovieScrapper.Admin
 {
     public partial class EditMoviesInThisCategory : System.Web.UI.Page
     {
+       // [Dependency]
+       // public ICategoryRepository CategoryRepository { get; }
+
+        private ICategoryService GetCategoryService()
+        {
+            var container = (IUnityContainer)Application["EntLibContainer"];
+            return container.Resolve<ICategoryService>();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //var repo = new CategoryRepository();
+
             if (!Page.IsPostBack)
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var service = new CategoryService();
+                var service = GetCategoryService();
                 var category = service.GetCategory(categoryId);
                 CategoryTitle.Text = category.CategoryTtle;      
             }
@@ -69,11 +83,12 @@ namespace MovieScrapper.Admin
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
         {
+            
             if (e.CommandName == "Delete")
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(e.CommandArgument.ToString());
-                var service = new CategoryService();
+                var service = GetCategoryService();
                 service.RemoveMovieFromCategory(categoryId, movieId);
                 Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
             }                     
@@ -89,7 +104,7 @@ namespace MovieScrapper.Admin
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(e.CommandArgument.ToString());
-                var service = new CategoryService();
+                var service = GetCategoryService();
                 service.MarkAsWinner(categoryId, movieId);
                 Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
             }
@@ -97,8 +112,9 @@ namespace MovieScrapper.Admin
 
         protected string CheckIfWinner( int currentMovieId)
         {
+            
             var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = new CategoryService();
+            var service = GetCategoryService();
             var category= service.GetCategory(categoryId);
             var winner = category.Winner;
 
@@ -122,8 +138,9 @@ namespace MovieScrapper.Admin
 
         protected string CheckIfWinnerImage(int currentMovieId)
         {
+            
             var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = new CategoryService();
+            var service = GetCategoryService();
             var category = service.GetCategory(categoryId);
             var winner = category.Winner;
 

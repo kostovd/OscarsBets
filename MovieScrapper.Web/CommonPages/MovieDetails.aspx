@@ -29,7 +29,7 @@
         </Fields>  
         </asp:DetailsView>
         <p>
-            <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category "  Width="527px" OnClick="AddMovieToCategoryButton_Click" />
+            <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category "  Width="500px" OnClick="AddMovieToCategoryButton_Click" />
         </p>
         
 </asp:Content>

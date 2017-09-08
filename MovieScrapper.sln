@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieScrapper.Data", "Movie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieScrapper.Entities", "MovieScrapper.Entities\MovieScrapper.Entities.csproj", "{BB500EB4-9987-494E-9C78-B2DD47F8D49B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{2B093F1F-DD46-4AAF-86E2-3EB569ED1A39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BB500EB4-9987-494E-9C78-B2DD47F8D49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB500EB4-9987-494E-9C78-B2DD47F8D49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB500EB4-9987-494E-9C78-B2DD47F8D49B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B093F1F-DD46-4AAF-86E2-3EB569ED1A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B093F1F-DD46-4AAF-86E2-3EB569ED1A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B093F1F-DD46-4AAF-86E2-3EB569ED1A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B093F1F-DD46-4AAF-86E2-3EB569ED1A39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

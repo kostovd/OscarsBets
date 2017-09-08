@@ -1,4 +1,5 @@
 ﻿using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,8 +25,8 @@ namespace MovieScrapper.CommonPages
                 //Sum
                 GridView1.Columns.Add(tfield);
 
-                var service = new WatcheMoviesStatisticService();
-                var titles = service.GetTitles();
+                var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
+                var titles = watcheMoviesStatisticService.GetTitles();
 
                 foreach (var title in titles)
                 {
@@ -42,8 +43,8 @@ namespace MovieScrapper.CommonPages
 
         private void BindGrid()
         {
-            var service = new WatcheMoviesStatisticService();
-            var users = service.GetData();
+            var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
+            var users = watcheMoviesStatisticService.GetData();
             DataTable dt = new DataTable();
             
             dt.Columns.AddRange(new DataColumn[2] { new DataColumn("User", typeof(string)), new DataColumn("Sum", typeof(string)),});
@@ -63,10 +64,10 @@ namespace MovieScrapper.CommonPages
             
             if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
             {
-                
-                var service = new WatcheMoviesStatisticService();
-                var dict = service.GetData();
-                var allTitles = service.GetTitles();
+
+                var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
+                var dict = watcheMoviesStatisticService.GetData();
+                var allTitles = watcheMoviesStatisticService.GetTitles();
                 var arrayOfAllKeys = dict.Keys.ToArray();               
                 var index = e.Row.RowIndex;
                 var userName = arrayOfAllKeys[index];

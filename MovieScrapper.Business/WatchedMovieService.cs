@@ -1,5 +1,6 @@
 ﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Data;
+using MovieScrapper.Data.Interfaces;
 using MovieScrapper.Entities;
 using System.Collections.Generic;
 
@@ -7,6 +8,15 @@ namespace MovieScrapper.Business
 {
     public class WatchedMovieService: IWatchedMovieService
     {
+
+        private readonly IWatchedMovieRepository _watchedMovieRepository;
+
+
+        public WatchedMovieService(IWatchedMovieRepository watchedMovieRepository)
+        {
+            _watchedMovieRepository = watchedMovieRepository;
+        }
+
         public Watched AddWatchedEntity(Watched watchedEntity)
         {
             var repo = new WatchedMovieRepository();

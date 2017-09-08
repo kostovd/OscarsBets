@@ -1,5 +1,6 @@
 ﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Data;
+using MovieScrapper.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,14 @@ using System.Linq;
 namespace MovieScrapper.Business
 {
     public class WatcheMoviesStatisticService: IWatcheMoviesStatisticService
-    {     
+    {
+        private readonly IWatchedMovieRepository _watchedMovieRepository;
+
+
+        public WatcheMoviesStatisticService(IWatchedMovieRepository watchedMovieRepository)
+        {
+            _watchedMovieRepository = watchedMovieRepository;
+        }
 
         public Dictionary<string, List<string>> GetData()
         {

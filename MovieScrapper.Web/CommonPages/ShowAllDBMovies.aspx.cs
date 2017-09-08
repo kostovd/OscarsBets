@@ -111,12 +111,12 @@ namespace MovieScrapper.CommonPages
                 int movieId = int.Parse((e.CommandArgument).ToString());
                 
 
-                var service = new WatchedMovieService();
+                var watchedMovieService = GetBuisnessService<IWatchedMovieService>();
                 var movieService = GetBuisnessService<IMovieService>(); 
-                if (service.GetUserWatchedEntity(userId)==null)
+                if (watchedMovieService.GetUserWatchedEntity(userId)==null)
                 {
                     var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
-                    watchedEntity = service.AddWatchedEntity(watchedEntity);                   
+                    watchedEntity = watchedMovieService.AddWatchedEntity(watchedEntity);                   
                 }
                 
                 movieService.ChangeMovieStatus(userId, movieId);

@@ -16,7 +16,6 @@ namespace MovieScrapper.Business
             _categoryRepository = categoryRepository;
         }
 
-
         public void AddCategory(Category category)
         {
             _categoryRepository.AddCategory(category);

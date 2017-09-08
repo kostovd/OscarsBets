@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MovieScrapper.Business.Interfaces;
 
 namespace MovieScrapper.CommonPages
 {
@@ -13,9 +14,9 @@ namespace MovieScrapper.CommonPages
         {
             if (!this.IsPostBack)
             {
-                var service = new BetsStatisticService();
-                var winners = service.GetWinners();
-                var categories = service.GetCategories();
+                var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+                var winners = betStatisticServices.GetWinners();
+                var categories = betStatisticServices.GetCategories();
                 bool winnerListIsEmpty = !winners.Any();
                 bool allWinnersAreSet;
                 if (winners.Count == categories.Count())
@@ -61,7 +62,7 @@ namespace MovieScrapper.CommonPages
                                     GridView1.Columns.Add(tfield);
                                 }
                             }
-                            var theWinner = service.GetWinner();
+                            var theWinner = betStatisticServices.GetWinner();
                             Label1.Text = theWinner;
                           
                         }
@@ -86,8 +87,8 @@ namespace MovieScrapper.CommonPages
 
         private void BindGrid()
         {
-            var service = new BetsStatisticService();
-            var users = service.GetData();
+            var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+            var users = betStatisticServices.GetData();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[1] { new DataColumn("Email", typeof(string)) });
 
@@ -108,14 +109,14 @@ namespace MovieScrapper.CommonPages
             if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
             {
 
-                var statisticsService = new BetsStatisticService();
-                var dict = statisticsService.GetData();
-                var allCategories = statisticsService.GetCategories();
+                var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+                var dict = betStatisticServices.GetData();
+                var allCategories = betStatisticServices.GetCategories();
                 var arrayOfAllKeys = dict.Keys.ToArray();
                 var index = e.Row.RowIndex;
                 var userName = arrayOfAllKeys[index];
                 var userCategoriesMovies = dict[userName];
-                var winners = statisticsService.GetWinners();
+                var winners = betStatisticServices.GetWinners();
                 bool winnerListIsEmpty = !winners.Any();
                 bool allWinnersAreSet;
                 if (winners.Count == allCategories.Count())
@@ -203,9 +204,9 @@ namespace MovieScrapper.CommonPages
 
         private bool GameIsRunning()
         {
-            var service = new GamePropertyService();
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
 
-            if (service.IsGameStopped() == false)
+            if (gamePropertyService.IsGameStopped() == false)
             {
                 return true;
             }

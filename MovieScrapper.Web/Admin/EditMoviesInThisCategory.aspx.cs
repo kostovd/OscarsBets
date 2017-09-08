@@ -166,5 +166,10 @@ namespace MovieScrapper.Admin
         {
             Response.Redirect("Categories.aspx" );
         }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetBuisnessService<IMovieService>();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Data;
+using MovieScrapper.Data.Interfaces;
 using MovieScrapper.Entities.StatisticsModels;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,13 @@ namespace MovieScrapper.Business
 {
     public class BetsStatisticService: IBetStatisticService
     {
+        private readonly IViewModelsRepository _viewModelsRepository;
+
+        public BetsStatisticService(ViewModelsRepository viewModelsRepository)
+        {
+            _viewModelsRepository = viewModelsRepository;
+        }
+
         public Dictionary<string, List<string[]>> GetData()
         {
             var data = new ViewModelsRepository();

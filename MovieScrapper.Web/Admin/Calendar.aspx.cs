@@ -1,4 +1,5 @@
 ﻿using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace MovieScrapper.Admin
         {
             if (!Page.IsPostBack)
             {
-                var service = new GamePropertyService();
-                StartGameCalendar.SelectedDate = service.GetGameStartDate();
-                StartGameCalendar.VisibleDate = service.GetGameStartDate();
-                StopGameCalendar.SelectedDate = service.GetGameStopDate();
-                StopGameCalendar.VisibleDate = service.GetGameStopDate();
+                var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+                StartGameCalendar.SelectedDate = gamePropertyService.GetGameStartDate();
+                StartGameCalendar.VisibleDate = gamePropertyService.GetGameStartDate();
+                StopGameCalendar.SelectedDate = gamePropertyService.GetGameStopDate();
+                StopGameCalendar.VisibleDate = gamePropertyService.GetGameStopDate();
             }
         }
 
@@ -37,11 +38,11 @@ namespace MovieScrapper.Admin
         {
             if (Page.IsValid)
             {
-                var service = new GamePropertyService();
+                var gamePropertyService = GetBuisnessService<IGamePropertyService>();
                 var startDate = StartGameCalendar.SelectedDate;
-                service.ChangeGameStartDate(startDate);
+                gamePropertyService.ChangeGameStartDate(startDate);
                 var stopDate = StopGameCalendar.SelectedDate;
-                service.ChangeGameStopDate(stopDate);
+                gamePropertyService.ChangeGameStopDate(stopDate);
                 Response.Redirect("Categories.aspx");
             }
         }

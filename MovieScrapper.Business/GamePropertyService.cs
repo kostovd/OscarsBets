@@ -1,5 +1,6 @@
 ﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Data;
+using MovieScrapper.Data.Interfaces;
 using MovieScrapper.Entities;
 using System;
 
@@ -7,44 +8,44 @@ namespace MovieScrapper.Business
 {
     public class GamePropertyService: IGamePropertyService
     {
+        private readonly IGamePropertyRepository _gamePropertyRepository;
+
+
+        public GamePropertyService(IGamePropertyRepository gamePropertyRepository)
+        {
+            _gamePropertyRepository = gamePropertyRepository;
+        }
+
         public void ChangeGameStartDate(DateTime stopDate)
         {
-            var repo = new GamePropertyRepository();
-            repo.ChangeGameStartDate(stopDate);
+            _gamePropertyRepository.ChangeGameStartDate(stopDate);
         }
 
         public void ChangeGameStopDate(DateTime stopDate)
         {
-            var repo = new GamePropertyRepository();
-            repo.ChangeGameStopDate(stopDate);
+            _gamePropertyRepository.ChangeGameStopDate(stopDate);
         }
 
         public DateTime GetGameStartDate()
         {
-            var repo = new GamePropertyRepository();
-            return repo.GetGameStartDate();
+            return _gamePropertyRepository.GetGameStartDate();
         }
 
         public DateTime GetGameStopDate()
-        {
-            var repo = new GamePropertyRepository();
-            return repo.GetGameStopDate();
+        {           
+            return _gamePropertyRepository.GetGameStopDate();
         }
 
         public bool IsGameNotStartedYet()
         {
-            var repo = new GamePropertyRepository();
-
-            GameProperties dateObject = repo.GetDate();
+            GameProperties dateObject = _gamePropertyRepository.GetDate();
             DateTime startDate = (dateObject != null ? dateObject.StartGameDate : DateTime.Now);
             return (startDate > DateTime.Now);
         }
 
         public bool IsGameStopped()
         {
-            var repo = new GamePropertyRepository();
-
-            GameProperties stopDateObject = repo.GetDate();
+            GameProperties stopDateObject = _gamePropertyRepository.GetDate();
             DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.Now);
             return (stopDate < DateTime.Now);
 

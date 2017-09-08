@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
+using Microsoft.Practices.Unity;
 
 namespace MovieScrapper
 {
@@ -70,7 +72,7 @@ namespace MovieScrapper
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var service = new GamePropertyService();
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
 
             if (HttpContext.Current.User.IsInRole("admin"))
             {
@@ -81,7 +83,7 @@ namespace MovieScrapper
                 Admin.Visible = false;
             }
 
-            if (service.IsGameNotStartedYet())
+            if (gamePropertyService.IsGameNotStartedYet())
             {
                 Statistics.Visible = false;
                 
@@ -96,12 +98,12 @@ namespace MovieScrapper
 
         public string ShowGameStatus()
         {
-            var service = new GamePropertyService();
-            if (service.IsGameStopped() == true)
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (gamePropertyService.IsGameStopped() == true)
             {
                 return "The Game is stopped!";
             }
-            else if(service.IsGameNotStartedYet()==true)
+            else if(gamePropertyService.IsGameNotStartedYet()==true)
             {
                 return "The Game is not started yet";
             }
@@ -116,6 +118,12 @@ namespace MovieScrapper
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        protected T GetBuisnessService<T>()
+        {
+            IUnityContainer container = (IUnityContainer)Application["EntLibContainer"];
+            return container.Resolve<T>();
         }
     }
 

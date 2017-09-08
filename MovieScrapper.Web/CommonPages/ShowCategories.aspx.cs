@@ -13,13 +13,10 @@ namespace MovieScrapper.CommonPages
 {
     public partial class ShowCategories : BasePage
     {
-        // [Dependency]
-        // public ICategoryRepository CategoryRepository { get; }
      
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            var service = new GamePropertyService();
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
 
             if (!User.Identity.IsAuthenticated)
             {
@@ -30,7 +27,7 @@ namespace MovieScrapper.CommonPages
                 GreatingLabel.CssClass = "hidden";
             }
 
-            if (service.IsGameNotStartedYet())
+            if (gamePropertyService.IsGameNotStartedYet())
             {
                 WarningLabel.CssClass = WarningLabel.CssClass.Replace("warning", "");
                 GreatingLabel.CssClass = "hidden";
@@ -40,8 +37,8 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameRunning()
         {
-            var service = new GamePropertyService();
-            if (service.IsGameStopped() == false)
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (gamePropertyService.IsGameStopped() == false)
             {
                 return true;
             }
@@ -53,8 +50,8 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameNotStartedYet()
         {
-            var service = new GamePropertyService();
-            if (service.IsGameNotStartedYet()==true)
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (gamePropertyService.IsGameNotStartedYet()==true)
             {
                 return true;
             }
@@ -106,8 +103,8 @@ namespace MovieScrapper.CommonPages
                 string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
                 var movieId = int.Parse(sortByAndArrangeByArray[0]);
                 var categoryId = int.Parse(sortByAndArrangeByArray[1]);
-                var service = new BetService();
-                var betEntity = service.MakeBetEntity(userId, movieId, categoryId);
+                var betService = GetBuisnessService<IBetService>();
+                var betEntity = betService.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
 
             }

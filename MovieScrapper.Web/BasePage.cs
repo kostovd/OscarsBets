@@ -15,10 +15,5 @@ namespace MovieScrapper
             return container.Resolve<T>();
         }
 
-    //private ICategoryService GetCategoryService()
-    //{
-    //    var container = (IUnityContainer)Application["EntLibContainer"];
-    //    return container.Resolve<ICategoryService>();
-    //}
-}
+    }
 }

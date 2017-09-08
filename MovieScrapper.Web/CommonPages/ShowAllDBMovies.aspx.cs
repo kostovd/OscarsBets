@@ -16,7 +16,7 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var service = new GamePropertyService();
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
             if (!User.Identity.IsAuthenticated)
             {
                GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
@@ -25,7 +25,7 @@ namespace MovieScrapper.CommonPages
             {
                 GreatingLabel.CssClass = "hidden";
             }
-            if (service.IsGameNotStartedYet())
+            if (gamePropertyService.IsGameNotStartedYet())
             {
                 GreatingLabel.CssClass = "hidden";
                 WarningLabel.CssClass = "hidden";
@@ -35,8 +35,8 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameRunning()
         {
-            var service = new GamePropertyService();
-            if (service.IsGameStopped() == false)
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (gamePropertyService.IsGameStopped() == false)
             {
                 return true;
             }
@@ -60,8 +60,8 @@ namespace MovieScrapper.CommonPages
 
         public bool IsGameNotStartedYet()
         {
-            var service = new GamePropertyService();
-            if (service.IsGameNotStartedYet() == true)
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (gamePropertyService.IsGameNotStartedYet() == true)
             {
                 return true;
             }

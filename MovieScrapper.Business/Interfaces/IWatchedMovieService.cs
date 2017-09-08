@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IWatchedMovieService
+    public interface IWatchedMovieService
     {
         Watched AddWatchedEntity(Watched watchedEntity);
 

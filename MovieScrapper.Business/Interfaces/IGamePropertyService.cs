@@ -2,7 +2,7 @@
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IGamePropertyService
+    public interface IGamePropertyService
     {
         void ChangeGameStartDate(DateTime stopDate);
 

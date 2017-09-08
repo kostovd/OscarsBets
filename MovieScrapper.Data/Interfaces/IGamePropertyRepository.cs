@@ -3,7 +3,7 @@ using System;
 
 namespace MovieScrapper.Data.Interfaces
 {
-    interface IGamePropertyRepository
+    public interface IGamePropertyRepository
     {
         void ChangeGameStartDate(DateTime startDate);
 

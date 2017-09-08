@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IMovieClient
+    public interface IMovieClient
     {         
         Task<Movie> GetMovieAsync(string movieID);
        

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Data
@@ -13,8 +8,14 @@ namespace MovieScrapper.Data
         public void RegisterTypes(IUnityContainer container)
         {
             // Register repositories 
+            container.RegisterType<IBetRepository, BetRepository>();
+            container.RegisterType<IGamePropertyRepository, GamePropertyRepository>();
             container.RegisterType<ICategoryRepository, CategoryRepository>();
-         
+            container.RegisterType<IMovieRepository, MovieRepository>();
+            container.RegisterType<ITMDBRepository, TMDBRepository>();
+            container.RegisterType<IViewModelsRepository, ViewModelsRepository>();
+            container.RegisterType<IWatchedMovieRepository, WatchedMovieRepository>();
+
         }
     }
 }

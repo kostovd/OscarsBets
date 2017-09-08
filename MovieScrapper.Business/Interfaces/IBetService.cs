@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IBetService
+    public interface IBetService
     {
         IEnumerable<Bet> GetAllUserBets(string userId);
 

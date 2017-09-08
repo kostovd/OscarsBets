@@ -2,12 +2,12 @@
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IWatcheMoviesStatisticService
+    public interface IWatcheMoviesStatisticService
     {
         Dictionary<string, List<string>> GetData();
 
         string[] GetTitles();
 
-        string[] GetUsers();       
+        string[] GetUsers();
     }
 }

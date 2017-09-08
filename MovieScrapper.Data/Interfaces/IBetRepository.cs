@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieScrapper.Data.Interfaces
 {
-    interface IBetRepository
+    public interface IBetRepository
     {
         IEnumerable<Bet> GetAllUserBets(string userId);
 

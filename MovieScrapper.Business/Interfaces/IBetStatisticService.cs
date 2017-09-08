@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IBetStatisticService
+    public interface IBetStatisticService
     {
 
         Dictionary<string, List<string[]>> GetData();       

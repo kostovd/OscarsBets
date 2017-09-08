@@ -82,7 +82,7 @@ namespace MovieScrapper
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(Request.QueryString["id"]);
-                var movieService = new MovieService();
+                var movieService = GetBuisnessService<IMovieService>();
                 var categoryService = GetCategoryService();
                 var databaseMovie = movieService.GetMovie(movieId);
                 var databaseMovieInCategory = categoryService.GetMovieInCategory(categoryId, movieId);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieScrapper.Data.Interfaces
 {
-    interface IViewModelsRepository
+    public interface IViewModelsRepository
     {
         List<WatchedMovies> GetWatchedMoviesData();
 

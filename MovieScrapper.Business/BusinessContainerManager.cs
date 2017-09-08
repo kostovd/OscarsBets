@@ -14,7 +14,13 @@ namespace MovieScrapper.Business
         public void RegisterTypes(IUnityContainer container)
         {
             // Register services 
+            container.RegisterType<IBetService, BetService>();
+            container.RegisterType<IBetStatisticService, BetsStatisticService>();
             container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<IGamePropertyService, GamePropertyService>();
+            container.RegisterType<IMovieService, MovieService>();
+            container.RegisterType<IWatchedMovieService, WatchedMovieService>();
+            container.RegisterType<IWatcheMoviesStatisticService, WatcheMoviesStatisticService>();
 
             // Register data types
             DataContainerManager containerManager = new DataContainerManager();

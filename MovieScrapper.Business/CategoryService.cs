@@ -9,16 +9,14 @@ namespace MovieScrapper.Business
     public class CategoryService: ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-
-        //public CategoryService()
-        //{
-        //    _categoryRepository = new CategoryRepository();
-        //}
+     
 
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
+
+
         public void AddCategory(Category category)
         {
             _categoryRepository.AddCategory(category);

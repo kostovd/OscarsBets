@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace MovieScrapper.Data.Interfaces
 {
-    interface IMovieRepository
+    public interface IMovieRepository
     {
+
+        void AddMovie(Movie movie);
+        
         void ChangeMovieStatus(string userId, int movieId);
 
         IEnumerable<Movie> GetAllMovies();

@@ -6,39 +6,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
     public class MovieService: IMovieService
     {
+        private readonly IMovieRepository _movieRepository;       
+
+        public MovieService(IMovieRepository movieRepository)
+        {
+            _movieRepository = movieRepository;
+        }
+
         public void AddMovie(Movie movie)
         {
-            var repo = new MovieRepository();
-            repo.AddMovie(movie);
+            _movieRepository.AddMovie(movie);
         }
 
         public void ChangeMovieStatus(string userId, int movieId)
         {
-            var repo = new MovieRepository();
-            repo.ChangeMovieStatus(userId, movieId);
+            _movieRepository.ChangeMovieStatus(userId, movieId);
         }
 
         public IEnumerable<Movie> GetAllMovies()
         {
-            var repo = new MovieRepository();
-            return repo.GetAllMovies();
+
+            return _movieRepository.GetAllMovies();
         }
 
         public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
         {
-            var repo = new MovieRepository();
-            return repo.GetAllMoviesInCategory(categoryId);
+
+            return _movieRepository.GetAllMoviesInCategory(categoryId);
         }
 
         public Movie GetMovie(int id)
         {
-            var repo = new MovieRepository();
-            return repo.GetMovie(id);
+            return _movieRepository.GetMovie(id);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using MovieScrapper.Business;
+using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 
 namespace MovieScrapper.CommonPages
@@ -111,7 +112,7 @@ namespace MovieScrapper.CommonPages
                 
 
                 var service = new WatchedMovieService();
-                var movieService = new MovieService();
+                var movieService = GetBuisnessService<IMovieService>(); 
                 if (service.GetUserWatchedEntity(userId)==null)
                 {
                     var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
@@ -176,6 +177,11 @@ namespace MovieScrapper.CommonPages
             {
                 WarningLabel.CssClass = "hidden";
             }
+        }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetBuisnessService<IMovieService>();
         }
     }
 }

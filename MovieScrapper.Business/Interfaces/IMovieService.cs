@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    interface IMovieService
+    public interface IMovieService
     {
         void AddMovie(Movie movie);
 

@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Entities;
+﻿using MovieScrapper.Data.Interfaces;
+using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web;
 
 namespace MovieScrapper.Data
 {
-    public class TMDBRepository
+    public class TMDBRepository: ITMDBRepository
     {
         private const string baseUrl = "https://api.themoviedb.org";
         private const string DefaltApiVersion = "3";

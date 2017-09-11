@@ -135,7 +135,7 @@ namespace MovieScrapper.Business
             {
 
                 var finalWinners = new List<string[]>();
-                var watchedMoviesService = new WatcheMoviesStatisticService(_watchedMovieRepository);
+                var watchedMoviesService = new WatcheMoviesStatisticService(_viewModelsRepository);
                 var usersMovies = watchedMoviesService.GetData();
                 var arrayOfAllUsersWatchedMovies = usersMovies.Keys.ToArray();
                 var bestMovieCount = 0;

@@ -10,18 +10,17 @@ namespace MovieScrapper.Business
 {
     public class WatcheMoviesStatisticService: IWatcheMoviesStatisticService
     {
-        private readonly IWatchedMovieRepository _watchedMovieRepository;
+        private readonly IViewModelsRepository _viewModelsRepository;
 
 
-        public WatcheMoviesStatisticService(IWatchedMovieRepository watchedMovieRepository)
+        public WatcheMoviesStatisticService(IViewModelsRepository viewModelsRepository)
         {
-            _watchedMovieRepository = watchedMovieRepository;
+            _viewModelsRepository = viewModelsRepository;
         }
 
         public Dictionary<string, List<string>> GetData()
         {
-            var data = new ViewModelsRepository();
-            var watchedMovies = data.GetWatchedMoviesData();
+            var watchedMovies = _viewModelsRepository.GetWatchedMoviesData();
             var stringArrTitles = watchedMovies.Select(m => m.Title).ToArray();
             var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
             int allTitlesCount = collectionWithAllDistinctTitles.Count();
@@ -60,9 +59,7 @@ namespace MovieScrapper.Business
 
         public string [] GetTitles()
         {
-            var data = new ViewModelsRepository();
-            var watchedMovies = data.GetWatchedMoviesData();
-
+            var watchedMovies = _viewModelsRepository.GetWatchedMoviesData();
             var stringArrTitles =  watchedMovies.Select(m => m.Title).ToArray();
             var collectionWithDistinctTitles = stringArrTitles.Distinct().ToArray();
             int titlesCount = collectionWithDistinctTitles.Count();                                             
@@ -71,8 +68,7 @@ namespace MovieScrapper.Business
 
         public string[] GetUsers()
         {
-            var data = new ViewModelsRepository();
-            var watchedMovies = data.GetWatchedMoviesData();
+            var watchedMovies = _viewModelsRepository.GetWatchedMoviesData();
             var stringArrEmails = watchedMovies.Select(m=>m.Email).Where(e=>e!=null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 

@@ -48,7 +48,6 @@ namespace MovieScrapper.Business
             GameProperties stopDateObject = _gamePropertyRepository.GetDate();
             DateTime stopDate = (stopDateObject != null ? stopDateObject.StopGameDate : DateTime.Now);
             return (stopDate < DateTime.Now);
-
         }
     }
 }

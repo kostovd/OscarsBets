@@ -56,7 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetServiceTests.cs" />
+    <Compile Include="BetsStatisticServiceTests.cs" />
     <Compile Include="CategoryServiceTests.cs" />
+    <Compile Include="GamePropertyServiceTests.cs" />
     <Compile Include="MovieServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

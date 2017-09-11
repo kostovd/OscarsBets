@@ -11,7 +11,7 @@ namespace UnitTestProject
     public class MovieServiceTests
     {
         [TestMethod]
-        public void AddMovie_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
+        public void AddMovie_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
 
@@ -33,7 +33,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void ChangeMovieStatus_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
+        public void ChangeMovieStatus_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
 
@@ -50,7 +50,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void GetAllMovies_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
+        public void GetAllMovies_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
 
@@ -67,7 +67,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void GetMovie_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
+        public void GetMovie_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
 
@@ -81,6 +81,26 @@ namespace UnitTestProject
 
             //Assert           
             movieRepositoryMock.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void GetMovie_ShouldReturnExpectedMovie_WhenTheCorrectRepositoryIsPassed()
+        {
+            var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
+            var expectedMovie = new Movie();
+            expectedMovie.Id = 1;
+            expectedMovie.Title = "Test";
+            //Arrange
+            movieRepositoryMock.Expect(dao => dao.GetMovie(Arg<int>.Is.Anything)).Return(expectedMovie).Repeat.Once(); ;
+
+            var movieService = new MovieService(movieRepositoryMock);
+
+            //Act
+            var returnedMovie= movieService.GetMovie(1);
+
+            //Assert           
+            Assert.AreEqual(expectedMovie.Id, returnedMovie.Id);
+            
         }
     }
 }

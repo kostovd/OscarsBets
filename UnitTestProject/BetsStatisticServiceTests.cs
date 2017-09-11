@@ -27,7 +27,6 @@ namespace UnitTestProject
             List<Winners> winners = new List<Winners>();
 
             viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once();
-            //viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies);
             viewModelsRepositoryMock.Expect(dao => dao.GetWinner()).Return(winners).Repeat.Once();
 
             var betService = new BetsStatisticService(viewModelsRepositoryMock);
@@ -50,7 +49,6 @@ namespace UnitTestProject
             List<Winners> winners = new List<Winners>();
 
             viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once();
-            //viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies);
             viewModelsRepositoryMock.Expect(dao => dao.GetWinner()).Return(winners).Repeat.Once();
 
             var betService = new BetsStatisticService(viewModelsRepositoryMock);

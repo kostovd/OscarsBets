@@ -102,6 +102,48 @@ namespace UnitTestProject
         }
 
         [TestMethod]
+        public void IsGameStopped_ShouldReturnTrue_WhenThePassedDateIsInThePast()
+        {
+            var gamePropertyRepositoryMock = MockRepository.GenerateMock<IGamePropertyRepository>();
+
+            //Arrange
+            var returnedDate = DateTime.MinValue;
+            var gamePropertyEntity = new GameProperties();
+            gamePropertyEntity.StopGameDate = returnedDate;
+            gamePropertyRepositoryMock.Expect(dao => dao.GetDate()).Return(gamePropertyEntity);
+
+            var gamePropertyService = new GamePropertyService(gamePropertyRepositoryMock);
+
+            //Act
+            bool recievedValue = gamePropertyService.IsGameStopped();
+
+            //Assert
+            Assert.AreEqual(true, recievedValue);
+
+        }
+
+        [TestMethod]
+        public void IsGameStopped_ShouldReturnFalse_WhenThePassedDateIsInTheFeuture()
+        {
+            var gamePropertyRepositoryMock = MockRepository.GenerateMock<IGamePropertyRepository>();
+
+            //Arrange
+            var returnedDate = DateTime.MaxValue;
+            var gamePropertyEntity = new GameProperties();
+            gamePropertyEntity.StopGameDate = returnedDate;
+            gamePropertyRepositoryMock.Expect(dao => dao.GetDate()).Return(gamePropertyEntity);
+
+            var gamePropertyService = new GamePropertyService(gamePropertyRepositoryMock);
+
+            //Act
+            bool recievedValue = gamePropertyService.IsGameStopped();
+
+            //Assert
+            Assert.AreEqual(false, recievedValue);
+
+        }
+
+        [TestMethod]
         public void IsGameNotStartedYet_ShouldCallGamePropertyRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var gamePropertyRepositoryMock = MockRepository.GenerateMock<IGamePropertyRepository>();
@@ -116,6 +158,46 @@ namespace UnitTestProject
 
             //Assert
             gamePropertyRepositoryMock.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void IsGameNotStartedYet_ShouldReturnTrue_WhenThePassedDateIsInTheFeauture()
+        {
+            var gamePropertyRepositoryMock = MockRepository.GenerateMock<IGamePropertyRepository>();
+
+            //Arrange
+            var returnedDate = DateTime.MaxValue;
+            var gamePropertyEntity = new GameProperties();
+            gamePropertyEntity.StartGameDate = returnedDate;
+            gamePropertyRepositoryMock.Expect(dao => dao.GetDate()).Return(gamePropertyEntity);
+
+            var gamePropertyService = new GamePropertyService(gamePropertyRepositoryMock);
+
+            //Act
+            bool recievedValue= gamePropertyService.IsGameNotStartedYet();
+
+            //Assert
+            Assert.AreEqual(true, recievedValue);
+        }
+
+        [TestMethod]
+        public void IsGameNotStartedYet_ShouldReturnFalse_WhenThePassedDateIsInThePast()
+        {
+            var gamePropertyRepositoryMock = MockRepository.GenerateMock<IGamePropertyRepository>();
+
+            //Arrange
+            var returnedDate = DateTime.MinValue;
+            var gamePropertyEntity = new GameProperties();
+            gamePropertyEntity.StartGameDate = returnedDate;
+            gamePropertyRepositoryMock.Expect(dao => dao.GetDate()).Return(gamePropertyEntity);
+
+            var gamePropertyService = new GamePropertyService(gamePropertyRepositoryMock);
+
+            //Act
+            bool recievedValue = gamePropertyService.IsGameNotStartedYet();
+
+            //Assert
+            Assert.AreEqual(false, recievedValue);
         }
     }
 }

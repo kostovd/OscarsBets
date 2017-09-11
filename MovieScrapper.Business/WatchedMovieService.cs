@@ -18,27 +18,23 @@ namespace MovieScrapper.Business
         }
 
         public Watched AddWatchedEntity(Watched watchedEntity)
-        {
-            var repo = new WatchedMovieRepository();
-            return repo.AddWatchedEntity(watchedEntity);
+        {            
+            return _watchedMovieRepository.AddWatchedEntity(watchedEntity);
         }
 
         public IEnumerable<Watched> GetAllUsersWatchedAMovie()
         {
-            var repo = new WatchedMovieRepository();
-            return repo.GetAllUsersWatchedAMovie();
+            return _watchedMovieRepository.GetAllUsersWatchedAMovie();
         }
 
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
         {
-            var repo = new WatchedMovieRepository();
-            return repo.GetAllWatchedMovies(userId);
+            return _watchedMovieRepository.GetAllWatchedMovies(userId);
         }
 
         public Watched GetUserWatchedEntity(string userId)
         {
-            var repo = new WatchedMovieRepository();
-            return repo.GetUserWatchedEntity(userId);
+            return _watchedMovieRepository.GetUserWatchedEntity(userId);
         }
     }
 }

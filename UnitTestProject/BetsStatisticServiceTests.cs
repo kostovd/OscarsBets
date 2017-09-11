@@ -2,6 +2,7 @@
 using MovieScrapper.Business;
 using MovieScrapper.Data.Interfaces;
 using MovieScrapper.Entities;
+using MovieScrapper.Entities.StatisticsModels;
 using Rhino.Mocks;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,58 @@ namespace UnitTestProject
     [TestClass]
     public class BetsStatisticServiceTests
     {
-        //[TestMethod]
-        //public void GetData_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
-        //{
-        //    var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
-        //    var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
+        [TestMethod]
+        public void GetData_ShouldCallViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
+        {
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
+            var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
 
-        //    //Arrange
-        //    viewModelsRepositoryMock.Expect(dao => dao.GetBetsData(Arg<string>.Is.Anything)).Return(Arg<IEnumerable<Bet>>.Is.Anything).Repeat.Once(); ;
+            //Arrange
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
 
-        //    var betService = new BetService(betRepositoryMock);
+            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
 
-        //    //Act
-        //    betService.GetAllUserBets("1");
+            //Act
+            betService.GetData();
 
-        //    //Assert
-        //    betRepositoryMock.VerifyAllExpectations();
-        //}
+            //Assert
+            viewModelsRepositoryMock.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void GetWinner_ShouldCallViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
+        {
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
+            var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
+
+            //Arrange
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
+
+            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
+
+            //Act
+            betService.GetWinner();
+
+            //Assert
+            viewModelsRepositoryMock.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void GetCategories_ShouldCallViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
+        {
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
+            var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
+
+            //Arrange
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
+
+            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
+
+            //Act
+            betService.GetCategories();
+
+            //Assert
+            viewModelsRepositoryMock.VerifyAllExpectations();
+        }
     }
 }

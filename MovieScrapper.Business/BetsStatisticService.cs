@@ -17,7 +17,7 @@ namespace MovieScrapper.Business
         private readonly IViewModelsRepository _viewModelsRepository;
         private readonly IWatchedMovieRepository _watchedMovieRepository;
 
-        public BetsStatisticService(ViewModelsRepository viewModelsRepository, IWatchedMovieRepository watchedMovieRepository)
+        public BetsStatisticService(IViewModelsRepository viewModelsRepository, IWatchedMovieRepository watchedMovieRepository)
         {
             _viewModelsRepository = viewModelsRepository;
             _watchedMovieRepository = watchedMovieRepository;
@@ -196,8 +196,7 @@ namespace MovieScrapper.Business
         }
 
         private List<string[]> GetWinningCategoryMovies()
-        {
-            //var data = new ViewModelsRepository();
+        {          
             List<Winners> winners = _viewModelsRepository.GetWinner();            
             var winningCategories = winners.Select(w => w.Category).Where(x => x != null).ToArray();
             List <string[]> winningMovies = new List<string[]>();     

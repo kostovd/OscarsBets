@@ -54,17 +54,20 @@ namespace UnitTestProject
         public void AreWinnersSet_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
+            bool sendReslt = true;
 
             //Arrange
-            categoryRepositoryMock.Expect(dao => dao.AreWinnersSet()).Return(Arg<bool>.Is.Anything).Repeat.Once(); ;
+            categoryRepositoryMock.Expect(dao => dao.AreWinnersSet()).Return(sendReslt).Repeat.Once(); ;
 
             var categoryService = new CategoryService(categoryRepositoryMock);
 
             //Act
-            categoryService.AreWinnersSet();
+            var receivedResult = categoryService.AreWinnersSet();
 
             //Assert
             categoryRepositoryMock.VerifyAllExpectations();
+
+            Assert.AreEqual(sendReslt, receivedResult);
         }
 
         [TestMethod]

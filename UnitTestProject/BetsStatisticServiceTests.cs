@@ -18,13 +18,19 @@ namespace UnitTestProject
         [TestMethod]
         public void GetData_ShouldCallViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
-            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
-            var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
 
             //Arrange
-            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();         
 
-            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
+            List<BetsStatistic> betStatisticList = new List<BetsStatistic>();
+            List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
+            List<Winners> winners = new List<Winners>();
+
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once();
+            //viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies);
+            viewModelsRepositoryMock.Expect(dao => dao.GetWinner()).Return(winners).Repeat.Once();
+
+            var betService = new BetsStatisticService(viewModelsRepositoryMock);
 
             //Act
             betService.GetData();
@@ -36,13 +42,18 @@ namespace UnitTestProject
         [TestMethod]
         public void GetWinner_ShouldCallViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
-            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
-            var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
-
             //Arrange
-            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
 
-            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
+            List<BetsStatistic> betStatisticList = new List<BetsStatistic>();
+            List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
+            List<Winners> winners = new List<Winners>();
+
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once();
+            //viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies);
+            viewModelsRepositoryMock.Expect(dao => dao.GetWinner()).Return(winners).Repeat.Once();
+
+            var betService = new BetsStatisticService(viewModelsRepositoryMock);
 
             //Act
             betService.GetWinner();
@@ -56,11 +67,11 @@ namespace UnitTestProject
         {
             var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
             var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
-
+            List<BetsStatistic> betStatisticList = new List<BetsStatistic>();
             //Arrange
-            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(Arg<List<BetsStatistic>>.Is.Anything).Repeat.Once(); ;
+            viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once(); ;
 
-            var betService = new BetsStatisticService(viewModelsRepositoryMock, watchedMovieRepositoryMock);
+            var betService = new BetsStatisticService(viewModelsRepositoryMock);
 
             //Act
             betService.GetCategories();

@@ -15,17 +15,16 @@ namespace MovieScrapper.Business
     public class BetsStatisticService: IBetStatisticService
     {
         private readonly IViewModelsRepository _viewModelsRepository;
-        private readonly IWatchedMovieRepository _watchedMovieRepository;
+        //private readonly IWatchedMovieRepository _watchedMovieRepository;
 
-        public BetsStatisticService(IViewModelsRepository viewModelsRepository, IWatchedMovieRepository watchedMovieRepository)
+        public BetsStatisticService(IViewModelsRepository viewModelsRepository)
         {
             _viewModelsRepository = viewModelsRepository;
-            _watchedMovieRepository = watchedMovieRepository;
+           // _watchedMovieRepository = watchedMovieRepository;
         }
 
         public Dictionary<string, List<string[]>> GetData()
         {
-            //var data = new ViewModelsRepository();
             List<BetsStatistic> bets = _viewModelsRepository.GetBetsData();           
             var stringArrEmails = bets.Select(b=>b.Email).Where(e => e != null).ToArray();
             var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
@@ -220,7 +219,6 @@ namespace MovieScrapper.Business
 
         public string[] GetCategories()
         {
-            //var data = new ViewModelsRepository();
             var dt = _viewModelsRepository.GetBetsData();
             var stringArrCategories = dt.Select(x => x.Category).ToArray();
             var collectionWithDistinctCategories = stringArrCategories.Distinct().ToArray();
@@ -229,7 +227,6 @@ namespace MovieScrapper.Business
 
         public List<string[]> GetWinners()
         {
-            //var data = new ViewModelsRepository();
             var dt = _viewModelsRepository.GetWinner();
           
             string currentCategory;

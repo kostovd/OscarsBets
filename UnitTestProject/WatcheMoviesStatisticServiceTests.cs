@@ -19,10 +19,11 @@ namespace UnitTestProject
         public void GetData_ShouldCalledViewModelsRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
+            List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
 
             //Arrange
 
-            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(Arg<List<WatchedMovies>>.Is.Anything).Repeat.Once(); ;
+            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies).Repeat.Once(); ;
 
             var watcheMoviesStatisticService = new WatcheMoviesStatisticService(viewModelsRepositoryMock);
 
@@ -39,8 +40,8 @@ namespace UnitTestProject
             var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
 
             //Arrange
-
-            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(Arg<List<WatchedMovies>>.Is.Anything).Repeat.Once(); ;
+            List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
+            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies).Repeat.Once(); ;
 
             var watcheMoviesStatisticService = new WatcheMoviesStatisticService(viewModelsRepositoryMock);
 
@@ -57,8 +58,8 @@ namespace UnitTestProject
             var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
 
             //Arrange
-
-            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(Arg<List<WatchedMovies>>.Is.Anything).Repeat.Once(); ;
+            List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
+            viewModelsRepositoryMock.Expect(dao => dao.GetWatchedMoviesData()).Return(watchedMovies).Repeat.Once(); 
 
             var watcheMoviesStatisticService = new WatcheMoviesStatisticService(viewModelsRepositoryMock);
 

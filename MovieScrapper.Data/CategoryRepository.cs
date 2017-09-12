@@ -19,7 +19,7 @@ namespace MovieScrapper.Data
         }
         
 
-        public void AddMovieInCategory(int categoryId, int movieId)
+        public void AddMovie(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
             {
@@ -95,14 +95,22 @@ namespace MovieScrapper.Data
         public Movie GetMovieInCategory(int categoryId, int movieId)
         {
             using (var ctx = new MovieContext())
-            {
-                //var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
+            {              
                 var databaseCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(x => x.Id == categoryId);
                 var foundedMovie = databaseCategory.Movies.FirstOrDefault(x => x.Id == movieId);
                 return foundedMovie;
             }
         }
-                          
+
+        public bool HasMovieInCategory(int categoryId, int movieId)
+        {
+            using (var ctx = new MovieContext())
+            {           
+                var databaseCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(x => x.Id == categoryId);
+                var hasMovie = databaseCategory.Movies.Any(x => x.Id == movieId);
+                return hasMovie;
+            }
+        }
 
         public void MarkAsWinner(int categoryId, int movieId)
         {

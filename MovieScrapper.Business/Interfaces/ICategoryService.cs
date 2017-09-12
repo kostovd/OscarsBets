@@ -7,8 +7,10 @@ namespace MovieScrapper.Business.Interfaces
     {
         void AddCategory(Category category);
 
-        void AddMovieInCategory(int categoryId, int movieId);
-          
+        //void AddMovieInCategory(int categoryId, int movieId);
+
+        void AddMovieInCategory(int categoryId, Movie movie);
+
         bool AreWinnersSet();
 
         void DeleteCategory(int id);
@@ -21,8 +23,9 @@ namespace MovieScrapper.Business.Interfaces
 
         Movie GetMovieInCategory(int categoryId, int movieId);
 
-        void MarkAsWinner(int categoryId, int movieId);
+        bool HasMovieInCategory(int categoryId, int movieId);
 
+        void MarkAsWinner(int categoryId, int movieId);
 
         void RemoveMovieFromCategory(int categoryId, int movieId);
        

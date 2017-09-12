@@ -11,13 +11,7 @@ namespace MovieScrapper
 {
     public partial class MovieDetails : BasePage
     {
-
-        private ICategoryService GetCategoryService()
-        {
-            var container = (IUnityContainer)Application["EntLibContainer"];
-            return container.Resolve<ICategoryService>();
-        }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {      
             
@@ -60,6 +54,12 @@ namespace MovieScrapper
             return backUrl;
         }
 
+        protected string BuildImdbUrl(string movieId)
+        {
+
+            return "http://www.imdb.com/title/" + movieId;
+        }
+
         protected string DisplayYear(string dateString)
         {
             DateTime res;
@@ -83,37 +83,25 @@ namespace MovieScrapper
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var movieId = Int32.Parse(Request.QueryString["id"]);
                 var movieService = GetBuisnessService<IMovieService>();
-                var categoryService = GetCategoryService();
-                var databaseMovie = movieService.GetMovie(movieId);
-                var databaseMovieInCategory = categoryService.GetMovieInCategory(categoryId, movieId);
+                var categoryService = GetBuisnessService<ICategoryService>();
+                categoryService.AddMovieInCategory(categoryId, movie);
 
-                if (databaseMovie == null)
-                {
-                    movieService.AddMovie(movie);
-                   
-                }
+                //var hasMovie = movieService.HasMovie(movieId);                
+                //var hasMovieInCategory = categoryService.HasMovieInCategory(categoryId, movieId);
 
-                if (databaseMovieInCategory == null)
-                {
-                    categoryService.AddMovieInCategory(categoryId, movieId);                   
-                }
+                //if (!hasMovie)
+                //{
+                //    movieService.AddMovie(movie);                 
+                //}
 
-                    Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
+                //if (!hasMovieInCategory)
+                //{
+                //    categoryService.AddMovieInCategory(categoryId, movieId);                   
+                //}
+
+                Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
             }
-        }
-
-        protected string ShowCategoryTitle()
-        {           
-            var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = GetCategoryService();
-            var title = service.GetCategory(categoryId).CategoryTtle;
-            return title;
-        }
-
-        protected string BuildImdbUrl(string movieId)
-        {
-
-            return "http://www.imdb.com/title/" + movieId;
-        }
+        }       
+        
     }
 }

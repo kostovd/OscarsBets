@@ -73,5 +73,15 @@ namespace MovieScrapper.Data
                 return foundedMovie;
             }
         }
+
+        public bool HasMovie(int id)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var isMovieFound = ctx.Movies.Any(m => m.Id == id);
+                return isMovieFound;
+            }
+        }
+
     }
 }

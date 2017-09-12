@@ -18,6 +18,8 @@ namespace MovieScrapper.Business.Interfaces
         IEnumerable<Movie> GetAllMoviesInCategory(int categoryId);
 
         Movie GetMovie(int id);
+
+        bool HasMovie(int id);
         
     }
 }

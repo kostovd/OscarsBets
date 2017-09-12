@@ -45,5 +45,11 @@ namespace MovieScrapper.Business
         {
             return _movieRepository.GetMovie(id);
         }
+
+        public bool HasMovie(int id)
+        {
+            return _movieRepository.HasMovie(id);
+           
+        }
     }
 }

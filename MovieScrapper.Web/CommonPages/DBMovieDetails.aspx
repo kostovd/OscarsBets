@@ -29,7 +29,8 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" 
             runat="server" 
             SelectMethod="GetMovie" 
-            TypeName="MovieScrapper.Business.MovieService">
+            TypeName="MovieScrapper.Business.Interfaces.IMovieService" 
+            OnObjectCreating="ObjectDataSource1_ObjectCreating">
             <SelectParameters>
                 <asp:QueryStringParameter QueryStringField="id" Name="id"/>
             </SelectParameters>

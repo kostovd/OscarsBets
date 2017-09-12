@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MovieScrapper.Business.Interfaces;
+using System;
+using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
@@ -24,6 +26,11 @@ namespace MovieScrapper.CommonPages
         protected string BuildImdbUrl(string movieId)
         {
             return "http://www.imdb.com/title/" + movieId;
+        }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetBuisnessService<IMovieService>();
         }
     }
 }

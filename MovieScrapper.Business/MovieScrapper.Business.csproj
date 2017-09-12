@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetMovieObject.cs" />
+    <Compile Include="BetObject.cs" />
     <Compile Include="BetService.cs" />
     <Compile Include="BetsStatisticService.cs" />
     <Compile Include="BusinessContainerManager.cs" />

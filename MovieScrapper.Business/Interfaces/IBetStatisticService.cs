@@ -9,7 +9,7 @@ namespace MovieScrapper.Business.Interfaces
     public interface IBetStatisticService
     {
 
-        Dictionary<string, List<string[]>> GetData();       
+        List<BetObject> GetData();       
 
         string GetWinner();
               

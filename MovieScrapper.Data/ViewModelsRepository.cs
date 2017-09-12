@@ -20,7 +20,7 @@ namespace MovieScrapper.Data
 
         public List<BetsStatistic> GetBetsData()
         {
-            string query = "SELECT Bets.Id, AspNetUsers.Email, Categories.CategoryTtle as Category, Movies.Title FROM Bets INNER JOIN Movies ON Bets.Movie_Id = Movies.Id INNER JOIN AspNetUsers ON Bets.UserId = AspNetUsers.Id JOIN Categories ON Bets.Category_Id = Categories.Id";
+            string query = "SELECT Bets.Id, AspNetUsers.Email, Categories.CategoryTtle as CategoryTitle, Movies.Title as MovieTitle FROM Bets INNER JOIN Movies ON Bets.Movie_Id = Movies.Id INNER JOIN AspNetUsers ON Bets.UserId = AspNetUsers.Id JOIN Categories ON Bets.Category_Id = Categories.Id";
             using (var ctx = new MovieContext())
             {
                 List<BetsStatistic> resaults = ctx.Database.SqlQuery<BetsStatistic>(query).ToList();

@@ -106,9 +106,7 @@ namespace MovieScrapper.Data
         {
             using (var ctx = new MovieContext())
             {           
-                var databaseCategory = ctx.MovieCaterogries.Include(cat => cat.Movies).SingleOrDefault(x => x.Id == categoryId);
-                var hasMovie = databaseCategory.Movies.Any(x => x.Id == movieId);
-                return hasMovie;
+                return ctx.MovieCaterogries.Any(x => x.Id == categoryId && x.Movies.Any(y => y.Id == movieId));
             }
         }
 

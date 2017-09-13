@@ -17,7 +17,10 @@ namespace MovieScrapper.CommonPages
             if (!this.IsPostBack)
             {              
                 GridViewInit();
-                Label1.Text = betStatisticServices.GetWinner();
+                if (!GameIsRunning())
+                {
+                    Label1.Text = betStatisticServices.GetWinner();
+                }
             }      
         }
 

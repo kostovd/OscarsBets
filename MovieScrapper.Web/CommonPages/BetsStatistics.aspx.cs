@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web.UI.WebControls;
 using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Entities.StatisticsModels;
 
 namespace MovieScrapper.CommonPages
 {
@@ -15,31 +16,33 @@ namespace MovieScrapper.CommonPages
             if (!this.IsPostBack)
             {              
                 GridViewInit();
-            }
-
-            //this.BindGrid();
-       
+            }      
         }
 
         private void GridViewInit()
         {
             var betStatisticServices = GetBuisnessService<IBetStatisticService>();
-
             var categories = betStatisticServices.GetCategories();
             var winners = betStatisticServices.GetWinners();
-            bool allWinnersAreSet;
-                if (winners.Count == categories.Count())
-                {
-                    allWinnersAreSet = true;
-                }
-                else
-                {
-                    allWinnersAreSet = false;
-                }
-
+        
             GridView1.Columns.Clear();
 
             // Create
+            var dt= CreateDataTable(categories, winners);
+
+            // Fill
+            dt= FillDataTable(dt);
+
+
+            // Bind
+            //GridView1.DataSource = dt;
+            //GridView1.DataBind();
+            BindDataTableToGrid(dt);
+        }
+
+        // CreateDataTable()
+        private DataTable CreateDataTable(string[] categories, List<Winners> winners)
+        {
             DataTable dt = new DataTable();
 
             dt.Columns.Add("Email", typeof(string));
@@ -49,7 +52,7 @@ namespace MovieScrapper.CommonPages
             field.SortExpression = "Email";
             GridView1.Columns.Add(field);
 
-            
+
             dt.Columns.Add("Scores", typeof(int));
             field = new BoundField();
             field.HeaderText = "Scores";
@@ -60,7 +63,16 @@ namespace MovieScrapper.CommonPages
                 field.InsertVisible = false;
             }
             GridView1.Columns.Add(field);
-            
+
+            bool allWinnersAreSet;
+            if (winners.Count == categories.Count())
+            {
+                allWinnersAreSet = true;
+            }
+            else
+            {
+                allWinnersAreSet = false;
+            }
 
             foreach (string category in categories)
             {
@@ -77,7 +89,7 @@ namespace MovieScrapper.CommonPages
                     {
                         //var winnersObj = winners.Where(x => x.Category == category);
                         var winner = winners.Where(x => x.Category == category).Select(x => x.Winner).Single();
-                        field.HeaderText = "<span class='goldFont'>" + category + "</span><br/><span style='color:rgb(237,192,116)'>" + winner +"</span>";
+                        field.HeaderText = "<span class='goldFont'>" + category + "</span><br/><span style='color:rgb(237,192,116)'>" + winner + "</span>";
                     }
                     else
                     {
@@ -89,8 +101,14 @@ namespace MovieScrapper.CommonPages
                 GridView1.Columns.Add(field);
 
             }
+            return dt;
+        }
 
-            // Fill
+
+        // FillDataTable()
+        private DataTable FillDataTable(DataTable dt)
+        {
+            var betStatisticServices = GetBuisnessService<IBetStatisticService>();
             var users = betStatisticServices.GetData();
             foreach (var user in users)
             {
@@ -116,19 +134,16 @@ namespace MovieScrapper.CommonPages
 
                 dt.Rows.Add(row);
             }
+            return dt;
+        }
 
-            // Bind
+        // BindDataTableToGrid()
+        protected void BindDataTableToGrid(DataTable dt)
+        {
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
 
-        // CreateDataTable()
-
-        // FillDataTable()
-
-        // BindDataTableToGrid()
-
-       
 
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)

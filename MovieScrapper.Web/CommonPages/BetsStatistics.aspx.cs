@@ -13,9 +13,11 @@ namespace MovieScrapper.CommonPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var betStatisticServices = GetBuisnessService<IBetStatisticService>();
             if (!this.IsPostBack)
             {              
                 GridViewInit();
+                Label1.Text = betStatisticServices.GetWinner();
             }      
         }
 
@@ -33,10 +35,7 @@ namespace MovieScrapper.CommonPages
             // Fill
             dt= FillDataTable(dt);
 
-
             // Bind
-            //GridView1.DataSource = dt;
-            //GridView1.DataBind();
             BindDataTableToGrid(dt);
         }
 
@@ -44,6 +43,16 @@ namespace MovieScrapper.CommonPages
         private DataTable CreateDataTable(string[] categories, List<Winners> winners)
         {
             DataTable dt = new DataTable();
+            bool allWinnersAreSet;
+
+                if (winners.Count == categories.Count())
+                {
+                    allWinnersAreSet = true;
+                }
+                else
+                {
+                    allWinnersAreSet = false;
+                }
 
             dt.Columns.Add("Email", typeof(string));
             var field = new BoundField();
@@ -64,15 +73,7 @@ namespace MovieScrapper.CommonPages
             }
             GridView1.Columns.Add(field);
 
-            bool allWinnersAreSet;
-            if (winners.Count == categories.Count())
-            {
-                allWinnersAreSet = true;
-            }
-            else
-            {
-                allWinnersAreSet = false;
-            }
+            
 
             foreach (string category in categories)
             {
@@ -87,7 +88,6 @@ namespace MovieScrapper.CommonPages
                 {
                     if (allWinnersAreSet)
                     {
-                        //var winnersObj = winners.Where(x => x.Category == category);
                         var winner = winners.Where(x => x.Category == category).Select(x => x.Winner).Single();
                         field.HeaderText = "<span class='goldFont'>" + category + "</span><br/><span style='color:rgb(237,192,116)'>" + winner + "</span>";
                     }

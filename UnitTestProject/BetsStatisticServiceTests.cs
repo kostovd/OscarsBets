@@ -20,7 +20,7 @@ namespace UnitTestProject
         {
 
             //Arrange
-            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();         
+            var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
 
             List<BetsStatistic> betStatisticList = new List<BetsStatistic>();
             List<WatchedMovies> watchedMovies = new List<WatchedMovies>();
@@ -65,6 +65,7 @@ namespace UnitTestProject
         {
             var viewModelsRepositoryMock = MockRepository.GenerateMock<IViewModelsRepository>();
             var watchedMovieRepositoryMock = MockRepository.GenerateMock<IWatchedMovieRepository>();
+
             List<BetsStatistic> betStatisticList = new List<BetsStatistic>();
             //Arrange
             viewModelsRepositoryMock.Expect(dao => dao.GetBetsData()).Return(betStatisticList).Repeat.Once(); ;

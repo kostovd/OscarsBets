@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieScrapper.Entities.StatisticsModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace MovieScrapper.Business.Interfaces
               
         string[] GetCategories();
 
-        List<string[]> GetWinners();
+        List<Winners> GetWinners();
         
     }
 }

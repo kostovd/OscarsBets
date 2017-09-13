@@ -21,61 +21,61 @@ namespace MovieScrapper.Business
             _viewModelsRepository = viewModelsRepository;
         }
 
-        public Dictionary<string, List<string[]>> GetData1()
-        {
-            List<BetsStatistic> bets = _viewModelsRepository.GetBetsData();           
-            var stringArrEmails = bets.Select(b=>b.Email).Where(e => e != null).ToArray();
-            var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
+        //public Dictionary<string, List<string[]>> GetData1()
+        //{
+        //    List<BetsStatistic> bets = _viewModelsRepository.GetBetsData();           
+        //    var stringArrEmails = bets.Select(b=>b.Email).Where(e => e != null).ToArray();
+        //    var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
 
-            var winningMovieCategories = GetWinningCategoryMovies();
+        //    var winningMovieCategories = GetWinningCategoryMovies();
                  
-            Dictionary<string, List<string[]>> myDict = new Dictionary<string, List<string[]>>();
+        //    Dictionary<string, List<string[]>> myDict = new Dictionary<string, List<string[]>>();
 
-            foreach (var email in collectionWithDistinctEmails)
-            {
+        //    foreach (var email in collectionWithDistinctEmails)
+        //    {
 
-                string currentCategory;
-                string currentTitle;
+        //        string currentCategory;
+        //        string currentTitle;
 
-                List<string[]> userCategories = new List<string[]>();
+        //        List<string[]> userCategories = new List<string[]>();
 
-                for (int j = 0; j < bets.Count; j++)
-                {
-                    string[] categoryMovie = new string[3];
-                    var bet = bets[j];
-                    if (bet.Email.ToString() == email)
-                    {
-                        currentCategory = bet.CategoryTitle.ToString();
-                        currentTitle = bet.MovieTitle.ToString();
+        //        for (int j = 0; j < bets.Count; j++)
+        //        {
+        //            string[] categoryMovie = new string[3];
+        //            var bet = bets[j];
+        //            if (bet.Email.ToString() == email)
+        //            {
+        //                currentCategory = bet.CategoryTitle.ToString();
+        //                currentTitle = bet.MovieTitle.ToString();
 
-                        categoryMovie[0] = currentCategory;
-                        categoryMovie[1] = currentTitle;
-                        var counter = 0;
-                        foreach(var winningMovieCategory in winningMovieCategories)
-                        {
-                            var currentWinningCategory = winningMovieCategory[0];
-                            var currentWinningMovie = winningMovieCategory[1];
-                            if(currentCategory== currentWinningCategory)
-                            {
-                                if(currentTitle== currentWinningMovie)
-                                {
-                                    counter++;
-                                }
-                            }
-                        }
-                        categoryMovie[2] = counter.ToString();
-                        userCategories.Add(categoryMovie);
+        //                categoryMovie[0] = currentCategory;
+        //                categoryMovie[1] = currentTitle;
+        //                var counter = 0;
+        //                foreach(var winningMovieCategory in winningMovieCategories)
+        //                {
+        //                    var currentWinningCategory = winningMovieCategory[0];
+        //                    var currentWinningMovie = winningMovieCategory[1];
+        //                    if(currentCategory== currentWinningCategory)
+        //                    {
+        //                        if(currentTitle== currentWinningMovie)
+        //                        {
+        //                            counter++;
+        //                        }
+        //                    }
+        //                }
+        //                categoryMovie[2] = counter.ToString();
+        //                userCategories.Add(categoryMovie);
 
-                    }
-                }
+        //            }
+        //        }
 
-                myDict.Add(email, userCategories);
-            }
+        //        myDict.Add(email, userCategories);
+        //    }
                     
-            myDict = myDict.OrderByDescending(x => x.Value.Count).ToDictionary(x => x.Key, x => x.Value);           
-            return myDict;
+        //    myDict = myDict.OrderByDescending(x => x.Value.Count).ToDictionary(x => x.Key, x => x.Value);           
+        //    return myDict;
 
-        }
+        //}
 
         public List<BetObject> GetData()
         {
@@ -84,6 +84,7 @@ namespace MovieScrapper.Business
             Dictionary<string, List<BetMovieObject>> betsDict = new Dictionary<string, List<BetMovieObject>>();
 
             List<BetsStatistic> bets = _viewModelsRepository.GetBetsData();
+
             foreach (var bet in bets)
             {
                 if (bet.Email != null)
@@ -226,28 +227,28 @@ namespace MovieScrapper.Business
             //}
         }
 
-        private List<string[]> GetWinningCategoryMovies()
-        {          
-            List<Winners> winners = _viewModelsRepository.GetWinner();            
-            //var winningCategories = winners.Select(w => w.Category).Where(x => x != null).ToArray();
-            List <string[]> winningMovies = new List<string[]>();     
-            string currentCategory;
-            string currentWinner;
+        //private List<string[]> GetWinningCategoryMovies()
+        //{          
+        //    List<Winners> winners = _viewModelsRepository.GetWinner();            
+        //    //var winningCategories = winners.Select(w => w.Category).Where(x => x != null).ToArray();
+        //    List <string[]> winningMovies = new List<string[]>();     
+        //    string currentCategory;
+        //    string currentWinner;
                
-                for (int i = 0; i < winners.Count; i++)
-                {
-                    string[] categoryMovie = new string[2];
-                    var winner = winners[i];
-                    currentCategory = winner.Category.ToString();
-                    currentWinner = winner.Winner.ToString();
-                    categoryMovie[0] = currentCategory;
-                    categoryMovie[1] = currentWinner;
+        //        for (int i = 0; i < winners.Count; i++)
+        //        {
+        //            string[] categoryMovie = new string[2];
+        //            var winner = winners[i];
+        //            currentCategory = winner.Category.ToString();
+        //            currentWinner = winner.Winner.ToString();
+        //            categoryMovie[0] = currentCategory;
+        //            categoryMovie[1] = currentWinner;
 
-                    winningMovies.Add(categoryMovie);
-                }         
+        //            winningMovies.Add(categoryMovie);
+        //        }         
 
-            return winningMovies;
-        }
+        //    return winningMovies;
+        //}
 
         public string[] GetCategories()
         {
@@ -257,28 +258,34 @@ namespace MovieScrapper.Business
             return collectionWithDistinctCategories;
         }
 
-        public List<string[]> GetWinners()
+        public List<Winners> GetWinners()
         {
-            var dt = _viewModelsRepository.GetWinner();
-          
-            string currentCategory;
-            string currentWinner;
-            List<string[]> winners = new List<string[]>();
-            for (int j = 0; j < dt.Count; j++)
-            {
-                string[] categoryWinner = new string[2];
-                var row = dt[j];
-
-                currentCategory = row.Category.ToString();
-                currentWinner = row.Winner.ToString();
-
-                categoryWinner[0] = currentCategory;
-                categoryWinner[1] = currentWinner;
-
-                winners.Add(categoryWinner);
-            }
+            List<Winners> winners = _viewModelsRepository.GetWinner();
             return winners;
         }
+
+        //public List<string[]> GetWinners()
+        //{
+        //    var dt = _viewModelsRepository.GetWinner();
+          
+        //    string currentCategory;
+        //    string currentWinner;
+        //    List<string[]> winners = new List<string[]>();
+        //    for (int j = 0; j < dt.Count; j++)
+        //    {
+        //        string[] categoryWinner = new string[2];
+        //        var row = dt[j];
+
+        //        currentCategory = row.Category.ToString();
+        //        currentWinner = row.Winner.ToString();
+
+        //        categoryWinner[0] = currentCategory;
+        //        categoryWinner[1] = currentWinner;
+
+        //        winners.Add(categoryWinner);
+        //    }
+        //    return winners;
+        //}
         
     }
 }

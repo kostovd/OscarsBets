@@ -57,8 +57,11 @@ namespace MovieScrapper.Business
 
         public string GetWinner()
         {
+            string resault = String.Empty;
+
             var users = GetData();            
             List<Winners> winners = _viewModelsRepository.GetWinner();
+            List<string[]> winningUsers = new List<string[]>();           
             string currentWinnerName = String.Empty;
             int currentWinnerScores = 0;
 
@@ -72,16 +75,104 @@ namespace MovieScrapper.Business
                         scores++;
                     }                  
                 }
+                if (scores == currentWinnerScores)
+                {
+                    currentWinnerScores = scores;
+                    currentWinnerName = user.UserEmail;
+                    string[] winningEntity = new string[2];
+                    winningEntity[0] = currentWinnerName;
+                    winningEntity[1] = currentWinnerScores.ToString();
+                    winningUsers.Add(winningEntity);
+                }
+
                 if (scores > currentWinnerScores)
                 {
                     currentWinnerScores = scores;
                     currentWinnerName = user.UserEmail;
+                    string[] winningEntity = new string[2];
+                    winningEntity[0] = currentWinnerName;
+                    winningEntity[1] = currentWinnerScores.ToString();
+                    winningUsers.Clear();
+                    winningUsers.Add(winningEntity);
                 }
+
             }
 
-            var resault= "The winner is "+ currentWinnerName +"! He/She guessed right in "+ currentWinnerScores.ToString()+" categories!";
-            return resault;
+            if (winningUsers.Count == 0)
+            {
+                resault = "<div class='redBorder'>There are no winners</div>";
+                return resault;
+            }
+            else if (winningUsers.Count == 1)
+            {
+                var winner = winningUsers[0];
+                resault = "<div class='redBorder'>The winner is " + winner[0] + "! He/she guessed right in " + winner[1] + " categories!</div>";
+                return resault;
+            }
 
+            else
+            {
+
+                var finalWinners = new List<string[]>();
+                var watchedMoviesService = new WatcheMoviesStatisticService(_viewModelsRepository);
+                var usersMovies = watchedMoviesService.GetData();
+                var arrayOfAllUsersWatchedMovies = usersMovies.Keys.ToArray();
+                var bestMovieCount = 0;
+                foreach (var currentWinner in winningUsers)
+                {
+                    foreach (var user in arrayOfAllUsersWatchedMovies)
+                    {
+
+                        if (currentWinner[0] == user)
+                        {
+                            var currentUserWatchedMovies = usersMovies[user];
+                            if (currentUserWatchedMovies.Count == bestMovieCount)
+                            {
+                                string[] currentEntity = new string[2];
+                                currentEntity[0] = user;
+                                currentEntity[1] = bestMovieCount.ToString();
+                                finalWinners.Add(currentEntity);
+                            }
+                            else if (currentUserWatchedMovies.Count > bestMovieCount)
+                            {
+                                string[] currentEntity = new string[2];
+                                bestMovieCount = currentUserWatchedMovies.Count;
+                                currentEntity[0] = user;
+                                currentEntity[1] = bestMovieCount.ToString();
+                                finalWinners.Clear();
+                                finalWinners.Add(currentEntity);
+                            }
+                        }
+                    }
+                }
+                if (finalWinners.Count == 0)
+                {
+                    resault = "<div class='redBorder'>The winners are: <br/>";
+                    foreach (var winner in winningUsers)
+                    {
+                        resault += winner[0] + "<br/>";
+                    }
+                    resault += "They guessed rigth in " + winningUsers[0][1] + " categories!</div>";
+                    return resault;
+                }
+                else if (finalWinners.Count == 1)
+                {
+                    resault = "<div class='redBorder'>" + finalWinners[0][0] + " wins! He/she guessed right in " + winningUsers[0][1] + " categories and watched " + finalWinners[0][1] + " movies!</div>";
+                    return resault;
+                }
+                else
+                {
+                    resault = "<div class='redBorder'>The winners are: <br/>";
+                    foreach (var winner in finalWinners)
+                    {
+                        resault += winner[0] + "<br/>";
+                    }
+                    resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in " + winningUsers[0][1] + " categories!</div>";
+                    return resault;
+                }
+
+                
+            }
         }
 
         public string[] GetCategories()

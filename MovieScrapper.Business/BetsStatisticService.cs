@@ -170,8 +170,6 @@ namespace MovieScrapper.Business
                     resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in " + winningUsers[0][1] + " categories!</div>";
                     return resault;
                 }
-
-                
             }
         }
 

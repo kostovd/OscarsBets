@@ -6,6 +6,6 @@
     <asp:Label ID="Label1" runat="server"></asp:Label>
     <a class="link" href="MoviesStatistic.aspx">See also the statistic for watched movies</a>
     <hr />
-    <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false" OnRowDataBound = "OnRowDataBound" AllowSorting="true" OnSorting="GridView1_Sorting"></asp:GridView>
+    <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false" AllowSorting="true" OnSorting="GridView1_Sorting" SortedAscendingHeaderStyle-CssClass="sortasc" SortedDescendingHeaderStyle-CssClass="sortdesc"></asp:GridView>
     
 </asp:Content>

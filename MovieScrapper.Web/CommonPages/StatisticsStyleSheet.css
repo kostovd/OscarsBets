@@ -32,3 +32,15 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+th.sortasc a {
+    display: block;
+    padding: 0 4px 0 15px;
+    background: url("/images/icons/AscArrow.png") no-repeat;
+}
+
+th.sortdesc a {
+    display: block;
+    padding: 0 4px 0 15px;
+    background: url("/images/icons/DescArrow.png") no-repeat;
+}

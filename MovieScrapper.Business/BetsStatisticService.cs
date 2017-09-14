@@ -113,64 +113,64 @@ namespace MovieScrapper.Business
             else
             {
 
-                //var finalWinners = new List<string[]>();
-                //var watchedMoviesService = new WatcheMoviesStatisticService(_viewModelsRepository);
-                //var usersMovies = watchedMoviesService.GetData();
-                //var arrayOfAllUsersWatchedMovies = usersMovies.Keys.ToArray();
-                //var bestMovieCount = 0;
-                //foreach (var currentWinner in winningUsers)
-                //{
-                //    foreach (var user in arrayOfAllUsersWatchedMovies)
-                //    {
+                var finalWinners = new List<string[]>();
+                var watchedMoviesService = new WatcheMoviesStatisticService(_viewModelsRepository);
+                var usersMovies = watchedMoviesService.GetData();
+                var arrayOfAllUsersWatchedMovies = usersMovies.Select(x=>x.UserEmail).ToArray();
+                var bestMovieCount = 0;
+                foreach (var currentWinner in winningUsers)
+                {
+                    foreach (var user in usersMovies)
+                    {
 
-                //        if (currentWinner[0] == user)
-                //        {
-                //            var currentUserWatchedMovies = usersMovies[user];
-                //            if (currentUserWatchedMovies.Count == bestMovieCount)
-                //            {
-                //                string[] currentEntity = new string[2];
-                //                currentEntity[0] = user;
-                //                currentEntity[1] = bestMovieCount.ToString();
-                //                finalWinners.Add(currentEntity);
-                //            }
-                //            else if (currentUserWatchedMovies.Count > bestMovieCount)
-                //            {
-                //                string[] currentEntity = new string[2];
-                //                bestMovieCount = currentUserWatchedMovies.Count;
-                //                currentEntity[0] = user;
-                //                currentEntity[1] = bestMovieCount.ToString();
-                //                finalWinners.Clear();
-                //                finalWinners.Add(currentEntity);
-                //            }
-                //        }
-                //    }
-                //}
-                //if (finalWinners.Count == 0)
-                //{
-                //    resault = "<div class='redBorder'>The winners are: <br/>";
-                //    foreach (var winner in winningUsers)
-                //    {
-                //        resault += winner[0] + "<br/>";
-                //    }
-                //    resault += "They guessed rigth in " + winningUsers[0][1] + " categories!</div>";
-                //    return resault;
-                //}
-                //else if (finalWinners.Count == 1)
-                //{
-                //    resault = "<div class='redBorder'>" + finalWinners[0][0] + " wins! He/she guessed right in " + winningUsers[0][1] + " categories and watched " + finalWinners[0][1] + " movies!</div>";
-                //    return resault;
-                //}
-                //else
-                //{
-                //    resault = "<div class='redBorder'>The winners are: <br/>";
-                //    foreach (var winner in finalWinners)
-                //    {
-                //        resault += winner[0] + "<br/>";
-                //    }
-                //    resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in " + winningUsers[0][1] + " categories!</div>";
-                //    return resault;
-                //}
-                return resault;
+                        if (currentWinner[0] == user.UserEmail)
+                        {
+                            var currentUserWatchedMovies = user.MovieTitles;
+                            if (currentUserWatchedMovies.Count == bestMovieCount)
+                            {
+                                string[] currentEntity = new string[2];
+                                currentEntity[0] = user.UserEmail;
+                                currentEntity[1] = bestMovieCount.ToString();
+                                finalWinners.Add(currentEntity);
+                            }
+                            else if (currentUserWatchedMovies.Count > bestMovieCount)
+                            {
+                                string[] currentEntity = new string[2];
+                                bestMovieCount = currentUserWatchedMovies.Count;
+                                currentEntity[0] = user.UserEmail;
+                                currentEntity[1] = bestMovieCount.ToString();
+                                finalWinners.Clear();
+                                finalWinners.Add(currentEntity);
+                            }
+                        }
+                    }
+                }
+                if (finalWinners.Count == 0)
+                {
+                    resault = "<div class='redBorder'>The winners are: <br/>";
+                    foreach (var winner in winningUsers)
+                    {
+                        resault += winner[0] + "<br/>";
+                    }
+                    resault += "They guessed rigth in " + winningUsers[0][1] + " categories!</div>";
+                    return resault;
+                }
+                else if (finalWinners.Count == 1)
+                {
+                    resault = "<div class='redBorder'>" + finalWinners[0][0] + " wins! He/she guessed right in " + winningUsers[0][1] + " categories and watched " + finalWinners[0][1] + " movies!</div>";
+                    return resault;
+                }
+                else
+                {
+                    resault = "<div class='redBorder'>The winners are: <br/>";
+                    foreach (var winner in finalWinners)
+                    {
+                        resault += winner[0] + "<br/>";
+                    }
+                    resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in " + winningUsers[0][1] + " categories!</div>";
+                    return resault;
+                }
+
 
 
             }

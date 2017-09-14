@@ -30,6 +30,7 @@ namespace MovieScrapper.Business
                 if (watchedEntity.Email != null)
                 {                   
                     List<string> watchedMoviesList;
+
                     if (!watchedDict.TryGetValue(watchedEntity.Email, out watchedMoviesList))
                     {
                         watchedMoviesList = new List<string>();
@@ -41,46 +42,7 @@ namespace MovieScrapper.Business
             }
 
             return watchedDict.Select(x => new WatchedObject { UserEmail = x.Key, MovieTitles = x.Value }).ToList();       
-        }
-
-        //public Dictionary<string, List<string>> GetData1()
-        //{
-        //    var watchedMovies = _viewModelsRepository.GetWatchedMoviesData();
-        //    var stringArrTitles = watchedMovies.Select(m => m.Title).ToArray();
-        //    var collectionWithAllDistinctTitles = stringArrTitles.Distinct().ToArray();            
-        //    int allTitlesCount = collectionWithAllDistinctTitles.Count();
-        //    var stringArrEmails = watchedMovies.Select(m => m.Email).Where(e => e != null).ToArray();
-        //    var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
-        //    int emailsCount = collectionWithDistinctEmails.Count();         
-
-        //    Dictionary<string, List<string>> myDict = new Dictionary<string, List<string>>();
-          
-        //    foreach(var email in collectionWithDistinctEmails)
-        //    {               
-        //        List<string> userTitles= new List<string>();
-        //        for (int j =0; j< allTitlesCount; j++)
-        //        {
-                   
-        //            string currentTitle;
-        //            foreach (var item in watchedMovies)
-        //            {
-        //                if (item.Email != null)
-        //                {
-        //                    if (item.Email.ToString() == email)
-        //                    {
-        //                        currentTitle = item.Title.ToString();
-        //                        userTitles.Add(currentTitle);
-        //                    }
-        //                }
-        //            }
-                   
-        //        }
-        //        List<string> distinctTitles = userTitles.Distinct().ToList();
-        //        myDict.Add(email, distinctTitles);
-        //    }
-        //    myDict = myDict.OrderByDescending(x => x.Value.Count).ToDictionary(x => x.Key, x => x.Value);
-        //    return myDict;
-        //}
+        }      
 
         public string [] GetTitles()
         {

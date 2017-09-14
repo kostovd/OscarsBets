@@ -4,7 +4,7 @@
     <link href="StatisticsStyleSheet.css" rel="stylesheet" /> 
     <br />   
     <hr />
-    <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false" OnRowDataBound = "OnRowDataBound"></asp:GridView>
+    <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false"  OnSorting="GridView1_Sorting"></asp:GridView>
     
 </asp:Content>
 

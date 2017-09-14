@@ -57,8 +57,6 @@ namespace MovieScrapper.Business
 
         public string GetWinner()
         {
-            string resault = String.Empty;
-
             var users = GetData();            
             List<Winners> winners = _viewModelsRepository.GetWinner();
             List<string[]> winningUsers = new List<string[]>();           
@@ -75,6 +73,7 @@ namespace MovieScrapper.Business
                         scores++;
                     }                  
                 }
+
                 if (scores == currentWinnerScores)
                 {
                     currentWinnerScores = scores;
@@ -98,6 +97,13 @@ namespace MovieScrapper.Business
 
             }
 
+            return DisplayWinner(winningUsers);         
+        }
+
+        private string DisplayWinner(List<string[]> winningUsers)
+        {
+            string resault = String.Empty;
+
             if (winningUsers.Count == 0)
             {
                 resault = "<div class='redBorder'>There are no winners</div>";
@@ -116,7 +122,7 @@ namespace MovieScrapper.Business
                 var finalWinners = new List<string[]>();
                 var watchedMoviesService = new WatcheMoviesStatisticService(_viewModelsRepository);
                 var usersMovies = watchedMoviesService.GetData();
-                var arrayOfAllUsersWatchedMovies = usersMovies.Select(x=>x.UserEmail).ToArray();
+                var arrayOfAllUsersWatchedMovies = usersMovies.Select(x => x.UserEmail).ToArray();
                 var bestMovieCount = 0;
                 foreach (var currentWinner in winningUsers)
                 {
@@ -170,9 +176,6 @@ namespace MovieScrapper.Business
                     resault += "They watched " + finalWinners[0][1] + " movies and guessed rigth in " + winningUsers[0][1] + " categories!</div>";
                     return resault;
                 }
-
-
-
             }
         }
 

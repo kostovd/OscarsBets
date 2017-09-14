@@ -66,12 +66,12 @@ namespace MovieScrapper.CommonPages
             {
 
                 var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
-                var dict = watcheMoviesStatisticService.GetData();
+                var watchedObjects = watcheMoviesStatisticService.GetData();
                 var allTitles = watcheMoviesStatisticService.GetTitles();
-                var arrayOfAllKeys = dict.Keys.ToArray();               
+                var allUsers = watchedObjects.Select(x=>x.UserEmail).ToArray();               
                 var index = e.Row.RowIndex;
-                var userName = arrayOfAllKeys[index];
-                var userTitles = dict[userName];
+                var userName = allUsers[index];
+                var userTitles = watchedObjects[index].MovieTitles;
 
                 e.Row.Cells[0].Text = userName;               
 

@@ -7,7 +7,5 @@
     <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false" AllowSorting="true" OnSorting="GridView1_Sorting">
         <SortedAscendingHeaderStyle CssClass="sortasc" />
         <SortedDescendingHeaderStyle CssClass="sortdesc" />
-    </asp:GridView>
-    
+    </asp:GridView>   
 </asp:Content>
-

@@ -7,7 +7,5 @@ namespace MovieScrapper.Business.Interfaces
         List<WatchedObject> GetData();
 
         string[] GetTitles();
-
-        string[] GetUsers();
     }
 }

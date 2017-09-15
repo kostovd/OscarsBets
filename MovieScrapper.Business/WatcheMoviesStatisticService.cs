@@ -53,15 +53,6 @@ namespace MovieScrapper.Business
             return collectionWithDistinctTitles;
         }
 
-        public string[] GetUsers()
-        {
-            var watchedMovies = _viewModelsRepository.GetWatchedMoviesData();
-            var stringArrEmails = watchedMovies.Select(m=>m.Email).Where(e=>e!=null).ToArray();
-            var collectionWithDistinctEmails = stringArrEmails.Distinct().ToArray();
-
-            return collectionWithDistinctEmails;
-        }
-
     }
 }
 

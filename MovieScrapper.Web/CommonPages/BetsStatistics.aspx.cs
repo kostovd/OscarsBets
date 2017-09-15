@@ -84,18 +84,18 @@ namespace MovieScrapper.CommonPages
                 field = new BoundField();
                 if (GameIsRunning())
                 {
-                    field.HeaderText = "<span class='goldFont'>" + category + "</span>";
+                    field.HeaderText = "<span class='redFont'>" + category + "</span>";
                 }
                 else
                 {
                     if (allWinnersAreSet)
                     {
                         var winner = winners.Where(x => x.Category == category).Select(x => x.Winner).Single();
-                        field.HeaderText = "<span class='goldFont'>" + category + "</span><br/><span style='color:rgb(237,192,116)'>" + winner + "</span>";
+                        field.HeaderText = "<span class='redFont'>" + category + "</span><br/><span style='color:rgb(237,192,116)'>" + winner + "</span>";
                     }
                     else
                     {
-                        field.HeaderText = "<span class='goldFont'>" + category + "</span><br/><span style='font-size:10px;'> Waiting to know the winner </span>";
+                        field.HeaderText = "<span class='redFont'>" + category + "</span><br/><span style='font-size:10px;'> Waiting to know the winner </span>";
                     }
                 }
                 field.DataField = category;
@@ -235,7 +235,6 @@ namespace MovieScrapper.CommonPages
             get { return ViewState["SortExpression"] as string; }
             set { ViewState["SortExpression"] = value; }
         }
-
 
     }
 }

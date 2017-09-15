@@ -60,7 +60,7 @@ namespace MovieScrapper.CommonPages
             foreach (string title in titles)
             {
                 field = new BoundField();                
-                field.HeaderText = "<span class='goldFont'>" + title + "</span>";                            
+                field.HeaderText = "<span class='redFont'>" + title + "</span>";                            
                 field.DataField = title;
                 field.HtmlEncode = false;
                 GridView1.Columns.Add(field);
@@ -94,7 +94,7 @@ namespace MovieScrapper.CommonPages
                 int scores = 0;
                 foreach (var title in user.MovieTitles)
                 {                  
-                        row[title] = "<span style='font-family:Wingdings;color:rgb(179,0,0); text-align: center;font-size:30px;'>&#252;</span>";
+                        row[title] = "<span style='font-family:Wingdings;color:rgb(237,192,116); text-align: center;font-size:30px;'>&#252;</span>";
                         scores++;                 
                 }
 
@@ -111,86 +111,82 @@ namespace MovieScrapper.CommonPages
             GridView1.DataBind();
         }
 
-        //private void BindGrid()
-        //{
-        //    var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
-        //    var users = watcheMoviesStatisticService.GetData();
-        //    DataTable dt = new DataTable();
-
-        //    dt.Columns.AddRange(new DataColumn[2] { new DataColumn("User", typeof(string)), new DataColumn("Sum", typeof(string)),});
-        //    foreach (var user in users)
-        //    {
-        //        dt.Rows.Add(user);
-
-        //    }           
-
-        //    GridView1.DataSource = dt;
-        //    GridView1.DataBind();
-
-        //}
-
-        //protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-
-        //    if (e.Row.RowType == DataControlRowType.DataRow && !this.IsPostBack)
-        //    {
-
-        //        var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
-        //        var watchedObjects = watcheMoviesStatisticService.GetData();
-        //        var allTitles = watcheMoviesStatisticService.GetTitles();
-        //        var allUsers = watchedObjects.Select(x=>x.UserEmail).ToArray();               
-        //        var index = e.Row.RowIndex;
-        //        var userName = allUsers[index];
-        //        var userTitles = watchedObjects[index].MovieTitles;
-
-        //        e.Row.Cells[0].Text = userName;               
-
-        //        e.Row.Cells[1].Text = userTitles.Count.ToString();
-        //        e.Row.Cells[1].CssClass = "columnscss";
-
-        //        for (int i = 0; i <allTitles.Count(); i++)
-        //        {
-        //            for(int j = 0; j < userTitles.Count; j++)
-        //            {
-        //                if (allTitles[i] == userTitles[j])
-        //                {
-
-        //                        e.Row.Cells[i + 2].Text = "<span style='font-family:Wingdings;color:rgb(179,0,0); text-align: center;font-size:30px;'>&#252;</span>";                              
-        //                        e.Row.Cells[i+2].CssClass = "columnscss";
-        //                }
-        //            }
-
-        //        }
-
-        //    }
-
-        //}
-
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
             //var betStatisticServices = GetBuisnessService<IBetStatisticService>();
-            //var categories = betStatisticServices.GetCategories();
+            var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
+            var titles = watcheMoviesStatisticService.GetTitles();
 
-            //DataTable dt = CreateDataTable(categories);
-            //dt = FillDataTable(dt);
-            //DataView dv = new DataView(dt);
+            DataTable dt = CreateDataTable(titles);
+            dt = FillDataTable(dt);
+            DataView dv = new DataView(dt);
 
-            //SortDirection sortDirection = GetSortDiraction(e.SortExpression);
+            SortDirection sortDirection = GetSortDiraction(e.SortExpression);
 
-            //if (sortDirection == SortDirection.Ascending)
+            if (sortDirection == SortDirection.Ascending)
+            {
+                dv.Sort = e.SortExpression + " ASC";
+            }
+            else
+            {
+                dv.Sort = e.SortExpression + " DESC";
+            }
+
+            e.SortDirection = sortDirection;
+            BindDataTableToGrid(dv);
+
+            GridViewSortExpression = e.SortExpression;
+            GridViewSortDirection = sortDirection;
+        }
+
+        private SortDirection GetSortDiraction(string sortExpression)
+        {
+            //if (sortExpression != GridViewSortExpression)
             //{
-            //    dv.Sort = e.SortExpression + " ASC";
-            //}
-            //else
-            //{
-            //    dv.Sort = e.SortExpression + " DESC";
+            //    return SortDirection.Ascending;
             //}
 
-            //e.SortDirection = sortDirection;
-            //BindDataTableToGrid(dv);
+            //return (GridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending);
 
-            //GridViewSortExpression = e.SortExpression;
-            //GridViewSortDirection = sortDirection;
+
+            SortDirection res;
+
+            if (sortExpression == GridViewSortExpression)
+            {
+                if (GridViewSortDirection == SortDirection.Ascending)
+                {
+                    res = SortDirection.Descending;
+                }
+                else
+                {
+                    res = SortDirection.Ascending;
+                }
+            }
+            else
+            {
+                res = SortDirection.Ascending;
+            }
+
+            return res;
+        }
+
+        private SortDirection GridViewSortDirection
+        {
+            get
+            {
+                if (ViewState["SortDirection"] == null)
+                    ViewState["SortDirection"] = SortDirection.Ascending;
+
+                return (SortDirection)ViewState["SortDirection"];
+            }
+            set { ViewState["SortDirection"] = value; }
+        }
+
+
+        private string GridViewSortExpression
+        {
+            get { return ViewState["SortExpression"] as string; }
+            set { ViewState["SortExpression"] = value; }
         }
     }
 }

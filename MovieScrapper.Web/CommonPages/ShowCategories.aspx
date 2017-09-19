@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowCategories.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowCategories" MasterPageFile="~/Site.Master" %>
-
+<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
     <asp:Label ID="GreatingLabel" runat="server" CssClass="warning" ></asp:Label>
@@ -18,17 +18,13 @@
                         <div>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div  class ="movieItem <%#  CheckIfWinner(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id)  %>"  >
-                            <div class="title">
-                                <div class="items " >                                   
-                                    <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
-                                    <br />
-                                    <a href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>                                   
-                                    <hr />
-                                    <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB"><img class="imdb" src="/imdb.svg" /> </a>
-                                    <asp:Button ID="MarkAsBettedButton"
+                        <div class=" pattern">
+                            <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
+                                <div class="under-movie">
+                                      <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
+                                      <asp:Button ID="MarkAsBettedButton"
                                         runat="server"
-                                        CssClass="items checkButton"
+                                        CssClass="checkButton"
                                         Text='<%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>'
                                         CommandName="MarkAsBetted"
                                         CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
@@ -36,11 +32,9 @@
                                         enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
                                         visible="<%#!IsGameNotStartedYet()%>"
                                         />
+                                       
+                                   </div>
                                 </div>
-                            </div>
-                            
-                            <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
-                        </div>
                     </ItemTemplate>
                     <FooterTemplate>
                         </div>

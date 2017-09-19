@@ -15,32 +15,7 @@ namespace MovieScrapper
         {
 
         }
-
-        //public bool IsGameRunning()
-        //{
-        //    var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-        //    if (gamePropertyService.IsGameStopped() == false)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        //public bool IsGameNotStartedYet()
-        //{
-        //    var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-        //    if (gamePropertyService.IsGameNotStartedYet() == true)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+      
 
         public string BuildPosterUrl(string path)
         {
@@ -65,7 +40,7 @@ namespace MovieScrapper
         protected string BuildUrl(int movieId)
         {
 
-            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=" + Request.Url.AbsolutePath;
+            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=" + Request.Url.AbsoluteUri;
         }
 
         protected string BuildImdbUrl(string movieId)

@@ -158,3 +158,11 @@ a {
     top: -130px;
     left: 110px;
 }
+
+.admin-buttons {
+    border: none;
+    background-color: gray;
+    color: rgb(237,192,116);
+    font-size:15px;
+    margin:3px;
+}

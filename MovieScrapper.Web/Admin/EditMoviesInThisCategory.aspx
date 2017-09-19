@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditMoviesInThisCategory.aspx.cs" Inherits="MovieScrapper.Admin.EditMoviesInThisCategory" MasterPageFile="~/Site.Master"%>
+<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
     <link href="../CommonPages/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
@@ -22,41 +23,27 @@
             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
             <ItemStyle BackColor="#EFF3FB" />
             <ItemTemplate>
-                <div class="movieItem <%#  CheckIfWinner(Item.Id)  %> ">  
-                  <div class="title">
-                      <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item.Id) %>" title="WINNER!"/>
-                      <%# Item.Title %> (<%# DisplayYear((string)Item.ReleaseDate) %>)
-                      
-                      <asp:Button 
+                <div class=" pattern">
+                            <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
+                                <div class="under-movie">                                    
+                                    <asp:Button 
                           ID="DeleteButton" 
                           runat="server" 
-                          CssClass="items"  
+                          CssClass="admin-buttons"  
                           Text="Delete" 
                           CommandName="Delete" 
                           CommandArgument='<%# Item.Id %>'  
                           OnClientClick="return confirm('Are you sure you want to delete this item?')"
                           />
-                                          
-                      <asp:Button 
-                          ID="ShowDetailsButton" 
-                          runat="server" 
-                          CssClass="items"
-                          Text="Show details"  
-                          CommandName="ShowDetails" 
-                          CommandArgument='<%# Item.Id %>'   
-                          />                      
-                      
-                      <asp:Button 
+                                    <asp:Button 
                           ID="MarkAsWinnerButton" 
                           runat="server" 
-                          CssClass="items"
+                          CssClass="admin-buttons"
                           Text="Mark as winner" 
                           CommandName="MarkAsWinner" 
                           CommandArgument='<%# Item.Id %>'   
                           />
-                  </div>  
-                  &nbsp;
-                  <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
+                                </div>
                 </div>
             </ItemTemplate>
             <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

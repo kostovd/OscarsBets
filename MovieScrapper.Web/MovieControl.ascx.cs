@@ -16,31 +16,31 @@ namespace MovieScrapper
 
         }
 
-        public bool IsGameRunning()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameStopped() == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public bool IsGameRunning()
+        //{
+        //    var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+        //    if (gamePropertyService.IsGameStopped() == false)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        public bool IsGameNotStartedYet()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameNotStartedYet() == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public bool IsGameNotStartedYet()
+        //{
+        //    var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+        //    if (gamePropertyService.IsGameNotStartedYet() == true)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         public string BuildPosterUrl(string path)
         {
@@ -65,7 +65,7 @@ namespace MovieScrapper
         protected string BuildUrl(int movieId)
         {
 
-            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowAllDBMovies";
+            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=" + Request.Url.AbsolutePath;
         }
 
         protected string BuildImdbUrl(string movieId)
@@ -74,11 +74,11 @@ namespace MovieScrapper
             return "http://www.imdb.com/title/" + movieId;
         }
 
-        protected T GetBuisnessService<T>()
-        {
-            IUnityContainer container = (IUnityContainer)Application["EntLibContainer"];
-            return container.Resolve<T>();
-        }
+        //protected T GetBuisnessService<T>()
+        //{
+        //    IUnityContainer container = (IUnityContainer)Application["EntLibContainer"];
+        //    return container.Resolve<T>();
+        //}
 
     }
 }

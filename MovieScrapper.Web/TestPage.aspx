@@ -6,7 +6,6 @@
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning-left" ></asp:Label>
     <br /> 
     
-    <br />
     <asp:Repeater ID="Repeater1" runat="server"
                         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1">
                         <HeaderTemplate>

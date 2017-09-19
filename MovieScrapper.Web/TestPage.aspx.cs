@@ -14,7 +14,20 @@ namespace MovieScrapper
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            if (!User.Identity.IsAuthenticated)
+            {
+                GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
+            }
+            else
+            {
+                GreatingLabel.CssClass = "hidden";
+            }
+            if (gamePropertyService.IsGameNotStartedYet())
+            {
+                GreatingLabel.CssClass = "hidden";
+                WarningLabel.CssClass = "hidden";
+            }
         }
         protected bool CheckIfTheUserIsLogged()
         {

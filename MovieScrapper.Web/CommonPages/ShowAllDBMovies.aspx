@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowAllDBMovies.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowAllDBMovies" MasterPageFile="~/Site.Master" %>
-
+<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <link href="MovieStyleSheet.css" rel="stylesheet" />    
     <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="warning-left"></asp:Label>
@@ -11,26 +11,21 @@
                             <div>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <div class="movieItem">
-                                <div class="title">
-                                    <div ="items">                                      
-                                       <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>"><%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)</a>                                                                             
-                                        <a href="<%# BuildImdbUrl(Item.ImdbId) %>" target="_newtab" title="See the info in IMDB" ><img class="imdb" src="/imdb.svg" /> </a>
-                                        <asp:Button ID="MarkAsWatchedButton" 
+                            <div class=" pattern">
+                            <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
+                                <div class="under-movie">
+                                    <asp:Button ID="MarkAsWatchedButton" 
                                             runat="server" 
-                                            CssClass="items checkButton" 
+                                            CssClass="checkButton" 
                                             Text= "<%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie) %>" 
                                             CommandName="MarkAsWatchedOrUnwatched" 
                                             CommandArgument='<%# Item.Id %>'
                                             title="Mark this movie as watched"
                                             enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
                                             visible="<%#!IsGameNotStartedYet()%>"
-                                            /> 
-                                    </div>
+                                      />  
+                                   </div>
                                 </div>
-                                <img class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
-                            </div>
-                            
                         </ItemTemplate>
                         <FooterTemplate>
                             </div>

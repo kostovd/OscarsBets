@@ -8,26 +8,47 @@
 
 .linkTitle {
     margin-bottom: 5px;
-    font-size: 20px;
-    color:slategray;
-    
+    font-size: 18px;
+    color: rgb(179,0,0);
 }
 
+.pattern {
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 3px;
+    background-color: lightgrey;
+    border-radius: 7px;
+}
 
+.under-movie {
+    background-color: grey;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.checkButton {
+    font-family: Wingdings;
+    background-color: gray;
+    border: none;
+    width: 30px;
+    height: 30px;
+    color: rgb(179,0,0);
+    font-size: 25px;
+    margin-bottom:5px;
+}
 .movieItem {
     width: 270px;
-    height: 220px;
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    margin: 7px;
     position: relative;
 }
 
 .items {
     display: block;
     padding: 3px;
-    margin:7px;
+    margin:0px;
     font-size: 16px;
     width: 120px;
     height: 30px;
@@ -61,15 +82,7 @@ a {
     color:darkgray;
 }
 
-.checkButton {
-    font-family: Wingdings;
-    background-color: ghostwhite;
-    border: none;
-    width: 30px;
-    height: 30px;
-    color:darkslategrey;
-    font-size:25px;
-}
+
 
 .greatingLabel {
     margin: 3px;
@@ -124,7 +137,7 @@ a {
     font-weight: bold;   
 }
 .imdb {
-    width:50px;
+    width:30px;
 }
 .notWinner {
     padding: 5px;

@@ -60,12 +60,7 @@ namespace MovieScrapper.Secured
             
 
         }
-
-        protected string BuildUrl(string path)
-        {
-
-            return "http://image.tmdb.org/t/p/w92" + path;
-        }
+     
 
         protected string BuildUrlWithName(string name)
         {
@@ -96,21 +91,7 @@ namespace MovieScrapper.Secured
 
         }
 
-        protected string DisplayYear(string dateString)
-        {
-            DateTime res;
-
-            if (DateTime.TryParse(dateString, out res))
-            {
-                return res.Year.ToString();
-            }
-            else
-            {
-                return dateString;
-            }
-
-        }
-
+       
         protected void BackToEditMoviesInThisCategoryButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Admin/EditMoviesInThisCategory.aspx?categoryId=" + Request.QueryString["categoryId"]);

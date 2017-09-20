@@ -10,8 +10,6 @@ namespace MovieScrapper.Admin
 {
     public partial class EditMoviesInThisCategory : BasePage
     {
-       // [Dependency]
-       // public ICategoryRepository CategoryRepository { get; }
 
         private ICategoryService GetCategoryService()
         {
@@ -21,7 +19,6 @@ namespace MovieScrapper.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //var repo = new CategoryRepository();
 
             if (!Page.IsPostBack)
             {
@@ -32,48 +29,7 @@ namespace MovieScrapper.Admin
             }
         }
 
-        public string DisplayYear(string dateString)
-        {
-            DateTime res;
 
-            if (DateTime.TryParse(dateString, out res))
-            {
-                return res.Year.ToString();
-            }
-            else
-            {
-                return dateString;
-            }
-
-        }
-
-        public string BuildPosterUrl(string path)
-        {
-
-            return "http://image.tmdb.org/t/p/w92" + path;
-        }
-
-        public string BuildUrlWithId(string id)
-        {
-            var categoryId = Request.QueryString["categoryId"];
-            
-                string encodedBackUrl = Server.UrlEncode("DBMovieDetails?id=" + id);
-                return "EditMoviesInThisCategory?categoryId=" +  categoryId + "&back=" + encodedBackUrl;
-                     
-        }
-
-        public string BuildUrlWithName(string name)
-        {
-            var categoryId = Request.QueryString["categoryId"];
-            if (categoryId != null)
-            {
-                return "ShowMovies?name=" + name + "&categoryId=" + categoryId;
-            }
-            else
-            {
-                return "ShowMovies?name=" + name;
-            }
-        }
 
         protected void AddMovieToThisCategoryButton_Click(object sender, EventArgs e)
         {

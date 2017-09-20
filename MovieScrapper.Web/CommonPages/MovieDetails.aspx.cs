@@ -84,20 +84,7 @@ namespace MovieScrapper
                 var movieId = Int32.Parse(Request.QueryString["id"]);
                 var movieService = GetBuisnessService<IMovieService>();
                 var categoryService = GetBuisnessService<ICategoryService>();
-                categoryService.AddMovieInCategory(categoryId, movie);
-
-                //var hasMovie = movieService.HasMovie(movieId);                
-                //var hasMovieInCategory = categoryService.HasMovieInCategory(categoryId, movieId);
-
-                //if (!hasMovie)
-                //{
-                //    movieService.AddMovie(movie);                 
-                //}
-
-                //if (!hasMovieInCategory)
-                //{
-                //    categoryService.AddMovieInCategory(categoryId, movieId);                   
-                //}
+                categoryService.AddMovieInCategory(categoryId, movie);              
 
                 Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
             }

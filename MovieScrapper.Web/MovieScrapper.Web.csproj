@@ -218,7 +218,6 @@
     <Content Include="Admin\Categories.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="CommonPages\BetsStatistics.aspx" />
-    <Content Include="CommonPages\DBMovieDetails.aspx" />
     <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
     <Content Include="CommonPages\ShowCategories.aspx" />
@@ -248,6 +247,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\LargePoster.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -440,13 +440,6 @@
     </Compile>
     <Compile Include="CommonPages\BetsStatistics.aspx.designer.cs">
       <DependentUpon>BetsStatistics.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CommonPages\DBMovieDetails.aspx.cs">
-      <DependentUpon>DBMovieDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPages\DBMovieDetails.aspx.designer.cs">
-      <DependentUpon>DBMovieDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPages\MoviesStatistic.aspx.cs">
       <DependentUpon>MoviesStatistic.aspx</DependentUpon>

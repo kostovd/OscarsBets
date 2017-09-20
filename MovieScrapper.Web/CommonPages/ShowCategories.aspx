@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowCategories.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowCategories" MasterPageFile="~/Site.Master" %>
 <%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="MovieStyleSheet.css" rel="stylesheet" />
+    <script src="../Scripts/LargePoster.js"></script>
     <asp:Label ID="GreatingLabel" runat="server" CssClass="warning" ></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning" ></asp:Label>
     <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>  

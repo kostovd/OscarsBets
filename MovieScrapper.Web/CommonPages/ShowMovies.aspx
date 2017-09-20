@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ShowMovies.aspx.cs" 
     Inherits="MovieScrapper.Secured.MyMovies" Async="true" %>
+<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
 
@@ -19,15 +20,9 @@
     <p>
         <asp:DataList ID="MoviesDataList" runat="server" RepeatColumns="3" RepeatDirection="Horizontal" RepeatLayout="Flow" >
             <ItemTemplate>
-              <div class="movieItem">  
-                  <div id="title">
-                      <%# Eval("Title") %> (<%# DisplayYear((string)Eval("ReleaseDate")) %>)
-                      <br>
-                      </br>
-                      <a id="buildUrlWithId" runat="server" href=<%# BuildUrlWithId((int)Eval("Id")) %>>Details</a>
-                  </div>  
-                  <img class="poster" src=<%# BuildUrl((string)Eval("PosterPath")) %> />                                                  
-              </div>
+                <div class=" pattern">
+                    <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)Container.DataItem) %>" /> 
+                </div>
             </ItemTemplate>
         </asp:DataList>
     </p>

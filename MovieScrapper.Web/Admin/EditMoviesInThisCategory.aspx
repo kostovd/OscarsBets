@@ -25,7 +25,8 @@
             <ItemTemplate>
                 <div class=" pattern">
                             <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
-                                <div class="under-movie">                                    
+                                <div class="under-movie">  
+                                     <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item.Id) %>" title="WINNER!"/>
                                     <asp:Button 
                           ID="DeleteButton" 
                           runat="server" 

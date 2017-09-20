@@ -60,38 +60,7 @@ namespace MovieScrapper.CommonPages
                 return false;
             }
         }
-
-        public string BuildPosterUrl(string path)
-        {
-            return "http://image.tmdb.org/t/p/w92" + path;
-        }
-
-        public string DisplayYear(string dateString)
-        {
-            DateTime res;
-
-            if (DateTime.TryParse(dateString, out res))
-            {
-                return res.Year.ToString();
-            }
-            else
-            {
-                return dateString;
-            }
-
-        }
-
-        protected string BuildImdbUrl(string movieId)
-        {
-
-            return "http://www.imdb.com/title/" + movieId;
-        }
-
-        protected string BuildUrl(int movieId)
-        {
-
-            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=/CommonPages/ShowCategories";
-        }
+       
 
         protected void Repeater2_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -246,7 +215,7 @@ namespace MovieScrapper.CommonPages
                 WarningLabel.CssClass = "hidden";
             }
 
-            //////////////// Show right gestures statistic label /////////////////////
+            //////////////// Show right suggestions statistic label /////////////////////
 
             if (CheckIfTheUserIsLogged() == true && IsGameRunning() == false)
             {
@@ -270,7 +239,7 @@ namespace MovieScrapper.CommonPages
                     }
                     else
                     {
-                        WinnerLabel.Text = "Sorry, you don't have right gestures";
+                        WinnerLabel.Text = "Sorry, you don't have right suggestions";
                     }
                 }
                 else

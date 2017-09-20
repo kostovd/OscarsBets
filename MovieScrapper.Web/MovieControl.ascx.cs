@@ -40,7 +40,7 @@ namespace MovieScrapper
         protected string BuildUrl(int movieId)
         {
 
-            return "/CommonPages/DBMovieDetails.aspx?id=" + movieId + "&back=" + Request.Url.AbsoluteUri;
+            return "/CommonPages/MovieDetails.aspx?id=" + movieId + "&back=" + Request.Url.PathAndQuery;
         }
 
         protected string BuildImdbUrl(string movieId)
@@ -48,12 +48,6 @@ namespace MovieScrapper
 
             return "http://www.imdb.com/title/" + movieId;
         }
-
-        //protected T GetBuisnessService<T>()
-        //{
-        //    IUnityContainer container = (IUnityContainer)Application["EntLibContainer"];
-        //    return container.Resolve<T>();
-        //}
 
     }
 }

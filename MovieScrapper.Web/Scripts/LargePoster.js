@@ -1,30 +1,35 @@
 ﻿$(document).ready(function () {
-	// Get the modal
-	
-	var modal = document.getElementById('myModal');
-	var movies = $('.movieItem');
-	movies.each(function () {
-		var img = $('#myImg');
-		img.onclick = function () {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-			captionText.innerHTML = this.alt;
-		}
-		var modalImg = $('#img01');
-		var captionText = $('#caption');
+		
+	$.each($('.movieItem'), function (index, item) {
+		$(item).find('.poster').attr('data-poster', index);
+		$(item).find('.modal').attr('data-modal', index);
+		$(item).find('.modal-content').attr('data-modalposter', index);
+		$(item).find('.close').attr('data-close', index);
 	});
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	
-	//var modalImg = document.getElementById("img01");
-	//var captionText = document.getElementById("caption");
-	
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function () {
-		modal.style.display = "none";
-	}
+	$(".poster").each(function (index, element) {
+		var poster = $(this);
+		//console.log(poster.data("poster"));
+		poster.on("click", function () {
+			imgSrc = this.src;
+			var newImgSrc = imgSrc.replace("w92", "w300");
+			//console.log(imgsrc);
+			var index = $(this).data('poster');
+			console.log(index);
+			var modal = $('div[data-modal="' + index + '"]');
+			var modalImg = $('[data-modalposter="' + index + '"]');
+			var span = $('[data-close="' + index + '"]')[0];
+
+			modal[0].style.display = "block";
+			modalImg[0].src = newImgSrc;
+
+			span.onclick = function () {
+				modal[0].style.display = "none";
+			}
+		});
+		
+	});
+	
 	
 })

@@ -5,6 +5,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
 
     <link href="MovieStyleSheet.css" rel="stylesheet" />
+    <script src="../Scripts/LargePoster.js"></script>
     <p>&nbsp;</p>
     <p>
         <asp:Panel runat="server" DefaultButton="SearchButton">

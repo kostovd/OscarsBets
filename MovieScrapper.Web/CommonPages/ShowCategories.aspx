@@ -12,7 +12,7 @@
             ItemType="MovieScrapper.Entities.Category">
             <ItemTemplate>
                 <br />                
-                <asp:Label ID="CategoryTtleLabel" class="categoryTtleLabel" runat="server" ToolTip="<%# Item.CategoryDescription %>" Text='<%# Item.CategoryTtle %>' />
+                <asp:Label ID="CategoryTtleLabel" cssClass= "categoryTitle" runat="server" ToolTip="<%# Item.CategoryDescription %>" Text='<%# Item.CategoryTtle %>' />
                 <hr />
                 <asp:Repeater ID="Repeater2" runat="server"
                     ItemType="MovieScrapper.Entities.Movie" DataSource="<%# Item.Movies %>" OnItemCommand="Repeater2_ItemCommand">

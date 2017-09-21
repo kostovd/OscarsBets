@@ -6,6 +6,12 @@
     visibility: hidden;
 }
 
+.categoryTitle {
+    color: rgb(179,0,0);
+    text-transform: uppercase;
+    font-size:18px;
+}
+
 .linkTitle {
     margin-bottom: 5px;
     font-size: 18px;
@@ -162,10 +168,11 @@ a {
 
 .admin-buttons {
     border: none;
-    background-color: gray;
-    color: rgb(237,192,116);
-    font-size:15px;
-    margin:3px;
+    background-color: LightGray;
+    color: white;
+    text-decoration:underline;
+    font-size: 15px;
+    margin: 3px;
 }
 
 

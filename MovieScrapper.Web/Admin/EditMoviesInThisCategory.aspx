@@ -3,11 +3,12 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
     <link href="../CommonPages/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/LargePoster.js"></script>
     <br />
     <hr />
  
         <div>
-            <asp:Label ID="CategoryTitle" runat="server" style="text-transform: uppercase;"></asp:Label>           
+            <asp:Label ID="CategoryTitle" runat="server" cssClass= "categoryTitle" ></asp:Label>           
         </div>
         <hr />       
         <asp:DataList ID="DataList1" runat="server" 

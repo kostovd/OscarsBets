@@ -18,6 +18,11 @@
     color: rgb(179,0,0);
 }
 
+.label {
+    color: rgb(179,0,0);
+    position: absolute;
+    top:10px;
+}
 .pattern {
     display: inline-block;
     margin-bottom: 5px;
@@ -43,7 +48,7 @@
     height: 30px;
     color: rgb(179,0,0);
     font-size: 25px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 .movieItem {
     width: 270px;

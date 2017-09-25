@@ -34,7 +34,7 @@
                                         enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
                                         visible="<%#!IsGameNotStartedYet()%>"
                                         />
-                                       
+                                    <span class="label" visible="<%#!IsGameNotStartedYet()%>">Bet for this movie!</span>                                       
                                    </div>
                                 </div>
                     </ItemTemplate>

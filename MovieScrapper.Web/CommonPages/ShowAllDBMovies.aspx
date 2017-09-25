@@ -25,6 +25,7 @@
                                             enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
                                             visible="<%#!IsGameNotStartedYet()%>"
                                       />  
+                                    <span class="label" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span> 
                                    </div>
                                 </div>
                         </ItemTemplate>

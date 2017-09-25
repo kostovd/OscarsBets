@@ -206,7 +206,7 @@ namespace MovieScrapper.CommonPages
                 else
                 {
                     WarningLabel.CssClass = "goldBorder";
-                    WarningLabel.Text = "Congretilations! You betted in all the " + categoryCount + " categories.";
+                    WarningLabel.Text = "Congratulations! You betted in all the " + categoryCount + " categories.";
                 }
 
             }
@@ -230,11 +230,11 @@ namespace MovieScrapper.CommonPages
                         }
                         else if (counter == 1)
                         {
-                            WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " category.";
+                            WinnerLabel.Text = "Congratulations! You guessed right in " + counter + " category.";
                         }
                         else
                         {
-                            WinnerLabel.Text = "Congretulations! You guessed right in " + counter + " categories.";
+                            WinnerLabel.Text = "Congratulations! You guessed right in " + counter + " categories.";
                         }
                     }
                     else

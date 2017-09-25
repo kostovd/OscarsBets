@@ -29,6 +29,7 @@ namespace MovieScrapper.CommonPages
             {
                 GreatingLabel.CssClass = "hidden";
                 WarningLabel.CssClass = "hidden";
+                
             }
             
         }
@@ -170,7 +171,7 @@ namespace MovieScrapper.CommonPages
                 else
                 {
                     WarningLabel.CssClass = "goldBorder-left";
-                    WarningLabel.Text = "Congretilations! You have watched all the " + moviesCount + " movies!";
+                    WarningLabel.Text = "Congratulations! You have watched all the " + moviesCount + " movies!";
                 }
             }
             else

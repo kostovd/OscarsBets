@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MovieDetails.aspx.cs" Inherits="MovieScrapper.MovieDetails" Async="true" MasterPageFile="~/Site.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
-    <link href="MovieDetail.css" rel="stylesheet" type="text/css" />       
+    <link href="../Content/MovieDetail.css" rel="stylesheet" type="text/css" />       
         <asp:DetailsView ID="DetailsView1" runat="server" Height="157px"  Width="279px" AutoGenerateRows="false" BorderStyle="None" GridLines="None" >
         <Fields>            
             <asp:TemplateField>

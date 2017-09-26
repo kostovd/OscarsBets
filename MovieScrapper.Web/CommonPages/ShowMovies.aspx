@@ -4,7 +4,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
 
-    <link href="MovieStyleSheet.css" rel="stylesheet" />
+    <link href="../Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/LargePoster.js"></script>
     <p>&nbsp;</p>
     <p>

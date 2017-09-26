@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
-    <link href="../CommonPages/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/LargePoster.js"></script>
     <br />
     <hr />

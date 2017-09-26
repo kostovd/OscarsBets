@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
-    <link href="AdminStyleSheet.css" rel="stylesheet" /> 
+    <link href="../Content/AdminStyleSheet.css" rel="stylesheet" type="text/css" /> 
     <div class="calendar">
         <h3 class="calendarTitle">Enter start game date</h3>
         <asp:Calendar ID="StartGameCalendar" cssClass="calendar" runat="server" ></asp:Calendar>              

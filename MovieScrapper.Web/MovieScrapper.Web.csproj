@@ -211,7 +211,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
-    <Content Include="Admin\AdminStyleSheet.css" />
+    <Content Include="Content\AdminStyleSheet.css" />
     <Content Include="Admin\Calendar.aspx" />
     <Content Include="Admin\EditCategory.aspx" />
     <Content Include="Admin\EditMoviesInThisCategory.aspx" />
@@ -221,7 +221,7 @@
     <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
     <Content Include="CommonPages\ShowCategories.aspx" />
-    <Content Include="CommonPages\StatisticsStyleSheet.css" />
+    <Content Include="Content\StatisticsStyleSheet.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -237,12 +237,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="images\icons\imdb.svg" />
+    <Content Include="Oscar_logo.eps" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="CommonPages\MovieDetail.css" />
+    <Content Include="Content\MovieDetail.css" />
     <Content Include="CommonPages\MovieDetails.aspx" />
     <Content Include="images\icons\AscArrow.png" />
     <Content Include="images\icons\DescArrow.png" />
-    <Content Include="MovieControl.ascx" />
+    <Content Include="MovieControl.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\oscar.ico" />
+    <Content Include="Oscar_logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -274,7 +281,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="CommonPages\MovieStyleSheet.css" />
+    <Content Include="Content\MovieStyleSheet.css" />
     <Content Include="CommonPages\ShowMovies.aspx" />
     <Content Include="Site.Master" />
     <Content Include="SiteMaster.css" />
@@ -465,9 +472,11 @@
     <Compile Include="MovieControl.ascx.cs">
       <DependentUpon>MovieControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MovieControl.ascx.designer.cs">
       <DependentUpon>MovieControl.ascx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="TestPage.aspx.cs">
       <DependentUpon>TestPage.aspx</DependentUpon>
@@ -528,12 +537,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Secured\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

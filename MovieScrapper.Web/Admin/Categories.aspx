@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="MovieScrapper.Admin.Categories" MasterPageFile="~/Site.Master" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
-    <link href="AdminStyleSheet.css" rel="stylesheet" />
+    <link href="../Content/AdminStyleSheet.css" rel="stylesheet" type="text/css" />
         <div>
             <asp:Button ID="AddCategoryButton" cssClass="adminMemuButton" runat="server" OnClick="AddCategoryButton_Click" Text="Add category"  />           
             <asp:Button ID="EditUsers" cssClass="adminMemuButton" runat="server" OnClick="EditUsersButton_Click" Text="Edit Users"  />

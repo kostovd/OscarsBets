@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BetsStatistics.aspx.cs" Inherits="MovieScrapper.CommonPages.BetsStatistics" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <link href="StatisticsStyleSheet.css" rel="stylesheet" />    
+    <link href="../Content/StatisticsStyleSheet.css" rel="stylesheet" type="text/css"/>    
     
     <asp:Label ID="Label1" runat="server"></asp:Label>
     <a class="link" href="MoviesStatistic.aspx">See also the statistic for watched movies</a>

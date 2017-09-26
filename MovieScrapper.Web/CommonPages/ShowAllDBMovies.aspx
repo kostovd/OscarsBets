@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowAllDBMovies.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowAllDBMovies" MasterPageFile="~/Site.Master" %>
 <%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <link href="MovieStyleSheet.css" rel="stylesheet" />  
+    <link href="../Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" /> 
     <script src="../Scripts/LargePoster.js"></script>
     <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="warning-left"></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning-left" ></asp:Label>

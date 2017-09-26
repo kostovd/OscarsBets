@@ -39,7 +39,7 @@
             </Scripts>
         </asp:ScriptManager>        
         <div class="navbar navbar-inverse ">  
-            <div class="" id="top-content"><img id="logo" src="/oscar.ico" />
+            <div class="" id="top-content"><img id="logo" src="/images/oscar.ico" />
                 <asp:Label ID="stopGameLabel" runat="server" CssClass="showIfGameStopped" ></asp:Label>
             </div>
             <div class="container">

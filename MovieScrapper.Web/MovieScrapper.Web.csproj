@@ -226,7 +226,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="favicon.ico" />
+    <Content Include="images\icons\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -238,7 +238,6 @@
     </Content>
     <Content Include="Admin\Web.config" />
     <Content Include="images\icons\imdb.svg" />
-    <Content Include="Oscar_logo.eps" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\MovieDetail.css" />
@@ -249,7 +248,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="images\oscar.ico" />
-    <Content Include="Oscar_logo.png" />
+    <Content Include="images\Oscar_logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -284,8 +283,7 @@
     <Content Include="Content\MovieStyleSheet.css" />
     <Content Include="CommonPages\ShowMovies.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="SiteMaster.css" />
-    <Content Include="TestPage.aspx" />
+    <Content Include="Content\SiteMaster.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -477,13 +475,6 @@
     <Compile Include="MovieControl.ascx.designer.cs">
       <DependentUpon>MovieControl.ascx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="TestPage.aspx.cs">
-      <DependentUpon>TestPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestPage.aspx.designer.cs">
-      <DependentUpon>TestPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebContainerManager.cs" />
     <Compile Include="Default.aspx.cs">

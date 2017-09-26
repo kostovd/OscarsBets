@@ -2,8 +2,8 @@
 <%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="../Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
-    <script src="../Scripts/LargePoster.js"></script>
+    <link href="/Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/LargePoster.js"></script>
     <asp:Label ID="GreatingLabel" runat="server" CssClass="warning" ></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning" ></asp:Label>
     <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>  

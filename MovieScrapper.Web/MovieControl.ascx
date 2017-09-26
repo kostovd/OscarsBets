@@ -9,7 +9,7 @@
                                        
          </div>
      </div >   
-     <img id= "myImg" class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" alt="test" />
+     <img id= "myImg" class="poster" src="<%# BuildPosterUrl(Item.PosterPath) %>" />
          
      <div id="myModal" class="modal">
          <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>

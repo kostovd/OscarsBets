@@ -108,7 +108,7 @@ namespace MovieScrapper.Admin
             {
                 if (winner.Id.ToString() == currentMovieId.ToString())
                 {
-                    return "/Oscar_logo.png";
+                    return "/images/Oscar_logo.png";
                 }
                 else
                 {

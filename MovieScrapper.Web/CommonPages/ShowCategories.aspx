@@ -24,16 +24,16 @@
                             <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
                                 <div class="under-movie">
                                       <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
-                                      <asp:Button ID="MarkAsBettedButton"
+                                      <asp:LinkButton ID="MarkAsBettedButton"
                                         runat="server"
-                                        CssClass="checkButton"
-                                        Text='<%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>'
+                                        Text=""
                                         CommandName="MarkAsBetted"
-                                        CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'
-                                        title="Bet that the movie will be the winer in this category"
+                                        CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent, "DataItem.Id")) %>'                       
                                         enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
-                                        visible="<%#!IsGameNotStartedYet()%>"
-                                        />
+                                        visible="<%#!IsGameNotStartedYet()%>">
+                                          <%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent, "DataItem.Bets"), Item.Id) %>
+                                      </asp:LinkButton>
+                                        
                                     <span class="label" visible="<%#!IsGameNotStartedYet()%>">Bet for this movie!</span>                                       
                                    </div>
                                 </div>

@@ -40,15 +40,9 @@
     border-bottom-right-radius: 7px;
     position: relative;
 }
-.checkButton {
-    font-family: Wingdings;
-    background-color: LightGray;
-    border: none;
-    width: 30px;
-    height: 30px;
+.check-button {
     color: rgb(179,0,0);
-    font-size: 25px;
-    margin-bottom: 2px;
+    margin: 7px;
 }
 .movieItem {
     width: 270px;

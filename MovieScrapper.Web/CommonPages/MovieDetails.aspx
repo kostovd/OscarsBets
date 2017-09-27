@@ -15,7 +15,7 @@
                                 <%# Eval("Overview") %>
                             </div>                           
                             <br></br>
-                            <a id="backlLink" runat="server" href="<%# BuildBackUrl() %>"><span style="font-family:Wingdings">&#231;</span></a> </br>
+                            <a id="backlLink" runat="server" href="<%# BuildBackUrl() %>"><span class='glyphicon glyphicon-backward'></span></a> </br>
                         </br>
                     </div>
                     <img class="poster" src="<%# BuildPosterUrl((string)Eval("PosterPath")) %> "/>

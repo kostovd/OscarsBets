@@ -9,7 +9,8 @@
     <p>&nbsp;</p>
     <p>
         <asp:Panel runat="server" DefaultButton="SearchButton">
-            <asp:Button ID="BackToEditMoviesInThisCategoryButton" runat="server" Text="&#231;" OnClick="BackToEditMoviesInThisCategoryButton_Click" style="font-family:Wingdings; background-color: none" />
+            
+            <asp:LinkButton ID="BackToEditMoviesInThisCategoryButton" runat="server" Text="back" BackColor="Transparent" BorderWidth="0" OnClick="BackToEditMoviesInThisCategoryButton_Click" ><span class="glyphicon glyphicon-backward"></span></asp:LinkButton>       
             &nbsp;
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             &nbsp;

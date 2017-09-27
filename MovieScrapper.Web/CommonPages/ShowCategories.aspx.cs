@@ -96,11 +96,11 @@ namespace MovieScrapper.CommonPages
             string currentUserId = User.Identity.GetUserId();
             if (categoryBets.Any(x => x.UserId == currentUserId && x.Movie.Id == movieId))
             {
-                return "þ"; //code 254 in ASCI
+                return "<span class='check-button glyphicon glyphicon-check'></span>"; 
             }
             else
             {
-                return "o"; //code 111 in ASCI
+                return "<span class='check-button glyphicon glyphicon-unchecked'></span>"; 
             }
         }
 

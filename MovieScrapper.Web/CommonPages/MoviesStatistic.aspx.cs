@@ -59,7 +59,8 @@ namespace MovieScrapper.CommonPages
 
             foreach (string title in titles)
             {
-                field = new BoundField();                
+                field = new BoundField();
+                field.HeaderStyle.Width = Unit.Pixel(100);
                 field.HeaderText = "<span class='redFont'>" + title + "</span>";                            
                 field.DataField = title;
                 field.HtmlEncode = false;
@@ -94,7 +95,7 @@ namespace MovieScrapper.CommonPages
                 int scores = 0;
                 foreach (var title in user.MovieTitles)
                 {                  
-                        row[title] = "<span style='font-family:Wingdings;color:rgb(237,192,116); text-align: center;font-size:30px;'>&#252;</span>";
+                        row[title] = "<span class='	glyphicon glyphicon-ok'></span>";
                         scores++;                 
                 }
 

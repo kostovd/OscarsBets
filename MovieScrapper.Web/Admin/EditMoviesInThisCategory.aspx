@@ -60,7 +60,7 @@
             </SelectParameters>
         </asp:ObjectDataSource>
         <hr />
-    <asp:Button ID="BackToEditCategoriesButton" runat="server" Text="&#231;" OnClick="BackToEditCategoriesButton_Click" style="font-family:Wingdings" />
+    <asp:LinkButton ID="BackToEditCategoriesButton" runat="server" Text="back" BackColor="Transparent" BorderWidth="0" OnClick="BackToEditCategoriesButton_Click" ><span class="glyphicon glyphicon-backward"></span></asp:LinkButton>
      &nbsp;
     <asp:Button ID="AddMovieToThiscategoryButton" runat="server" OnClick="AddMovieToThisCategoryButton_Click" Text="Add movie to this category" Width="282px" />
         <br />

@@ -135,11 +135,11 @@ namespace MovieScrapper.CommonPages
         {
             if (!users.Any(x => x.UserId == User.Identity.GetUserId()))
             {
-                return "o"; //code 111 in ASCI
+                return "<span class='check-button glyphicon glyphicon-unchecked'></span>"; 
             }
             else
             {
-                return "þ"; //code 254 in ASCI
+                return "<span class='check-button glyphicon glyphicon-check'></span>"; 
             }
         }
 

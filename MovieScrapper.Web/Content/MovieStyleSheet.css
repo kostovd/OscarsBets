@@ -14,7 +14,7 @@
 
 .linkTitle {
     margin-bottom: 5px;
-    font-size: 18px;
+    font-size: 16px;
     color: rgb(179,0,0);
 }
 
@@ -70,8 +70,7 @@
 }
 
 .poster {
-    width: 170px;
-    height: 190px;
+ 
     align-self: flex-start;
     float: right;
     margin: 5px;

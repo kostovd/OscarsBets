@@ -47,7 +47,9 @@
         SelectMethod="GetAllMovies"
         OnSelected="ObjectDataSource1_Selected"
         TypeName="MovieScrapper.Business.Interfaces.IMovieService"
-        OnObjectCreating="ObjectDataSource1_ObjectCreating"></asp:ObjectDataSource>
+        OnObjectCreating="ObjectDataSource1_ObjectCreating">
+
+    </asp:ObjectDataSource>
     <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
                 <div class="loading-panel">

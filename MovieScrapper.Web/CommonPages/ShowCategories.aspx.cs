@@ -75,6 +75,7 @@ namespace MovieScrapper.CommonPages
                 var betService = GetBuisnessService<IBetService>();
                 var betEntity = betService.MakeBetEntity(userId, movieId, categoryId);
                 Repeater1.DataBind();
+                System.Threading.Thread.Sleep(500);
 
             }
         }

@@ -122,6 +122,7 @@ namespace MovieScrapper.CommonPages
                 
                 movieService.ChangeMovieStatus(userId, movieId);
                 Repeater1.DataBind();
+                System.Threading.Thread.Sleep(500);
             }
         }
         

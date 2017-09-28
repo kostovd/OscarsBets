@@ -245,7 +245,6 @@
     <Content Include="CommonPages\MovieDetails.aspx" />
     <Content Include="images\icons\AscArrow.png" />
     <Content Include="images\icons\DescArrow.png" />
-    <Content Include="images\Pacman.gif" />
     <Content Include="MovieControl.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

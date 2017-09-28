@@ -58,7 +58,7 @@
 
                                     <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
                                     <div class="under-movie">
-                                        <img class="winnerLogo" src="<%# CheckIfWinnerImage((int?)DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
+                                       <%-- <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />--%>
                                         <asp:LinkButton ID="MarkAsBettedButton"
                                             runat="server"
                                             Text=""

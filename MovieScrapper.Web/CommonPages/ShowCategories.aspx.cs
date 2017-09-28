@@ -131,7 +131,7 @@ namespace MovieScrapper.CommonPages
 
         }
 
-        protected string CheckIfWinnerImage(int? winnerMovieId, int currentMovieId)
+        protected string CheckIfWinnerImage(object winnerMovieId, int currentMovieId)
         {
             if (IsGameRunning() == true)
             {
@@ -139,13 +139,20 @@ namespace MovieScrapper.CommonPages
             }
             else
             {
-                if (winnerMovieId.HasValue && winnerMovieId.Value == currentMovieId)
+                if (winnerMovieId == null)
                 {
-                    return "/images/Oscar_logo.png";
+                    return "";
                 }
                 else
                 {
-                    return "";
+                    if (int.Parse(winnerMovieId.ToString()) == currentMovieId)
+                    {
+                        return "/images/Oscar_logo.png";
+                    }
+                    else
+                    {
+                        return "";
+                    }
                 }
             }
         }

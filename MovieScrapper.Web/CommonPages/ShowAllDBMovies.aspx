@@ -4,35 +4,38 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <link href="../Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/LargePoster.js"></script>
+
     <asp:Label ID="GreatingLabel" runat="server" Text="" CssClass="warning-left"></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning-left"></asp:Label>
     <br />
     <br />
+
     <asp:Repeater ID="Repeater1" runat="server"
         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
         <HeaderTemplate>
             <div>
         </HeaderTemplate>
         <ItemTemplate>
-            <%--<asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                <ContentTemplate>--%>
-                    <div class=" pattern">
-                        <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />
+            <div class=" pattern">
+                <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
+                        <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
                         <div class="under-movie">
                             <asp:LinkButton ID="MarkAsWatchedButton"
                                 runat="server"
                                 Text=""
+                                ClientIDMode="AutoID"
                                 CommandName="MarkAsWatchedOrUnwatched"
-                                CommandArgument='<%# Item.Id %>'
+                                CommandArgument="<%#((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).Id%>"
                                 Enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
                                 Visible="<%#!IsGameNotStartedYet()%>">
-                                <%# ChangeTextIfUserWatchedThisMovie(Item.UsersWatchedThisMovie) %>
+                                <%# ChangeTextIfUserWatchedThisMovie(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).UsersWatchedThisMovie) %>
                             </asp:LinkButton>
                             <span class="label" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span>
                         </div>
-                    </div>
-                <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
         </ItemTemplate>
         <FooterTemplate>
             </div>

@@ -44,7 +44,7 @@ namespace MovieScrapper
 
         protected string BuildPosterUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w185" + path;
+            return "http://image.tmdb.org/t/p/w300" + path;
         }
 
         protected string BuildBackUrl()

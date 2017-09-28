@@ -121,8 +121,7 @@ namespace MovieScrapper.CommonPages
                 }
                 
                 movieService.ChangeMovieStatus(userId, movieId);
-                Response.Redirect("/CommonPages/ShowAllDBMovies.aspx?userId=" + userId);
-                
+                Repeater1.DataBind();
             }
         }
         

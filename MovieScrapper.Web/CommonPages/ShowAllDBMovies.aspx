@@ -48,4 +48,34 @@
         OnSelected="ObjectDataSource1_Selected"
         TypeName="MovieScrapper.Business.Interfaces.IMovieService"
         OnObjectCreating="ObjectDataSource1_ObjectCreating"></asp:ObjectDataSource>
+    <asp:UpdateProgress ID="updateProgress" runat="server">
+            <ProgressTemplate>
+                <div class="loading-panel">
+                    <div class="loading-container">
+                        <img src="<%= this.ResolveUrl("~/images/DoubleRing.gif")%>" />
+                    </div>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+     <style>
+            .loading-panel {
+                background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+                position: relative;
+                width: 100%;
+            }
+
+            .loading-container {
+                background: rgba(49, 133, 156, 0.4) none repeat scroll 0 0;
+                color: #fff;
+                font-size: 90px;
+                height: 100%;
+                left: 0;
+                padding-top: 15%;
+                position: fixed;
+                text-align: center;
+                top: 0;
+                width: 100%;
+                z-index: 999999;
+            }
+        </style>
 </asp:Content>

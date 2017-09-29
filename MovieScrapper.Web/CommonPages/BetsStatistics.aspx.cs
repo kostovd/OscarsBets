@@ -134,7 +134,7 @@ namespace MovieScrapper.CommonPages
                     //row[bet.CategoryTitle] = bet;
                     if (bet.IsRightGuess && !GameIsRunning())
                     {
-                        row[bet.CategoryTitle] = bet.MovieTitle + "<span class='glyphicon glyphicon-thumbs-up'></span>";
+                        row[bet.CategoryTitle] = bet.MovieTitle + "</br><span class='glyphicon glyphicon-thumbs-up'></span>";
                         scores++;
                     }
                     else

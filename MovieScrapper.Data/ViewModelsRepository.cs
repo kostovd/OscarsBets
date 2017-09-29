@@ -10,7 +10,7 @@ namespace MovieScrapper.Data
 
         public List<WatchedMovies> GetWatchedMoviesData()
         {
-            string query = "SELECT Movies.Id, Movies.Title, AspNetUsers.Email FROM Movies LEFT JOIN WatchedMovies on Movies.Id = WatchedMovies.Movie_Id LEFT JOIN AspNetUsers on WatchedMovies.Watched_UserId = AspNetUsers.Id";
+            string query = "SELECT distinct Movies.Id, Movies.Title, AspNetUsers.Email FROM Movies LEFT JOIN WatchedMovies on Movies.Id = WatchedMovies.Movie_Id Join MovieCategory on MovieCategory.MovieId = WatchedMovies.Movie_Id LEFT JOIN AspNetUsers on WatchedMovies.Watched_UserId = AspNetUsers.Id";
             using (var ctx = new MovieContext())
             {
                 List<WatchedMovies> resaults = ctx.Database.SqlQuery<WatchedMovies>(query).ToList();

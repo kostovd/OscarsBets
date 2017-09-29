@@ -75,6 +75,7 @@ namespace MovieScrapper.Data
                     .Include(cat => cat.Movies)
                     .Include(cat => cat.Bets.Select(bet=>bet.Movie))
                     .Include(cat => cat.Winner)
+                    .OrderBy(cat=>cat.Id)
                     .ToList();
 
                 return databaseCategory;

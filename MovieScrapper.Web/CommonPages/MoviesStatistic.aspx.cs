@@ -19,10 +19,7 @@ namespace MovieScrapper.CommonPages
         {
             if (!this.IsPostBack)
             {
-                if (ViewState["SortExpression"] == null)
-                {
-                    ViewState["SortExpression"]= "Scores";
-                }
+                
                 GridViewInit();
             }
 
@@ -42,7 +39,7 @@ namespace MovieScrapper.CommonPages
             dt = FillDataTable(dt);
 
             //Sort
-            DataView sortedView = DefaultTableSort(dt, " DESC", ScoresColumnName);
+            DataView sortedView = DefaultTableSort(dt, ScoresColumnName);
 
             // Bind
             BindDataTableToGrid(sortedView);
@@ -50,7 +47,8 @@ namespace MovieScrapper.CommonPages
 
         // CreateGridViewColumns()
         private void InitGridViewColumns(string[] titles)
-        {            
+        {   
+            Array.Sort(titles, StringComparer.InvariantCulture);
             var field = new BoundField();
             field.HeaderText = "User";
             field.DataField = UserColumnName;
@@ -119,10 +117,12 @@ namespace MovieScrapper.CommonPages
             GridView1.DataBind();
         }
 
-        DataView DefaultTableSort (DataTable dt, string sortDirection, string sortExpresion)
+        DataView DefaultTableSort (DataTable dt, string sortExpresion)
         {
             DataView dv= new DataView(dt);
-            dv.Sort = sortExpresion + sortDirection;
+            dv.Sort = sortExpresion + " DESC";
+            GridViewSortExpression = sortExpresion;
+            GridViewSortDirection = SortDirection.Descending;
 
             return dv;
         }

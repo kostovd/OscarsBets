@@ -54,8 +54,11 @@ namespace MovieScrapper.CommonPages
             // Fill
             dt = FillDataTable(dt);
 
+            //Sort
+            DataView sortedView = DefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
+
             // Bind
-            BindDataTableToGrid(new DataView(dt));
+            BindDataTableToGrid(sortedView);
         }
 
         // CreateGridViewColumns()
@@ -78,6 +81,8 @@ namespace MovieScrapper.CommonPages
                 field.Visible = false;
             }
             GridView1.Columns.Add(field);
+
+            Array.Sort(categories, StringComparer.InvariantCulture);
 
             foreach (string category in categories)
             {
@@ -150,6 +155,8 @@ namespace MovieScrapper.CommonPages
             return dt;
         }
 
+
+
         // BindDataTableToGrid()
         protected void BindDataTableToGrid(DataView dv)
         {
@@ -159,6 +166,30 @@ namespace MovieScrapper.CommonPages
 
         //-------------------SORTING---------------------------//
 
+        DataView DefaultTableSort(DataTable dt, string sortExpresion, SortDirection sortDirection)
+        {
+            DataView dv = new DataView(dt);
+            if (ViewState["SortDirection"] == null)
+            {
+                dv.Sort = sortExpresion + " DESC";
+            }
+            else
+            {
+                if (sortDirection == SortDirection.Ascending)
+                {
+                    dv.Sort = sortExpresion + " ASC";
+                }
+                else
+                {
+                    dv.Sort = sortExpresion + " DESC";
+                }
+            }
+            GridViewSortExpression = sortExpresion;
+            GridViewSortDirection = sortDirection;
+
+            return dv;
+        }
+
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
             var betStatisticServices = GetBuisnessService<IBetStatisticService>();
@@ -166,35 +197,17 @@ namespace MovieScrapper.CommonPages
 
             DataTable dt = CreateDataTable(categories);
             dt = FillDataTable(dt);
-            DataView dv = new DataView(dt);
 
-            SortDirection sortDirection = GetSortDiraction(e.SortExpression);
+            SortDirection sortDirection = CalculateSortDiraction(e.SortExpression);
 
-            if (sortDirection == SortDirection.Ascending)
-            {
-                dv.Sort = e.SortExpression + " ASC";              
-            }
-            else
-            {
-                dv.Sort = e.SortExpression + " DESC";
-            }
-
-            e.SortDirection = sortDirection;
+            DataView dv = DefaultTableSort(dt, e.SortExpression, sortDirection);            
+            
             BindDataTableToGrid(dv);
-
-            GridViewSortExpression = e.SortExpression;
-            GridViewSortDirection = sortDirection;
+            
         }
 
-        private SortDirection GetSortDiraction(string sortExpression)
+        private SortDirection CalculateSortDiraction(string sortExpression)
         {
-            //if (sortExpression != GridViewSortExpression)
-            //{
-            //    return SortDirection.Ascending;
-            //}
-
-            //return (GridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending);
-
 
             SortDirection res;
 

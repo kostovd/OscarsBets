@@ -39,7 +39,7 @@ namespace MovieScrapper.CommonPages
             dt = FillDataTable(dt);
 
             //Sort
-            DataView sortedView = DefaultTableSort(dt, ScoresColumnName);
+            DataView sortedView = DefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
 
             // Bind
             BindDataTableToGrid(sortedView);
@@ -117,54 +117,50 @@ namespace MovieScrapper.CommonPages
             GridView1.DataBind();
         }
 
-        DataView DefaultTableSort (DataTable dt, string sortExpresion)
+        DataView DefaultTableSort (DataTable dt, string sortExpresion, SortDirection sortDirection)
         {
-            DataView dv= new DataView(dt);
-            dv.Sort = sortExpresion + " DESC";
+            DataView dv = new DataView(dt);
+            if (ViewState["SortDirection"] == null)
+            {
+                dv.Sort = sortExpresion + " DESC";
+            }
+            else
+            {
+                if (sortDirection == SortDirection.Ascending)
+                {
+                    dv.Sort = sortExpresion + " ASC";
+                }
+                else
+                {
+                    dv.Sort = sortExpresion + " DESC";
+                }
+            }
             GridViewSortExpression = sortExpresion;
-            GridViewSortDirection = SortDirection.Descending;
+            GridViewSortDirection = sortDirection;
 
             return dv;
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+            
             var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
             var titles = watcheMoviesStatisticService.GetTitles();
 
             DataTable dt = CreateDataTable(titles);
             dt = FillDataTable(dt);
-            DataView dv = new DataView(dt);
 
-            SortDirection sortDirection = GetSortDiraction(e.SortExpression);
+            SortDirection sortDirection = CalculateSortDiraction(e.SortExpression);
 
-            if (sortDirection == SortDirection.Ascending)
-            {
-                dv.Sort = e.SortExpression + " ASC";
-            }
-            else
-            {
-                dv.Sort = e.SortExpression + " DESC";
-            }
+            DataView dv = DefaultTableSort(dt, e.SortExpression, sortDirection);
 
-            e.SortDirection = sortDirection;
             BindDataTableToGrid(dv);
-
-            GridViewSortExpression = e.SortExpression;
-            GridViewSortDirection = sortDirection;
+            
         }
 
-        private SortDirection GetSortDiraction(string sortExpression)
+        private SortDirection CalculateSortDiraction(string sortExpression)
         {
-            //if (sortExpression != GridViewSortExpression)
-            //{
-            //    return SortDirection.Ascending;
-            //}
-
-            //return (GridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending);
-
-
+           
             SortDirection res;
 
             if (sortExpression == GridViewSortExpression)

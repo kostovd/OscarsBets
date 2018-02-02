@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.UI;
 
@@ -42,8 +43,8 @@ namespace MovieScrapper.Secured
 
         private async Task LoadMoviesAsync()
         {
-            var environmentKey = Environment.GetEnvironmentVariable("TMDB_API_KEY");
-            var movieClient = new MovieClient(environmentKey);
+            var apiKey = ConfigurationManager.AppSettings["tmdb:ApiKey"];
+            var movieClient = new MovieClient(apiKey);
             var searchedMovie = TextBox1.Text;
             try
             {

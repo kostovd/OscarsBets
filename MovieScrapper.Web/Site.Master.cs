@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using MovieScrapper.Business;
 using MovieScrapper.Business.Interfaces;
 using Microsoft.Practices.Unity;
+using Microsoft.Owin.Security.OpenIdConnect;
+using Microsoft.Owin.Security.Cookies;
 
 namespace MovieScrapper
 {
@@ -117,7 +119,7 @@ namespace MovieScrapper
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
-            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Context.GetOwinContext().Authentication.SignOut(OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
         }
 
         protected T GetBuisnessService<T>()

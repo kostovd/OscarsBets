@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Owin;
-using MovieScrapper.Models;
+using Microsoft.Owin.Security.OpenIdConnect;
+using System.Globalization;
+using Microsoft.Owin.Security;
 
 namespace MovieScrapper.Account
 {
@@ -12,14 +12,30 @@ namespace MovieScrapper.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
-            // Enable this once you have account confirmation enabled for password reset functionality
-            //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
+            //RegisterHyperLink.NavigateUrl = "Register";
+            //// Enable this once you have account confirmation enabled for password reset functionality
+            ////ForgotPasswordHyperLink.NavigateUrl = "Forgot";
+            //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+            //if (!String.IsNullOrEmpty(returnUrl))
+            //{
+            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            //}
+
+            string returnUrl = Request.QueryString["ReturnUrl"] ?? "/";
+
+            if (User.Identity.IsAuthenticated)
             {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+                Response.Redirect(returnUrl);
+            }
+            else
+            {
+                Context.GetOwinContext().Authentication.Challenge(
+                    new AuthenticationProperties { RedirectUri = Request.QueryString["ReturnUrl"] },
+                    OpenIdConnectAuthenticationDefaults.AuthenticationType);
+
+                Response.StatusCode = 401;
+                Response.End();
             }
         }
 

@@ -14,6 +14,7 @@ namespace MovieScrapper
         private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
         private static string tenantId = ConfigurationManager.AppSettings["ida:TenantId"];
         private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
+        private static string RedirectUri = ConfigurationManager.AppSettings["ida:RedirectUri"];
 
         string authority = aadInstance + tenantId;
 
@@ -80,6 +81,7 @@ namespace MovieScrapper
                     ClientId = clientId,
                     Authority = authority,
                     PostLogoutRedirectUri = postLogoutRedirectUri,
+                    RedirectUri = RedirectUri,
 
                     Notifications = new OpenIdConnectAuthenticationNotifications()
                     {

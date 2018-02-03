@@ -70,12 +70,12 @@
 }
 
 .poster {
- 
     align-self: flex-start;
     float: right;
     margin: 5px;
     border: 3px solid LightGray;
     border-radius:7px;
+    width: 150px;
 }
 
 .categoryTtleLabel {
@@ -204,6 +204,7 @@ a {
 .modal-content {
     margin: auto;
     display: block;
+    border: none;
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */

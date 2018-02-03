@@ -13,7 +13,7 @@
 		//console.log(poster.data("poster"));
 		poster.on("click", function () {
 			imgSrc = this.src;
-			var newImgSrc = imgSrc.replace("w150", "w500");
+			var newImgSrc = imgSrc.replace("w300", "w500");
 			//console.log(imgsrc);
 			var index = $(this).data('poster');
 			console.log(index);

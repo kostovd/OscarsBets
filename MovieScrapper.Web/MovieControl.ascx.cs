@@ -19,7 +19,7 @@ namespace MovieScrapper
 
         public string BuildPosterUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w150" + path;
+            return "http://image.tmdb.org/t/p/w300" + path;
         }
 
         public string DisplayYear(string dateString)

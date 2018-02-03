@@ -254,7 +254,6 @@
     </Content>
     <Content Include="Admin\Web.config" />
     <Content Include="images\icons\imdb.svg" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\MovieDetail.css" />
     <Content Include="CommonPages\MovieDetails.aspx" />
@@ -548,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

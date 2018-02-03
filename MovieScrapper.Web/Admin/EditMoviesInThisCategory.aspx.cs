@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.Unity;
-using MovieScrapper.Business;
-using MovieScrapper.Business.Interfaces;
+﻿using MovieScrapper.Business.Interfaces;
 using System;
 using System.Runtime.CompilerServices;
 using System.Web.UI;
@@ -10,11 +8,9 @@ namespace MovieScrapper.Admin
 {
     public partial class EditMoviesInThisCategory : BasePage
     {
-
         private ICategoryService GetCategoryService()
         {
-            var container = (IUnityContainer)Application["EntLibContainer"];
-            return container.Resolve<ICategoryService>();
+            return GetBuisnessService<ICategoryService>();
         }
 
         protected void Page_Load(object sender, EventArgs e)

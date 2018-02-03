@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Entities;
+﻿using MovieScrapper.Data.Migrations;
+using MovieScrapper.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
@@ -8,7 +9,7 @@ namespace MovieScrapper.Data
     {
         public MovieContext() : base("DefaultConnection")
         {
-            Database.SetInitializer<MovieContext>(new DropCreateDatabaseIfModelChanges<MovieContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MovieContext, Configuration>("DefaultConnection"));
         }
 
         public DbSet<Movie> Movies { get; set; }

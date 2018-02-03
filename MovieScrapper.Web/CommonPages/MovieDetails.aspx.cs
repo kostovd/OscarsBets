@@ -3,6 +3,7 @@ using MovieScrapper.Business;
 using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -30,8 +31,8 @@ namespace MovieScrapper
 
         private async Task LoadMovieDetailsAsync()
         {
-            var environmentKey = Environment.GetEnvironmentVariable("TMDB_API_KEY");
-            var movieClient = new MovieClient(environmentKey);
+            var apiKey = ConfigurationManager.AppSettings["tmdb:ApiKey"];
+            var movieClient = new MovieClient(apiKey);
             var id= Request.QueryString["id"];
             var movie = await movieClient.GetMovieAsync(id);
 

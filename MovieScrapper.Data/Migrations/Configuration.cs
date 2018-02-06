@@ -9,7 +9,7 @@ namespace MovieScrapper.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "MovieScrapper.Data.MovieContext";
         }
 

@@ -5,18 +5,17 @@ using System.Collections.Generic;
 namespace MovieScrapper.Entities
 {
     [Serializable]
-    public class Category:ICategory
+    public class Category
     {
         public Category()
         {
-            this.Movies = new List<Movie>();
+            this.Nominations = new List<Nomination>();
         }
 
         public int Id { get; set; }
         public string CategoryTtle { get; set; }
         public string CategoryDescription { get; set; }     
-        public virtual ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Nomination> Nominations { get; set; }
         public ICollection<Bet> Bets { get; set; }
-        public virtual Movie Winner { get; set; }
     }
 }

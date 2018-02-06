@@ -1,12 +1,11 @@
 ﻿using MovieScrapper.Business.Interfaces;
-using MovieScrapper.Data;
 using MovieScrapper.Entities;
 using System.Collections.Generic;
 using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
-    public class CategoryService: ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMovieRepository _movieRepository;
@@ -27,26 +26,22 @@ namespace MovieScrapper.Business
             _categoryRepository.AddCategory(category);
         }         
 
-        public void AddMovieInCategory(int categoryId, Movie movie)
+        public void AddMovieInCategory(int categoryId, Movie movie, MovieCredit credit)
         {            
             var hasMovie = _movieRepository.HasMovie(movie.Id);
-            var hasMovieInCategory = HasMovieInCategory(categoryId, movie.Id);
-
             if (!hasMovie)
             {
                 _movieRepository.AddMovie(movie);
             }
 
-            if (!hasMovieInCategory)
+            List<string> creditIds = new List<string>();
+            if (credit != null)
             {
-                _categoryRepository.AddMovie(categoryId, movie.Id);
+                creditIds.Add(credit.Id);
             }
-        }
-              
-        public bool AreWinnersSet()
-        {
-            return _categoryRepository.AreWinnersSet();
-        }       
+
+            _categoryRepository.AddNomination(categoryId, movie.Id, creditIds);
+        }      
       
         public void DeleteCategory(int id)
         {
@@ -66,18 +61,6 @@ namespace MovieScrapper.Business
         public Category GetCategory(int id)
         {
             return _categoryRepository.GetCategory(id);
-        }
-           
-        public Movie GetMovieInCategory(int categoryId, int movieId)
-        {
-            return _categoryRepository.GetMovieInCategory(categoryId, movieId);
-        }
-
-        public bool HasMovieInCategory(int categoryId, int movieId)
-        {
-            var hasMovie= _categoryRepository.HasMovieInCategory(categoryId, movieId);
-
-            return hasMovie;      
         }
 
         public void MarkAsWinner(int categoryId, int movieId)

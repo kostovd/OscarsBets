@@ -35,12 +35,6 @@ namespace MovieScrapper.Business
             return _movieRepository.GetAllMovies();
         }
 
-        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
-        {
-
-            return _movieRepository.GetAllMoviesInCategory(categoryId);
-        }
-
         public Movie GetMovie(int id)
         {
             return _movieRepository.GetMovie(id);

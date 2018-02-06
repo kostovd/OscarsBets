@@ -31,7 +31,7 @@ namespace MovieScrapper.Account
             else
             {
                 Context.GetOwinContext().Authentication.Challenge(
-                    new AuthenticationProperties { RedirectUri = Request.QueryString["ReturnUrl"] },
+                    new AuthenticationProperties { RedirectUri = returnUrl },
                     OpenIdConnectAuthenticationDefaults.AuthenticationType);
 
                 Response.StatusCode = 401;

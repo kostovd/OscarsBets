@@ -1,37 +1,36 @@
-﻿using MovieScrapper.Entities.Interfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieScrapper.Entities
 {
     [JsonObject]
     [Serializable]
-    public class Movie:IMovie
+    public class Movie
     {
         public Movie()
         {
-            this.Categories = new List<Category>();
+            this.Nominations = new List<Nomination>();
         }
 
-        ////[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
+
         public string Title { get; set; }
 
-        [JsonProperty("release_date")]
         public string ReleaseDate { get; set; }
 
-        [JsonProperty("poster_path")]
         public string PosterPath { get; set; }
+
         public string Overview { get; set; }
-        [JsonProperty("imdb_id")]
+
         public string ImdbId { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<MovieCredit> Credits { get; set; }
+
+        public virtual ICollection<Nomination> Nominations { get; set; }
+
         public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }
-        public ICollection<Bet> Bets { get; set; }
-        public virtual ICollection<Category> WinningCategories { get; set; }
+
+        public virtual ICollection<Nomination> WinningNominations { get; set; }
     }
 }

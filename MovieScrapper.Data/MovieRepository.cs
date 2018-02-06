@@ -3,13 +3,11 @@ using System.Linq;
 using System.Data.Entity;
 using MovieScrapper.Entities;
 using MovieScrapper.Data.Interfaces;
-using MovieScrapper.Entities.Interfaces;
 
 namespace MovieScrapper.Data
 {
     public class MovieRepository: IMovieRepository
     {
-
         public void AddMovie(Movie movie)
         {
             using (var ctx = new MovieContext())
@@ -21,7 +19,6 @@ namespace MovieScrapper.Data
 
         public void ChangeMovieStatus(string userId, int movieId)
         {
-
             using (var ctx = new MovieContext())
             {
                 var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
@@ -41,27 +38,15 @@ namespace MovieScrapper.Data
 
         public IEnumerable<Movie> GetAllMovies()
         {
-
             using (var ctx = new MovieContext())
             {               
                 var movies = ctx.Movies
                     .Include(u => u.UsersWatchedThisMovie)
-                    .Where(x => x.Categories.Any())
+                    .Where(x => x.Nominations.Any())
                     .OrderBy(m=>m.Title)
                     .ToList();
-                return movies;
-            }
-        }
 
-        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var foundedCategoty = ctx.MovieCaterogries
-                    .Include(cat => cat.Winner)
-                    .Include(cat => cat.Movies)
-                    .Where(cat => cat.Id == categoryId).SingleOrDefault();
-                return foundedCategoty.Movies;
+                return movies;
             }
         }
 

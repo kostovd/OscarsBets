@@ -1,5 +1,7 @@
 ﻿using MovieScrapper.Business.Interfaces;
+using MovieScrapper.Entities;
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -62,56 +64,11 @@ namespace MovieScrapper.Admin
             }
         }
 
-        protected string CheckIfWinner( int currentMovieId)
+        protected string CheckIfWinnerImage(Nomination nomination)
         {
-            
-            var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = GetCategoryService();
-            var category= service.GetCategory(categoryId);
-            var winner = category.Winner;
-
-            if (winner == null)
-            {
-                return "";
-            }
-            else
-            {
-                if (winner.Id.ToString() == currentMovieId.ToString())
-                {
-                    return "winner";
-                }
-                else
-                {
-                    return "notWinner";
-                }
-            }
-
-        }
-
-        protected string CheckIfWinnerImage(int currentMovieId)
-        {
-            
-            var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-            var service = GetCategoryService();
-            var category = service.GetCategory(categoryId);
-            var winner = category.Winner;
-
-            if (winner == null)
-            {
-                return "";
-            }
-            else
-            {
-                if (winner.Id.ToString() == currentMovieId.ToString())
-                {
-                    return "/images/Oscar_logo.png";
-                }
-                else
-                {
-                    return "";
-                }
-            }
-
+            return nomination.IsWinner ?
+                    "/images/Oscar_logo.png" :
+                    "";
         }
 
         protected void BackToEditCategoriesButton_Click(object sender, EventArgs e)

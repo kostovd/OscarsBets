@@ -43,6 +43,20 @@ namespace MovieScrapper
 
         }
 
+        private async Task LoadMovieCreditsAsync()
+        {
+            var apiKey = ConfigurationManager.AppSettings["tmdb:ApiKey"];
+            var movieClient = new MovieClient(apiKey);
+            var id = Request.QueryString["id"];
+            var movie = await movieClient.GetMovieAsync(id);
+
+            DetailsView1.DataSource = new Movie[] { movie };
+            DetailsView1.DataBind();
+
+            ViewState["Movie"] = movie;
+
+        }
+
         protected string BuildPosterUrl(string path)
         {
             return "http://image.tmdb.org/t/p/w500" + path;
@@ -78,18 +92,17 @@ namespace MovieScrapper
         protected void AddMovieToCategoryButton_Click(object sender, EventArgs e)
         {           
             var movie = ViewState["Movie"] as Movie;
+            var movieCredit = ViewState["Credit"] as MovieCredit;
 
             if (movie != null)
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var movieId = Int32.Parse(Request.QueryString["id"]);
-                var movieService = GetBuisnessService<IMovieService>();
                 var categoryService = GetBuisnessService<ICategoryService>();
-                categoryService.AddMovieInCategory(categoryId, movie);              
+                categoryService.AddMovieInCategory(categoryId, movie, movieCredit);              
 
                 Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
             }
-        }       
+        }
         
     }
 }

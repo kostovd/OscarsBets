@@ -15,8 +15,6 @@ namespace MovieScrapper.Business.Interfaces
 
         IEnumerable<Movie> GetAllMovies();
 
-        IEnumerable<Movie> GetAllMoviesInCategory(int categoryId);
-
         Movie GetMovie(int id);
 
         bool HasMovie(int id);

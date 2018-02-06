@@ -13,30 +13,22 @@ namespace MovieScrapper.Data
         }
 
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Category> MovieCaterogries { get; set; }
+        public DbSet<Category> Caterogries { get; set; }
         public DbSet<Watched> Watched { get; set; }
         public DbSet<Bet> Bets { get; set; }
-        public DbSet<GameProperties> Game {get; set; }
+        public DbSet<GameProperties> Game { get; set; }
+        public DbSet<MovieCredit> Credits { get; set; }
+        public DbSet<Nomination> Nominations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Movie>().Property(t => t.Id)
-            .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             modelBuilder.Entity<Movie>()
-               .HasMany<Category>(c => c.Categories)
-               .WithMany(m => m.Movies)
-               .Map(cs =>
-               {
-                   cs.MapLeftKey("MovieId");
-                   cs.MapRightKey("CategoryId");
-                   cs.ToTable("MovieCategory");
-               });
+                .Property(t => t.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            //modelBuilder.Entity<Category>()
-            //        .HasOptional<Movie>(m => m.Winner)
-            //        .WithMany(cat => cat.Categories)
-            //        .HasForeignKey(x => x.Winner);
+            modelBuilder.Entity<MovieCredit>()
+                .Property(t => t.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
         }
     }
-    }
+}

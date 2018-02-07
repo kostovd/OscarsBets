@@ -11,6 +11,6 @@ namespace MovieScrapper.Business.Interfaces
     {         
         Task<Movie> GetMovieAsync(string movieID);
        
-        Task<MoviesCollection> SearchMovieAsync(string searchString);       
+        Task<List<Movie>> SearchMovieAsync(string searchString);       
     }
 }

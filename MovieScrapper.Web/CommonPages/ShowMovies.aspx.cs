@@ -50,7 +50,7 @@ namespace MovieScrapper.Secured
             {
 
                     var movies = await movieClient.SearchMovieAsync(searchedMovie);
-                    MoviesDataList.DataSource = movies.Results;
+                    MoviesDataList.DataSource = movies;
                     MoviesDataList.DataBind();
 
             }

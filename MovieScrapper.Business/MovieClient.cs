@@ -49,14 +49,14 @@ namespace MovieScrapper
             return null;
         }
 
-        public async Task<MoviesCollection> SearchMovieAsync(string searchString)
+        public async Task<List<Movie>> SearchMovieAsync(string searchString)
         {
             string path = String.Format("{0}/{1}/{2}/{3}?api_key={4}&query={5}", BaseUrl, DefaultApiVersion, SearchPath, MoviePath, _key, searchString);
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
-                var movies = await response.Content.ReadAsAsync<MoviesCollection>();
-                return movies;
+                JObject content = await GetContent(response);
+                return MapToMovies(content);
             }
             else
             {
@@ -81,17 +81,30 @@ namespace MovieScrapper
             return content = await responseMessage.Content.ReadAsAsync<JObject>();
         }
 
+        private List<Movie> MapToMovies(JObject moviesContent)
+        {
+            JArray moviesResultContent = moviesContent["results"].Value<JArray>();
+
+            return moviesResultContent
+                .Select(item => MapToMovie(item.Value<JObject>()))
+                .ToList();
+        }
+
         private Movie MapToMovie(JObject movieContent)
         {
             Movie movie = new Movie()
             {
-                Id = movieContent.GetValue("id").Value<int>(),
-                Title = movieContent.GetValue("title").Value<string>(),
-                ReleaseDate = movieContent.GetValue("release_date").Value<string>(),
-                PosterPath = movieContent.GetValue("poster_path").Value<string>(),
-                Overview = movieContent.GetValue("overview").Value<string>(),
-                ImdbId = movieContent.GetValue("imdb_id").Value<string>(),
-                Credits = MapToCredits(movieContent.GetValue("credits").Value<JObject>()),
+                Id = movieContent["id"].Value<int>(),
+                Title = movieContent["title"].Value<string>(),
+                ReleaseDate = movieContent["release_date"].Value<string>(),
+                PosterPath = movieContent["poster_path"].Value<string>(),
+                Overview = movieContent["overview"].Value<string>(),
+                ImdbId = movieContent["imdb_id"] != null 
+                    ? movieContent["imdb_id"].Value<string>()
+                    : string.Empty,
+                Credits = movieContent["credits"] != null 
+                    ? MapToCredits(movieContent["credits"].Value<JObject>())
+                    : null,
             };
 
             return movie;
@@ -101,17 +114,17 @@ namespace MovieScrapper
         {
             List<MovieCredit> cresdits = new List<MovieCredit>();
 
-            JArray castsContent = creditsContent.GetValue("cast").Value<JArray>();
+            JArray castsContent = creditsContent["cast"].Value<JArray>();
 
-            cresdits.AddRange(
-                castsContent.Select(item => 
-                    MapToCast(item.Value<JObject>())));
+                cresdits.AddRange(
+                    castsContent.Select(item =>
+                        MapToCast(item.Value<JObject>())));
 
-            JArray crewsContent = creditsContent.GetValue("crew").Value<JArray>();
+                JArray crewsContent = creditsContent["crew"].Value<JArray>();
 
-            cresdits.AddRange(
-                crewsContent.Select((item, index) => 
-                    MapToCrew(item.Value<JObject>(), index)));
+                cresdits.AddRange(
+                    crewsContent.Select((item, index) =>
+                        MapToCrew(item.Value<JObject>(), index)));
 
             return cresdits;
         }
@@ -120,13 +133,13 @@ namespace MovieScrapper
         {
             MovieCredit movieCredit = new MovieCredit()
             {
-                Id = castContent.GetValue("credit_id").Value<string>(),
-                Order = castContent.GetValue("order").Value<int>(),
-                PersonId = castContent.GetValue("id").Value<int>(),
-                Name = castContent.GetValue("name").Value<string>(),
+                Id = castContent["credit_id"].Value<string>(),
+                Order = castContent["order"].Value<int>(),
+                PersonId = castContent["id"].Value<int>(),
+                Name = castContent["name"].Value<string>(),
                 IsCast = true,
-                Role = castContent.GetValue("character").Value<string>(),
-                PosterPath = castContent.GetValue("poster_path").Value<string>(),
+                Role = castContent["character"].Value<string>(),
+                PosterPath = castContent["poster_path"].Value<string>(),
             };
 
             return movieCredit;
@@ -136,13 +149,13 @@ namespace MovieScrapper
         {
             MovieCredit movieCredit = new MovieCredit()
             {
-                Id = crewContent.GetValue("credit_id").Value<string>(),
+                Id = crewContent["credit_id"].Value<string>(),
                 Order = order,
-                PersonId = crewContent.GetValue("id").Value<int>(),
-                Name = crewContent.GetValue("name").Value<string>(),
+                PersonId = crewContent["id"].Value<int>(),
+                Name = crewContent["name"].Value<string>(),
                 IsCast = false,
-                Role = crewContent.GetValue("job").Value<string>(),
-                PosterPath = crewContent.GetValue("poster_path").Value<string>(),
+                Role = crewContent["job"].Value<string>(),
+                PosterPath = crewContent["poster_path"].Value<string>(),
             };
 
             return movieCredit;

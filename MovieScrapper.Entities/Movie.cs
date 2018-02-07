@@ -4,13 +4,11 @@ using System.Collections.Generic;
 
 namespace MovieScrapper.Entities
 {
-    [JsonObject]
     [Serializable]
     public class Movie
     {
         public Movie()
         {
-            this.Nominations = new List<Nomination>();
         }
 
         public int Id { get; set; }

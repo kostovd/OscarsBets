@@ -139,7 +139,7 @@ namespace MovieScrapper
                 Name = castContent["name"].Value<string>(),
                 IsCast = true,
                 Role = castContent["character"].Value<string>(),
-                PosterPath = castContent["poster_path"].Value<string>(),
+                PosterPath = castContent["profile_path"].Value<string>(),
             };
 
             return movieCredit;
@@ -155,7 +155,7 @@ namespace MovieScrapper
                 Name = crewContent["name"].Value<string>(),
                 IsCast = false,
                 Role = crewContent["job"].Value<string>(),
-                PosterPath = crewContent["poster_path"].Value<string>(),
+                PosterPath = crewContent["profile_path"].Value<string>(),
             };
 
             return movieCredit;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Entities
 {
+    [Serializable]
     public class MovieCredit
     {
         public string Id { get; set; }

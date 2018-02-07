@@ -15,7 +15,7 @@ namespace MovieScrapper.Data
             container.RegisterType<ITMDBRepository, TMDBRepository>();
             container.RegisterType<IViewModelsRepository, ViewModelsRepository>();
             container.RegisterType<IWatchedMovieRepository, WatchedMovieRepository>();
-
+            container.RegisterType<INominationRepository, NominationRepository>();
         }
     }
 }

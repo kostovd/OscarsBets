@@ -10,7 +10,7 @@ using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
-    public class MovieService: IMovieService
+    public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;       
 

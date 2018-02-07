@@ -78,7 +78,7 @@ namespace MovieScrapper.Admin
 
         protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
         {
-            e.ObjectInstance = GetBuisnessService<IMovieService>();
+            e.ObjectInstance = GetBuisnessService<INominationService>();
         }
     }
 }

@@ -39,8 +39,10 @@ namespace MovieScrapper
             DetailsView1.DataSource = new Movie[] { movie };
             DetailsView1.DataBind();
 
-            ViewState["Movie"] = movie;
+            RptCredits.DataSource = movie.Credits;
+            RptCredits.DataBind();
 
+            ViewState["Movie"] = movie;
         }
 
         private async Task LoadMovieCreditsAsync()
@@ -60,6 +62,11 @@ namespace MovieScrapper
         protected string BuildPosterUrl(string path)
         {
             return "http://image.tmdb.org/t/p/w500" + path;
+        }
+
+        protected string BuildProfileUrl(string path)
+        {
+            return "http://image.tmdb.org/t/p/w92" + path;
         }
 
         protected string BuildBackUrl()

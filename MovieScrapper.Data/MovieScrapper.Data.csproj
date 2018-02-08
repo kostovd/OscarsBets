@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201802060048597_Nominations.Designer.cs">
       <DependentUpon>201802060048597_Nominations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802072323316_MovieCreditsColumnRename.cs" />
+    <Compile Include="Migrations\201802072323316_MovieCreditsColumnRename.Designer.cs">
+      <DependentUpon>201802072323316_MovieCreditsColumnRename.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieContext.cs" />
     <Compile Include="MovieRepository.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802060048597_Nominations.resx">
       <DependentUpon>201802060048597_Nominations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802072323316_MovieCreditsColumnRename.resx">
+      <DependentUpon>201802072323316_MovieCreditsColumnRename.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

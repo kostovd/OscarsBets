@@ -24,7 +24,7 @@ namespace MovieScrapper.Entities
         /// </summary>
         public string Role { get; set; }
 
-        public string PosterPath { get; set; }
+        public string ProfilePath { get; set; }
 
         public Movie Movie { get; set; }
 

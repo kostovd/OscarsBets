@@ -27,37 +27,51 @@
 
         </Fields>
     </asp:DetailsView>
-    <asp:Repeater ID="RptCredits" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
-        <HeaderTemplate>
-            <div class="container">
-        </HeaderTemplate>
-        <ItemTemplate>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="well">
-                        <img src="<%# BuildProfileUrl(Item.ProfilePath) %> " />
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="well">
-                                <%# Item.Name %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="well">
-                                    <%# Item.Role %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <asp:Repeater ID="RptCast" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
+                    <HeaderTemplate>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="well well-sm">
+                            <asp:CheckBox ID="CheckBox1" Visible="true" class="form-check-input" runat="server" Text="Nominated" />
+                            <div>
+                                <img style="margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %>" />
+                                <div style="display: inline-block">
+                                    <p><%# Item.Name %></p>
+                                    <p><%# Item.Role %></p>
                                 </div>
                             </div>
-                    </div>
-                </div>
-        </ItemTemplate>
-        <FooterTemplate>
+                        </div>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                    </FooterTemplate>
+                </asp:Repeater>
             </div>
-        </FooterTemplate>
-    </asp:Repeater>
+            <div class="col-sm-6">
+                <asp:Repeater ID="RptCrew" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
+                    <HeaderTemplate>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="well well-sm">
+                            <asp:CheckBox ID="CheckBox1" Visible="true" class="form-check-input" runat="server" Text="Nominated" />
+                            <div>
+                                <img style="float: left; margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %> " />
+                                <blockquote class="blockquote">
+                                    <p class="mb-0"><%# Item.Name %></p>
+                                    <footer class="blockquote-footer"><%# Item.Role %></footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+    </div>
     <p>
         <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category " Width="500px" OnClick="AddMovieToCategoryButton_Click" />
     </p>

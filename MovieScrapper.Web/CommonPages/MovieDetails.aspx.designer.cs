@@ -22,13 +22,22 @@ namespace MovieScrapper {
         protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
         
         /// <summary>
-        /// RptCredits control.
+        /// RptCast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RptCredits;
+        protected global::System.Web.UI.WebControls.Repeater RptCast;
+        
+        /// <summary>
+        /// RptCrew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RptCrew;
         
         /// <summary>
         /// AddMovieToCategoryButton control.

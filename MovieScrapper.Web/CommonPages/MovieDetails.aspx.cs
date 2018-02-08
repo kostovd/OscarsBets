@@ -4,6 +4,7 @@ using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -39,8 +40,11 @@ namespace MovieScrapper
             DetailsView1.DataSource = new Movie[] { movie };
             DetailsView1.DataBind();
 
-            RptCredits.DataSource = movie.Credits;
-            RptCredits.DataBind();
+            RptCast.DataSource = movie.Credits.Where(x => x.IsCast).ToList();
+            RptCast.DataBind();
+
+            RptCrew.DataSource = movie.Credits.Where(x => !x.IsCast).ToList();
+            RptCrew.DataBind();
 
             ViewState["Movie"] = movie;
         }
@@ -66,7 +70,7 @@ namespace MovieScrapper
 
         protected string BuildProfileUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w92" + path;
+            return "http://image.tmdb.org/t/p/w45" + path;
         }
 
         protected string BuildBackUrl()

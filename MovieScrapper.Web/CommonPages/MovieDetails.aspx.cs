@@ -71,9 +71,24 @@ namespace MovieScrapper
             return "http://image.tmdb.org/t/p/w500" + path;
         }
 
-        protected string BuildProfileUrl(string path)
+        protected string BuildMovieUrl(int movieId)
         {
-            return "http://image.tmdb.org/t/p/w45" + path;
+            return "https://www.themoviedb.org/movie/" + movieId;
+        }
+
+        protected string BuildProfileImageUrl(string path)
+        {
+            return "http://image.tmdb.org/t/p/w66_and_h66_face" + path;
+        }
+
+        protected string BuildPersonUrl(int personId)
+        {
+            return "https://www.themoviedb.org/person/" + personId.ToString();
+        }
+
+        protected bool HasProfileImage(string path)
+        {
+            return !string.IsNullOrEmpty(path);
         }
 
         protected string BuildBackUrl()

@@ -8,7 +8,9 @@
                 <ItemTemplate>
                     <div class="movieItem">
                         <div id="info">
-                            <div id="title"><%# Eval("Title") %> (<%# DisplayYear((string)Eval("ReleaseDate")) %>)</div>
+                            <a target="_newtab" href="<%# BuildMovieUrl((int)Eval("Id")) %>">
+                                <div id="title"><%# Eval("Title") %> (<%# DisplayYear((string)Eval("ReleaseDate")) %>)</div>
+                            </a>
                             </br></br>
                         <div id="overview">
                             <%# Eval("Overview") %>
@@ -17,7 +19,7 @@
                             <a id="backlLink" runat="server" href="<%# BuildBackUrl() %>"><span class='glyphicon glyphicon-backward'></span></a>
                             </br></br>
                         </div>
-                        <img class="poster" src="<%# BuildPosterUrl((string)Eval("PosterPath")) %> " />
+                        <img class="poster" src="<%# BuildPosterUrl((string)Eval("PosterPath")) %>" />
                         <br />
                         <br />
                         <br />
@@ -31,7 +33,7 @@
     <asp:Panel ID="PnlAddMovieButton" runat="server">
         <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category " Width="500px" OnClick="AddMovieToCategoryButton_Click" />
     </asp:Panel>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -43,11 +45,15 @@
                         <div class="well well-sm">
                             <asp:CheckBox ID="CbNominated" Visible="<%# IsCheckBoxNominationVisible %>" runat="server" Text="Nominated" />
                             <asp:HiddenField ID="HfCreditId" Value="<%# Item.Id %>" runat="server" />
-                            <div>
-                                <img style="margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %>" />
-                                <div style="display: inline-block">
-                                    <p class="h5"><%# Item.Name %></p>
-                                    <p class="h5 text-muted"><%# Item.Role %></p>
+                            <div class="person_profile">
+                                <div runat="server" class="glyphicon glyphicon-user profile_image no_image" visible="<%# !HasProfileImage(Item.ProfilePath) %>" />
+                                <img runat="server" class="profile_image" visible="<%# HasProfileImage(Item.ProfilePath) %>" src="<%# BuildProfileImageUrl(Item.ProfilePath) %>" />
+                                <div class="person_info">
+                                    <p class="h5">
+                                        <a target="_newtab" href="<%# BuildPersonUrl(Item.PersonId) %>"><%# Item.Name %></a>
+                                        <br />
+                                        <span class="text-muted"><%# Item.Role %></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -65,11 +71,15 @@
                         <div class="well well-sm">
                             <asp:CheckBox ID="CbNominated" Visible="<%# IsCheckBoxNominationVisible %>" runat="server" Text="Nominated" />
                             <asp:HiddenField ID="HfCreditId" Value="<%# Item.Id %>" runat="server" />
-                            <div>
-                                <img style="margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %>" />
-                                <div style="display: inline-block">
-                                    <p class="h5"><%# Item.Name %></p>
-                                    <p class="h5 text-muted"><%# Item.Role %></p>
+                            <div class="person_profile">
+                                <div runat="server" class="glyphicon glyphicon-user profile_image no_image" visible="<%# !HasProfileImage(Item.ProfilePath) %>" />
+                                <img runat="server" class="profile_image" visible="<%# HasProfileImage(Item.ProfilePath) %>" src="<%# BuildProfileImageUrl(Item.ProfilePath) %>" />
+                                <div class="person_info">
+                                    <p class="h5">
+                                        <a target="_newtab" href="<%# BuildPersonUrl(Item.PersonId) %>"><%# Item.Name %></a>
+                                        <br />
+                                        <span class="text-muted"><%# Item.Role %></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -80,5 +90,5 @@
             </div>
         </div>
     </div>
-    
+
 </asp:Content>

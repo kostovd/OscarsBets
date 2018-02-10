@@ -9,13 +9,9 @@ namespace MovieScrapper.Business.Interfaces
 {
     public interface IMovieService
     {
-        void AddMovie(Movie movie);
-
         void ChangeMovieStatus(string userId, int movieId);
 
         IEnumerable<Movie> GetAllMovies();
-
-        IEnumerable<Movie> GetAllMoviesInCategory(int categoryId);
 
         Movie GetMovie(int id);
 

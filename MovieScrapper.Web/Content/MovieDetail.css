@@ -40,3 +40,30 @@
     margin:5px;
     width: 60px;
 }
+
+.person_profile {
+    display: flex;
+}
+
+.no_image {
+    display: inline-block;
+    text-align: center;
+    background-color: #dbdbdb;
+    color: #b5b5b5;
+    box-sizing: border-box;
+    font-size: 33px;
+    border: 1px solid #d7d7d7;
+    line-height: 66px;
+}
+
+.profile_image {
+    width: 66px;
+    height: 66px;
+    border-radius: 4px;
+}
+
+.person_info {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+}

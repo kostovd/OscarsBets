@@ -7,9 +7,7 @@ namespace MovieScrapper.Data.Interfaces
     {
         void AddCategory(Category category);
 
-        void AddMovie(int categoryId, int movieId);
-
-        bool AreWinnersSet();
+        void AddNomination(int categoryId, int movieId, List<string> creditIds);
 
         void DeleteCategory(int id);
 
@@ -19,11 +17,7 @@ namespace MovieScrapper.Data.Interfaces
 
         Category GetCategory(int id);
 
-        Movie GetMovieInCategory(int categoryId, int movieId);
-
-        bool HasMovieInCategory(int categoryId, int movieId);
-
-        void MarkAsWinner(int categoryId, int movieId);
+        void MarkAsWinner(int categoryId, int nominationId);
 
         void RemoveMovieFromCategory(int categoryId, int movieId);                           
 

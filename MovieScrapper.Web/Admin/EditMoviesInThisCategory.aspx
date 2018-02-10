@@ -18,16 +18,16 @@
             CellPadding="4" 
             ForeColor="#333333" 
             DataSourceID="ObjectDataSource1"
-            ItemType="MovieScrapper.Entities.Movie">
+            ItemType="MovieScrapper.Entities.Nomination">
             <AlternatingItemStyle BackColor="White" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
             <ItemStyle BackColor="#EFF3FB" />
             <ItemTemplate>
                 <div class=" pattern">
-                            <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item %>" />    
+                            <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item.Movie %>" />    
                                 <div class="under-movie">  
-                                     <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item.Id) %>" />
+                                     <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
                                     <asp:Button 
                           ID="DeleteButton" 
                           runat="server" 
@@ -52,8 +52,8 @@
         </asp:DataList>
         <asp:ObjectDataSource ID="ObjectDataSource1" 
             runat="server" 
-            SelectMethod="GetAllMoviesInCategory" 
-            TypeName="MovieScrapper.Business.Interfaces.IMovieService" 
+            SelectMethod="GetAllNominationsInCategory" 
+            TypeName="MovieScrapper.Business.Interfaces.INominationService" 
             OnObjectCreating="ObjectDataSource1_ObjectCreating">
             <SelectParameters>
                 <asp:QueryStringParameter QueryStringField="categoryId" Name="categoryId"/>

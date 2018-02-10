@@ -11,28 +11,6 @@ namespace UnitTestProject
     public class MovieServiceTests
     {
         [TestMethod]
-        public void AddMovie_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
-        {
-            var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
-
-            //Arrange
-            var movie = new Movie { Id = 1};
-            
-            movieRepositoryMock.Expect(dao => dao.AddMovie(Arg<Movie>.Is.Anything)).Repeat.Once(); ;
-
-            var movieService = new MovieService(movieRepositoryMock);
-
-            //Act
-            movieService.AddMovie(movie);
-
-            //Assert
-            //movieRepositoryMock.AssertWasCalled(x => x.AddMovie(movie),
-            //                   x => x.Repeat.Once());
-
-            movieRepositoryMock.VerifyAllExpectations();
-        }
-
-        [TestMethod]
         public void ChangeMovieStatus_ShouldCallMovieRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();

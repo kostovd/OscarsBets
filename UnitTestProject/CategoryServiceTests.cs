@@ -15,22 +15,22 @@ namespace UnitTestProject
     public class CategoryServiceTests
     {
         [TestMethod]
-        public void AddMovieInCategory_ShouldCallCategoryRepositoryMockAndMovieRepositoryMockOnce_WhenTheMovieIsNotInTheDB()
+        public void AddNominationInCategory_ShouldCallCategoryRepositoryMockAndMovieRepositoryMockOnce_WhenTheMovieIsNotInTheDB()
         {
             var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
             var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
 
             //Arrange
             Movie movie = new Movie { Id = 1 };
+            var movieCredit = new List<string>() { "1" };
             movieRepositoryMock.Expect(dao => dao.HasMovie(1)).Return(false);
-            categoryRepositoryMock.Expect(dao => dao.HasMovieInCategory(1, 1)).Return(false);
             movieRepositoryMock.Expect(dao => dao.AddMovie(movie)).Repeat.Once();
-            categoryRepositoryMock.Expect(dao => dao.AddMovie(1, 1)).Repeat.Once();
+            categoryRepositoryMock.Expect(dao => dao.AddNomination(1, 1, movieCredit)).Repeat.Once();
 
             var categoryService = new CategoryService(categoryRepositoryMock, movieRepositoryMock);
 
             //Act
-            categoryService.AddMovieInCategory(1, movie);
+            categoryService.AddMovieInCategory(1, movie, movieCredit);
 
             //Assert
             movieRepositoryMock.VerifyAllExpectations();
@@ -46,37 +46,14 @@ namespace UnitTestProject
             //Arrange
             Movie movie = new Movie { Id = 1 };
             movieRepositoryMock.Expect(dao => dao.HasMovie(1)).Return(true);
-            categoryRepositoryMock.Expect(dao => dao.HasMovieInCategory(1, 1)).Return(true);
             movieRepositoryMock.Expect(dao => dao.AddMovie(movie)).Repeat.Never();
-            categoryRepositoryMock.Expect(dao => dao.AddMovie(1, 1)).Repeat.Never();
+            movieRepositoryMock.Expect(dao => dao.OverrideMovie(movie)).Repeat.Once();
+            categoryRepositoryMock.Expect(dao => dao.AddNomination(Arg<int>.Is.Equal(1), Arg<int>.Is.Equal(1), Arg<List<string>>.Matches(x => x.Count == 0))).Repeat.Once();
 
             var categoryService = new CategoryService(categoryRepositoryMock, movieRepositoryMock);
 
             //Act
-            categoryService.AddMovieInCategory(1, movie);
-
-            //Assert
-            movieRepositoryMock.VerifyAllExpectations();
-            categoryRepositoryMock.VerifyAllExpectations();
-        }
-
-        [TestMethod]
-        public void AddMovieInCategory_ShouldCallOnlyCategoryRepositoryMock_WhenTheMovieIsInTheDBButNotForThisCategory()
-        {
-            var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
-            var movieRepositoryMock = MockRepository.GenerateMock<IMovieRepository>();
-
-            //Arrange
-            Movie movie = new Movie { Id = 1 };
-            movieRepositoryMock.Expect(dao => dao.HasMovie(1)).Return(true);
-            categoryRepositoryMock.Expect(dao => dao.HasMovieInCategory(1, 1)).Return(false);
-            movieRepositoryMock.Expect(dao => dao.AddMovie(movie)).Repeat.Never();
-            categoryRepositoryMock.Expect(dao => dao.AddMovie(1, 1)).Repeat.Once();
-
-            var categoryService = new CategoryService(categoryRepositoryMock, movieRepositoryMock);
-
-            //Act
-            categoryService.AddMovieInCategory(1, movie);
+            categoryService.AddMovieInCategory(1, movie, null);
 
             //Assert
             movieRepositoryMock.VerifyAllExpectations();
@@ -100,27 +77,6 @@ namespace UnitTestProject
 
             //Assert
             categoryRepositoryMock.VerifyAllExpectations();
-        }
-
-        
-        [TestMethod]
-        public void AreWinnersSet_ShouldCallCategoryRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
-        {
-            var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
-            bool sendReslt = true;
-
-            //Arrange
-            categoryRepositoryMock.Expect(dao => dao.AreWinnersSet()).Return(sendReslt).Repeat.Once(); ;
-
-            var categoryService = new CategoryService(categoryRepositoryMock);
-
-            //Act
-            var receivedResult = categoryService.AreWinnersSet();
-
-            //Assert
-            categoryRepositoryMock.VerifyAllExpectations();
-
-            Assert.AreEqual(sendReslt, receivedResult);
         }
 
         [TestMethod]
@@ -186,23 +142,6 @@ namespace UnitTestProject
 
             //Act
             categoryService.GetCategory(1);
-
-            //Assert
-            categoryRepositoryMock.VerifyAllExpectations();
-        }
-
-        [TestMethod]
-        public void GetMovieInCategory_ShouldCallCategoryRepositoryMockOnce_WhenTheCorrectRepositoryIsPassed()
-        {
-            var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
-
-            //Arrange
-            categoryRepositoryMock.Expect(dao => dao.GetMovieInCategory(Arg<int>.Is.Anything, Arg<int>.Is.Anything)).Return(Arg<Movie>.Is.Anything).Repeat.Once(); ;
-
-            var categoryService = new CategoryService(categoryRepositoryMock);
-
-            //Act
-            categoryService.GetMovieInCategory(1, 1);
 
             //Assert
             categoryRepositoryMock.VerifyAllExpectations();

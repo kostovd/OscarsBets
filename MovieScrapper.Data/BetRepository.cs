@@ -2,6 +2,7 @@
 using MovieScrapper.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace MovieScrapper.Data
 {
@@ -16,37 +17,42 @@ namespace MovieScrapper.Data
             }
         }
 
-        public Bet GetUserBetEntity(string userId)
+        public void MakeBetEntity(string userId, int nominationId)
         {
             using (var ctx = new MovieContext())
             {
-                var foundedEntity = ctx.Bets.Where(x => x.UserId == userId).SingleOrDefault();
-                return foundedEntity;
+                var selectedNomination = ctx.Nominations
+                    .Include(x => x.Category)
+                    .Where(x => x.Id == nominationId)
+                    .SingleOrDefault();
 
-            }
-        }
+                Bet categoryUserBet = ctx.Bets
+                    .Include(x => x.Nomination)
+                    .Where(x => x.UserId == userId)
+                    .Where(x => x.Nomination.Category.Id == selectedNomination.Category.Id)
+                    .FirstOrDefault();
 
-        public Bet MakeBetEntity(string userId, int movieId, int categoryId)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var foundedMovie = ctx.Movies.Where(m => m.Id == movieId).SingleOrDefault();
-                var foundedCategory = ctx.MovieCaterogries.Where(x => x.Id == categoryId).SingleOrDefault();
-                var foundedUserBets = ctx.Bets.Where(x => x.UserId == userId);
-                Bet foundedUserBetInThisCategory = ctx.Bets.Where(x => x.UserId == userId).Where(y => y.Category.Id == categoryId).FirstOrDefault();
-                if (foundedUserBetInThisCategory == null)
+                if (categoryUserBet == null)
                 {
-                    var betEntity = new Bet() { UserId = userId, Movie = foundedMovie, Category = foundedCategory };
-                    betEntity = ctx.Bets.Add(betEntity);
-                    ctx.SaveChanges();
-                    return betEntity;
+                    categoryUserBet = new Bet()
+                    {
+                        UserId = userId,
+                        Nomination = selectedNomination,
+                    };
+
+                    ctx.Entry(categoryUserBet).State = EntityState.Added;
+                }
+                else if (categoryUserBet.Nomination.Id == selectedNomination.Id)
+                {
+                    ctx.Entry(categoryUserBet).State = EntityState.Deleted;
                 }
                 else
                 {
-                    foundedUserBetInThisCategory.Movie = foundedMovie;
-                    ctx.SaveChanges();
-                    return foundedUserBetInThisCategory;
+                    categoryUserBet.Nomination = selectedNomination;
+                    ctx.Entry(categoryUserBet).State = EntityState.Modified;
                 }
+
+                ctx.SaveChanges();
             }
         }
     }

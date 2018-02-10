@@ -73,6 +73,7 @@
     <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Interfaces\IGamePropertyRepository.cs" />
     <Compile Include="Interfaces\IMovieRepository.cs" />
+    <Compile Include="Interfaces\INominationRepository.cs" />
     <Compile Include="Interfaces\ITMDBRepository.cs" />
     <Compile Include="Interfaces\IViewModelsRepository.cs" />
     <Compile Include="Interfaces\IWatchedMovieRepository.cs" />
@@ -80,9 +81,14 @@
     <Compile Include="Migrations\201712291105262_InitialCreate.Designer.cs">
       <DependentUpon>201712291105262_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802102215562_Nominations.cs" />
+    <Compile Include="Migrations\201802102215562_Nominations.Designer.cs">
+      <DependentUpon>201802102215562_Nominations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieContext.cs" />
     <Compile Include="MovieRepository.cs" />
+    <Compile Include="NominationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMDBRepository.cs" />
     <Compile Include="ViewModelsRepository.cs" />
@@ -101,6 +107,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712291105262_InitialCreate.resx">
       <DependentUpon>201712291105262_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802102215562_Nominations.resx">
+      <DependentUpon>201802102215562_Nominations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

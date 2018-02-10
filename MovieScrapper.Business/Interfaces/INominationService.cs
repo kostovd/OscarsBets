@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Interfaces
 {
-    public interface IMovieClient
-    {         
-        Task<Movie> GetMovieAsync(string movieID);
-       
-        Task<List<Movie>> SearchMovieAsync(string searchString);       
+    public interface INominationService
+    {
+        List<Nomination> GetAllNominationsInCategory(int categoryId);
     }
 }

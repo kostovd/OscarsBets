@@ -32,34 +32,17 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void GetUserBetEntity_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
-        {
-            var betRepositoryMock = MockRepository.GenerateMock<IBetRepository>();
-
-            //Arrange
-            betRepositoryMock.Expect(dao => dao.GetUserBetEntity(Arg<string>.Is.Anything)).Return(Arg<Bet>.Is.Anything).Repeat.Once(); ;
-
-            var betService = new BetService(betRepositoryMock);
-
-            //Act
-            betService.GetUserBetEntity("1");
-
-            //Assert
-            betRepositoryMock.VerifyAllExpectations();
-        }
-
-        [TestMethod]
         public void MakeBetEntity_Should_BeCalledOnce_WhenTheCorrectRepositoryIsPassed()
         {
             var betRepositoryMock = MockRepository.GenerateMock<IBetRepository>();
 
             //Arrange
-            betRepositoryMock.Expect(dao => dao.MakeBetEntity(Arg<string>.Is.Anything, Arg<int>.Is.Anything, Arg<int>.Is.Anything)).Return(Arg<Bet>.Is.Anything).Repeat.Once(); ;
+            betRepositoryMock.Expect(dao => dao.MakeBetEntity(Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Repeat.Once(); ;
 
             var betService = new BetService(betRepositoryMock);
 
             //Act
-            betService.MakeBetEntity("1", 1 , 1);
+            betService.MakeBetEntity("1", 1);
 
             //Assert
             betRepositoryMock.VerifyAllExpectations();

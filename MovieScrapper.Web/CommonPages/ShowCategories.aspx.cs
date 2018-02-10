@@ -67,16 +67,13 @@ namespace MovieScrapper.CommonPages
             if (e.CommandName == "MarkAsBetted")
             {
                 var userId = User.Identity.GetUserId();
-                string sortByAndArrangeBy = (e.CommandArgument).ToString();
-                char[] separator = { '|' };
-                string[] sortByAndArrangeByArray = sortByAndArrangeBy.Split(separator);
-                var movieId = int.Parse(sortByAndArrangeByArray[0]);
-                var categoryId = int.Parse(sortByAndArrangeByArray[1]);
+                var nominationId = int.Parse(e.CommandArgument.ToString());
+
                 var betService = GetBuisnessService<IBetService>();
-                var betEntity = betService.MakeBetEntity(userId, movieId, categoryId);
+                betService.MakeBetEntity(userId, nominationId);
+
                 Repeater1.DataBind();
                 System.Threading.Thread.Sleep(500);
-
             }
         }
 
@@ -92,10 +89,10 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected string ChangeTextIfUserBettedOnThisMovie(ICollection<Bet> categoryBets, int movieId)
+        protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
         {
             string currentUserId = User.Identity.GetUserId();
-            if (categoryBets.Any(x => x.UserId == currentUserId && x.Movie.Id == movieId))
+            if (nominationBets.Any(x => x.UserId == currentUserId))
             {
                 return "<span class='check-button glyphicon glyphicon-check'></span>"; 
             }
@@ -105,89 +102,28 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected string CheckIfWinner(object winner, int currentMovieId)
+        protected string CheckIfWinnerImage(Nomination nomination)
         {
-            if (IsGameRunning() == true)
-            {
-                return "";
-            }
-            else
-            {
-                if (winner == null)
-                {
-                    return "";
-                }
-                else
-                {
-                    if (winner.ToString() == currentMovieId.ToString())
-                    {
-                        return "winner";
-                    }
-                    else
-                    {
-                        return "notWinner";
-                    }
-                }
-            }
-
-        }
-
-        protected string CheckIfWinnerImage(object winnerMovieId, int currentMovieId)
-        {
-            if (IsGameRunning() == true)
-            {
-                return "";
-            }
-            else
-            {
-                if (winnerMovieId == null)
-                {
-                    return "";
-                }
-                else
-                {
-                    if (int.Parse(winnerMovieId.ToString()) == currentMovieId)
-                    {
-                        return "/images/Oscar_logo.png";
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-            }
+            return nomination.IsWinner && IsGameRunning() ?
+                    "/images/Oscar_logo.png" :
+                    "";
         }
 
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
             var currentUsereId = User.Identity.GetUserId();
 
-            IEnumerable<Category> categories = (IEnumerable<Category>)e.ReturnValue;
-            var categoryCount = categories.Count();
-            var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
-            var missedCategories = categoryCount - bettedCategories;
-            var winners = categories.Select(c => c.Winner).ToList();
-            bool winnersAreSet = !winners.Any(x => x == null);
-            var counter = 0;
+            var categories = (IEnumerable<Category>)e.ReturnValue;
+            int categoryCount = categories.Count();
 
-            foreach (var category in categories)
-            {
-                if (category.Winner != null)
-                {
-                    var winner = category.Winner.Id;
-                    Bet bet = category.Bets.Where(x => x.UserId == currentUsereId).SingleOrDefault();
-                    if (bet != null)
-                    {
-                        if (winner != 0)
-                        {
-                            if (bet.Movie.Id == winner)
-                            {
-                                counter++;
-                            }
-                        }
-                    }
-                }
-            }
+            var bets = categories.SelectMany(x => x.Nominations).SelectMany(x => x.Bets).Where(x => x.UserId == currentUsereId).ToList();
+
+            int missedCategories = categoryCount - bets.Count;
+
+            var winners = categories.SelectMany(c => c.Nominations).Where(x => x.IsWinner).ToList();
+            bool winnersAreSet = (winners.Count == categoryCount);
+
+            int counter = bets.Count(x => x.Nomination.IsWinner);
 
             if (CheckIfTheUserIsLogged() == true && IsGameRunning() == true)
             {

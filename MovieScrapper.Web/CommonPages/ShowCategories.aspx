@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowCategories.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowCategories" MasterPageFile="~/Site.Master" ClientIDMode="AutoId" %>
 
-<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
+<%@ Register TagPrefix="My" TagName="NominationControl" Src="~/NominationControl.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -20,24 +20,26 @@
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:Repeater ID="Repeater2" runat="server"
-                            ItemType="MovieScrapper.Entities.Movie" DataSource="<%# ((MovieScrapper.Entities.Category)((IDataItemContainer)Container).DataItem).Movies %>" OnItemCommand="Repeater2_ItemCommand">
+                            ItemType="MovieScrapper.Entities.Nomination" 
+                            DataSource="<%# ((MovieScrapper.Entities.Category)((IDataItemContainer)Container).DataItem).Nominations %>" 
+                            OnItemCommand="Repeater2_ItemCommand">
                             <HeaderTemplate>
                                 <div>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class=" pattern">
 
-                                    <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
+                                    <My:NominationControl ID="NominationControl1" runat="server" Item="<%# Item %>" />
                                     <div class="under-movie">
-                                         <img class="winnerLogo" src="<%# CheckIfWinnerImage(DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Winner.Id"), Item.Id) %>" />
+                                         <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
                                         <asp:LinkButton ID="MarkAsBettedButton"
                                             runat="server"
                                             Text=""
                                             CommandName="MarkAsBetted"
-                                            CommandArgument='<%# string.Format("{0}|{1}", Item.Id , DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Id")) %>'
+                                            CommandArgument='<%# Item.Id %>'
                                             Enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
                                             Visible="<%#!IsGameNotStartedYet()%>">
-                                          <%# ChangeTextIfUserBettedOnThisMovie((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Bets"), Item.Id) %>
+                                          <%# ChangeTextIfUserBettedOnThisNomination(Item.Bets) %>
                                         </asp:LinkButton>
 
                                         <span class="label" visible="<%#!IsGameNotStartedYet()%>">Bet for this movie!</span>

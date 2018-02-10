@@ -2,7 +2,7 @@
 
 <div class="movieItem">
    <div class="title">
-        <div ="items">                                      
+        <div class="items">                                      
               <a class="linkTitle" href="<%# BuildUrl(Item.Id) %>" title="<%# Item.Overview %>">
                   <%# Item.Title %> (<%# DisplayYear(Item.ReleaseDate) %>)
               </a> 

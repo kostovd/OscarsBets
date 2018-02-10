@@ -1,12 +1,9 @@
-﻿using MovieScrapper.Entities.Interfaces;
-
-namespace MovieScrapper.Entities
+﻿namespace MovieScrapper.Entities
 {
-    public class Bet: IBet
+    public class Bet
     {
         public int Id { get; set; }
         public string UserId { get; set; }
-        public Movie Movie { get; set; }
-        public Category Category { get; set; }
+        public Nomination Nomination { get; set; }
     }
 }

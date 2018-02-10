@@ -18,19 +18,12 @@ namespace MovieScrapper.Business
 
         public IEnumerable<Bet> GetAllUserBets(string userId)
         {
-           
             return _betRepository.GetAllUserBets(userId);
         }
 
-        public Bet GetUserBetEntity(string userId)
+        public void MakeBetEntity(string userId, int nominationId)
         {
-            return _betRepository.GetUserBetEntity(userId);
-        }
-
-        public Bet MakeBetEntity(string userId, int movieId, int categoryId)
-        {
-
-            return _betRepository.MakeBetEntity(userId, movieId, categoryId);
+            _betRepository.MakeBetEntity(userId, nominationId);
         }
     }
 

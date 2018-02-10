@@ -10,18 +10,13 @@ using MovieScrapper.Data.Interfaces;
 
 namespace MovieScrapper.Business
 {
-    public class MovieService: IMovieService
+    public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;       
 
         public MovieService(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
-        }
-
-        public void AddMovie(Movie movie)
-        {
-            _movieRepository.AddMovie(movie);
         }
 
         public void ChangeMovieStatus(string userId, int movieId)
@@ -33,12 +28,6 @@ namespace MovieScrapper.Business
         {
 
             return _movieRepository.GetAllMovies();
-        }
-
-        public IEnumerable<Movie> GetAllMoviesInCategory(int categoryId)
-        {
-
-            return _movieRepository.GetAllMoviesInCategory(categoryId);
         }
 
         public Movie GetMovie(int id)

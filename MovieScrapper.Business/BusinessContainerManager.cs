@@ -21,6 +21,7 @@ namespace MovieScrapper.Business
             container.RegisterType<IMovieService, MovieService>();
             container.RegisterType<IWatchedMovieService, WatchedMovieService>();
             container.RegisterType<IWatcheMoviesStatisticService, WatcheMoviesStatisticService>();
+            container.RegisterType<INominationService, NominationService>();
 
             // Register data types
             DataContainerManager containerManager = new DataContainerManager();

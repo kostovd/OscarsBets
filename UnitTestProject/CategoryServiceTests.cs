@@ -47,7 +47,8 @@ namespace UnitTestProject
             Movie movie = new Movie { Id = 1 };
             movieRepositoryMock.Expect(dao => dao.HasMovie(1)).Return(true);
             movieRepositoryMock.Expect(dao => dao.AddMovie(movie)).Repeat.Never();
-            categoryRepositoryMock.Expect(dao => dao.AddNomination(1, 1, Arg<List<string>>.Matches(x => x.Count == 0))).Repeat.Once();
+            movieRepositoryMock.Expect(dao => dao.OverrideMovie(movie)).Repeat.Once();
+            categoryRepositoryMock.Expect(dao => dao.AddNomination(Arg<int>.Is.Equal(1), Arg<int>.Is.Equal(1), Arg<List<string>>.Matches(x => x.Count == 0))).Repeat.Once();
 
             var categoryService = new CategoryService(categoryRepositoryMock, movieRepositoryMock);
 

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowCategories.aspx.cs" Inherits="MovieScrapper.CommonPages.ShowCategories" MasterPageFile="~/Site.Master" ClientIDMode="AutoId" %>
 
-<%@ Register TagPrefix="My" TagName="MovieControl" Src="~/MovieControl.ascx" %>
+<%@ Register TagPrefix="My" TagName="NominationControl" Src="~/NominationControl.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -29,7 +29,7 @@
                             <ItemTemplate>
                                 <div class=" pattern">
 
-                                    <My:MovieControl ID="MovieControl1" runat="server" Item="<%# Item.Movie %>" />
+                                    <My:NominationControl ID="NominationControl1" runat="server" Item="<%# Item %>" />
                                     <div class="under-movie">
                                          <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
                                         <asp:LinkButton ID="MarkAsBettedButton"

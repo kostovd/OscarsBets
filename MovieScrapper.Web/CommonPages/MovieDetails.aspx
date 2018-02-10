@@ -28,20 +28,26 @@
         </Fields>
     </asp:DetailsView>
 
+    <asp:Panel ID="PnlAddMovieButton" runat="server">
+        <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category " Width="500px" OnClick="AddMovieToCategoryButton_Click" />
+    </asp:Panel>
+    
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <asp:Repeater ID="RptCast" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
                     <HeaderTemplate>
+                        <h2>Cast</h2>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="well well-sm">
-                            <asp:CheckBox ID="CheckBox1" Visible="true" class="form-check-input" runat="server" Text="Nominated" />
+                            <asp:CheckBox ID="CbNominated" Visible="<%# IsCheckBoxNominationVisible %>" runat="server" Text="Nominated" />
+                            <asp:HiddenField ID="HfCreditId" Value="<%# Item.Id %>" runat="server" />
                             <div>
                                 <img style="margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %>" />
                                 <div style="display: inline-block">
-                                    <p><%# Item.Name %></p>
-                                    <p><%# Item.Role %></p>
+                                    <p class="h5"><%# Item.Name %></p>
+                                    <p class="h5 text-muted"><%# Item.Role %></p>
                                 </div>
                             </div>
                         </div>
@@ -50,19 +56,21 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <asp:Repeater ID="RptCrew" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
                     <HeaderTemplate>
+                        <h2>Crew</h2>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="well well-sm">
-                            <asp:CheckBox ID="CheckBox1" Visible="true" class="form-check-input" runat="server" Text="Nominated" />
+                            <asp:CheckBox ID="CbNominated" Visible="<%# IsCheckBoxNominationVisible %>" runat="server" Text="Nominated" />
+                            <asp:HiddenField ID="HfCreditId" Value="<%# Item.Id %>" runat="server" />
                             <div>
-                                <img style="float: left; margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %> " />
-                                <blockquote class="blockquote">
-                                    <p class="mb-0"><%# Item.Name %></p>
-                                    <footer class="blockquote-footer"><%# Item.Role %></footer>
-                                </blockquote>
+                                <img style="margin-right: 15px;" src="<%# BuildProfileUrl(Item.ProfilePath) %>" />
+                                <div style="display: inline-block">
+                                    <p class="h5"><%# Item.Name %></p>
+                                    <p class="h5 text-muted"><%# Item.Role %></p>
+                                </div>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -72,7 +80,5 @@
             </div>
         </div>
     </div>
-    <p>
-        <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category " Width="500px" OnClick="AddMovieToCategoryButton_Click" />
-    </p>
+    
 </asp:Content>

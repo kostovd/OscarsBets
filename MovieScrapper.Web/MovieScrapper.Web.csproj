@@ -259,6 +259,9 @@
     <Content Include="CommonPages\MovieDetails.aspx" />
     <Content Include="images\icons\AscArrow.png" />
     <Content Include="images\icons\DescArrow.png" />
+    <Content Include="NominationControl.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="MovieControl.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -481,6 +484,15 @@
     </Compile>
     <Compile Include="CommonPages\ShowCategories.aspx.designer.cs">
       <DependentUpon>ShowCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NominationControl.ascx.cs">
+      <DependentUpon>NominationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="NominationControl.ascx.designer.cs">
+      <DependentUpon>NominationControl.ascx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MovieControl.ascx.cs">
       <DependentUpon>MovieControl.ascx</DependentUpon>

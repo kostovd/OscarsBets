@@ -26,21 +26,19 @@ namespace MovieScrapper.Business
             _categoryRepository.AddCategory(category);
         }         
 
-        public void AddMovieInCategory(int categoryId, Movie movie, MovieCredit credit)
+        public void AddMovieInCategory(int categoryId, Movie movie, List<string> creditIds)
         {            
             var hasMovie = _movieRepository.HasMovie(movie.Id);
             if (!hasMovie)
             {
                 _movieRepository.AddMovie(movie);
             }
-
-            List<string> creditIds = new List<string>();
-            if (credit != null)
+            else
             {
-                creditIds.Add(credit.Id);
+                _movieRepository.OverrideMovie(movie);
             }
 
-            _categoryRepository.AddNomination(categoryId, movie.Id, creditIds);
+            _categoryRepository.AddNomination(categoryId, movie.Id, creditIds ?? new List<string>());
         }      
       
         public void DeleteCategory(int id)

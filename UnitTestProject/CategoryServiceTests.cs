@@ -22,10 +22,10 @@ namespace UnitTestProject
 
             //Arrange
             Movie movie = new Movie { Id = 1 };
-            MovieCredit movieCredit = new MovieCredit { Id = "1" };
+            var movieCredit = new List<string>() { "1" };
             movieRepositoryMock.Expect(dao => dao.HasMovie(1)).Return(false);
             movieRepositoryMock.Expect(dao => dao.AddMovie(movie)).Repeat.Once();
-            categoryRepositoryMock.Expect(dao => dao.AddNomination(1, 1, Arg<List<string>>.Matches(x => x.Count == 1 && x.First() == movieCredit.Id))).Repeat.Once();
+            categoryRepositoryMock.Expect(dao => dao.AddNomination(1, 1, movieCredit)).Repeat.Once();
 
             var categoryService = new CategoryService(categoryRepositoryMock, movieRepositoryMock);
 

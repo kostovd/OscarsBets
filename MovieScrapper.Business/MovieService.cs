@@ -19,11 +19,6 @@ namespace MovieScrapper.Business
             _movieRepository = movieRepository;
         }
 
-        public void AddMovie(Movie movie)
-        {
-            _movieRepository.AddMovie(movie);
-        }
-
         public void ChangeMovieStatus(string userId, int movieId)
         {
             _movieRepository.ChangeMovieStatus(userId, movieId);

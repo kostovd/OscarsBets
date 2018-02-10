@@ -50,8 +50,11 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var databaseCategory = ctx.Caterogries.Where(x => x.Id == id).SingleOrDefault();
-                ctx.Entry(databaseCategory).State = System.Data.Entity.EntityState.Deleted;
+                var databaseCategory = ctx.Caterogries.
+                    Include(x => x.Nominations).
+                    SingleOrDefault(x => x.Id == id);
+
+                ctx.Entry(databaseCategory).State = EntityState.Deleted;
                 ctx.SaveChanges();
             }
         }
@@ -70,7 +73,8 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var databaseCategory = ctx.Caterogries
-                    .Include(cat => cat.Nominations)
+                    .Include(cat => cat.Nominations.Select(nom => nom.Movie))
+                    .Include(cat => cat.Nominations.Select(nom => nom.Credits))
                     .Include(cat => cat.Bets.Select(bet => bet.Nomination))
                     .OrderBy(cat => cat.Id)
                     .ToList();

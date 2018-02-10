@@ -7,7 +7,7 @@ namespace MovieScrapper.Business.Interfaces
     {
         void AddCategory(Category category);
 
-        void AddMovieInCategory(int categoryId, Movie movie, MovieCredit credit);
+        void AddMovieInCategory(int categoryId, Movie movie, List<string> creditIds);
 
         void DeleteCategory(int id);
 

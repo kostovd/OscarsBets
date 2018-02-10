@@ -17,6 +17,28 @@ namespace MovieScrapper.Data
             }
         }
 
+        public void OverrideMovie(Movie movie)
+        {
+            using (var ctx = new MovieContext())
+            {
+                ctx.Entry(movie).State = EntityState.Modified;
+
+                foreach (MovieCredit credit in movie.Credits)
+                {
+                    if (ctx.Credits.Any(x => x.Id == credit.Id))
+                    {
+                        ctx.Entry(credit).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        ctx.Entry(credit).State = EntityState.Added;
+                    }
+                }
+
+                ctx.SaveChanges();
+            }
+        }
+
         public void ChangeMovieStatus(string userId, int movieId)
         {
             using (var ctx = new MovieContext())

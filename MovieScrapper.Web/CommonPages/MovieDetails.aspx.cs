@@ -3,38 +3,41 @@ using MovieScrapper.Business;
 using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace MovieScrapper
 {
     public partial class MovieDetails : BasePage
     {
-        
+
         protected void Page_Load(object sender, EventArgs e)
-        {      
-            
-            RegisterAsyncTask(new PageAsyncTask(LoadMovieDetailsAsync));
-
-            if (HttpContext.Current.User.IsInRole("admin") & Request.QueryString["categoryId"]!=null)
+        {
+            if (!Page.IsPostBack)
             {
-                AddMovieToCategoryButton.Visible = true;
-            }
-            else
-            {
-                AddMovieToCategoryButton.Visible = false;
-            }
+                RegisterAsyncTask(new PageAsyncTask(LoadMovieDetailsAsync));
 
+                if (HttpContext.Current.User.IsInRole("admin") & Request.QueryString["categoryId"] != null)
+                {
+                    PnlAddMovieButton.Visible = true;
+                }
+                else
+                {
+                    PnlAddMovieButton.Visible = false;
+                }
+            }
         }
 
         private async Task LoadMovieDetailsAsync()
         {
             var apiKey = ConfigurationManager.AppSettings["tmdb:ApiKey"];
             var movieClient = new MovieClient(apiKey);
-            var id= Request.QueryString["id"];
+            var id = Request.QueryString["id"];
             var movie = await movieClient.GetMovieAsync(id);
 
             DetailsView1.DataSource = new Movie[] { movie };
@@ -75,7 +78,7 @@ namespace MovieScrapper
 
         protected string BuildBackUrl()
         {
-            
+
             string backUrl = Request.QueryString["back"];
             return backUrl;
         }
@@ -101,19 +104,43 @@ namespace MovieScrapper
         }
 
         protected void AddMovieToCategoryButton_Click(object sender, EventArgs e)
-        {           
+        {
             var movie = ViewState["Movie"] as Movie;
-            var movieCredit = ViewState["Credit"] as MovieCredit;
 
             if (movie != null)
             {
+                List<string> creditIds = new List<string>();
+                creditIds.AddRange(GetCredits(RptCast));
+                creditIds.AddRange(GetCredits(RptCrew));
+
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var categoryService = GetBuisnessService<ICategoryService>();
-                categoryService.AddMovieInCategory(categoryId, movie, movieCredit);              
+                categoryService.AddMovieInCategory(categoryId, movie, creditIds);
 
-                Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);               
+                Response.Redirect("/Admin/EditMoviesInThisCategory?categoryId=" + categoryId);
             }
         }
-        
+
+        public List<string> GetCredits(Repeater repeater)
+        {
+            List<string> nominated = new List<string>();
+
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                CheckBox cbNominated = (CheckBox)item.FindControl("CbNominated");
+                if (cbNominated.Checked)
+                {
+                    HiddenField hfCreditId = (HiddenField)item.FindControl("HfCreditId");
+                    nominated.Add(hfCreditId.Value);
+                }
+            }
+
+            return nominated;
+        }
+
+        protected bool IsCheckBoxNominationVisible
+        {
+            get { return HttpContext.Current.User.IsInRole("admin"); }
+        }
     }
 }

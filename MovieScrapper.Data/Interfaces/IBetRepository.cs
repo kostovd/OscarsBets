@@ -7,6 +7,6 @@ namespace MovieScrapper.Data.Interfaces
     {
         IEnumerable<Bet> GetAllUserBets(string userId);
 
-        Bet MakeBetEntity(string userId, int nominationId);
+        void MakeBetEntity(string userId, int nominationId);
     }
 }

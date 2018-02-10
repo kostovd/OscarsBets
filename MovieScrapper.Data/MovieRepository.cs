@@ -45,13 +45,13 @@ namespace MovieScrapper.Data
             {
                 var movie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
                 var watchedEntity = ctx.Watched.Include(w => w.Movies).SingleOrDefault(x => x.UserId == userId);
-                if (watchedEntity.Movies.Where(m => m.Id == movieId).SingleOrDefault() == null)
+                if (watchedEntity.Movies.Any(m => m.Id == movieId))
                 {
-                    watchedEntity.Movies.Add(movie);
+                    watchedEntity.Movies.Remove(movie);
                 }
                 else
                 {
-                    watchedEntity.Movies.Remove(movie);
+                    watchedEntity.Movies.Add(movie);
                 }
 
                 ctx.SaveChanges();

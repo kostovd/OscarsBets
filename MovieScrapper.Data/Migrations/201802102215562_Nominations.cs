@@ -7,10 +7,12 @@ namespace MovieScrapper.Data.Migrations
     {
         public override void Up()
         {
+            DropForeignKey("dbo.Bets", "Category_Id", "dbo.Categories");
             DropForeignKey("dbo.Bets", "Movie_Id", "dbo.Movies");
             DropForeignKey("dbo.MovieCategory", "MovieId", "dbo.Movies");
             DropForeignKey("dbo.MovieCategory", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Categories", "Winner_Id", "dbo.Movies");
+            DropIndex("dbo.Bets", new[] { "Category_Id" });
             DropIndex("dbo.Bets", new[] { "Movie_Id" });
             DropIndex("dbo.Categories", new[] { "Winner_Id" });
             DropIndex("dbo.MovieCategory", new[] { "MovieId" });
@@ -23,18 +25,12 @@ namespace MovieScrapper.Data.Migrations
                         IsWinner = c.Boolean(nullable: false),
                         Category_Id = c.Int(),
                         Movie_Id = c.Int(),
-                        Movie_Id1 = c.Int(),
-                        Movie_Id2 = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.Category_Id)
                 .ForeignKey("dbo.Movies", t => t.Movie_Id)
-                .ForeignKey("dbo.Movies", t => t.Movie_Id1)
-                .ForeignKey("dbo.Movies", t => t.Movie_Id2)
                 .Index(t => t.Category_Id)
-                .Index(t => t.Movie_Id)
-                .Index(t => t.Movie_Id1)
-                .Index(t => t.Movie_Id2);
+                .Index(t => t.Movie_Id);
             
             CreateTable(
                 "dbo.MovieCredits",
@@ -46,7 +42,7 @@ namespace MovieScrapper.Data.Migrations
                         Name = c.String(),
                         IsCast = c.Boolean(nullable: false),
                         Role = c.String(),
-                        PosterPath = c.String(),
+                        ProfilePath = c.String(),
                         Movie_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -69,6 +65,7 @@ namespace MovieScrapper.Data.Migrations
             AddColumn("dbo.Bets", "Nomination_Id", c => c.Int());
             CreateIndex("dbo.Bets", "Nomination_Id");
             AddForeignKey("dbo.Bets", "Nomination_Id", "dbo.Nominations", "Id");
+            DropColumn("dbo.Bets", "Category_Id");
             DropColumn("dbo.Bets", "Movie_Id");
             DropColumn("dbo.Categories", "Winner_Id");
             DropTable("dbo.MovieCategory");
@@ -87,10 +84,9 @@ namespace MovieScrapper.Data.Migrations
             
             AddColumn("dbo.Categories", "Winner_Id", c => c.Int());
             AddColumn("dbo.Bets", "Movie_Id", c => c.Int());
-            DropForeignKey("dbo.Nominations", "Movie_Id2", "dbo.Movies");
+            AddColumn("dbo.Bets", "Category_Id", c => c.Int());
             DropForeignKey("dbo.MovieCreditNominations", "Nomination_Id", "dbo.Nominations");
             DropForeignKey("dbo.MovieCreditNominations", "MovieCredit_Id", "dbo.MovieCredits");
-            DropForeignKey("dbo.Nominations", "Movie_Id1", "dbo.Movies");
             DropForeignKey("dbo.Nominations", "Movie_Id", "dbo.Movies");
             DropForeignKey("dbo.MovieCredits", "Movie_Id", "dbo.Movies");
             DropForeignKey("dbo.Nominations", "Category_Id", "dbo.Categories");
@@ -98,8 +94,6 @@ namespace MovieScrapper.Data.Migrations
             DropIndex("dbo.MovieCreditNominations", new[] { "Nomination_Id" });
             DropIndex("dbo.MovieCreditNominations", new[] { "MovieCredit_Id" });
             DropIndex("dbo.MovieCredits", new[] { "Movie_Id" });
-            DropIndex("dbo.Nominations", new[] { "Movie_Id2" });
-            DropIndex("dbo.Nominations", new[] { "Movie_Id1" });
             DropIndex("dbo.Nominations", new[] { "Movie_Id" });
             DropIndex("dbo.Nominations", new[] { "Category_Id" });
             DropIndex("dbo.Bets", new[] { "Nomination_Id" });
@@ -111,10 +105,12 @@ namespace MovieScrapper.Data.Migrations
             CreateIndex("dbo.MovieCategory", "MovieId");
             CreateIndex("dbo.Categories", "Winner_Id");
             CreateIndex("dbo.Bets", "Movie_Id");
+            CreateIndex("dbo.Bets", "Category_Id");
             AddForeignKey("dbo.Categories", "Winner_Id", "dbo.Movies", "Id");
             AddForeignKey("dbo.MovieCategory", "CategoryId", "dbo.Categories", "Id", cascadeDelete: true);
             AddForeignKey("dbo.MovieCategory", "MovieId", "dbo.Movies", "Id", cascadeDelete: true);
             AddForeignKey("dbo.Bets", "Movie_Id", "dbo.Movies", "Id");
+            AddForeignKey("dbo.Bets", "Category_Id", "dbo.Categories", "Id");
         }
     }
 }

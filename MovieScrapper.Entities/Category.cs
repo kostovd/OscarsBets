@@ -16,6 +16,5 @@ namespace MovieScrapper.Entities
         public string CategoryTtle { get; set; }
         public string CategoryDescription { get; set; }     
         public virtual ICollection<Nomination> Nominations { get; set; }
-        public ICollection<Bet> Bets { get; set; }
     }
 }

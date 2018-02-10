@@ -37,7 +37,7 @@ namespace UnitTestProject
             var betRepositoryMock = MockRepository.GenerateMock<IBetRepository>();
 
             //Arrange
-            betRepositoryMock.Expect(dao => dao.MakeBetEntity(Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(Arg<Bet>.Is.Anything).Repeat.Once(); ;
+            betRepositoryMock.Expect(dao => dao.MakeBetEntity(Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Repeat.Once(); ;
 
             var betService = new BetService(betRepositoryMock);
 

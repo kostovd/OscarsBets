@@ -28,7 +28,5 @@ namespace MovieScrapper.Entities
         public virtual ICollection<Nomination> Nominations { get; set; }
 
         public virtual ICollection<Watched> UsersWatchedThisMovie { get; set; }
-
-        public virtual ICollection<Nomination> WinningNominations { get; set; }
     }
 }

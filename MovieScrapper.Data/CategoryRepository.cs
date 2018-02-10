@@ -75,7 +75,7 @@ namespace MovieScrapper.Data
                 var databaseCategory = ctx.Caterogries
                     .Include(cat => cat.Nominations.Select(nom => nom.Movie))
                     .Include(cat => cat.Nominations.Select(nom => nom.Credits))
-                    .Include(cat => cat.Bets.Select(bet => bet.Nomination))
+                    .Include(cat => cat.Nominations.Select(bet => bet.Bets))
                     .OrderBy(cat => cat.Id)
                     .ToList();
 

@@ -39,7 +39,7 @@
                                             CommandArgument='<%# Item.Id %>'
                                             Enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning()%>"
                                             Visible="<%#!IsGameNotStartedYet()%>">
-                                          <%# ChangeTextIfUserBettedOnThisNomination((ICollection<MovieScrapper.Entities.Bet>)DataBinder.Eval(Container.Parent.Parent.Parent.Parent, "DataItem.Bets"), Item.Id) %>
+                                          <%# ChangeTextIfUserBettedOnThisNomination(Item.Bets) %>
                                         </asp:LinkButton>
 
                                         <span class="label" visible="<%#!IsGameNotStartedYet()%>">Bet for this movie!</span>

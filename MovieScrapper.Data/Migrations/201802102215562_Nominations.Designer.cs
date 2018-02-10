@@ -7,13 +7,13 @@ namespace MovieScrapper.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class MovieCreditsColumnRename : IMigrationMetadata
+    public sealed partial class Nominations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MovieCreditsColumnRename));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Nominations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802072323316_MovieCreditsColumnRename"; }
+            get { return "201802102215562_Nominations"; }
         }
         
         string IMigrationMetadata.Source

@@ -17,7 +17,7 @@ namespace MovieScrapper.Data
             }
         }
 
-        public Bet MakeBetEntity(string userId, int nominationId)
+        public void MakeBetEntity(string userId, int nominationId)
         {
             using (var ctx = new MovieContext())
             {
@@ -27,15 +27,12 @@ namespace MovieScrapper.Data
                     .SingleOrDefault();
 
                 Bet categoryUserBet = ctx.Bets
+                    .Include(x => x.Nomination)
                     .Where(x => x.UserId == userId)
-                    .Where(x => x.Nomination.Category == selectedNomination.Category)
+                    .Where(x => x.Nomination.Category.Id == selectedNomination.Category.Id)
                     .FirstOrDefault();
 
-                if (categoryUserBet != null)
-                {
-                    categoryUserBet.Nomination = selectedNomination;
-                }
-                else
+                if (categoryUserBet == null)
                 {
                     categoryUserBet = new Bet()
                     {
@@ -43,11 +40,19 @@ namespace MovieScrapper.Data
                         Nomination = selectedNomination,
                     };
 
-                    categoryUserBet = ctx.Bets.Add(categoryUserBet);
+                    ctx.Entry(categoryUserBet).State = EntityState.Added;
+                }
+                else if (categoryUserBet.Nomination.Id == selectedNomination.Id)
+                {
+                    ctx.Entry(categoryUserBet).State = EntityState.Deleted;
+                }
+                else
+                {
+                    categoryUserBet.Nomination = selectedNomination;
+                    ctx.Entry(categoryUserBet).State = EntityState.Modified;
                 }
 
                 ctx.SaveChanges();
-                return categoryUserBet;
             }
         }
     }

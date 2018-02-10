@@ -21,9 +21,9 @@ namespace MovieScrapper.Business
             return _betRepository.GetAllUserBets(userId);
         }
 
-        public Bet MakeBetEntity(string userId, int nominationId)
+        public void MakeBetEntity(string userId, int nominationId)
         {
-            return _betRepository.MakeBetEntity(userId, nominationId);
+            _betRepository.MakeBetEntity(userId, nominationId);
         }
     }
 

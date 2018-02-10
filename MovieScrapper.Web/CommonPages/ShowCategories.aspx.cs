@@ -67,16 +67,10 @@ namespace MovieScrapper.CommonPages
             if (e.CommandName == "MarkAsBetted")
             {
                 var userId = User.Identity.GetUserId();
-
-                string nominationIdAndCategoryId = (e.CommandArgument).ToString();
-                char[] separator = { '|' };
-
-                string[] nominationIdAndCategoryIdArray = nominationIdAndCategoryId.Split(separator);
-                var nominationId = int.Parse(nominationIdAndCategoryIdArray[0]);
-                var categoryId = int.Parse(nominationIdAndCategoryIdArray[1]);
+                var nominationId = int.Parse(e.CommandArgument.ToString());
 
                 var betService = GetBuisnessService<IBetService>();
-                var betEntity = betService.MakeBetEntity(userId, nominationId);
+                betService.MakeBetEntity(userId, nominationId);
 
                 Repeater1.DataBind();
                 System.Threading.Thread.Sleep(500);
@@ -95,10 +89,10 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> categoryBets, int nominationId)
+        protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
         {
             string currentUserId = User.Identity.GetUserId();
-            if (categoryBets.Any(x => x.UserId == currentUserId && x.Nomination.Id == nominationId))
+            if (nominationBets.Any(x => x.UserId == currentUserId))
             {
                 return "<span class='check-button glyphicon glyphicon-check'></span>"; 
             }
@@ -122,7 +116,7 @@ namespace MovieScrapper.CommonPages
             var categories = (IEnumerable<Category>)e.ReturnValue;
             int categoryCount = categories.Count();
 
-            var bets = categories.SelectMany(x => x.Bets).Where(x => x.UserId == currentUsereId).ToList();
+            var bets = categories.SelectMany(x => x.Nominations).SelectMany(x => x.Bets).Where(x => x.UserId == currentUsereId).ToList();
 
             int missedCategories = categoryCount - bets.Count;
 

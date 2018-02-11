@@ -66,7 +66,7 @@ namespace MovieScrapper.CommonPages
         {
             if (e.CommandName == "MarkAsBetted")
             {
-                var userId = User.Identity.GetUserId();
+                var userId = User.Identity.Name;
                 var nominationId = int.Parse(e.CommandArgument.ToString());
 
                 var betService = GetBuisnessService<IBetService>();
@@ -91,7 +91,7 @@ namespace MovieScrapper.CommonPages
 
         protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
         {
-            string currentUserId = User.Identity.GetUserId();
+            string currentUserId = User.Identity.Name;
             if (nominationBets.Any(x => x.UserId == currentUserId))
             {
                 return "<span class='check-button glyphicon glyphicon-check'></span>"; 
@@ -111,7 +111,7 @@ namespace MovieScrapper.CommonPages
 
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
-            var currentUsereId = User.Identity.GetUserId();
+            var currentUsereId = User.Identity.Name;
 
             var categories = (IEnumerable<Category>)e.ReturnValue;
             int categoryCount = categories.Count();

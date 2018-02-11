@@ -108,7 +108,7 @@ namespace MovieScrapper.CommonPages
         {
             if (e.CommandName == "MarkAsWatchedOrUnwatched")
             {
-                var userId = User.Identity.GetUserId();
+                var userId = User.Identity.Name;
                 int movieId = int.Parse((e.CommandArgument).ToString());
                 
 
@@ -128,12 +128,12 @@ namespace MovieScrapper.CommonPages
         
         protected bool DoesUserWatchedThisMovie(ICollection<Watched> users)
         {
-            return !users.Any(x => x.UserId == User.Identity.GetUserId());
+            return !users.Any(x => x.UserId == User.Identity.Name);
         }
 
         protected string ChangeTextIfUserWatchedThisMovie(ICollection<Watched> users)
         {
-            if (!users.Any(x => x.UserId == User.Identity.GetUserId()))
+            if (!users.Any(x => x.UserId == User.Identity.Name))
             {
                 return "<span class='check-button glyphicon glyphicon-unchecked'></span>"; 
             }
@@ -145,7 +145,7 @@ namespace MovieScrapper.CommonPages
 
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
-            var currentUsereId = User.Identity.GetUserId();
+            var currentUsereId = User.Identity.Name;
 
             IEnumerable<Movie> movies = (IEnumerable<Movie>)e.ReturnValue;
             var moviesCount = movies.Count();

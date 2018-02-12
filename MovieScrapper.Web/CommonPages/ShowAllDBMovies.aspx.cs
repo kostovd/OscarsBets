@@ -74,7 +74,7 @@ namespace MovieScrapper.CommonPages
 
         public string BuildPosterUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w92" + path;
+            return "https://image.tmdb.org/t/p/w92" + path;
         }
 
         public string DisplayYear(string dateString)

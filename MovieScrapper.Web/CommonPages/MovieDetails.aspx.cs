@@ -68,7 +68,7 @@ namespace MovieScrapper
 
         protected string BuildPosterUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w500" + path;
+            return "https://image.tmdb.org/t/p/w500" + path;
         }
 
         protected string BuildMovieUrl(int movieId)
@@ -78,7 +78,7 @@ namespace MovieScrapper
 
         protected string BuildProfileImageUrl(string path)
         {
-            return "http://image.tmdb.org/t/p/w66_and_h66_face" + path;
+            return "https://image.tmdb.org/t/p/w66_and_h66_face" + path;
         }
 
         protected string BuildPersonUrl(int personId)

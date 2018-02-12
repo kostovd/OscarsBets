@@ -17,7 +17,7 @@ namespace MovieScrapper
         {
             get
             {
-                return "http://image.tmdb.org/t/p/w300" + Item.Movie.PosterPath;
+                return "https://image.tmdb.org/t/p/w300" + Item.Movie.PosterPath;
             }
         }
 
@@ -25,7 +25,7 @@ namespace MovieScrapper
         {
             get
             {
-                return  "http://image.tmdb.org/t/p/w45" + Item.Credits.FirstOrDefault()?.ProfilePath;
+                return  "https://image.tmdb.org/t/p/w45" + Item.Credits.FirstOrDefault()?.ProfilePath;
             }
         }
 

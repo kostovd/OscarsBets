@@ -216,6 +216,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
+    <Content Include="Account\ManageOpenId.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
@@ -359,6 +360,13 @@
     <Compile Include="Account\ManageLogins.aspx.designer.cs">
       <DependentUpon>ManageLogins.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\ManageOpenId.aspx.cs">
+      <DependentUpon>ManageOpenId.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ManageOpenId.aspx.designer.cs">
+      <DependentUpon>ManageOpenId.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\ManagePassword.aspx.cs">
       <DependentUpon>ManagePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -485,6 +493,7 @@
     <Compile Include="CommonPages\ShowCategories.aspx.designer.cs">
       <DependentUpon>ShowCategories.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="NominationControl.ascx.cs">
       <DependentUpon>NominationControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

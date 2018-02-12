@@ -12,6 +12,7 @@ using MovieScrapper.Business.Interfaces;
 using Microsoft.Practices.Unity;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Microsoft.Owin.Security.Cookies;
+using MovieScrapper.Extensions;
 
 namespace MovieScrapper
 {
@@ -126,6 +127,11 @@ namespace MovieScrapper
         {
             IUnityContainer container = (IUnityContainer)Application["EntLibContainer"];
             return container.Resolve<T>();
+        }
+
+        protected string GetOpenIdUserName()
+        {
+            return Context.User.Identity.GetOpenIdName();
         }
     }
 

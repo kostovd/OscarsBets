@@ -61,14 +61,14 @@ namespace MovieScrapper.Business
             return _categoryRepository.GetCategory(id);
         }
 
-        public void MarkAsWinner(int categoryId, int movieId)
+        public void MarkAsWinner(int categoryId, int nominationId)
         {
-            _categoryRepository.MarkAsWinner(categoryId, movieId);
+            _categoryRepository.MarkAsWinner(categoryId, nominationId);
         }
 
-        public void RemoveMovieFromCategory(int categoryId, int movieId)
+        public void RemoveNominationFromCategory(int categoryId, int nominationId)
         {
-            _categoryRepository.RemoveMovieFromCategory(categoryId, movieId);
+            _categoryRepository.RemoveNominationFromCategory(categoryId, nominationId);
         }                                
 
     }

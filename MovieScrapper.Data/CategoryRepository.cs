@@ -121,14 +121,13 @@ namespace MovieScrapper.Data
             }
         }
 
-        public void RemoveMovieFromCategory(int categoryId, int movieId)
+        public void RemoveNominationFromCategory(int categoryId, int nominationId)
         {
             using (var ctx = new MovieContext())
             {
-                var databaseMovie = ctx.Movies.SingleOrDefault(x => x.Id == movieId);
                 var databaseCategory = ctx.Caterogries.Include(cat => cat.Nominations).SingleOrDefault(x => x.Id == categoryId);
-                var foundedMovie = databaseCategory.Nominations.FirstOrDefault(x => x.Id == movieId);
-                databaseCategory.Nominations.Remove(foundedMovie);
+                var foundNomination = databaseCategory.Nominations.FirstOrDefault(x => x.Id == nominationId);
+                databaseCategory.Nominations.Remove(foundNomination);
                 ctx.SaveChanges();
             }
         }                               

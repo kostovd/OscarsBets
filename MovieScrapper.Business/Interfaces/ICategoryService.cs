@@ -17,8 +17,8 @@ namespace MovieScrapper.Business.Interfaces
 
         Category GetCategory(int id);
 
-        void MarkAsWinner(int categoryId, int movieId);
+        void MarkAsWinner(int categoryId, int nominationId);
 
-        void RemoveMovieFromCategory(int categoryId, int movieId);
+        void RemoveNominationFromCategory(int categoryId, int nominationId);
     }
 }

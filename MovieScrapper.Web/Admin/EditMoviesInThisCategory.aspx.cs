@@ -41,25 +41,17 @@ namespace MovieScrapper.Admin
             if (e.CommandName == "Delete")
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var movieId = Int32.Parse(e.CommandArgument.ToString());
+                var nominationId = Int32.Parse(e.CommandArgument.ToString());
                 var service = GetCategoryService();
-                service.RemoveMovieFromCategory(categoryId, movieId);
-                Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
-            }                     
-
-            if (e.CommandName == "ShowDetails")
-            {
-                var id= e.CommandArgument.ToString();
-                
-                Response.Redirect("/CommonPages/DBMovieDetails.aspx?id=" + id.ToString()+ "&back=/Admin/EditMoviesInThisCategory?categoryId="+ Request.QueryString["categoryId"]);
+                service.RemoveNominationFromCategory(categoryId, nominationId);
+                DataList1.DataBind();
             }
-
-            if (e.CommandName == "MarkAsWinner")
+            else if (e.CommandName == "MarkAsWinner")
             {
                 var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
-                var movieId = Int32.Parse(e.CommandArgument.ToString());
+                var nominationId = Int32.Parse(e.CommandArgument.ToString());
                 var service = GetCategoryService();
-                service.MarkAsWinner(categoryId, movieId);
+                service.MarkAsWinner(categoryId, nominationId);
                 Response.Redirect("EditMoviesInThisCategory?categoryId=" + categoryId);
             }
         }

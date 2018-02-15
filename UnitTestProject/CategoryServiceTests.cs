@@ -170,12 +170,12 @@ namespace UnitTestProject
             var categoryRepositoryMock = MockRepository.GenerateMock<ICategoryRepository>();
 
             //Arrange
-            categoryRepositoryMock.Expect(dao => dao.RemoveMovieFromCategory(Arg<int>.Is.Anything, Arg<int>.Is.Anything)).Repeat.Once(); ;
+            categoryRepositoryMock.Expect(dao => dao.RemoveNominationFromCategory(Arg<int>.Is.Anything, Arg<int>.Is.Anything)).Repeat.Once(); ;
 
             var categoryService = new CategoryService(categoryRepositoryMock);
 
             //Act
-            categoryService.RemoveMovieFromCategory(1, 1);
+            categoryService.RemoveNominationFromCategory(1, 1);
 
             //Assert
             categoryRepositoryMock.VerifyAllExpectations();

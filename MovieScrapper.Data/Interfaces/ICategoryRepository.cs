@@ -19,7 +19,7 @@ namespace MovieScrapper.Data.Interfaces
 
         void MarkAsWinner(int categoryId, int nominationId);
 
-        void RemoveMovieFromCategory(int categoryId, int movieId);                           
+        void RemoveNominationFromCategory(int categoryId, int nominationId);
 
     }
 }

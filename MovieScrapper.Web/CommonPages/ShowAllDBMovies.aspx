@@ -31,7 +31,8 @@
                                 Visible="<%#!IsGameNotStartedYet()%>">
                                 <%# ChangeTextIfUserWatchedThisMovie(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).UsersWatchedThisMovie) %>
                             </asp:LinkButton>
-                            <span class="label" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span>
+                            <span class="label leftLabel" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span>
+                            <span class="label rightLabel"><%# GetNominaionsInfo(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem)) %></span>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

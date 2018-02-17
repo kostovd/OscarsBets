@@ -63,9 +63,10 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {               
                 var movies = ctx.Movies
-                    .Include(u => u.UsersWatchedThisMovie)
+                    .Include(x => x.UsersWatchedThisMovie)
+                    .Include(x => x.Nominations)
                     .Where(x => x.Nominations.Any())
-                    .OrderBy(m=>m.Title)
+                    .OrderBy(x => x.Title)
                     .ToList();
 
                 return movies;

@@ -18,10 +18,16 @@
     color: rgb(179,0,0);
 }
 
-.label {
+.leftLabel {
     color: rgb(179,0,0);
+    top: 10px;
     position: absolute;
-    top:10px;
+}
+.rightLabel {
+    color: rgb(179,0,0);
+    top: 10px;
+    position: absolute;
+    right: 3px;
 }
 .pattern {
     display: inline-block;

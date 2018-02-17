@@ -42,7 +42,7 @@
                                           <%# ChangeTextIfUserBettedOnThisNomination(Item.Bets) %>
                                         </asp:LinkButton>
 
-                                        <span class="label" visible="<%#!IsGameNotStartedYet()%>">Bet for this movie!</span>
+                                        <span class="label leftLabel" visible="<%#!IsGameNotStartedYet()%>">Bet for this nomination!</span>
                                     </div>
 
                                 </div>

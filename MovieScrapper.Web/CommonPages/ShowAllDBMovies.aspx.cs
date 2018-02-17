@@ -143,6 +143,22 @@ namespace MovieScrapper.CommonPages
             }
         }
 
+        protected string GetNominaionsInfo(Movie movie)
+        {
+            if (movie.Nominations.Count == 1)
+            {
+                return "1 nomination";
+            }
+            else if (movie.Nominations.Count > 1)
+            {
+                return movie.Nominations.Count + " nominations";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
             var currentUsereId = User.Identity.Name;

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -20,15 +21,17 @@ namespace MovieScrapper
         {
             if (!Page.IsPostBack)
             {
-                RegisterAsyncTask(new PageAsyncTask(LoadMovieDetailsAsync));
-
                 if (HttpContext.Current.User.IsInRole("admin") & Request.QueryString["categoryId"] != null)
                 {
                     PnlAddMovieButton.Visible = true;
+                    PnlNominations.Visible = false;
+                    RegisterAsyncTask(new PageAsyncTask(LoadMovieDetailsAsync));
                 }
                 else
                 {
                     PnlAddMovieButton.Visible = false;
+                    PnlNominations.Visible = true;
+                    LoadLocalMovieDetails();
                 }
             }
         }
@@ -50,6 +53,27 @@ namespace MovieScrapper
             RptCrew.DataBind();
 
             ViewState["Movie"] = movie;
+        }
+
+        private void LoadLocalMovieDetails()
+        {
+            var movieService = GetBuisnessService<IMovieService>();
+            if (int.TryParse(Request.QueryString["id"], out int id))
+            {
+                var movie = movieService.GetMovie(id);
+
+                DetailsView1.DataSource = new Movie[] { movie };
+                DetailsView1.DataBind();
+
+                RptCast.DataSource = movie.Credits.Where(x => x.IsCast).ToList();
+                RptCast.DataBind();
+
+                RptCrew.DataSource = movie.Credits.Where(x => !x.IsCast).ToList();
+                RptCrew.DataBind();
+
+                RptNominations.DataSource = movie.Nominations.Where(x => x.Category != null).ToList();
+                RptNominations.DataBind();
+            }
         }
 
         protected string BuildPosterUrl(string path)
@@ -142,6 +166,12 @@ namespace MovieScrapper
         protected bool IsCheckBoxNominationVisible
         {
             get { return HttpContext.Current.User.IsInRole("admin") & Request.QueryString["categoryId"] != null; }
+        }
+
+        protected string GetNominationInfo(Nomination nomination)
+        {
+            return string.Join("<br/>",
+                nomination.Credits.Select(x => string.Format("{0} ... {1}", x.Name, x.Role)).ToList());
         }
     }
 }

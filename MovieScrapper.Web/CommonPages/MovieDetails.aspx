@@ -34,12 +34,35 @@
         <asp:Button ID="AddMovieToCategoryButton" runat="server" Height="40px" Text="Add this movie to the selected category " Width="500px" OnClick="AddMovieToCategoryButton_Click" />
     </asp:Panel>
 
+    <asp:Panel ID="PnlNominations" runat="server" CssClass="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <asp:Repeater ID="RptNominations" runat="server" ItemType="MovieScrapper.Entities.Nomination">
+                    <HeaderTemplate>
+                        <h3>Nominations</h3>
+                        <div class="list-group">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading"><%# Item.Category.CategoryTtle %></h4>
+                            <p class="list-group-item-text"><%# GetNominationInfo(Item) %></p>
+                        </div>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
+
+            </div>
+        </div>
+    </asp:Panel>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
                 <asp:Repeater ID="RptCast" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
                     <HeaderTemplate>
-                        <h2>Cast</h2>
+                        <h3>Cast</h3>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="well well-sm">
@@ -59,13 +82,14 @@
                         </div>
                     </ItemTemplate>
                     <FooterTemplate>
+                        </ul>
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
             <div class="col-sm-4">
                 <asp:Repeater ID="RptCrew" runat="server" ItemType="MovieScrapper.Entities.MovieCredit">
                     <HeaderTemplate>
-                        <h2>Crew</h2>
+                        <h3>Crew</h3>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="well well-sm">

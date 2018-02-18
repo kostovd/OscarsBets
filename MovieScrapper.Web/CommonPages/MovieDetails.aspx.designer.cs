@@ -40,6 +40,24 @@ namespace MovieScrapper {
         protected global::System.Web.UI.WebControls.Button AddMovieToCategoryButton;
         
         /// <summary>
+        /// PnlNominations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PnlNominations;
+        
+        /// <summary>
+        /// RptNominations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RptNominations;
+        
+        /// <summary>
         /// RptCast control.
         /// </summary>
         /// <remarks>

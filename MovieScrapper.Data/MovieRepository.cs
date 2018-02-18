@@ -64,8 +64,8 @@ namespace MovieScrapper.Data
             {               
                 var movies = ctx.Movies
                     .Include(x => x.UsersWatchedThisMovie)
-                    .Include(x => x.Nominations)
-                    .Where(x => x.Nominations.Any())
+                    .Include(x => x.Nominations.Select(nom => nom.Category))
+                    .Where(x => x.Nominations.Any(nom => nom.Category != null))
                     .OrderBy(x => x.Title)
                     .ToList();
 
@@ -78,7 +78,13 @@ namespace MovieScrapper.Data
 
             using (var ctx = new MovieContext())
             {
-                var foundedMovie = ctx.Movies.Where(m => m.Id == id).SingleOrDefault();
+                var foundedMovie = ctx.Movies
+                    .Include(m => m.Credits)
+                    .Include(m => m.Nominations.Select(x => x.Category))
+                    .Include(m => m.Nominations.Select(x => x.Credits))
+                    .Where(m => m.Id == id)
+                    .SingleOrDefault();
+
                 return foundedMovie;
             }
         }

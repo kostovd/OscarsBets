@@ -10,5 +10,6 @@ namespace MovieScrapper.Data.Interfaces
     public interface INominationRepository
     {
         List<Nomination> GetAllNominationsInCategory(int categoryId);
+        void RemoveNomination(int nominationId);
     }
 }

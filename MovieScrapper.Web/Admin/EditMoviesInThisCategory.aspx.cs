@@ -15,6 +15,11 @@ namespace MovieScrapper.Admin
             return GetBuisnessService<ICategoryService>();
         }
 
+        private INominationService GetNominationService()
+        {
+            return GetBuisnessService<INominationService>();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -40,10 +45,9 @@ namespace MovieScrapper.Admin
             
             if (e.CommandName == "Delete")
             {
-                var categoryId = Int32.Parse(Request.QueryString["categoryId"]);
                 var nominationId = Int32.Parse(e.CommandArgument.ToString());
-                var service = GetCategoryService();
-                service.RemoveNominationFromCategory(categoryId, nominationId);
+                var service = GetNominationService();
+                service.RemoveNomination(nominationId);
                 DataList1.DataBind();
             }
             else if (e.CommandName == "MarkAsWinner")

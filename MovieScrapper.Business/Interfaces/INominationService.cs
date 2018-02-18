@@ -10,5 +10,6 @@ namespace MovieScrapper.Business.Interfaces
     public interface INominationService
     {
         List<Nomination> GetAllNominationsInCategory(int categoryId);
+        void RemoveNomination(int nominationId);
     }
 }

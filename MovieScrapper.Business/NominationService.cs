@@ -22,5 +22,10 @@ namespace MovieScrapper.Business
         {
             return _nominationRepository.GetAllNominationsInCategory(categoryId);
         }
+
+        public void RemoveNomination(int nominationId)
+        {
+            _nominationRepository.RemoveNomination(nominationId);
+        }
     }
 }

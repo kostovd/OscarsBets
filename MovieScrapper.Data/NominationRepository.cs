@@ -22,5 +22,15 @@ namespace MovieScrapper.Data
                     .ToList();
             }
         }
+
+        public void RemoveNomination(int nominationId)
+        {
+            using (var ctx = new MovieContext())
+            {
+                var foundNomination = ctx.Nominations.Single(x => x.Id == nominationId);
+                ctx.Nominations.Remove(foundNomination);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

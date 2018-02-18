@@ -65,7 +65,7 @@ namespace MovieScrapper.Data
                 var movies = ctx.Movies
                     .Include(x => x.UsersWatchedThisMovie)
                     .Include(x => x.Nominations.Select(nom => nom.Category))
-                    .Where(x => x.Nominations.Any(nom => nom.Category != null))
+                    .Where(x => x.Nominations.Any())
                     .OrderBy(x => x.Title)
                     .ToList();
 

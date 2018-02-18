@@ -145,7 +145,7 @@ namespace MovieScrapper.CommonPages
 
         protected string GetNominaionsInfo(Movie movie)
         {
-            int nominationsCount = movie.Nominations.Count(x => x.Category != null);
+            int nominationsCount = movie.Nominations.Count;
 
             if (nominationsCount == 1)
             {
@@ -153,7 +153,7 @@ namespace MovieScrapper.CommonPages
             }
             else if (nominationsCount > 1)
             {
-                return movie.Nominations.Count + " nominations";
+                return nominationsCount + " nominations";
             }
             else
             {

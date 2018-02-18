@@ -52,20 +52,6 @@ namespace MovieScrapper
             ViewState["Movie"] = movie;
         }
 
-        private async Task LoadMovieCreditsAsync()
-        {
-            var apiKey = ConfigurationManager.AppSettings["tmdb:ApiKey"];
-            var movieClient = new MovieClient(apiKey);
-            var id = Request.QueryString["id"];
-            var movie = await movieClient.GetMovieAsync(id);
-
-            DetailsView1.DataSource = new Movie[] { movie };
-            DetailsView1.DataBind();
-
-            ViewState["Movie"] = movie;
-
-        }
-
         protected string BuildPosterUrl(string path)
         {
             return "https://image.tmdb.org/t/p/w500" + path;
@@ -155,7 +141,7 @@ namespace MovieScrapper
 
         protected bool IsCheckBoxNominationVisible
         {
-            get { return HttpContext.Current.User.IsInRole("admin"); }
+            get { return HttpContext.Current.User.IsInRole("admin") & Request.QueryString["categoryId"] != null; }
         }
     }
 }

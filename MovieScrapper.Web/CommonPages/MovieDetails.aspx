@@ -44,8 +44,8 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="list-group-item">
-                            <h4 class="list-group-item-heading"><%# Item.Category.CategoryTtle %></h4>
-                            <p class="list-group-item-text"><%# GetNominationInfo(Item) %></p>
+                            <h5 class="list-group-item-heading text-info"><%# Item.Category.CategoryTtle %></h5>
+                            <p class="list-group-item-text text-muted"><%# GetNominationInfo(Item) %></p>
                         </div>
                     </ItemTemplate>
                     <FooterTemplate>

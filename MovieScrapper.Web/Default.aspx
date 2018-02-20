@@ -25,6 +25,7 @@
     <p>
         Don't hesitate to organize yourself or your Colleagues to watch some of the nominated movies on Cinema.<br />
         Here is the list of nominated movies on Cinema this week:<br />
+        <a href="http://www.programata.bg/?p=29&l=2&c=1&id=96902" target="_newtab">Molly’s Game (1 nomination)</a><br />
         <a href="http://www.programata.bg/?p=30&l=2&c=1&id=96793" target="_newtab">All the Money in the World (1 nomination)</a><br />
         <a href="http://www.programata.bg/?p=30&l=2&c=1&id=96042" target="_newtab">Call Me by Your Name (4 nominations)</a><br />
         <a href="http://www.programata.bg/?p=30&l=2&c=1&id=96365" target="_newtab">Coco (2 nominations)</a><br />

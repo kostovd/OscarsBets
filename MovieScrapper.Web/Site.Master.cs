@@ -89,14 +89,27 @@ namespace MovieScrapper
             if (gamePropertyService.IsGameNotStartedYet())
             {
                 Statistics.Visible = false;
-                
+                lblRemaining.Text = string.Empty;
             }
             else
             {
                 Statistics.Visible = true;
+                lblRemaining.Text = GetRemainingTimeLabel();
             }
 
             stopGameLabel.Text = ShowGameStatus();
+        }
+
+        private string GetRemainingTimeLabel()
+        {
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            DateTime endDate = gamePropertyService.GetGameStopDate();
+            TimeSpan tsRemainingTime = endDate - DateTime.Now;
+
+            return string.Format("Remaining time for voting: {0} {1} {2}",
+                tsRemainingTime.Days == 1 ? "1 Day" : tsRemainingTime.Days + " Days",
+                tsRemainingTime.Hours == 1 ? "1 Hour" : tsRemainingTime.Hours + " Hours",
+                tsRemainingTime.Minutes == 1 ? "1 Minute" : tsRemainingTime.Minutes + " Minutes");
         }
 
         public string ShowGameStatus()

@@ -11,13 +11,13 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="/images/icons/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/SiteMaster.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
-    <form runat="server">       
+    <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -37,26 +37,32 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
-        </asp:ScriptManager>        
-        <div class="navbar navbar-inverse ">  
-            <div class="" id="top-content"><img id="logo" src="/images/oscar.ico" />
-                <asp:Label ID="stopGameLabel" runat="server" CssClass="showIfGameStopped" ></asp:Label>
+        </asp:ScriptManager>
+        <div class="navbar navbar-inverse ">
+            <div class="" id="top-content">
+                <img id="logo" src="/images/oscar.ico" />
+                <asp:Label ID="stopGameLabel" runat="server" CssClass="showIfGameStopped"></asp:Label>
             </div>
+
             <div class="container">
+                <p class="text-center">
+                    <asp:Label ID="lblRemaining" runat="server" Text="Label"></asp:Label>
+                </p>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>                  
+                    </button>
                 </div>
+
                 <div class="navbar-collapse collapse">
-                    
+
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" id="Admin" class="adminLink" href="~/Admin/Categories">Admin panel</a></li> 
+                        <li><a runat="server" id="Admin" class="adminLink" href="~/Admin/Categories">Admin panel</a></li>
                         <li><a runat="server" id="Home" href="~/Default">Home</a></li>
                         <li><a runat="server" href="~/CommonPages/ShowCategories">Categories</a></li>
-                        <li><a runat="server" href="~/CommonPages/ShowAllDBMovies">Movies</a></li>                         
+                        <li><a runat="server" href="~/CommonPages/ShowAllDBMovies">Movies</a></li>
                         <li><a runat="server" id="Statistics" href="~/CommonPages/BetsStatistics">Statistics</a></li>
                     </ul>
 
@@ -84,7 +90,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Oscars Bets ASP.NET Application. With the help of the <a href="https://www.themoviedb.org" target="_newtab"> TMDB Movie Database</a></p>
+                <p>&copy; <%: DateTime.Now.Year %> - Oscars Bets ASP.NET Application. With the help of the <a href="https://www.themoviedb.org" target="_newtab">TMDB Movie Database</a></p>
             </footer>
         </div>
     </form>

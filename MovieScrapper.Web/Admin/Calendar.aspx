@@ -1,21 +1,32 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="MovieScrapper.Admin.Calendar" MasterPageFile="~/Site.Master" %>
 
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
-    <link href="../Content/AdminStyleSheet.css" rel="stylesheet" type="text/css" /> 
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="../Content/AdminStyleSheet.css" rel="stylesheet" type="text/css" />
+    <div>
+        <p class="calendarTitle">
+            <asp:Label ID="lblServerDate" runat="server" Text="Label"></asp:Label>
+        </p>
+        <p class="calendarTitle">
+            <asp:Label ID="lblStartGameDate" runat="server" Text="Label"></asp:Label>
+        </p>
+        <p class="calendarTitle">
+            <asp:Label ID="lblEndGameDate" runat="server" Text="Label"></asp:Label>
+        </p>
+    </div>
     <div class="calendar">
         <h3 class="calendarTitle">Enter start game date</h3>
-        <asp:Calendar ID="StartGameCalendar" cssClass="calendar" runat="server" ></asp:Calendar>              
-     </div>
+        <asp:Calendar ID="StartGameCalendar" CssClass="calendar" runat="server"></asp:Calendar>
+    </div>
 
     <div class="calendar">
-        <h3 class="calendarTitle">Enter stop game date</h3>                      
-        <asp:Calendar ID="StopGameCalendar" cssClass="calendar" runat="server" ></asp:Calendar>           
-     </div>
+        <h3 class="calendarTitle">Enter stop game date</h3>
+        <asp:Calendar ID="StopGameCalendar" CssClass="calendar" runat="server"></asp:Calendar>
+    </div>
     <hr />
-   <asp:Button ID="Button1" cssClass="saveButton" runat="server" OnClick="ChangeDateButton_Click" Text="Save"  />
-   <asp:CustomValidator id="CustomValidator1" runat="server" Display="Dynamic" 
-       ErrorMessage="<span class='errorMessage'>Please select a date. The start date must be before the end date.</span>"  
-       OnServerValidate="StopGameValidator_ServerValidate"></asp:CustomValidator>
-        
+    <asp:Button ID="Button1" CssClass="saveButton" runat="server" OnClick="ChangeDateButton_Click" Text="Save" />
+    <asp:CustomValidator ID="CustomValidator1" runat="server" Display="Dynamic"
+        ErrorMessage="<span class='errorMessage'>Please select a date. The start date must be before the end date.</span>"
+        OnServerValidate="StopGameValidator_ServerValidate"></asp:CustomValidator>
+
 </asp:Content>

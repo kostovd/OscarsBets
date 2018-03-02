@@ -13,6 +13,33 @@ namespace MovieScrapper.Admin {
     public partial class Calendar {
         
         /// <summary>
+        /// lblServerDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServerDate;
+        
+        /// <summary>
+        /// lblStartGameDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStartGameDate;
+        
+        /// <summary>
+        /// lblEndGameDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEndGameDate;
+        
+        /// <summary>
         /// StartGameCalendar control.
         /// </summary>
         /// <remarks>

@@ -13,13 +13,20 @@ namespace MovieScrapper.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            DateTime startGameDate = gamePropertyService.GetGameStartDate();
+            DateTime endGameDate = gamePropertyService.GetGameStopDate();
+
+            lblServerDate.Text = string.Format("Server date and time: {0}", DateTime.Now);
+            lblStartGameDate.Text = string.Format("Start game date and time: {0}", startGameDate);
+            lblEndGameDate.Text = string.Format("End game date and time: {0}", endGameDate);
+
             if (!Page.IsPostBack)
             {
-                var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-                StartGameCalendar.SelectedDate = gamePropertyService.GetGameStartDate();
-                StartGameCalendar.VisibleDate = gamePropertyService.GetGameStartDate();
-                StopGameCalendar.SelectedDate = gamePropertyService.GetGameStopDate();
-                StopGameCalendar.VisibleDate = gamePropertyService.GetGameStopDate();
+                StartGameCalendar.SelectedDate = startGameDate;
+                StartGameCalendar.VisibleDate = startGameDate;
+                StopGameCalendar.SelectedDate = endGameDate;
+                StopGameCalendar.VisibleDate = endGameDate;
             }
         }
 

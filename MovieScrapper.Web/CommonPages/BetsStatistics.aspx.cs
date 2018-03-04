@@ -28,14 +28,19 @@ namespace MovieScrapper.CommonPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+            
             if (!this.IsPostBack)
             {
                 GridViewInit();
 
                 if (!GameIsRunning())
                 {
-                    Label1.Text = betStatisticServices.GetWinner();
+                    var nominationService = GetBuisnessService<INominationService>();
+                    if (nominationService.AreAllWinnersSet())
+                    {
+                        var betStatisticServices = GetBuisnessService<IBetStatisticService>();
+                        Label1.Text = betStatisticServices.GetWinner();
+                    }
                 }
             }
         }

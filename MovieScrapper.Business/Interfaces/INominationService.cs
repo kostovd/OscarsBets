@@ -11,5 +11,6 @@ namespace MovieScrapper.Business.Interfaces
     {
         List<Nomination> GetAllNominationsInCategory(int categoryId);
         void RemoveNomination(int nominationId);
+        bool AreAllWinnersSet();
     }
 }

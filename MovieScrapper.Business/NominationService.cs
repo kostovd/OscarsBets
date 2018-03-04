@@ -27,5 +27,14 @@ namespace MovieScrapper.Business
         {
             _nominationRepository.RemoveNomination(nominationId);
         }
+
+        public bool AreAllWinnersSet()
+        {
+            List<Nomination> listAllNominations = _nominationRepository.GetAllNominations();
+            int categoriesCount = listAllNominations.Select(x => x.Category.Id).Distinct().Count();
+            int winnersCount = listAllNominations.Count(x => x.IsWinner);
+
+            return categoriesCount == winnersCount;
+        }
     }
 }

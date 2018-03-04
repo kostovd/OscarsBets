@@ -77,23 +77,16 @@ namespace MovieScrapper
         {
             var gamePropertyService = GetBuisnessService<IGamePropertyService>();
 
-            if (HttpContext.Current.User.IsInRole("admin"))
-            {
-                Admin.Visible = true;                
-            }
-            else
-            {
-                Admin.Visible = false;
-            }
+            Admin.Visible = HttpContext.Current.User.IsInRole("admin");
+
+            Statistics.Visible = !gamePropertyService.IsGameNotStartedYet();
 
             if (gamePropertyService.IsGameStopped())
             {
-                Statistics.Visible = false;
                 lblRemaining.Text = string.Empty;
             }
             else
             {
-                Statistics.Visible = true;
                 lblRemaining.Text = GetRemainingTimeLabel();
             }
 

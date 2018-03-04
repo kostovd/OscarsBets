@@ -11,6 +11,18 @@ namespace MovieScrapper.Data
 {
     public class NominationRepository : INominationRepository
     {
+        public List<Nomination> GetAllNominations()
+        {
+            using (var ctx = new MovieContext())
+            {
+                return ctx.Nominations
+                    .Include(cat => cat.Category)
+                    .Where(cat => cat.Category != null)
+                    .Where(cat => cat.Movie != null)
+                    .ToList();
+            }
+        }
+
         public List<Nomination> GetAllNominationsInCategory(int categoryId)
         {
             using (var ctx = new MovieContext())

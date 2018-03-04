@@ -108,21 +108,28 @@ namespace MovieScrapper.CommonPages
         {
             if (e.CommandName == "MarkAsWatchedOrUnwatched")
             {
-                var userId = User.Identity.Name;
-                int movieId = int.Parse((e.CommandArgument).ToString());
-                
-
-                var watchedMovieService = GetBuisnessService<IWatchedMovieService>();
-                var movieService = GetBuisnessService<IMovieService>(); 
-                if (watchedMovieService.GetUserWatchedEntity(userId)==null)
+                if (IsGameRunning())
                 {
-                    var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
-                    watchedEntity = watchedMovieService.AddWatchedEntity(watchedEntity);                   
+                    var userId = User.Identity.Name;
+                    int movieId = int.Parse((e.CommandArgument).ToString());
+
+
+                    var watchedMovieService = GetBuisnessService<IWatchedMovieService>();
+                    var movieService = GetBuisnessService<IMovieService>();
+                    if (watchedMovieService.GetUserWatchedEntity(userId) == null)
+                    {
+                        var watchedEntity = new Watched() { UserId = userId, Movies = new List<Movie>() };
+                        watchedEntity = watchedMovieService.AddWatchedEntity(watchedEntity);
+                    }
+
+                    movieService.ChangeMovieStatus(userId, movieId);
+                    Repeater1.DataBind();
+                    System.Threading.Thread.Sleep(500);
                 }
-                
-                movieService.ChangeMovieStatus(userId, movieId);
-                Repeater1.DataBind();
-                System.Threading.Thread.Sleep(500);
+                else
+                {
+                    Response.Redirect("ShowAllDBMovies.aspx");
+                }
             }
         }
         

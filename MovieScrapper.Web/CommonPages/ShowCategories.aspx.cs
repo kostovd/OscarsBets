@@ -66,14 +66,21 @@ namespace MovieScrapper.CommonPages
         {
             if (e.CommandName == "MarkAsBetted")
             {
-                var userId = User.Identity.Name;
-                var nominationId = int.Parse(e.CommandArgument.ToString());
+                if (IsGameRunning())
+                {
+                    var userId = User.Identity.Name;
+                    var nominationId = int.Parse(e.CommandArgument.ToString());
 
-                var betService = GetBuisnessService<IBetService>();
-                betService.MakeBetEntity(userId, nominationId);
+                    var betService = GetBuisnessService<IBetService>();
+                    betService.MakeBetEntity(userId, nominationId);
 
-                Repeater1.DataBind();
-                System.Threading.Thread.Sleep(500);
+                    Repeater1.DataBind();
+                    System.Threading.Thread.Sleep(500);
+                }
+                else
+                {
+                    Response.Redirect("ShowCategories.aspx");
+                }
             }
         }
 

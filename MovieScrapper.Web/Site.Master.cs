@@ -86,7 +86,7 @@ namespace MovieScrapper
                 Admin.Visible = false;
             }
 
-            if (gamePropertyService.IsGameNotStartedYet())
+            if (gamePropertyService.IsGameStopped())
             {
                 Statistics.Visible = false;
                 lblRemaining.Text = string.Empty;

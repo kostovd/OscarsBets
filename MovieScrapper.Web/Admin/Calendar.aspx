@@ -17,11 +17,15 @@
     <div class="calendar">
         <h3 class="calendarTitle">Enter start game date</h3>
         <asp:Calendar ID="StartGameCalendar" CssClass="calendar" runat="server"></asp:Calendar>
+        <h3 class="calendarTitle">Enter start game time</h3>
+        <asp:TextBox CssClass="calendar" ID="StartGameTimeTextbox" runat="server"></asp:TextBox>
     </div>
 
     <div class="calendar">
         <h3 class="calendarTitle">Enter stop game date</h3>
         <asp:Calendar ID="StopGameCalendar" CssClass="calendar" runat="server"></asp:Calendar>
+        <h3 class="calendarTitle">Enter stop game time</h3>
+        <asp:TextBox CssClass="calendar" ID="StopGameTimeTextbox" runat="server"></asp:TextBox>
     </div>
     <hr />
     <asp:Button ID="Button1" CssClass="saveButton" runat="server" OnClick="ChangeDateButton_Click" Text="Save" />

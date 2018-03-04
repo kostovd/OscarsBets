@@ -49,6 +49,15 @@ namespace MovieScrapper.Admin {
         protected global::System.Web.UI.WebControls.Calendar StartGameCalendar;
         
         /// <summary>
+        /// StartGameTimeTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox StartGameTimeTextbox;
+        
+        /// <summary>
         /// StopGameCalendar control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace MovieScrapper.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar StopGameCalendar;
+        
+        /// <summary>
+        /// StopGameTimeTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox StopGameTimeTextbox;
         
         /// <summary>
         /// Button1 control.

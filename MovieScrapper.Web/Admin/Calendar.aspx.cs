@@ -23,10 +23,13 @@ namespace MovieScrapper.Admin
 
             if (!Page.IsPostBack)
             {
-                StartGameCalendar.SelectedDate = startGameDate;
-                StartGameCalendar.VisibleDate = startGameDate;
-                StopGameCalendar.SelectedDate = endGameDate;
-                StopGameCalendar.VisibleDate = endGameDate;
+                StartGameCalendar.SelectedDate = startGameDate.Date;
+                StartGameCalendar.VisibleDate = startGameDate.Date;
+                StopGameCalendar.SelectedDate = endGameDate.Date;
+                StopGameCalendar.VisibleDate = endGameDate.Date;
+
+                StartGameTimeTextbox.Text = string.Format("{0:D2}:{1:D2}", startGameDate.Hour, startGameDate.Minute);
+                StopGameTimeTextbox.Text = string.Format("{0:D2}:{1:D2}", endGameDate.Hour, endGameDate.Minute);
             }
         }
 
@@ -46,11 +49,34 @@ namespace MovieScrapper.Admin
             if (Page.IsValid)
             {
                 var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+
                 var startDate = StartGameCalendar.SelectedDate;
+                var startTimeArray = StartGameTimeTextbox.Text.Split(':');
+
+                startDate = new DateTime(
+                    startDate.Year,
+                    startDate.Month,
+                    startDate.Day,
+                    int.Parse(startTimeArray[0]),
+                    int.Parse(startTimeArray[1]),
+                    0);
+
                 gamePropertyService.ChangeGameStartDate(startDate);
+
                 var stopDate = StopGameCalendar.SelectedDate;
+                var stopTimeArray = StopGameTimeTextbox.Text.Split(':');
+
+                stopDate = new DateTime(
+                    stopDate.Year,
+                    stopDate.Month,
+                    stopDate.Day,
+                    int.Parse(stopTimeArray[0]),
+                    int.Parse(stopTimeArray[1]),
+                    0);
+
                 gamePropertyService.ChangeGameStopDate(stopDate);
-                Response.Redirect("Categories.aspx");
+
+                Response.Redirect("Calendar.aspx");
             }
         }
 

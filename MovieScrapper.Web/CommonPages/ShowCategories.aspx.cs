@@ -111,7 +111,7 @@ namespace MovieScrapper.CommonPages
 
         protected string CheckIfWinnerImage(Nomination nomination)
         {
-            return nomination.IsWinner && IsGameRunning() ?
+            return nomination.IsWinner && !IsGameRunning() ?
                     "/images/Oscar_logo.png" :
                     "";
         }

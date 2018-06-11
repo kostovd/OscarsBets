@@ -203,5 +203,10 @@ namespace MovieScrapper.CommonPages
         {
             e.ObjectInstance = GetBuisnessService<ICategoryService>();
         }
+
+        public string GetCategoryUrl(int categoryId)
+        {
+            return String.Format("~/CommonPages/ShowCategory?ID={0}", categoryId);
+        }
     }
 }

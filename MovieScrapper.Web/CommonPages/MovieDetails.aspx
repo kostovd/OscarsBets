@@ -44,7 +44,7 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="list-group-item">
-                            <a class="list-group-item-heading text-info" runat="server" href='<%# String.Format("~/CommonPages/ShowCategory?ID={0}", Item.Category.Id) %>'><%# Item.Category.CategoryTtle %> </a>
+                            <a class="list-group-item-heading text-info" runat="server" href='<%# GetCategoryUrl(Item.Category.Id) %>'><%# Item.Category.CategoryTtle %> </a>
                             <p class="list-group-item-text text-muted"><%# GetNominationInfo(Item) %></p>
                         </div>
                     </ItemTemplate>

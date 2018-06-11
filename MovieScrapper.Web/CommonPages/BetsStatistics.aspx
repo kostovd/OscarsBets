@@ -7,7 +7,9 @@
         <li><a href="MoviesStatistic.aspx">Watched movies</a></li>
     </ul>
     <asp:Label ID="Label1" runat="server"></asp:Label>
-     <asp:GridView ID="GridView1" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" GridLines="None" runat="server" AutoGenerateColumns="false" AllowSorting="true" OnSorting="GridView1_Sorting">
+    <asp:GridView ID="GridView1" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" GridLines="None" runat="server" AutoGenerateColumns="false" AllowSorting="true" OnSorting="GridView1_Sorting">
+        <SortedAscendingHeaderStyle CssClass="sortasc" />
+        <SortedDescendingHeaderStyle CssClass="sortdesc" />
     </asp:GridView>
 
 </asp:Content>

@@ -16,7 +16,7 @@
             <ItemTemplate>
                 <br />
                 <asp:Label ID="CategoryTtleLabel" CssClass="categoryTitle" runat="server" ToolTip="<%# Item.CategoryDescription %>">
-                     <a  runat="server" CssClass="categoryTitle" href='<%# String.Format("~/CommonPages/ShowCategory?ID={0}", Item.Id) %>'><%# Item.CategoryTtle %> </a>
+                     <a  runat="server" CssClass="categoryTitle" href='<%# GetCategoryUrl(Item.Id) %>'><%# Item.CategoryTtle %> </a>
                 </asp:Label>
                 <hr />
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">

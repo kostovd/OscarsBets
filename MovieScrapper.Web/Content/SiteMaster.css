@@ -25,3 +25,45 @@
 .adminLink {
 
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: -1px;
+}
+
+.dropdown-a {
+    position: relative;
+    display: block;
+    padding: 13px 15px;
+    background: black;
+    color: #999999;
+    z-index: 999;
+}
+
+    .dropdown-a:hover,
+    .dropdown-a a:focus {
+        text-decoration: none;
+        background-color: black;
+        color: #ffffff;
+    }
+
+        .dropdown-a:hover .dropdown-menu {
+            display: block;
+            margin-top: -1px;
+        }
+
+.nav .caret {
+    border-top-color: #999999;
+    border-bottom-color: #999999;
+}
+
+.nav a:hover .caret {
+    border-top-color: rgb(237,192,116);
+    border-bottom-color: rgb(237,192,116);
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: black;
+    background-color: rgb(237,192,116);
+}

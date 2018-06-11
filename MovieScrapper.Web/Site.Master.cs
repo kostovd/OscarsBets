@@ -139,6 +139,11 @@ namespace MovieScrapper
         {
             return Context.User.Identity.GetOpenIdName();
         }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetBuisnessService<ICategoryService>();
+        }
     }
 
 }

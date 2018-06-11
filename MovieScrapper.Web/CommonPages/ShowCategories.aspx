@@ -6,7 +6,7 @@
 
     <link href="/Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/LargePoster.js"></script>
-  
+
     <asp:Label ID="GreatingLabel" runat="server" CssClass="warning"></asp:Label>
     <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
     <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>
@@ -15,13 +15,15 @@
             ItemType="MovieScrapper.Entities.Category">
             <ItemTemplate>
                 <br />
-                <asp:Label ID="CategoryTtleLabel" CssClass="categoryTitle" runat="server" ToolTip="<%# Item.CategoryDescription %>" Text='<%# Item.CategoryTtle %>' />
-                <hr />               
+                <asp:Label ID="CategoryTtleLabel" CssClass="categoryTitle" runat="server" ToolTip="<%# Item.CategoryDescription %>">
+                     <a  runat="server" CssClass="categoryTitle" href='<%# String.Format("~/CommonPages/ShowCategory?ID={0}", Item.Id) %>'><%# Item.CategoryTtle %> </a>
+                </asp:Label>
+                <hr />
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:Repeater ID="Repeater2" runat="server"
-                            ItemType="MovieScrapper.Entities.Nomination" 
-                            DataSource="<%# ((MovieScrapper.Entities.Category)((IDataItemContainer)Container).DataItem).Nominations %>" 
+                            ItemType="MovieScrapper.Entities.Nomination"
+                            DataSource="<%# ((MovieScrapper.Entities.Category)((IDataItemContainer)Container).DataItem).Nominations %>"
                             OnItemCommand="Repeater2_ItemCommand">
                             <HeaderTemplate>
                                 <div>
@@ -31,7 +33,7 @@
 
                                     <My:NominationControl ID="NominationControl1" runat="server" Item="<%# Item %>" />
                                     <div class="under-movie">
-                                         <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
+                                        <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
                                         <asp:LinkButton ID="MarkAsBettedButton"
                                             runat="server"
                                             Text=""

@@ -6,8 +6,6 @@
         <li><a href="BetsStatistics.aspx">Predictions</a></li>
         <li class="active"><a href="MoviesStatistic.aspx">Watched movies</a></li>
     </ul>
-    <asp:GridView ID="GridView1" CssClass="grid" runat="server" AutoGenerateColumns = "false" AllowSorting="true" OnSorting="GridView1_Sorting" >
-        <SortedAscendingHeaderStyle CssClass="sortasc" />
-        <SortedDescendingHeaderStyle CssClass="sortdesc" />
-    </asp:GridView>   
+    <asp:GridView ID="GridView1" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" GridLines="None" runat="server" AutoGenerateColumns = "false" AllowSorting="true" OnSorting="GridView1_Sorting" >
+    </asp:GridView>  
 </asp:Content>

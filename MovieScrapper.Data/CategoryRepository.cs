@@ -88,7 +88,12 @@ namespace MovieScrapper.Data
             using (var ctx = new MovieContext())
             {
                 var foundedCategory = ctx.Caterogries
-                    .Include(cat => cat.Nominations).Where(cat => cat.Id == id).SingleOrDefault();
+                   .Include(cat => cat.Nominations)
+                   .Include(cat => cat.Nominations.Select(nom => nom.Movie))
+                   .Include(cat => cat.Nominations.Select(nom => nom.Credits))
+                   .Include(cat => cat.Nominations.Select(nom => nom.Bets))
+                   .Where(cat => cat.Id == id)
+                   .SingleOrDefault();
                 return foundedCategory;
             }
         }

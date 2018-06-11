@@ -173,5 +173,10 @@ namespace MovieScrapper
             return string.Join("<br/>",
                 nomination.Credits.Select(x => string.Format("{0} ... {1}", x.Name, x.Role)).ToList());
         }
+
+        public string GetCategoryUrl(int categoryId)
+        {
+            return String.Format("~/CommonPages/ShowCategory?ID={0}", categoryId);
+        }
     }
 }

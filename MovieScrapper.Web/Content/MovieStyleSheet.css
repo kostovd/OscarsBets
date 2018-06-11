@@ -12,6 +12,12 @@
     font-size:18px;
 }
 
+.categoryTitle a{
+    color: rgb(179,0,0);
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
 .linkTitle {
     margin-bottom: 5px;
     font-size: 16px;

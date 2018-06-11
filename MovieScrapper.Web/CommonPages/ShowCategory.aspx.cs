@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Practices.Unity;
-using MovieScrapper.Business;
-using MovieScrapper.Business.Interfaces;
+﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class ShowCategories : BasePage
+    public partial class ShowCategory : BasePage
     {
-     
         protected void Page_Load(object sender, EventArgs e)
         {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
+            BindCategory();
+            DataBind();
 
+            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
             if (!User.Identity.IsAuthenticated)
             {
                 GreatingLabel.Text = "You must be logged in to bet!";
@@ -38,29 +38,27 @@ namespace MovieScrapper.CommonPages
         public bool IsGameRunning()
         {
             var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameStopped() == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return !gamePropertyService.IsGameStopped();
+        }
+
+        private void BindCategory()
+        {
+            int.TryParse(Request.QueryString["ID"], out int id);
+            Category currentCategory = GetBuisnessService<ICategoryService>().GetCategory(id);
+            Repeater2.DataSource = currentCategory.Nominations;
+
+            CategoryTtleLabel.Text = currentCategory.CategoryTtle;
+            CategoryTtleLabel.ToolTip = currentCategory.CategoryDescription;
+
+            GridView1.DataSource = currentCategory.Nominations;
         }
 
         public bool IsGameNotStartedYet()
         {
             var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameNotStartedYet()==true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return gamePropertyService.IsGameNotStartedYet();
         }
-       
 
         protected void Repeater2_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -74,7 +72,8 @@ namespace MovieScrapper.CommonPages
                     var betService = GetBuisnessService<IBetService>();
                     betService.MakeBetEntity(userId, nominationId);
 
-                    Repeater1.DataBind();
+                    BindCategory();
+                    DataBind();
                     System.Threading.Thread.Sleep(500);
                 }
                 else
@@ -86,14 +85,7 @@ namespace MovieScrapper.CommonPages
 
         protected bool CheckIfTheUserIsLogged()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return User.Identity.IsAuthenticated;
         }
 
         protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
@@ -101,11 +93,11 @@ namespace MovieScrapper.CommonPages
             string currentUserId = User.Identity.Name;
             if (nominationBets.Any(x => x.UserId == currentUserId))
             {
-                return "<span class='check-button glyphicon glyphicon-check'></span>"; 
+                return "<span class='check-button glyphicon glyphicon-check'></span>";
             }
             else
             {
-                return "<span class='check-button glyphicon glyphicon-unchecked'></span>"; 
+                return "<span class='check-button glyphicon glyphicon-unchecked'></span>";
             }
         }
 
@@ -116,11 +108,11 @@ namespace MovieScrapper.CommonPages
                     "";
         }
 
-        protected void ObjectDataSource1_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+        private void BetUpdate()
         {
             var currentUsereId = User.Identity.Name;
 
-            var categories = (IEnumerable<Category>)e.ReturnValue;
+            var categories = GetBuisnessService<ICategoryService>().GetAll();
             int categoryCount = categories.Count();
 
             var bets = categories.SelectMany(x => x.Nominations).SelectMany(x => x.Bets).Where(x => x.UserId == currentUsereId).ToList();
@@ -199,14 +191,9 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            e.ObjectInstance = GetBuisnessService<ICategoryService>();
-        }
-
-        public string GetCategoryUrl(int categoryId)
-        {
-            return String.Format("~/CommonPages/ShowCategory?ID={0}", categoryId);
-        }
+            BetUpdate();
+        }       
     }
 }

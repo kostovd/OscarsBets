@@ -44,7 +44,7 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="list-group-item">
-                            <h5 class="list-group-item-heading text-info"><%# Item.Category.CategoryTtle %></h5>
+                            <a class="list-group-item-heading text-info" runat="server" href='<%# GetCategoryUrl(Item.Category.Id) %>'><%# Item.Category.CategoryTtle %> </a>
                             <p class="list-group-item-text text-muted"><%# GetNominationInfo(Item) %></p>
                         </div>
                     </ItemTemplate>

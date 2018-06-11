@@ -139,6 +139,16 @@ namespace MovieScrapper
         {
             return Context.User.Identity.GetOpenIdName();
         }
+
+        protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
+        {
+            e.ObjectInstance = GetBuisnessService<ICategoryService>();
+        }
+
+        public string GetCategoryUrl(int categoryId)
+        {
+            return String.Format("~/CommonPages/ShowCategory?ID={0}", categoryId);
+        }
     }
 
 }

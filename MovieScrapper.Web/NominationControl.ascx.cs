@@ -1,5 +1,6 @@
 ﻿using MovieScrapper.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MovieScrapper
@@ -86,5 +87,14 @@ namespace MovieScrapper
             }
         }
 
+        public string GetPersonProfileUrl(string posterPath)
+        {
+            return "https://image.tmdb.org/t/p/w45" + posterPath;
+        }
+
+        public IEnumerable<MovieCredit> GetTopMovieCredits()
+        {
+            return Item.Credits.Distinct().Take(4);
+        }
     }
 }

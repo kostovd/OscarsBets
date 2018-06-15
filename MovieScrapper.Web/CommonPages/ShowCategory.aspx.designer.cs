@@ -13,6 +13,15 @@ namespace MovieScrapper.CommonPages {
     public partial class ShowCategory {
         
         /// <summary>
+        /// CategoryDataUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel CategoryDataUpdatePanel;
+        
+        /// <summary>
         /// GreatingLabel control.
         /// </summary>
         /// <remarks>
@@ -49,31 +58,49 @@ namespace MovieScrapper.CommonPages {
         protected global::System.Web.UI.WebControls.Label CategoryTtleLabel;
         
         /// <summary>
-        /// UpdatePanel2 control.
+        /// NominationsRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.WebControls.Repeater NominationsRepeater;
         
         /// <summary>
-        /// Repeater2 control.
+        /// GridsUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater2;
+        protected global::System.Web.UI.UpdatePanel GridsUpdatePanel;
         
         /// <summary>
-        /// GridView1 control.
+        /// MoviesScoresGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView MoviesScoresGridView;
+        
+        /// <summary>
+        /// UserVotesGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView UserVotesGridView;
+        
+        /// <summary>
+        /// UserWatchedGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView UserWatchedGridView;
         
         /// <summary>
         /// updateProgress control.

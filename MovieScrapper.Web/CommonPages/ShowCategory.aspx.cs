@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class ShowCategory : BasePage
+    public partial class ShowCategory : StatisticBase
     {
         private const string UserColumnName = "Email";
 
@@ -79,7 +79,7 @@ namespace MovieScrapper.CommonPages
                 WarningLabel.CssClass = "hidden";
             }
         }
-             
+
         private void BindCategory()
         {
             Category currentCategory = GetCurrentCategory();
@@ -101,21 +101,6 @@ namespace MovieScrapper.CommonPages
             return GetBuisnessService<ICategoryService>().GetCategory(id);
         }
 
-        public bool IsGameNotStartedYet()
-        {
-            return GetBuisnessService<IGamePropertyService>().IsGameNotStartedYet();
-        }
-
-        public bool IsGameRunning()
-        {
-            return !GetBuisnessService<IGamePropertyService>().IsGameStopped();
-        }
-
-        protected bool CheckIfTheUserIsLogged()
-        {
-            return User.Identity.IsAuthenticated;
-        }
-
         public string BuildPosterUrl(string path)
         {
             return "https://image.tmdb.org/t/p/w92" + path;
@@ -134,7 +119,7 @@ namespace MovieScrapper.CommonPages
 
             var dataTable = CreateUserMoviesDataTable(moviesFromCategory);
             dataTable = FillVotesDataTable(dataTable, currentCategory.Nominations.Select(n => n.Movie.Title).ToList(), currentCategory);
-            DataView sortedView = DefaultUserVotesTableSort(dataTable, UserColumnName, UserVotesGridViewSortDirection);
+            DataView sortedView = GetDefaultTableSort(dataTable, UserColumnName, UserVotesGridViewSortDirection);
             UserVotesGridView.DataSource = sortedView;
         }
 
@@ -149,7 +134,7 @@ namespace MovieScrapper.CommonPages
 
             var dataTable = CreateUserMoviesDataTable(moviesFromCategory);
             dataTable = FillWatchedDataTable(dataTable, currentCategory.Nominations.Select(n => n.Movie.Title).ToList(), currentCategory);
-            DataView sortedView = DefaultUserVotesTableSort(dataTable, UserColumnName, UserWatchedGridViewSortDirection);
+            DataView sortedView = GetDefaultTableSort(dataTable, UserColumnName, UserWatchedGridViewSortDirection);
             UserWatchedGridView.DataSource = sortedView;
         }
 
@@ -209,7 +194,7 @@ namespace MovieScrapper.CommonPages
         }
 
         #endregion
-      
+
         #region FillGridViews
 
         private DataTable FillVotesDataTable(DataTable dataTable, List<string> titles, Category currentCategory)
@@ -317,50 +302,9 @@ namespace MovieScrapper.CommonPages
             SetSortingArrows(UserWatchedGridView, UserWatchedGridViewSortDirection, e.SortExpression);
         }
 
-        private void SetSortingArrows(GridView gridView, SortDirection gridViewSortDirection, string sortingExpression)
-        {
-            if (gridViewSortDirection == SortDirection.Ascending)
-            {
-                gridView.HeaderRow.Cells[GetColumnIndex(sortingExpression, gridView)].CssClass = "sortasc";
-            }
-            else
-            {
-                gridView.HeaderRow.Cells[GetColumnIndex(sortingExpression, gridView)].CssClass = "sortdesc";
-            }
-        }
-
-        private int GetColumnIndex(string SortExpression, GridView gridViewToSearch)
-        {
-            int columnIndex = 0;
-
-            foreach (DataControlField c in gridViewToSearch.Columns)
-            {
-                if (c.SortExpression == SortExpression)
-                    break;
-
-                columnIndex++;
-            }
-
-            return columnIndex;
-        }
-
-        private DataView DefaultUserVotesTableSort(DataTable dataTable, string sortExpresion, SortDirection gridViewSortDirection)
-        {
-            DataView dataView = new DataView(dataTable);
-
-            if (gridViewSortDirection == SortDirection.Ascending)
-            {
-                dataView.Sort = sortExpresion + " ASC";
-            }
-            else
-            {
-                dataView.Sort = sortExpresion + " DESC";
-            }
-
-            return dataView;
-        }
-
         #endregion
+
+        #region NominationRepeaterEvents
 
         protected void NominationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -387,7 +331,11 @@ namespace MovieScrapper.CommonPages
         protected void NominationsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             BetUpdate();
-        }        
+        }
+
+        #endregion
+
+        #region BetMethods
 
         protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
         {
@@ -487,5 +435,7 @@ namespace MovieScrapper.CommonPages
                 WinnerLabel.CssClass = "hidden";
             }
         }
+
+        #endregion
     }
 }

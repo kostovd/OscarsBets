@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Practices.Unity;
-using MovieScrapper.Business;
-using MovieScrapper.Business.Interfaces;
+﻿using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
@@ -35,33 +31,6 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        public bool IsGameRunning()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameStopped() == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool IsGameNotStartedYet()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameNotStartedYet()==true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-       
-
         protected void Repeater2_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "MarkAsBetted")
@@ -81,18 +50,6 @@ namespace MovieScrapper.CommonPages
                 {
                     Response.Redirect("ShowCategories.aspx");
                 }
-            }
-        }
-
-        protected bool CheckIfTheUserIsLogged()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 

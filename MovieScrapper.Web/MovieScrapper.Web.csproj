@@ -524,6 +524,9 @@
     <Compile Include="Roles\RoleConfigurationElementCollection.cs" />
     <Compile Include="Roles\RolesConfigurationSection.cs" />
     <Compile Include="Roles\WebConfigRoleProvider.cs" />
+    <Compile Include="StatisticBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="WebContainerManager.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

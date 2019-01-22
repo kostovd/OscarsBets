@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.AspNet.Identity;
-using MovieScrapper.Business;
 using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 
@@ -32,45 +27,7 @@ namespace MovieScrapper.CommonPages
                 
             }
             
-        }
-
-        public bool IsGameRunning()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameStopped() == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        protected bool CheckIfTheUserIsLogged()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool IsGameNotStartedYet()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (gamePropertyService.IsGameNotStartedYet() == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        } 
 
         public string BuildPosterUrl(string path)
         {

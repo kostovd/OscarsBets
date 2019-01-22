@@ -9,12 +9,15 @@
             <br />
             <a href="<%# MovieImdbUrl %>" target="_newtab" title="See the info in IMDB">
                 <img class="imdb" src="/images/icons/imdb.svg" />
-            </a>
-            
+            </a>     
         </div>
-        <img runat="server" visible="<%# PersonVisible %>" class="profile" src="<%# PersonProfileUrl %>" title="<%# PersonName %>" />  
-    </div>
-    
+
+        <asp:Repeater runat="server" ItemType="MovieScrapper.Entities.MovieCredit" DataSource="<%# GetTopMovieCredits() %>">
+            <ItemTemplate>
+                <img runat="server" visible="<%# PersonVisible %>" class="profile" src="<%# GetPersonProfileUrl(Item.ProfilePath) %>" title="<%# Item.Name %>" /> 
+            </ItemTemplate>
+        </asp:Repeater>        
+    </div>  
           
     <img id="myImg" class="poster" src="<%# MoviePosterUrl %>" />
     

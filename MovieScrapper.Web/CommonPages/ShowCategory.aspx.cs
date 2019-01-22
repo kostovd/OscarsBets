@@ -4,21 +4,66 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class ShowCategory : BasePage
+    public partial class ShowCategory : StatisticBase
     {
+        private const string UserColumnName = "Email";
+
+        #region SortDirectionProperties
+
+        private SortDirection MoviesScoresGridViewSortDirection
+        {
+            get
+            {
+                if (ViewState["MoviesScoresSortDirection"] == null)
+                    ViewState["MoviesScoresSortDirection"] = SortDirection.Ascending;
+
+                return (SortDirection)ViewState["MoviesScoresSortDirection"];
+            }
+
+            set { ViewState["MoviesScoresSortDirection"] = value; }
+        }
+
+        private SortDirection UserVotesGridViewSortDirection
+        {
+            get
+            {
+                if (ViewState["UserVotesSortDirection"] == null)
+                    ViewState["UserVotesSortDirection"] = SortDirection.Ascending;
+
+                return (SortDirection)ViewState["UserVotesSortDirection"];
+            }
+
+            set { ViewState["UserVotesSortDirection"] = value; }
+        }
+
+        private SortDirection UserWatchedGridViewSortDirection
+        {
+            get
+            {
+                if (ViewState["UserWatchedSortDirection"] == null)
+                    ViewState["UserWatchedSortDirection"] = SortDirection.Ascending;
+
+                return (SortDirection)ViewState["UserWatchedSortDirection"];
+            }
+
+            set { ViewState["UserWatchedSortDirection"] = value; }
+        }
+
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindCategory();
-            DataBind();
+            if (!IsPostBack)
+            {
+                BindCategory();
+                DataBind();
+            }
 
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            if (!User.Identity.IsAuthenticated)
+            if (!CheckIfTheUserIsLogged())
             {
                 GreatingLabel.Text = "You must be logged in to bet!";
             }
@@ -27,7 +72,7 @@ namespace MovieScrapper.CommonPages
                 GreatingLabel.CssClass = "hidden";
             }
 
-            if (gamePropertyService.IsGameNotStartedYet())
+            if (GetBuisnessService<IGamePropertyService>().IsGameNotStartedYet())
             {
                 WarningLabel.CssClass = WarningLabel.CssClass.Replace("warning", "");
                 GreatingLabel.CssClass = "hidden";
@@ -35,32 +80,233 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        public bool IsGameRunning()
-        {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-            return !gamePropertyService.IsGameStopped();
-        }
-
         private void BindCategory()
         {
-            int.TryParse(Request.QueryString["ID"], out int id);
-            Category currentCategory = GetBuisnessService<ICategoryService>().GetCategory(id);
-            Repeater2.DataSource = currentCategory.Nominations;
+            Category currentCategory = GetCurrentCategory();
+
+            NominationsRepeater.DataSource = currentCategory.Nominations;
 
             CategoryTtleLabel.Text = currentCategory.CategoryTtle;
             CategoryTtleLabel.ToolTip = currentCategory.CategoryDescription;
 
-            GridView1.DataSource = currentCategory.Nominations;
+            MoviesScoresGridView.DataSource = currentCategory.Nominations;
+
+            CreateAndFillUserVotesDataTable(currentCategory);
+            CreateAndFillUserWatchedDataTable(currentCategory);
         }
 
-        public bool IsGameNotStartedYet()
+        private Category GetCurrentCategory()
         {
-            var gamePropertyService = GetBuisnessService<IGamePropertyService>();
-
-            return gamePropertyService.IsGameNotStartedYet();
+            int.TryParse(Request.QueryString["ID"], out int id);
+            return GetBuisnessService<ICategoryService>().GetCategory(id);
         }
 
-        protected void Repeater2_ItemCommand(object source, RepeaterCommandEventArgs e)
+        public string BuildPosterUrl(string path)
+        {
+            return "https://image.tmdb.org/t/p/w92" + path;
+        }
+
+        #region CreateAndInitGridViews
+
+        private void CreateAndFillUserVotesDataTable(Category currentCategory)
+        {
+            var moviesFromCategory = currentCategory.Nominations.Select(n => n.Movie).ToList();
+
+            if (!IsPostBack)
+            {
+                InitUserVotesGridViewColumns(moviesFromCategory);
+            }
+
+            var dataTable = CreateUserMoviesDataTable(moviesFromCategory);
+            dataTable = FillVotesDataTable(dataTable, currentCategory.Nominations.Select(n => n.Movie.Title).ToList(), currentCategory);
+            DataView sortedView = GetDefaultTableSort(dataTable, UserColumnName, UserVotesGridViewSortDirection);
+            UserVotesGridView.DataSource = sortedView;
+        }
+
+        private void CreateAndFillUserWatchedDataTable(Category currentCategory)
+        {
+            var moviesFromCategory = currentCategory.Nominations.Select(n => n.Movie).ToList();
+
+            if (!IsPostBack)
+            {
+                InitUserWatchedGridViewColumns(moviesFromCategory);
+            }
+
+            var dataTable = CreateUserMoviesDataTable(moviesFromCategory);
+            dataTable = FillWatchedDataTable(dataTable, currentCategory.Nominations.Select(n => n.Movie.Title).ToList(), currentCategory);
+            DataView sortedView = GetDefaultTableSort(dataTable, UserColumnName, UserWatchedGridViewSortDirection);
+            UserWatchedGridView.DataSource = sortedView;
+        }
+
+        private void InitUserVotesGridViewColumns(IList<Movie> movies)
+        {
+            movies = movies.OrderBy(m => m.Title).ToList();
+
+            var field = new BoundField();
+            field.HeaderText = "User";
+            field.DataField = UserColumnName;
+            field.SortExpression = UserColumnName;
+            UserVotesGridView.Columns.Add(field);
+
+            foreach (var movie in movies)
+            {
+                field = new BoundField();
+                field.HeaderStyle.Width = Unit.Pixel(46);
+                field.HeaderImageUrl = BuildPosterUrl(movie.PosterPath);
+                field.DataField = movie.Title;
+                field.HtmlEncode = false;
+                UserVotesGridView.Columns.Add(field);
+            }
+        }
+
+        private void InitUserWatchedGridViewColumns(IList<Movie> movies)
+        {
+            movies = movies.OrderBy(m => m.Title).ToList();
+
+            var field = new BoundField();
+            field.HeaderText = "User";
+            field.DataField = UserColumnName;
+            field.SortExpression = UserColumnName;
+            UserWatchedGridView.Columns.Add(field);
+
+            foreach (var movie in movies)
+            {
+                field = new BoundField();
+                field.HeaderStyle.Width = Unit.Pixel(46);
+                field.HeaderImageUrl = BuildPosterUrl(movie.PosterPath);
+                field.DataField = movie.Title;
+                field.HtmlEncode = false;
+                UserWatchedGridView.Columns.Add(field);
+            }
+        }
+
+        private DataTable CreateUserMoviesDataTable(IList<Movie> movies)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add(UserColumnName, typeof(string));
+
+            foreach (var movie in movies)
+            {
+                dataTable.Columns.Add(movie.Title);
+            }
+
+            return dataTable;
+        }
+
+        #endregion
+
+        #region FillGridViews
+
+        private DataTable FillVotesDataTable(DataTable dataTable, List<string> titles, Category currentCategory)
+        {
+            var betStatisticService = GetBuisnessService<IBetStatisticService>();
+            var users = betStatisticService.GetData();
+
+            foreach (var user in users)
+            {
+                var row = dataTable.NewRow();
+                row[UserColumnName] = user.UserEmail;
+
+                int scores = 0;
+
+                foreach (var bet in user.UserBets.Where(b => b.CategoryTitle == currentCategory.CategoryTtle))
+                {
+                    row[bet.MovieTitle] = "<span class='glyphicon glyphicon-ok'></span>";
+                    scores++;
+                }
+
+                dataTable.Rows.Add(row);
+            }
+            return dataTable;
+        }
+
+        private DataTable FillWatchedDataTable(DataTable dataTable, List<string> titles, Category currentCategory)
+        {
+            var watchedMoviesStatistic = GetBuisnessService<IWatcheMoviesStatisticService>();
+            var users = watchedMoviesStatistic.GetData();
+
+            foreach (var user in users)
+            {
+                var row = dataTable.NewRow();
+                row[UserColumnName] = user.UserEmail;
+
+                int scores = 0;
+
+                foreach (var movie in user.MovieTitles.Where(m => currentCategory.Nominations.Any(n => n.Movie.Title.Contains(m))))
+                {
+                    row[movie] = "<span class='glyphicon glyphicon-ok'></span>";
+                    scores++;
+                }
+
+                dataTable.Rows.Add(row);
+            }
+            return dataTable;
+        }
+
+        #endregion
+
+        #region SortingEventsAndMethods
+
+        protected void MoviesScoresGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            Category currentCategory = GetCurrentCategory();
+
+            MoviesScoresGridViewSortDirection = MoviesScoresGridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+
+            if (MoviesScoresGridViewSortDirection == SortDirection.Ascending)
+            {
+                MoviesScoresGridView.DataSource = e.SortExpression == "Movie" ?
+                    currentCategory.Nominations.OrderBy(n => n.Movie.Title) : currentCategory.Nominations.OrderBy(n => n.Bets.Count);
+            }
+            else
+            {
+                MoviesScoresGridView.DataSource = e.SortExpression == "Movie" ?
+                    currentCategory.Nominations.OrderByDescending(n => n.Movie.Title) : currentCategory.Nominations.OrderByDescending(n => n.Bets.Count);
+            }
+
+            MoviesScoresGridView.DataBind();
+
+            NominationsRepeater.DataSource = currentCategory.Nominations;
+            NominationsRepeater.DataBind();
+
+            SetSortingArrows(MoviesScoresGridView, MoviesScoresGridViewSortDirection, e.SortExpression);
+        }
+
+        protected void UserVotesGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            Category currentCategory = GetCurrentCategory();
+
+            UserVotesGridViewSortDirection = UserVotesGridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+
+            CreateAndFillUserVotesDataTable(currentCategory);
+            UserVotesGridView.DataBind();
+
+            NominationsRepeater.DataSource = currentCategory.Nominations;
+            NominationsRepeater.DataBind();
+
+            SetSortingArrows(UserVotesGridView, UserVotesGridViewSortDirection, e.SortExpression);
+        }
+
+        protected void UserWatchedGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            Category currentCategory = GetCurrentCategory();
+
+            UserWatchedGridViewSortDirection = UserWatchedGridViewSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+
+            CreateAndFillUserWatchedDataTable(currentCategory);
+            UserWatchedGridView.DataBind();
+
+            NominationsRepeater.DataSource = currentCategory.Nominations;
+            NominationsRepeater.DataBind();
+
+            SetSortingArrows(UserWatchedGridView, UserWatchedGridViewSortDirection, e.SortExpression);
+        }
+
+        #endregion
+
+        #region NominationRepeaterEvents
+
+        protected void NominationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "MarkAsBetted")
             {
@@ -74,7 +320,6 @@ namespace MovieScrapper.CommonPages
 
                     BindCategory();
                     DataBind();
-                    System.Threading.Thread.Sleep(500);
                 }
                 else
                 {
@@ -83,14 +328,19 @@ namespace MovieScrapper.CommonPages
             }
         }
 
-        protected bool CheckIfTheUserIsLogged()
+        protected void NominationsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            return User.Identity.IsAuthenticated;
+            BetUpdate();
         }
+
+        #endregion
+
+        #region BetMethods
 
         protected string ChangeTextIfUserBettedOnThisNomination(ICollection<Bet> nominationBets)
         {
             string currentUserId = User.Identity.Name;
+
             if (nominationBets.Any(x => x.UserId == currentUserId))
             {
                 return "<span class='check-button glyphicon glyphicon-check'></span>";
@@ -103,9 +353,7 @@ namespace MovieScrapper.CommonPages
 
         protected string CheckIfWinnerImage(Nomination nomination)
         {
-            return nomination.IsWinner && !IsGameRunning() ?
-                    "/images/Oscar_logo.png" :
-                    "";
+            return nomination.IsWinner && !IsGameRunning() ? "/images/Oscar_logo.png" : "";
         }
 
         private void BetUpdate()
@@ -144,7 +392,6 @@ namespace MovieScrapper.CommonPages
                     WarningLabel.CssClass = "goldBorder";
                     WarningLabel.Text = "Congratulations! You betted in all the " + categoryCount + " categories.";
                 }
-
             }
             else
             {
@@ -182,18 +429,13 @@ namespace MovieScrapper.CommonPages
                 {
                     WinnerLabel.Text = "The game is stopped, but we are waiting to know the winners.";
                 }
-
             }
-
             else
             {
                 WinnerLabel.CssClass = "hidden";
             }
         }
 
-        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            BetUpdate();
-        }       
+        #endregion
     }
 }

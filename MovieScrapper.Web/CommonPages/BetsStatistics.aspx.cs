@@ -1,5 +1,4 @@
-﻿using MovieScrapper.Business;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,7 +8,7 @@ using MovieScrapper.Entities.StatisticsModels;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class BetsStatistics : BasePage
+    public partial class BetsStatistics : StatisticBase
     {
         private const string UserColumnName = "Email";
         private const string ScoresColumnName = "Scores";
@@ -60,7 +59,7 @@ namespace MovieScrapper.CommonPages
             dt = FillDataTable(dt);
 
             //Sort
-            DataView sortedView = DefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
+            DataView sortedView = GetDefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
 
             // Bind
             BindDataTableToGrid(sortedView);
@@ -171,30 +170,6 @@ namespace MovieScrapper.CommonPages
 
         //-------------------SORTING---------------------------//
 
-        DataView DefaultTableSort(DataTable dt, string sortExpresion, SortDirection sortDirection)
-        {
-            DataView dv = new DataView(dt);
-            if (ViewState["SortDirection"] == null)
-            {
-                dv.Sort = sortExpresion + " DESC";
-            }
-            else
-            {
-                if (sortDirection == SortDirection.Ascending)
-                {
-                    dv.Sort = sortExpresion + " ASC";
-                }
-                else
-                {
-                    dv.Sort = sortExpresion + " DESC";
-                }
-            }
-            GridViewSortExpression = sortExpresion;
-            GridViewSortDirection = sortDirection;
-
-            return dv;
-        }
-
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
             var betStatisticServices = GetBuisnessService<IBetStatisticService>();
@@ -205,10 +180,12 @@ namespace MovieScrapper.CommonPages
 
             SortDirection sortDirection = CalculateSortDiraction(e.SortExpression);
 
-            DataView dv = DefaultTableSort(dt, e.SortExpression, sortDirection);            
-            
+            DataView dv = GetDefaultTableSort(dt, e.SortExpression, sortDirection);
+            GridViewSortExpression = e.SortExpression;
+            GridViewSortDirection = sortDirection;
+
             BindDataTableToGrid(dv);
-            
+            SetSortingArrows(GridView1, sortDirection, e.SortExpression);
         }
 
         private SortDirection CalculateSortDiraction(string sortExpression)

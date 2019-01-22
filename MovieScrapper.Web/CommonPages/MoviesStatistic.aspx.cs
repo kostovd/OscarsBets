@@ -1,16 +1,11 @@
-﻿using MovieScrapper.Business;
-using MovieScrapper.Business.Interfaces;
+﻿using MovieScrapper.Business.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MovieScrapper.CommonPages
 {
-    public partial class MoviesStatistic : BasePage
+    public partial class MoviesStatistic : StatisticBase
     {
         private const string UserColumnName = "Email";
         private const string ScoresColumnName = "Scores";
@@ -18,11 +13,9 @@ namespace MovieScrapper.CommonPages
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
-            {
-                
+            {                
                 GridViewInit();
             }
-
         }
 
         private void GridViewInit()
@@ -39,7 +32,7 @@ namespace MovieScrapper.CommonPages
             dt = FillDataTable(dt);
 
             //Sort
-            DataView sortedView = DefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
+            DataView sortedView = GetDefaultTableSort(dt, ScoresColumnName, SortDirection.Descending);
 
             // Bind
             BindDataTableToGrid(sortedView);
@@ -117,33 +110,8 @@ namespace MovieScrapper.CommonPages
             GridView1.DataBind();
         }
 
-        DataView DefaultTableSort (DataTable dt, string sortExpresion, SortDirection sortDirection)
-        {
-            DataView dv = new DataView(dt);
-            if (ViewState["SortDirection"] == null)
-            {
-                dv.Sort = sortExpresion + " DESC";
-            }
-            else
-            {
-                if (sortDirection == SortDirection.Ascending)
-                {
-                    dv.Sort = sortExpresion + " ASC";
-                }
-                else
-                {
-                    dv.Sort = sortExpresion + " DESC";
-                }
-            }
-            GridViewSortExpression = sortExpresion;
-            GridViewSortDirection = sortDirection;
-
-            return dv;
-        }
-
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            
+        {            
             var watcheMoviesStatisticService = GetBuisnessService<IWatcheMoviesStatisticService>();
             var titles = watcheMoviesStatisticService.GetTitles();
 
@@ -152,15 +120,16 @@ namespace MovieScrapper.CommonPages
 
             SortDirection sortDirection = CalculateSortDiraction(e.SortExpression);
 
-            DataView dv = DefaultTableSort(dt, e.SortExpression, sortDirection);
+            DataView dv = GetDefaultTableSort(dt, e.SortExpression, sortDirection);
+            GridViewSortExpression = e.SortExpression;
+            GridViewSortDirection = e.SortDirection;
 
             BindDataTableToGrid(dv);
-            
+            SetSortingArrows(GridView1, sortDirection, e.SortExpression);
         }
 
         private SortDirection CalculateSortDiraction(string sortExpression)
-        {
-           
+        {          
             SortDirection res;
 
             if (sortExpression == GridViewSortExpression)

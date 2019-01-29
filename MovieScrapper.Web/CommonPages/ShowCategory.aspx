@@ -60,7 +60,7 @@
     <asp:UpdatePanel ID="GridsUpdatePanel" runat="server" >
         <ContentTemplate>
             <br />
-            <asp:Label runat="server">See how many votes each nomination has</asp:Label>
+            <asp:Label runat="server">See how many votes and views each nomination has</asp:Label>
             <asp:GridView
                 ID="MoviesScoresGridView"
                 CssClass="mGrid"
@@ -68,7 +68,7 @@
                 AlternatingRowStyle-CssClass="alt"
                 GridLines="None"
                 runat="server"
-                AllowSorting="true"
+                AllowSorting="false"
                 AutoGenerateColumns="false"
                 OnSorting="MoviesScoresGridView_Sorting">
                 <Columns>
@@ -78,8 +78,12 @@
                         SortExpression="Movie" />
                     <asp:BoundField
                         DataField="Bets.Count"
-                        HeaderText="Bets"
+                        HeaderText="Voted"
                         SortExpression="Bets" />
+                    <asp:BoundField
+                        DataField="Movie.UsersWatchedThisMovie.Count"
+                        HeaderText="Watched"
+                        SortExpression="Watched" />
                 </Columns>
             </asp:GridView>
 
@@ -93,7 +97,7 @@
                 GridLines="None"
                 runat="server"
                 AutoGenerateColumns="false"
-                AllowSorting="true"
+                AllowSorting="false"
                 OnSorting="UserVotesGridView_Sorting">
             </asp:GridView>
 
@@ -107,7 +111,7 @@
                 GridLines="None"
                 runat="server"
                 AutoGenerateColumns="false"
-                AllowSorting="true"
+                AllowSorting="false"
                 OnSorting="UserWatchedGridView_Sorting">
             </asp:GridView>
 
@@ -146,5 +150,4 @@
             z-index: 999999;
         }
     </style>
-    </div>
 </asp:Content>

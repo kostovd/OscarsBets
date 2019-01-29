@@ -17,6 +17,16 @@ namespace MovieScrapper.Data
             }
         }
 
+        public IEnumerable<Bet> GetAllBetsByCategory(int categoryId)
+        {
+            using(var ctx = new MovieContext())
+            {
+                return ctx.Bets
+                    .Include(b=>b.Nomination).Include(b=>b.Nomination.Movie)
+                    .Where(bet => bet.Nomination.Category.Id == categoryId).ToList();
+            }
+        }
+
         public void MakeBetEntity(string userId, int nominationId)
         {
             using (var ctx = new MovieContext())

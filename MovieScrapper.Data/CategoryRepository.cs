@@ -92,6 +92,7 @@ namespace MovieScrapper.Data
                    .Include(cat => cat.Nominations.Select(nom => nom.Movie))
                    .Include(cat => cat.Nominations.Select(nom => nom.Credits))
                    .Include(cat => cat.Nominations.Select(nom => nom.Bets))
+                   .Include(cat => cat.Nominations.Select(nom => nom.Movie.UsersWatchedThisMovie))
                    .Where(cat => cat.Id == id)
                    .SingleOrDefault();
                 return foundedCategory;

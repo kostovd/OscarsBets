@@ -21,17 +21,14 @@ namespace MovieScrapper.Data
 
         public IEnumerable<Watched> GetAllUsersWatchedAMovie()
         {
-
             using (var ctx = new MovieContext())
             {
-                var watched = ctx.Watched.Include(w => w.Movies);
-                return watched;
+                return ctx.Watched.Include(w => w.Movies).ToList();
             }
         }
 
         public IEnumerable<Watched> GetAllWatchedMovies(string userId)
         {
-
             using (var ctx = new MovieContext())
             {
                 var watched = ctx.Watched.Include(w => w.Movies).Where(x => x.UserId == userId).ToList();

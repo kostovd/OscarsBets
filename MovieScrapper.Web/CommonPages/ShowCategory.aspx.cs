@@ -62,7 +62,7 @@ namespace MovieScrapper.CommonPages
                 BindCategory();
                 DataBind();
             }
-
+            
             if (!CheckIfTheUserIsLogged())
             {
                 GreatingLabel.Text = "You must be logged in to bet!";
@@ -110,22 +110,22 @@ namespace MovieScrapper.CommonPages
 
         private void CreateAndFillUserVotesDataTable(Category currentCategory)
         {
-            var moviesFromCategory = currentCategory.Nominations.Select(n => n.Movie).ToList();
+            var nominationsFromCategory = currentCategory.Nominations.ToList();
 
             if (!IsPostBack)
             {
-                InitUserVotesGridViewColumns(moviesFromCategory);
+                InitUserVotesGridViewColumns(nominationsFromCategory);
             }
 
-            var dataTable = CreateUserMoviesDataTable(moviesFromCategory);
-            dataTable = FillVotesDataTable(dataTable, currentCategory.Nominations.Select(n => n.Movie.Title).ToList(), currentCategory);
+            var dataTable = CreateUserBetsDataTable(nominationsFromCategory);
+            dataTable = FillVotesDataTable(dataTable, currentCategory);
             DataView sortedView = GetDefaultTableSort(dataTable, UserColumnName, UserVotesGridViewSortDirection);
             UserVotesGridView.DataSource = sortedView;
         }
 
         private void CreateAndFillUserWatchedDataTable(Category currentCategory)
         {
-            var moviesFromCategory = currentCategory.Nominations.Select(n => n.Movie).ToList();
+            var moviesFromCategory = currentCategory.Nominations.Select(n => n.Movie).Distinct().ToList();
 
             if (!IsPostBack)
             {
@@ -138,22 +138,20 @@ namespace MovieScrapper.CommonPages
             UserWatchedGridView.DataSource = sortedView;
         }
 
-        private void InitUserVotesGridViewColumns(IList<Movie> movies)
+        private void InitUserVotesGridViewColumns(IList<Nomination> nominations)
         {
-            movies = movies.OrderBy(m => m.Title).ToList();
-
             var field = new BoundField();
             field.HeaderText = "User";
             field.DataField = UserColumnName;
             field.SortExpression = UserColumnName;
             UserVotesGridView.Columns.Add(field);
 
-            foreach (var movie in movies)
+            foreach (var nomination in nominations)
             {
                 field = new BoundField();
                 field.HeaderStyle.Width = Unit.Pixel(46);
-                field.HeaderImageUrl = BuildPosterUrl(movie.PosterPath);
-                field.DataField = movie.Title;
+                field.HeaderImageUrl = BuildPosterUrl(nomination.Movie.PosterPath);
+                field.DataField = nomination.Id.ToString();
                 field.HtmlEncode = false;
                 UserVotesGridView.Columns.Add(field);
             }
@@ -180,6 +178,19 @@ namespace MovieScrapper.CommonPages
             }
         }
 
+        private DataTable CreateUserBetsDataTable(IList<Nomination> nominations)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add(UserColumnName, typeof(string));
+
+            foreach (var nomination in nominations)
+            {
+                dataTable.Columns.Add(nomination.Id.ToString());
+            }
+
+            return dataTable;
+        }
+
         private DataTable CreateUserMoviesDataTable(IList<Movie> movies)
         {
             DataTable dataTable = new DataTable();
@@ -197,23 +208,20 @@ namespace MovieScrapper.CommonPages
 
         #region FillGridViews
 
-        private DataTable FillVotesDataTable(DataTable dataTable, List<string> titles, Category currentCategory)
+        private DataTable FillVotesDataTable(DataTable dataTable, Category currentCategory)
         {
-            var betStatisticService = GetBuisnessService<IBetStatisticService>();
-            var users = betStatisticService.GetData();
+            var betService = GetBuisnessService<IBetService>();
+            var bets = betService.GetAllBetsByCategory(currentCategory.Id);
 
-            foreach (var user in users)
+            foreach (var bet in bets)
             {
                 var row = dataTable.NewRow();
-                row[UserColumnName] = user.UserEmail;
+                row[UserColumnName] = bet.UserId.Split('@')[0];
 
                 int scores = 0;
 
-                foreach (var bet in user.UserBets.Where(b => b.CategoryTitle == currentCategory.CategoryTtle))
-                {
-                    row[bet.MovieTitle] = "<span class='glyphicon glyphicon-ok'></span>";
-                    scores++;
-                }
+                row[bet.Nomination.Id.ToString()] = "<span class='glyphicon glyphicon-ok'></span>";
+                scores++;
 
                 dataTable.Rows.Add(row);
             }
@@ -228,14 +236,11 @@ namespace MovieScrapper.CommonPages
             foreach (var user in users)
             {
                 var row = dataTable.NewRow();
-                row[UserColumnName] = user.UserEmail;
-
-                int scores = 0;
+                row[UserColumnName] = user.UserEmail.Split('@')[0];
 
                 foreach (var movie in user.MovieTitles.Where(m => currentCategory.Nominations.Any(n => n.Movie.Title.Contains(m))))
                 {
                     row[movie] = "<span class='glyphicon glyphicon-ok'></span>";
-                    scores++;
                 }
 
                 dataTable.Rows.Add(row);

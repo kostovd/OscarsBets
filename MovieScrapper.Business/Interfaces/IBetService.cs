@@ -11,6 +11,8 @@ namespace MovieScrapper.Business.Interfaces
     {
         IEnumerable<Bet> GetAllUserBets(string userId);
 
+        IEnumerable<Bet> GetAllBetsByCategory(int categoryId);
+
         void MakeBetEntity(string userId, int nominationId);       
     }
 }

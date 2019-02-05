@@ -119,7 +119,9 @@
                             alt="POWERED BY tHE MOVIE DB"
                             width="152" />
                 </a>
-                <a style="margin-left: 10px;" href="https://www.statuscake.com" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=ZC84x0akbQ&Days=1&Design=1" /></a>
+                <a style="margin-left: 10px;" href="https://www.statuscake.com" title="Website Uptime Monitoring">
+                    <img src="https://app.statuscake.com/button/index.php?Track=ZC84x0akbQ&Days=1&Design=2" />
+                </a>
             </footer>
         </div>
     </form>

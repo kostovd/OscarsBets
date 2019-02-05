@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="text-large">
         <h2>Welcome!</h2>
-
+        <br />
         <p>You have reached the the Proxiad Oscars challenge game website.</p>
 
         <p>Every Proxiad member can participate in the game by <a href="Account/Login">login</a> with the Proxiad office 365 account.</p>

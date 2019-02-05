@@ -261,6 +261,9 @@
     <Content Include="CommonPages\MovieDetails.aspx" />
     <Content Include="images\icons\AscArrow.png" />
     <Content Include="images\icons\DescArrow.png" />
+    <Content Include="images\icons\Profile-icon-01.png" />
+    <Content Include="images\icons\Profile-icon-02.jpg" />
+    <Content Include="images\icons\Profile-icon-03.png" />
     <Content Include="NominationControl.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

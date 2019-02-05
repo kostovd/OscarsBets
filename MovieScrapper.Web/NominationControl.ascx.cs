@@ -89,12 +89,12 @@ namespace MovieScrapper
 
         public string GetPersonProfileUrl(string posterPath)
         {
-            return "https://image.tmdb.org/t/p/w45" + posterPath;
+            return string.IsNullOrEmpty(posterPath) ? "/images/icons/Profile-icon-03.png" : "https://image.tmdb.org/t/p/w45" + posterPath;
         }
 
         public IEnumerable<MovieCredit> GetTopMovieCredits()
         {
-            return Item.Credits.Distinct().Take(4);
+            return Item.Credits.OrderBy(x => x.Order).Take(2).ToList();
         }
     }
 }

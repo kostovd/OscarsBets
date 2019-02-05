@@ -95,3 +95,8 @@ input[type="select"] {
                 color: #000;
                 text-decoration: none;
             }
+
+
+.text-large {
+    font-size: 125%;
+}

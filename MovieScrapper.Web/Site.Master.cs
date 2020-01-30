@@ -79,8 +79,6 @@ namespace MovieScrapper
 
             Admin.Visible = HttpContext.Current.User.IsInRole("admin");
 
-            Statistics.Visible = !gamePropertyService.IsGameNotStartedYet();
-
             if (gamePropertyService.IsGameStopped())
             {
                 lblRemaining.Text = string.Empty;

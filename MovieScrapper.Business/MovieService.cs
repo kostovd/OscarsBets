@@ -30,21 +30,21 @@ namespace MovieScrapper.Business
             return _movieRepository.GetAllMovies();
         }
 
-        public IEnumerable<Movie> GetAllMoviesByCriteria(FilterTypes filter)
+        public IEnumerable<Movie> GetAllMoviesByCriteria(OrderType orderType)
         {
             IEnumerable<Movie> allMovies = new List<Movie>();
 
-            switch (filter)
+            switch (orderType)
             {
-                case FilterTypes.ByName:
+                case OrderType.ByName:
                     allMovies = GetAllMovies();
                     break;
 
-                case FilterTypes.ByNominations:
+                case OrderType.ByNominations:
                     allMovies = MoviesByNominations();
                     break;
 
-                case FilterTypes.ByProxiadPopularity:
+                case OrderType.ByProxiadPopularity:
                     allMovies = MoviesByProxiadPopularity();
                     break;
             }

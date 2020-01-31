@@ -14,7 +14,7 @@ namespace MovieScrapper.Business.Interfaces
 
         IEnumerable<Movie> GetAllMovies();
 
-        IEnumerable<Movie> GetAllMoviesByCriteria(FilterTypes filter);
+        IEnumerable<Movie> GetAllMoviesByCriteria(OrderType orderType);
 
         Movie GetMovie(int id);
 

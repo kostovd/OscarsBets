@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieScrapper.Business.Enums
 {
-    public enum FilterTypes
+    public enum OrderType
     {
         ByName = 0,
         ByNominations = 1,

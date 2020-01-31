@@ -11,12 +11,12 @@
     <br />
 
     <asp:DropDownList 
-        ID="DdlFilters"
+        ID="DdlOrder"
         runat="server"  
         AutoPostBack="true"
         Height="40px" 
         Width="180px"
-        CssClass="dropdown-filter">
+        CssClass="dropdown-order">
         <asp:ListItem Selected="True" Value="0">By Name</asp:ListItem>
         <asp:ListItem Value="1">By Nominations</asp:ListItem>
         <asp:ListItem Value="2">By Proxiad Popularity</asp:ListItem>
@@ -64,7 +64,7 @@
         TypeName="MovieScrapper.Business.Interfaces.IMovieService"
         OnObjectCreating="ObjectDataSource1_ObjectCreating">
         <SelectParameters>
-            <asp:ControlParameter ControlID="DdlFilters" DefaultValue="0" Name="filter" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="DdlOrder" DefaultValue="0" Name="orderType" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
     <asp:UpdateProgress ID="updateProgress" runat="server">

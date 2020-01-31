@@ -52,6 +52,14 @@
     padding: 5px;
 }
 
+.dropdown-filter {
+    background-image: url('../images/icons/AscArrow.png');
+}
+
+.dropdown-separator {
+    margin: 5px;
+}
+
 .under-movie {
     background-color: LightGray;
     border-top-left-radius: 3px;

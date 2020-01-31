@@ -30,7 +30,7 @@ namespace MovieScrapper.Business
             return _movieRepository.GetAllMovies();
         }
 
-        public IEnumerable<Movie> GetAllMoviesByCriteria(OrderType orderType)
+        public IEnumerable<Movie> GetAllMoviesByCriteria(OrderType orderType, FilterType filterType)
         {
             IEnumerable<Movie> allMovies = new List<Movie>();
 
@@ -48,6 +48,8 @@ namespace MovieScrapper.Business
                     allMovies = MoviesByProxiadPopularity();
                     break;
             }
+
+            /*FilterMovies(allMovies, filterType);*/
 
             return allMovies;
         }
@@ -69,6 +71,14 @@ namespace MovieScrapper.Business
                 .ThenByDescending(x => x.Title)
                 .ToList();
         }
+
+        //private IEnumerable<Movie> FilterMovies(IEnumerable<Movie> moviesToFilter, FilterType filterType)
+        //{
+        //    if (filterType == FilterType.None)
+        //        return moviesToFilter;
+
+        //    return 
+        //}
 
         public Movie GetMovie(int id)
         {

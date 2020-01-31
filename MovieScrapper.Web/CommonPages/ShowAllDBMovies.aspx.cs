@@ -164,5 +164,10 @@ namespace MovieScrapper.CommonPages
         {
             e.ObjectInstance = GetBuisnessService<IMovieService>();
         }
+
+        protected void DdlFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //DdlFilter.SelectedValue;
+        }
     }
 }

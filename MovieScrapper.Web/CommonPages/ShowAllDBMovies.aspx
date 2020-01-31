@@ -24,6 +24,20 @@
     <br />
     <br />
 
+    <asp:DropDownList 
+        ID="DdlFilter"
+        runat="server"  
+        AutoPostBack="true"
+        OnSelectedIndexChanged="DdlFilter_SelectedIndexChanged"
+        CssClass="dropdown-filter">
+        <asp:ListItem disabled="disabled" class="dropdown-separator" Value="">Filter</asp:ListItem>
+        <asp:ListItem Value="1">Watched</asp:ListItem>
+        <asp:ListItem Value="2">Unwatched</asp:ListItem>
+        <asp:ListItem disabled="disabled" class="dropdown-separator" Value="">Fade</asp:ListItem>
+        <asp:ListItem Value="1">Watched</asp:ListItem>
+        <asp:ListItem Value="2">Unwatched</asp:ListItem>
+    </asp:DropDownList>
+
     <asp:Repeater ID="Repeater1" runat="server"
         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
         <HeaderTemplate>
@@ -33,7 +47,7 @@
             <div class=" pattern">
                 <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
+                        <My:MovieControl ID="MovieControl1" style="opacity:0.3;" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
                         <div class="under-movie">
                             <asp:LinkButton ID="MarkAsWatchedButton"
                                 runat="server"

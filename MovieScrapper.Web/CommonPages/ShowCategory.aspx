@@ -3,32 +3,35 @@
 <%@ Register TagPrefix="My" TagName="NominationControl" Src="~/NominationControl.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    <link href="../Content/StatisticsStyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="/Content/MovieStyleSheet.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/LargePoster.js"></script>
 
-    <asp:Label ID="GreatingLabel" runat="server" CssClass="warning"></asp:Label>
-    <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
-    <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>
-    <div>
+    <asp:UpdatePanel ID="CategoryDataUpdatePanel" runat="server">
+        <ContentTemplate>
+            <asp:Label ID="GreatingLabel" runat="server" CssClass="warning"></asp:Label>
+            <asp:Label ID="WarningLabel" runat="server" CssClass="warning"></asp:Label>
+            <asp:Label ID="WinnerLabel" runat="server" CssClass="greenBorder"></asp:Label>
+            <div>
 
-        <asp:Label ID="CategoryTtleLabel" CssClass="categoryTitle" runat="server" />
-        <hr />
-        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-            <ContentTemplate>
-                <asp:Repeater ID="Repeater2" runat="server"
+                <asp:Label ID="CategoryTtleLabel" CssClass="categoryTitle" runat="server" />
+                <hr />
+                <asp:Repeater 
+                    ID="NominationsRepeater" runat="server"
                     ItemType="MovieScrapper.Entities.Nomination"
-                    OnItemCommand="Repeater2_ItemCommand" OnItemDataBound="Repeater2_ItemDataBound">
+                    OnItemCommand="NominationsRepeater_ItemCommand" 
+                    OnItemDataBound="NominationsRepeater_ItemDataBound">
                     <HeaderTemplate>
                         <div>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class=" pattern">
+                        <div class="pattern">
 
                             <My:NominationControl ID="NominationControl1" runat="server" Item="<%# Item %>" />
                             <div class="under-movie">
                                 <img class="winnerLogo" src="<%# CheckIfWinnerImage(Item) %>" />
-                                <asp:LinkButton ID="MarkAsBettedButton"
+                                <asp:LinkButton 
+                                    ID="MarkAsBettedButton"
                                     runat="server"
                                     Text=""
                                     CommandName="MarkAsBetted"
@@ -48,62 +51,103 @@
                            
                     </FooterTemplate>
                 </asp:Repeater>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
-                <br />
+    <br />
 
-                <asp:GridView
-                    ID="GridView1"
-                    CssClass="mGrid"
-                    PagerStyle-CssClass="pgr"
-                    AlternatingRowStyle-CssClass="alt"
-                    GridLines="None"
-                    runat="server"
-                    AutoGenerateColumns="false">
-                    <Columns>
-                        <asp:BoundField
-                            DataField="Movie.Title"
-                            HeaderText="Movie"
-                            SortExpression="Movie.Title" />
-                        <asp:BoundField
-                            DataField="Bets.Count"
-                            HeaderText="Bets"
-                            SortExpression="Bets.Count" />
-                    </Columns>
-                </asp:GridView>
-            </ContentTemplate>
-        </asp:UpdatePanel>
 
-        <br />
+    <asp:UpdatePanel ID="GridsUpdatePanel" runat="server" >
+        <ContentTemplate>
+            <br />
+            <asp:Label runat="server">See how many votes and views each nomination has</asp:Label>
+            <asp:GridView
+                ID="MoviesScoresGridView"
+                CssClass="mGrid"
+                PagerStyle-CssClass="pgr"
+                AlternatingRowStyle-CssClass="alt"
+                GridLines="None"
+                runat="server"
+                AllowSorting="false"
+                AutoGenerateColumns="false"
+                OnSorting="MoviesScoresGridView_Sorting">
+                <Columns>
+                    <asp:BoundField
+                        DataField="Movie.Title"
+                        HeaderText="Movie"
+                        SortExpression="Movie" />
+                    <asp:BoundField
+                        DataField="Bets.Count"
+                        HeaderText="Voted"
+                        SortExpression="Bets" />
+                    <asp:BoundField
+                        DataField="Movie.UsersWatchedThisMovie.Count"
+                        HeaderText="Watched"
+                        SortExpression="Watched" />
+                </Columns>
+            </asp:GridView>
 
-        <asp:UpdateProgress ID="updateProgress" runat="server">
-            <ProgressTemplate>
-                <div class="loading-panel">
-                    <div class="loading-container">
-                        <img src="<%= this.ResolveUrl("~/images/DoubleRing.gif")%>" />
-                    </div>
+            <br />
+            <asp:Label runat="server">See how others have voted for this category</asp:Label>
+            <asp:GridView
+                ID="UserVotesGridView"
+                CssClass="mGrid"
+                PagerStyle-CssClass="pgr"
+                AlternatingRowStyle-CssClass="alt"
+                GridLines="None"
+                runat="server"
+                AutoGenerateColumns="false"
+                AllowSorting="false"
+                OnSorting="UserVotesGridView_Sorting">
+            </asp:GridView>
+
+            <br />
+            <asp:Label runat="server">See which of these movies others have watched</asp:Label>
+            <asp:GridView
+                ID="UserWatchedGridView"
+                CssClass="mGrid"
+                PagerStyle-CssClass="pgr"
+                AlternatingRowStyle-CssClass="alt"
+                GridLines="None"
+                runat="server"
+                AutoGenerateColumns="false"
+                AllowSorting="false"
+                OnSorting="UserWatchedGridView_Sorting">
+            </asp:GridView>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <br />
+
+    <asp:UpdateProgress ID="updateProgress" runat="server">
+        <ProgressTemplate>
+            <div class="loading-panel">
+                <div class="loading-container">
+                    <img src="<%= this.ResolveUrl("~/images/DoubleRing.gif")%>" />
                 </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
-        <style>
-            .loading-panel {
-                background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
-                position: relative;
-                width: 100%;
-            }
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+    <style>
+        .loading-panel {
+            background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+            position: relative;
+            width: 100%;
+        }
 
-            .loading-container {
-                background: rgba(49, 133, 156, 0.4) none repeat scroll 0 0;
-                color: #fff;
-                font-size: 90px;
-                height: 100%;
-                left: 0;
-                padding-top: 15%;
-                position: fixed;
-                text-align: center;
-                top: 0;
-                width: 100%;
-                z-index: 999999;
-            }
-        </style>
-    </div>
+        .loading-container {
+            background: rgba(49, 133, 156, 0.4) none repeat scroll 0 0;
+            color: #fff;
+            font-size: 90px;
+            height: 100%;
+            left: 0;
+            padding-top: 15%;
+            position: fixed;
+            text-align: center;
+            top: 0;
+            width: 100%;
+            z-index: 999999;
+        }
+    </style>
 </asp:Content>

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
 using MovieScrapper.Business.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MovieScrapper
 {
@@ -15,5 +11,19 @@ namespace MovieScrapper
             return container.Resolve<T>();
         }
 
+        protected bool IsGameNotStartedYet()
+        {
+            return GetBuisnessService<IGamePropertyService>().IsGameNotStartedYet();
+        }
+
+        protected bool IsGameRunning()
+        {
+            return !GetBuisnessService<IGamePropertyService>().IsGameStopped();
+        }
+
+        protected bool CheckIfTheUserIsLogged()
+        {
+            return User.Identity.IsAuthenticated;
+        }
     }
 }

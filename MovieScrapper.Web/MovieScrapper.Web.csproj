@@ -261,6 +261,9 @@
     <Content Include="CommonPages\MovieDetails.aspx" />
     <Content Include="images\icons\AscArrow.png" />
     <Content Include="images\icons\DescArrow.png" />
+    <Content Include="images\icons\Profile-icon-01.png" />
+    <Content Include="images\icons\Profile-icon-02.jpg" />
+    <Content Include="images\icons\Profile-icon-03.png" />
     <Content Include="NominationControl.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -524,6 +527,9 @@
     <Compile Include="Roles\RoleConfigurationElementCollection.cs" />
     <Compile Include="Roles\RolesConfigurationSection.cs" />
     <Compile Include="Roles\WebConfigRoleProvider.cs" />
+    <Compile Include="StatisticBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="WebContainerManager.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

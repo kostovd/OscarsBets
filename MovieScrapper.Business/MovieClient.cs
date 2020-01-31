@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -26,6 +27,11 @@ namespace MovieScrapper
 
             if (client == null)
             {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                    | SecurityProtocolType.Tls11
+                    | SecurityProtocolType.Tls12
+                    | SecurityProtocolType.Ssl3;
+
                 client = new HttpClient();
                 client.BaseAddress = new Uri(BaseUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -95,10 +101,10 @@ namespace MovieScrapper
             Movie movie = new Movie()
             {
                 Id = movieContent["id"].Value<int>(),
-                Title = movieContent["title"].Value<string>(),
-                ReleaseDate = movieContent["release_date"].Value<string>(),
-                PosterPath = movieContent["poster_path"].Value<string>(),
-                Overview = movieContent["overview"].Value<string>(),
+                Title = movieContent["title"]?.Value<string>(),
+                ReleaseDate = movieContent["release_date"]?.Value<string>(),
+                PosterPath = movieContent["poster_path"]?.Value<string>(),
+                Overview = movieContent["overview"]?.Value<string>(),
                 ImdbId = movieContent["imdb_id"] != null 
                     ? movieContent["imdb_id"].Value<string>()
                     : string.Empty,

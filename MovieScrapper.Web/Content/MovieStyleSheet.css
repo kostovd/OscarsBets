@@ -47,6 +47,9 @@
 .dropdown-filter {
     border-width: 3px;
     border-color: black;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .under-movie {

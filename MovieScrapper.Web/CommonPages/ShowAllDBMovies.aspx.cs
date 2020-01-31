@@ -24,9 +24,7 @@ namespace MovieScrapper.CommonPages
             {
                 GreatingLabel.CssClass = "hidden";
                 WarningLabel.CssClass = "hidden";
-                
             }
-            
         } 
 
         public string BuildPosterUrl(string path)

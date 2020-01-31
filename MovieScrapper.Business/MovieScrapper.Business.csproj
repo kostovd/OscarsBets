@@ -64,6 +64,7 @@
     <Compile Include="BetsStatisticService.cs" />
     <Compile Include="BusinessContainerManager.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="Enums\OrderType.cs" />
     <Compile Include="GamePropertyService.cs" />
     <Compile Include="Interfaces\IBetService.cs" />
     <Compile Include="Interfaces\IBetStatisticService.cs" />

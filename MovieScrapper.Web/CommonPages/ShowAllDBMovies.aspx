@@ -10,6 +10,20 @@
     <br />
     <br />
 
+    <asp:DropDownList 
+        ID="DdlFilters"
+        runat="server"  
+        AutoPostBack="true"
+        Height="40px" 
+        Width="180px"
+        CssClass="dropdown-filter">
+        <asp:ListItem Selected="True" Value="0">By Name</asp:ListItem>
+        <asp:ListItem Value="1">By Nominations</asp:ListItem>
+        <asp:ListItem Value="2">By Proxiad Popularity</asp:ListItem>
+    </asp:DropDownList>
+    <br />
+    <br />
+
     <asp:Repeater ID="Repeater1" runat="server"
         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
         <HeaderTemplate>
@@ -45,11 +59,13 @@
     <asp:ObjectDataSource
         ID="ObjectDataSource1"
         runat="server"
-        SelectMethod="GetAllMovies"
+        SelectMethod="GetAllMoviesByCriteria"
         OnSelected="ObjectDataSource1_Selected"
         TypeName="MovieScrapper.Business.Interfaces.IMovieService"
         OnObjectCreating="ObjectDataSource1_ObjectCreating">
-
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DdlFilters" DefaultValue="0" Name="filter" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
     </asp:ObjectDataSource>
     <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>

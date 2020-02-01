@@ -74,12 +74,22 @@ namespace MovieScrapper.Business
         {
             if (filterType == FilterType.Watched)
             {
-                moviesToFilter = moviesToFilter.Where(x => x.UsersWatchedThisMovie.Select(y => y.UserId).Contains(userId));
+                moviesToFilter = 
+                    moviesToFilter
+                    .Where(x => 
+                        x.UsersWatchedThisMovie
+                        .Select(y => y.UserId)
+                        .Contains(userId));
             }
 
             if (filterType == FilterType.Unwatched)
             {
-                moviesToFilter = moviesToFilter.Where(x => !x.UsersWatchedThisMovie.Select(y => y.UserId).Contains(userId));
+                moviesToFilter =
+                    moviesToFilter
+                    .Where(x =>
+                        !x.UsersWatchedThisMovie
+                        .Select(y => y.UserId)
+                        .Contains(userId));
             }
 
             return moviesToFilter.ToList();

@@ -10,83 +10,90 @@
     <br />
     <br />
 
-    <div>
-        <div style="display:inline-block">
-            <asp:Label 
-                runat="server" 
-                Font-Bold="true"
-                Font-Size="Medium">
-            Order By:
-            </asp:Label>
-            <asp:DropDownList
-                ID="DdlOrder"
-                runat="server"
-                AutoPostBack="true"
-                CssClass="dropdownlist">
-                <asp:ListItem Selected="True" Value="0">By Name</asp:ListItem>
-                <asp:ListItem Value="1">By Nominations</asp:ListItem>
-                <asp:ListItem Value="2">By Proxiad Popularity</asp:ListItem>
-            </asp:DropDownList>
-        </div>
+    <asp:UpdatePanel ID="UPMovies" UpdateMode="Conditional" runat="server">
+        <ContentTemplate>
 
-        <div style="display:inline-block; margin-left:360px">
-            <asp:Label 
-                runat="server" 
-                Font-Bold="true"
-                Font-Size="Medium">
-            Filter:
-            </asp:Label>
-            <asp:DropDownList
-                ID="DdlFilter"
-                runat="server"
-                AutoPostBack="true"
-                CssClass="dropdownlist">
-                <asp:ListItem Value="0">None</asp:ListItem>
-                <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Show Only</asp:ListItem>
-                <asp:ListItem Value="1">Watched</asp:ListItem>
-                <asp:ListItem Value="2">Unwatched</asp:ListItem>
-                <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Fade</asp:ListItem>
-                <asp:ListItem Value="3">Watched</asp:ListItem>
-                <asp:ListItem Value="4">Unwatched</asp:ListItem>
-            </asp:DropDownList>
-        </div>
-    </div>
-
-    <br />
-    <br />
-
-    <asp:Repeater ID="Repeater1" runat="server"
-        ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
-        <HeaderTemplate>
             <div>
-        </HeaderTemplate>
-        <ItemTemplate>
-            <div runat="server" class="pattern" style="<%#SetFadeFilter(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem))%>">
-                <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
-                    <ContentTemplate>
-                        <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
-                        <div class="under-movie">
-                            <asp:LinkButton ID="MarkAsWatchedButton"
-                                runat="server"
-                                Text=""
-                                ClientIDMode="AutoID"
-                                CommandName="MarkAsWatchedOrUnwatched"
-                                CommandArgument="<%#((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).Id%>"
-                                Enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
-                                Visible="<%#!IsGameNotStartedYet()%>">
+                <div style="display: inline-block">
+                    <asp:Label
+                        runat="server"
+                        Font-Bold="true"
+                        Font-Size="Medium">
+                        Order By:
+                    </asp:Label>
+                    <asp:DropDownList
+                        ID="DdlOrder"
+                        runat="server"
+                        AutoPostBack="true"
+                        CssClass="dropdownlist">
+                        <asp:ListItem Selected="True" Value="0">Name</asp:ListItem>
+                        <asp:ListItem Value="1">Nominations</asp:ListItem>
+                        <asp:ListItem Value="2">Proxiad Popularity</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div style="display: inline-block; margin-left: 360px">
+                    <asp:Label
+                        runat="server"
+                        Font-Bold="true"
+                        Font-Size="Medium">
+                        Filter:
+                    </asp:Label>
+                    <asp:DropDownList
+                        ID="DdlFilter"
+                        runat="server"
+                        AutoPostBack="true"
+                        CssClass="dropdownlist">
+                        <asp:ListItem Value="0">None</asp:ListItem>
+                        <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Show Only</asp:ListItem>
+                        <asp:ListItem Value="1">Watched</asp:ListItem>
+                        <asp:ListItem Value="2">Unwatched</asp:ListItem>
+                        <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Fade</asp:ListItem>
+                        <asp:ListItem Value="3">Watched</asp:ListItem>
+                        <asp:ListItem Value="4">Unwatched</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <asp:Repeater ID="Repeater1" runat="server"
+                ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
+                <HeaderTemplate>
+                    <div>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <div runat="server" class="pattern" style="<%#SetFadeFilter(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem))%>">
+                        <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
+                            <ContentTemplate>
+                                <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
+                                <div class="under-movie">
+                                    <asp:LinkButton ID="MarkAsWatchedButton"
+                                        runat="server"
+                                        Text=""
+                                        ClientIDMode="AutoID"
+                                        CommandName="MarkAsWatchedOrUnwatched"
+                                        CommandArgument="<%#((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).Id%>"
+                                        Enabled="<%# CheckIfTheUserIsLogged() & IsGameRunning() %>"
+                                        Visible="<%#!IsGameNotStartedYet()%>">
                                 <%# ChangeTextIfUserWatchedThisMovie(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem).UsersWatchedThisMovie) %>
-                            </asp:LinkButton>
-                            <span class="label leftLabel" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span>
-                            <span class="label rightLabel"><%# GetNominaionsInfo(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem)) %></span>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-        </ItemTemplate>
-        <FooterTemplate>
-            </div>
-        </FooterTemplate>
-    </asp:Repeater>
+                                    </asp:LinkButton>
+                                    <span class="label leftLabel" visible="<%#!IsGameNotStartedYet()%>">Mark as watched</span>
+                                    <span class="label rightLabel"><%# GetNominaionsInfo(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem)) %></span>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </div>
+                </FooterTemplate>
+            </asp:Repeater>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
     <asp:ObjectDataSource
         ID="ObjectDataSource1"
         runat="server"

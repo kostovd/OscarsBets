@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MovieScrapper.CommonPages
-{
-
-
-    public partial class ShowAllDBMovies
-    {
-
+namespace MovieScrapper.CommonPages {
+    
+    
+    public partial class ShowAllDBMovies {
+        
         /// <summary>
         /// GreatingLabel control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label GreatingLabel;
-
+        
         /// <summary>
         /// WarningLabel control.
         /// </summary>
@@ -31,7 +29,16 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label WarningLabel;
-
+        
+        /// <summary>
+        /// UPMovies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPMovies;
+        
         /// <summary>
         /// DdlOrder control.
         /// </summary>
@@ -40,7 +47,7 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlOrder;
-
+        
         /// <summary>
         /// DdlFilter control.
         /// </summary>
@@ -49,7 +56,7 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlFilter;
-
+        
         /// <summary>
         /// Repeater1 control.
         /// </summary>
@@ -58,7 +65,7 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
-
+        
         /// <summary>
         /// ObjectDataSource1 control.
         /// </summary>
@@ -67,7 +74,7 @@ namespace MovieScrapper.CommonPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
-
+        
         /// <summary>
         /// updateProgress control.
         /// </summary>

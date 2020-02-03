@@ -1,4 +1,5 @@
-﻿using MovieScrapper.Entities;
+﻿using MovieScrapper.Business.Enums;
+using MovieScrapper.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace MovieScrapper.Business.Interfaces
 
         IEnumerable<Movie> GetAllMovies();
 
+        IEnumerable<Movie> GetAllMoviesByCriteria(string userId, OrderType orderType, FilterType filterType);
+
         Movie GetMovie(int id);
 
         bool HasMovie(int id);
-        
     }
 }

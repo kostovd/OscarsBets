@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using MovieScrapper.Business.Enums;
 using MovieScrapper.Business.Interfaces;
 using MovieScrapper.Entities;
 
@@ -9,25 +10,27 @@ namespace MovieScrapper.CommonPages
 {
     public partial class ShowAllDBMovies : BasePage
     {
+        private const string NormalOpacity = "opacity: 1";
+        private const string FadedOpacity = "opacity: 0.3";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var gamePropertyService = GetBuisnessService<IGamePropertyService>();
             if (!User.Identity.IsAuthenticated)
             {
-               GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
+                GreatingLabel.Text = "You must be logged in to mark a movie as watched!";
             }
             else
             {
                 GreatingLabel.CssClass = "hidden";
+                Session["CurrentUser"] = User.Identity.Name;
             }
             if (gamePropertyService.IsGameNotStartedYet())
             {
                 GreatingLabel.CssClass = "hidden";
                 WarningLabel.CssClass = "hidden";
-                
             }
-            
-        } 
+        }
 
         public string BuildPosterUrl(string path)
         {
@@ -89,7 +92,7 @@ namespace MovieScrapper.CommonPages
                 }
             }
         }
-        
+
         protected bool DoesUserWatchedThisMovie(ICollection<Watched> users)
         {
             return !users.Any(x => x.UserId == User.Identity.Name);
@@ -99,11 +102,11 @@ namespace MovieScrapper.CommonPages
         {
             if (!users.Any(x => x.UserId == User.Identity.Name))
             {
-                return "<span class='check-button glyphicon glyphicon-unchecked'></span>"; 
+                return "<span class='check-button glyphicon glyphicon-unchecked'></span>";
             }
             else
             {
-                return "<span class='check-button glyphicon glyphicon-check'></span>"; 
+                return "<span class='check-button glyphicon glyphicon-check'></span>";
             }
         }
 
@@ -133,7 +136,7 @@ namespace MovieScrapper.CommonPages
             var moviesCount = movies.Count();
             //var bettedCategories = categories.Sum(x => x.Bets.Count(b => b.UserId == currentUsereId));
             var watchedMovies = movies.Sum(x => x.UsersWatchedThisMovie.Count(u => u.UserId == currentUsereId));
-           
+
             var missedMovies = moviesCount - watchedMovies;
             if (CheckIfTheUserIsLogged() == true)
             {
@@ -165,6 +168,28 @@ namespace MovieScrapper.CommonPages
         protected void ObjectDataSource1_ObjectCreating(object sender, ObjectDataSourceEventArgs e)
         {
             e.ObjectInstance = GetBuisnessService<IMovieService>();
+        }
+
+        protected string SetFadeFilter(Movie movie)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return NormalOpacity;
+
+            int selectedFilter = int.Parse(DdlFilter.SelectedValue);
+
+            if (selectedFilter == (int)FadeFilterType.Unwatched
+                && !movie.UsersWatchedThisMovie.Select(x => x.UserId).Contains(User.Identity.Name))
+            {
+                return FadedOpacity;
+            }
+
+            if (selectedFilter == (int)FadeFilterType.Watched
+                && movie.UsersWatchedThisMovie.Select(x => x.UserId).Contains(User.Identity.Name))
+            {
+                return FadedOpacity;
+            }
+
+            return NormalOpacity;
         }
     }
 }

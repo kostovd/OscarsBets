@@ -10,13 +10,58 @@
     <br />
     <br />
 
+    <div>
+        <div style="display:inline-block">
+            <asp:Label 
+                runat="server" 
+                Font-Bold="true"
+                Font-Size="Medium">
+            Order By:
+            </asp:Label>
+            <asp:DropDownList
+                ID="DdlOrder"
+                runat="server"
+                AutoPostBack="true"
+                CssClass="dropdownlist">
+                <asp:ListItem Selected="True" Value="0">By Name</asp:ListItem>
+                <asp:ListItem Value="1">By Nominations</asp:ListItem>
+                <asp:ListItem Value="2">By Proxiad Popularity</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+
+        <div style="display:inline-block; margin-left:360px">
+            <asp:Label 
+                runat="server" 
+                Font-Bold="true"
+                Font-Size="Medium">
+            Filter:
+            </asp:Label>
+            <asp:DropDownList
+                ID="DdlFilter"
+                runat="server"
+                AutoPostBack="true"
+                CssClass="dropdownlist">
+                <asp:ListItem Value="0">None</asp:ListItem>
+                <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Show Only</asp:ListItem>
+                <asp:ListItem Value="1">Watched</asp:ListItem>
+                <asp:ListItem Value="2">Unwatched</asp:ListItem>
+                <asp:ListItem disabled="disabled" class="dropdown-separator" Value="0">Fade</asp:ListItem>
+                <asp:ListItem Value="3">Watched</asp:ListItem>
+                <asp:ListItem Value="4">Unwatched</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
     <asp:Repeater ID="Repeater1" runat="server"
         ItemType="MovieScrapper.Entities.Movie" DataSourceID="ObjectDataSource1" OnItemCommand="Repeater1_ItemCommand">
         <HeaderTemplate>
             <div>
         </HeaderTemplate>
         <ItemTemplate>
-            <div class=" pattern">
+            <div runat="server" class="pattern" style="<%#SetFadeFilter(((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem))%>">
                 <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <My:MovieControl ID="MovieControl1" runat="server" Item="<%# ((MovieScrapper.Entities.Movie)((IDataItemContainer)Container).DataItem) %>" />
@@ -45,40 +90,44 @@
     <asp:ObjectDataSource
         ID="ObjectDataSource1"
         runat="server"
-        SelectMethod="GetAllMovies"
+        SelectMethod="GetAllMoviesByCriteria"
         OnSelected="ObjectDataSource1_Selected"
         TypeName="MovieScrapper.Business.Interfaces.IMovieService"
         OnObjectCreating="ObjectDataSource1_ObjectCreating">
-
+        <SelectParameters>
+            <asp:SessionParameter Name="userId" SessionField="CurrentUser" />
+            <asp:ControlParameter ControlID="DdlOrder" DefaultValue="0" Name="orderType" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="DdlFilter" DefaultValue="0" Name="filterType" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
     </asp:ObjectDataSource>
     <asp:UpdateProgress ID="updateProgress" runat="server">
-            <ProgressTemplate>
-                <div class="loading-panel">
-                    <div class="loading-container">
-                        <img src="<%= this.ResolveUrl("~/images/DoubleRing.gif")%>" />
-                    </div>
+        <ProgressTemplate>
+            <div class="loading-panel">
+                <div class="loading-container">
+                    <img src="<%= this.ResolveUrl("~/images/DoubleRing.gif")%>" />
                 </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
-     <style>
-            .loading-panel {
-                background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
-                position: relative;
-                width: 100%;
-            }
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+    <style>
+        .loading-panel {
+            background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+            position: relative;
+            width: 100%;
+        }
 
-            .loading-container {
-                background: rgba(49, 133, 156, 0.4) none repeat scroll 0 0;
-                color: #fff;
-                font-size: 90px;
-                height: 100%;
-                left: 0;
-                padding-top: 15%;
-                position: fixed;
-                text-align: center;
-                top: 0;
-                width: 100%;
-                z-index: 999999;
-            }
-        </style>
+        .loading-container {
+            background: rgba(49, 133, 156, 0.4) none repeat scroll 0 0;
+            color: #fff;
+            font-size: 90px;
+            height: 100%;
+            left: 0;
+            padding-top: 15%;
+            position: fixed;
+            text-align: center;
+            top: 0;
+            width: 100%;
+            z-index: 999999;
+        }
+    </style>
 </asp:Content>

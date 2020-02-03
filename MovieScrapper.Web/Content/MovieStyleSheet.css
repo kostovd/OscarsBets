@@ -44,6 +44,22 @@
     border-radius: 7px;
 }
 
+.dropdownlist {
+    border-width: 3px;
+    border-color: black;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+    height: 40px;
+    width: 180px;
+}
+
+.dropdown-separator {
+    margin: 5px;
+    font-weight:bold;
+}
+
 .under-movie {
     background-color: LightGray;
     border-top-left-radius: 3px;

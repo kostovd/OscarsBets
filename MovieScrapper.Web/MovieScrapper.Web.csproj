@@ -244,6 +244,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="images\DoubleRing.gif" />
+    <Content Include="images\grd_alt.png" />
+    <Content Include="images\grd_head.png" />
+    <Content Include="images\grd_pgr.png" />
     <Content Include="images\icons\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

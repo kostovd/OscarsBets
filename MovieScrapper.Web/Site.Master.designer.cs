@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MovieScrapper {
-    
-    
-    public partial class SiteMaster {
-        
+namespace MovieScrapper
+{
+
+
+    public partial class SiteMaster
+    {
+
         /// <summary>
         /// ObjectDataSource1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace MovieScrapper {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
-        
+
         /// <summary>
         /// stopGameLabel control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace MovieScrapper {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label stopGameLabel;
-        
+
         /// <summary>
         /// lblRemaining control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace MovieScrapper {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRemaining;
-        
+
         /// <summary>
         /// Admin control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace MovieScrapper {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Admin;
-        
+
         /// <summary>
         /// Home control.
         /// </summary>
@@ -56,7 +58,16 @@ namespace MovieScrapper {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Home;
-        
+
+        /// <summary>
+        /// Leaderboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Leaderboard;
+
         /// <summary>
         /// MainContent control.
         /// </summary>

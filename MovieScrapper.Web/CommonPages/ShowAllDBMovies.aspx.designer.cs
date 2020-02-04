@@ -31,6 +31,15 @@ namespace MovieScrapper.CommonPages {
         protected global::System.Web.UI.WebControls.Label WarningLabel;
         
         /// <summary>
+        /// UPMovies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPMovies;
+        
+        /// <summary>
         /// DdlOrder control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace MovieScrapper.CommonPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlOrder;
+        
+        /// <summary>
+        /// DdlFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlFilter;
         
         /// <summary>
         /// Repeater1 control.

@@ -30,7 +30,7 @@ namespace MovieScrapper.Business
             return _movieRepository.GetAllMovies();
         }
 
-        public IEnumerable<Movie> GetAllMoviesByCriteria(OrderType orderType)
+        public IEnumerable<Movie> GetAllMoviesByCriteria(string userId, OrderType orderType, FilterType filterType)
         {
             IEnumerable<Movie> allMovies = new List<Movie>();
 
@@ -49,6 +49,8 @@ namespace MovieScrapper.Business
                     break;
             }
 
+            allMovies = FilterMovies(userId, allMovies, filterType);
+
             return allMovies;
         }
 
@@ -57,8 +59,7 @@ namespace MovieScrapper.Business
             return GetAllMovies()
                 .OrderByDescending(x => x.Nominations.Count)
                 .ThenByDescending(x => x.UsersWatchedThisMovie.Count)
-                .ThenByDescending(x => x.Title)
-                .ToList();
+                .ThenByDescending(x => x.Title);
         }
 
         private IEnumerable<Movie> MoviesByProxiadPopularity()
@@ -66,8 +67,32 @@ namespace MovieScrapper.Business
             return GetAllMovies()
                 .OrderByDescending(x => x.UsersWatchedThisMovie.Count)
                 .ThenByDescending(x => x.Nominations.Count)
-                .ThenByDescending(x => x.Title)
-                .ToList();
+                .ThenByDescending(x => x.Title);
+        }
+
+        private IEnumerable<Movie> FilterMovies(string userId, IEnumerable<Movie> moviesToFilter, FilterType filterType)
+        {
+            if (filterType == FilterType.Watched)
+            {
+                moviesToFilter = 
+                    moviesToFilter
+                    .Where(x => 
+                        x.UsersWatchedThisMovie
+                        .Select(y => y.UserId)
+                        .Contains(userId));
+            }
+
+            if (filterType == FilterType.Unwatched)
+            {
+                moviesToFilter =
+                    moviesToFilter
+                    .Where(x =>
+                        !x.UsersWatchedThisMovie
+                        .Select(y => y.UserId)
+                        .Contains(userId));
+            }
+
+            return moviesToFilter.ToList();
         }
 
         public Movie GetMovie(int id)
@@ -78,7 +103,6 @@ namespace MovieScrapper.Business
         public bool HasMovie(int id)
         {
             return _movieRepository.HasMovie(id);
-
         }
     }
 }

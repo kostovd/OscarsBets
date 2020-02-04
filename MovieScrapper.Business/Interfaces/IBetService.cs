@@ -1,4 +1,5 @@
 ﻿using MovieScrapper.Entities;
+using MovieScrapper.Entities.StatisticsModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace MovieScrapper.Business.Interfaces
 
         IEnumerable<Bet> GetAllBetsByCategory(int categoryId);
 
-        void MakeBetEntity(string userId, int nominationId);       
+        void MakeBetEntity(string userId, int nominationId);
+
+        IEnumerable<UserScore> GetAllUserScores();
     }
 }

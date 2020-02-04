@@ -225,6 +225,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="CommonPages\Leaderboard.aspx" />
     <Content Include="CommonPages\ShowCategory.aspx" />
     <Content Include="Content\AdminStyleSheet.css" />
     <Content Include="Admin\Calendar.aspx" />
@@ -236,6 +237,7 @@
     <Content Include="CommonPages\MoviesStatistic.aspx" />
     <Content Include="CommonPages\ShowAllDBMovies.aspx" />
     <Content Include="CommonPages\ShowCategories.aspx" />
+    <Content Include="Content\Leaderboard.css" />
     <Content Include="Content\StatisticsStyleSheet.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -475,6 +477,13 @@
     </Compile>
     <Compile Include="CommonPages\BetsStatistics.aspx.designer.cs">
       <DependentUpon>BetsStatistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPages\Leaderboard.aspx.cs">
+      <DependentUpon>Leaderboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPages\Leaderboard.aspx.designer.cs">
+      <DependentUpon>Leaderboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPages\MoviesStatistic.aspx.cs">
       <DependentUpon>MoviesStatistic.aspx</DependentUpon>

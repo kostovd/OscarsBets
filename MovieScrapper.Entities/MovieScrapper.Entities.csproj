@@ -69,6 +69,7 @@
     <Compile Include="Nomination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatisticsModels\BetsStatistic.cs" />
+    <Compile Include="StatisticsModels\UserScore.cs" />
     <Compile Include="StatisticsModels\WatchedMovies.cs" />
     <Compile Include="StatisticsModels\Winners.cs" />
     <Compile Include="GameProperties.cs" />

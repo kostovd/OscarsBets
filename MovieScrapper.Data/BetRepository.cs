@@ -3,6 +3,7 @@ using MovieScrapper.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using MovieScrapper.Entities.StatisticsModels;
 
 namespace MovieScrapper.Data
 {
@@ -63,6 +64,51 @@ namespace MovieScrapper.Data
                 }
 
                 ctx.SaveChanges();
+            }
+        }
+
+        public IEnumerable<UserScore> GetAllUserScores()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var bets = ctx.Bets
+                    .GroupBy(x => x.UserId)
+                    .Select(g => new
+                    {
+                        UserId = g.Key,
+                        Score = g.Count(x => x.Nomination.IsWinner),
+                        WatchedMovies = 0,
+                        WatchedNominations = 0,
+                        Bets = g.Count(),
+                    });
+
+                var watchedMovies = ctx.Watched
+                    .GroupBy(x => x.UserId)
+                    .Select(g => new
+                    {
+                        UserId = g.Key,
+                        Score = 0,
+                        WatchedMovies = g.Sum(x => x.Movies.Count),
+                        WatchedNominations = g.Sum(x => x.Movies.SelectMany(m => m.Nominations).Count()),
+                        Bets = 0,
+                    });
+
+                return bets
+                    .Union(watchedMovies)
+                    .GroupBy(x => x.UserId)
+                    .Select(g => new UserScore
+                    {
+                        Email = g.Key,
+                        Score = g.Sum(x => x.Score),
+                        WatchedMovies = g.Sum(x => x.WatchedMovies),
+                        WatchedNominations = g.Sum(x => x.WatchedNominations),
+                        Bets = g.Sum(x => x.Bets),
+                    })
+                    .OrderByDescending(x => x.Score)
+                    .ThenByDescending(x => x.WatchedMovies)
+                    .ThenByDescending(x => x.WatchedNominations)
+                    .ThenByDescending(x => x.Bets)
+                    .ToList();
             }
         }
     }

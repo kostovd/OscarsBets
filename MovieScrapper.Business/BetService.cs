@@ -1,7 +1,7 @@
 ﻿using MovieScrapper.Business.Interfaces;
-using MovieScrapper.Data;
 using MovieScrapper.Data.Interfaces;
 using MovieScrapper.Entities;
+using MovieScrapper.Entities.StatisticsModels;
 using System;
 using System.Collections.Generic;
 
@@ -29,6 +29,19 @@ namespace MovieScrapper.Business
         public void MakeBetEntity(string userId, int nominationId)
         {
             _betRepository.MakeBetEntity(userId, nominationId);
+        }
+
+        public IEnumerable<UserScore> GetAllUserScores()
+        {
+            var allScores = _betRepository.GetAllUserScores();
+
+            int rank = 1;
+            foreach (UserScore userScore in allScores)
+            {
+                userScore.Rank = rank++;
+            }
+
+            return allScores;
         }
     }
 

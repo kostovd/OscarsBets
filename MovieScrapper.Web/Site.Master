@@ -53,7 +53,7 @@
 
             <div class="container">
                 <p class="text-center">
-                    <asp:Label ID="lblRemaining" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblRemaining" runat="server" CssClass="remaining-time-label"></asp:Label>
                 </p>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

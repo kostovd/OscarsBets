@@ -13,8 +13,8 @@
     <asp:UpdatePanel ID="UPMovies" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
 
-            <div>
-                <div style="display: inline-block">
+            <div style="display:flex; flex-wrap: wrap">
+                <div>
                     <asp:Label
                         runat="server"
                         Font-Bold="true"
@@ -31,8 +31,8 @@
                         <asp:ListItem Value="2">Proxiad Popularity</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-
-                <div style="display: inline-block; margin-left: 360px">
+                <div style="width: 360px"></div>
+                <div>
                     <asp:Label
                         runat="server"
                         Font-Bold="true"

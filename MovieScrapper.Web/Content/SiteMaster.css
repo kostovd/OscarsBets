@@ -22,6 +22,11 @@
     border: 3px solid rgb(237,192,116);
     border-radius: 7px;
 }
+
+.remaining-time-label {
+    display: inline-block;
+}
+
 .adminLink {
 
 }

@@ -146,7 +146,7 @@ a {
     border-radius: 7px;
     font-size: 18px;
     font-weight: bold;
-    
+    display: inline-block;
 }
 .greenBorder {
     margin: 5px;
@@ -316,3 +316,4 @@ a {
     width: 100%;
     z-index: 999999;
 }
+
